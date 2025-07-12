@@ -196,8 +196,13 @@ page_renderer = [
     "samaaja.page_renderers.ProfilePage",
 ]
 
-website_redirects = [
+""" website_redirects = [
     {"source": "/update-profile/", "target": "/edit-profile/"},
+] """
+
+website_route_rules = [
+    {"from_route": "/user-profile/<username>", "to_route": "user-profile"},
+    {"from_route": "/campaign/<route>", "to_route": "campaign"},
 ]
 
 has_website_permission = {

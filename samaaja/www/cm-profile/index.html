@@ -1,0 +1,486 @@
+{% extends "templates/web.html" %}
+
+{% block title %}{{ _('Solve Ninja - Leaderboard') }}{% endblock %}
+{% block content %}
+<div class="lb_wrapper_outer">
+    <div class="lb_wrapper">
+        <div class="lb_section_left">
+            <div class="user_badge">
+                {% if current_user.user_image %}
+                <img 
+                src="{{ current_user.user_image }}" title="{{ current_user.full_name }}">
+                {% else %}
+                <img 
+                src="{{ frappe.get_gravatar(current_user.full_name) }}" title="{{ current_user.full_name }}">
+                {% endif %}
+                >
+            </div>
+            <div class="lb_left_content">
+
+                <div class="user_detail">
+                    <h3>{{current_user.full_name}}  </h3>
+                    <p>
+
+                        <svg viewBox="0 0 20 20">
+                            <path fill="#51A76A"
+                                d="M10,1.375c-3.17,0-5.75,2.548-5.75,5.682c0,6.685,5.259,11.276,5.483,11.469c0.152,0.132,0.382,0.132,0.534,0c0.224-0.193,5.481-4.784,5.483-11.469C15.75,3.923,13.171,1.375,10,1.375 M10,17.653c-1.064-1.024-4.929-5.127-4.929-10.596c0-2.68,2.212-4.861,4.929-4.861s4.929,2.181,4.929,4.861C14.927,12.518,11.063,16.627,10,17.653 M10,3.839c-1.815,0-3.286,1.47-3.286,3.286s1.47,3.286,3.286,3.286s3.286-1.47,3.286-3.286S11.815,3.839,10,3.839 M10,9.589c-1.359,0-2.464-1.105-2.464-2.464S8.641,4.661,10,4.661s2.464,1.105,2.464,2.464S11.359,9.589,10,9.589">
+                            </path>
+                        </svg>
+                        {% if user_metadata.city %}
+                        <span>{{user_metadata.city}}</span>
+                        {% else %}
+                        <span>Login and add your city !</span>
+                        {% endif %}
+                    </p>
+                    {% if current_user.verified_by %}
+                        <p>
+                            <div class="verified_profile">
+<svg id="Layer_1" data-name="Layer 1" viewBox="0 0 122.88 116.87"><polygon fill="#00ade9" points="61.37 8.24 80.43 0 90.88 17.79 111.15 22.32 109.15 42.85 122.88 58.43 109.2 73.87 111.15 94.55 91 99 80.43 116.87 61.51 108.62 42.45 116.87 32 99.08 11.73 94.55 13.73 74.01 0 58.43 13.68 42.99 11.73 22.32 31.88 17.87 42.45 0 61.37 8.24 61.37 8.24"/><path fill="#ffffff" d="M37.92,65c-6.07-6.53,3.25-16.26,10-10.1,2.38,2.17,5.84,5.34,8.24,7.49L74.66,39.66C81.1,33,91.27,42.78,84.91,49.48L61.67,77.2a7.13,7.13,0,0,1-9.9.44C47.83,73.89,42.05,68.5,37.92,65Z"/></svg>
+                                <span>Verified Change Maker</span>
+                            </div>
+                        </p>
+                    {% endif %}
+                </div>
+                <!--<div class="report_user show_mob">
+                    <a href="/report-user">Report the user</a>
+                </div>-->
+                <div class="ctas_wrapper show_mob"> 
+                    {% if frappe.session.user == current_user.name or current_user.is_system_manager %}
+                        <a  href="/record-actions/new" target="_new"><button class="btn btn_fill">Add Action</button></a>
+                        <a class="btn btn_outline" href="https://wa.me/+918095500118?text=mentor" target="_blank">Contact Mentor</a>
+                        <a class="btn btn_outline" href="/request-expert-recommendations/new?user={{current_user.name}}" target="_blank">Request Review</a>
+                        <a class="btn btn_outline download-btn" href="#" onClick="download_profile('{{current_user.name}}')">Download Profile</a>
+                    {% endif %}
+                </div>
+                <div class="last_activity">
+                    <svg viewBox="0 0 20 20">
+                        <path fill="#51A76A"
+                            d="M10.25,2.375c-4.212,0-7.625,3.413-7.625,7.625s3.413,7.625,7.625,7.625s7.625-3.413,7.625-7.625S14.462,2.375,10.25,2.375M10.651,16.811v-0.403c0-0.221-0.181-0.401-0.401-0.401s-0.401,0.181-0.401,0.401v0.403c-3.443-0.201-6.208-2.966-6.409-6.409h0.404c0.22,0,0.401-0.181,0.401-0.401S4.063,9.599,3.843,9.599H3.439C3.64,6.155,6.405,3.391,9.849,3.19v0.403c0,0.22,0.181,0.401,0.401,0.401s0.401-0.181,0.401-0.401V3.19c3.443,0.201,6.208,2.965,6.409,6.409h-0.404c-0.22,0-0.4,0.181-0.4,0.401s0.181,0.401,0.4,0.401h0.404C16.859,13.845,14.095,16.609,10.651,16.811 M12.662,12.412c-0.156,0.156-0.409,0.159-0.568,0l-2.127-2.129C9.986,10.302,9.849,10.192,9.849,10V5.184c0-0.221,0.181-0.401,0.401-0.401s0.401,0.181,0.401,0.401v4.651l2.011,2.008C12.818,12.001,12.818,12.256,12.662,12.412">
+                        </path>
+                    </svg>
+                    <span>Last activity: {{user_metadata.last_action_date}}</span>
+                </div>
+                <div class="mob-tabs-wrapper">
+                    <div class="tabs">
+                        <div class="tab active">Profile</div>
+                        <div class="tab">Overview</div>
+                        <div class="tab">Actions</div>
+                    </div>
+                    <div class="tabs_content panels">
+                        <div class="profile_content panel">
+
+                            <div class="user_bio">
+                                <h4>Bio</h4>
+                                {% if current_user.bio %}
+                                <p>{{current_user.bio}} </p>
+                                {% else %}
+                                <p>Looks like you don't have a bio. You may login and add your bio</p>
+                                {% endif %}
+                            </div>
+
+                            <div class="user_stats">
+                                <div class="user_stats_item">
+                                    <strong>Hours Invested</strong>
+                                    <span>{{user_metadata.hours_invested}}</span>
+                                </div>
+                                <div class="user_stats_item">
+                                    <strong>Actions Taken</strong>
+                                    <span>{{user_metadata.contributions}}</span>
+                                </div>
+                            </div>
+                            
+                            <div class="skill-badges">
+                                <div class="title">Skill Badges</div>
+                                <div class="badges-wrapper">
+                                    {% if current_user.skills%}
+                                    {% for skill in current_user.skills %}
+                                    <div class="badge">
+                                        <div class="bi_wrapper">
+                                            <img src="{{skill.image}}" alt="" />
+                                            <div class="badge_count">{{ 'x10+' if skill.badge_count > 10 else 'x' ~ skill.badge_count }}</div>
+
+                                        </div>
+                                        <span>{{skill.name}}</span>
+                                    </div>
+                                    {% endfor %}
+                                    {% else %}
+                                    To start activating skill badges share the details of action taken by you!
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="overview_content panel">
+                            <fieldset class="profile_fieldset">
+                                <legend>Highlight</legend>
+                                {% if current_user.highlighted_action.title %}
+                                <h3>{{current_user.highlighted_action.title}}</h3>
+                                <p>{{current_user.highlighted_action.description}}</p>
+                                {% else %}
+                                <p>Highlight an action to be displayed in this section !</p>
+                                {% endif %}
+                            </fieldset>
+                            <fieldset class="profile_fieldset">
+                                <legend>Interested in</legend>
+                                <div class="shf_items">
+                                    {% for superhero in current_user.superheroes%}
+                                        <div class="item">
+                                            <img src="{{superhero.image}}" alt="" />
+                                            <span>{{superhero.name}}</span>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </fieldset>
+                            {% if current_user.reviews or frappe.session.user == current_user.name %}
+                                <fieldset class="profile_fieldset profile_fieldset100">
+                                    <legend>Expert Review</legend>
+                                    <div class="expert_review">
+                                        <div class="content">
+                                            {% for review in current_user.reviews%}
+                                                <p>{{review.comment}}</p>
+                                                <strong>{{review.reviewer_name}}, {{review.desigantion}} {{review.organisation}}</strong>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            {% endif %}
+                        </div>
+                        <div class="action_content panel">
+                            {% if current_user.actions%}
+                            {% for action in current_user.actions %}
+                            <div class="action_item">
+                                <div class="action_item_head">
+                                    <p>
+                                        <svg viewBox="0 0 20 20">
+                                            <path fill="#51A76A"
+                                                d="M10.25,2.375c-4.212,0-7.625,3.413-7.625,7.625s3.413,7.625,7.625,7.625s7.625-3.413,7.625-7.625S14.462,2.375,10.25,2.375M10.651,16.811v-0.403c0-0.221-0.181-0.401-0.401-0.401s-0.401,0.181-0.401,0.401v0.403c-3.443-0.201-6.208-2.966-6.409-6.409h0.404c0.22,0,0.401-0.181,0.401-0.401S4.063,9.599,3.843,9.599H3.439C3.64,6.155,6.405,3.391,9.849,3.19v0.403c0,0.22,0.181,0.401,0.401,0.401s0.401-0.181,0.401-0.401V3.19c3.443,0.201,6.208,2.965,6.409,6.409h-0.404c-0.22,0-0.4,0.181-0.4,0.401s0.181,0.401,0.4,0.401h0.404C16.859,13.845,14.095,16.609,10.651,16.811 M12.662,12.412c-0.156,0.156-0.409,0.159-0.568,0l-2.127-2.129C9.986,10.302,9.849,10.192,9.849,10V5.184c0-0.221,0.181-0.401,0.401-0.401s0.401,0.181,0.401,0.401v4.651l2.011,2.008C12.818,12.001,12.818,12.256,12.662,12.412">
+                                            </path>
+                                        </svg>
+                                        <span>{{action.creation}}</span>
+                                    </p>
+                                    {% if frappe.session.user == current_user.name %}
+                                    <div class="dropdown">
+                                        <a href="dropdown-toggle" data-toggle="dropdown">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                                              <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                                            </svg>
+                                        </a>
+                                      <ul class="dropdown-menu" role="menu">
+                                        <li><a class="dropdown-item" href="#" onClick="highlight('{{current_user.username}}','{{action.event_id}}')">Highlight</a></li>
+                                        <li><a class="dropdown-item" href="/record-actions/{{action.event_id}}/edit">Edit</a></li>
+                                        <li><a class="dropdown-item" href="/request-actions-review/new?events={{action.event_id}}" target="_blank">Request Review</a></li>
+                                        <li><a class="dropdown-item" href="#" onClick="delete_event('{{action.event_id}}')">Delete</a></li>
+                                      </ul>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                                <h3>{{action.title}}
+                                    {% if action.review %}
+                                        <div class="vouched_by">
+                                            <svg id="Layer_1" data-name="Layer 1" viewBox="0 0 122.88 116.87"><polygon fill="#00ade9" points="61.37 8.24 80.43 0 90.88 17.79 111.15 22.32 109.15 42.85 122.88 58.43 109.2 73.87 111.15 94.55 91 99 80.43 116.87 61.51 108.62 42.45 116.87 32 99.08 11.73 94.55 13.73 74.01 0 58.43 13.68 42.99 11.73 22.32 31.88 17.87 42.45 0 61.37 8.24 61.37 8.24"/><path fill="#ffffff" d="M37.92,65c-6.07-6.53,3.25-16.26,10-10.1,2.38,2.17,5.84,5.34,8.24,7.49L74.66,39.66C81.1,33,91.27,42.78,84.91,49.48L61.67,77.2a7.13,7.13,0,0,1-9.9.44C47.83,73.89,42.05,68.5,37.92,65Z"/></svg>
+                                            <span>Verified by: {{ action.review.reviewer_name }}</span>
+                                        </div>
+                                    {% endif %}
+                                </h3>
+                                {% if action.location_name %}
+                                    <p>
+                                        <svg viewBox="0 0 20 20">
+                                            <path fill="#51A76A"
+                                                d="M10,1.375c-3.17,0-5.75,2.548-5.75,5.682c0,6.685,5.259,11.276,5.483,11.469c0.152,0.132,0.382,0.132,0.534,0c0.224-0.193,5.481-4.784,5.483-11.469C15.75,3.923,13.171,1.375,10,1.375 M10,17.653c-1.064-1.024-4.929-5.127-4.929-10.596c0-2.68,2.212-4.861,4.929-4.861s4.929,2.181,4.929,4.861C14.927,12.518,11.063,16.627,10,17.653 M10,3.839c-1.815,0-3.286,1.47-3.286,3.286s1.47,3.286,3.286,3.286s3.286-1.47,3.286-3.286S11.815,3.839,10,3.839 M10,9.589c-1.359,0-2.464-1.105-2.464-2.464S8.641,4.661,10,4.661s2.464,1.105,2.464,2.464S11.359,9.589,10,9.589">
+                                            </path>
+                                        </svg>
+                                        {% if action.location_name %}
+                                        <span>{{action.location_name}}</span>
+                                        {% else %}
+                                        <span>Location not available !</span>
+                                        {% endif %}
+                                    </p>
+                                {% endif %}
+                                {% if action.description %}
+                                <p class="action_description">{{action.description}}</p>
+                                {% endif %}
+                            </div>
+                            {% endfor %}
+                            {%else%}
+                            Please add actions to be displayed in this section !
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="user_stats">
+                    <div class="user_stats_item">
+                        <strong>Hours Invested</strong>
+                        <span>{{user_metadata.hours_invested}}</span>
+                    </div>
+                    <div class="user_stats_item">
+                        <strong>Actions Taken</strong>
+                        <span>{{user_metadata.contributions}}</span>
+                    </div>
+                </div>
+
+                <div class="user_bio">
+                    <h4>Bio</h4>
+                    {% if current_user.bio %}
+                    <p>{{current_user.bio}} </p>
+                    {% else %}
+                    <p>Looks like you don't have a bio. You may login and add your bio</p>
+                    {% endif %}
+                </div>
+                
+                <div class="ctas_wrapper">
+                    {% if frappe.session.user == current_user.name or current_user.is_system_manager %}
+                        <a  href="/record-actions/new" target="_new"><button class="btn btn_fill">Add Action</button></a>
+                        <a class="btn btn_outline" href="https://wa.me/+918095500118?text=mentor" target="_blank">Contact Mentor</a>
+                        <a class="btn btn_outline" href="/request-expert-recommendations/new?user={{current_user.name}}" target="_blank">Request Review</a>
+                        <a class="btn btn_outline download-btn" href="#" onClick="download_profile('{{current_user.name}}')">Download Profile</a>
+                    {% endif %}
+                </div>
+                <!--
+                <div class="report_user">
+                    <a href="/report-user/new">Report the user</a>
+                </div>-->
+            </div>
+        </div>
+        <div class="lb_section_right">
+            <div class="skill-badges">
+                <div class="title">Skill Badges</div>
+                <div class="badges-wrapper">
+                    {% if current_user.skills%}
+                    {% for skill in current_user.skills %}
+                    <div class="badge">
+                        <div class="bi_wrapper">
+                            <img src="{{skill.image}}" alt="" />
+                            <div class="badge_count">{{ 'x10+' if skill.badge_count > 10 else 'x' ~ skill.badge_count }}</div>
+                        </div>
+                        <span>{{skill.name}}</span>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    To start activating skill badges share the details of action taken by you!
+                    {% endif %}
+                </div>
+            </div>
+            <div class="tabs-wrapper">
+                <div class="tabs">
+                    <div class="tab active">Overview</div>
+                    <div class="tab">Actions</div>
+                </div>
+                <div class="tabs_content panels">
+                    <div class="overview_content panel">
+                        <fieldset class="profile_fieldset">
+                            <legend>Highlight</legend>
+                            {% if current_user.highlighted_action.title %}
+                                <h3>{{current_user.highlighted_action.title}}</h3>
+                                <p>{{current_user.highlighted_action.description}}</p>
+                            {% else %}
+                                <p>Highlight an action to be displayed in this section !</p>
+                            {% endif %}
+                        </fieldset>
+                        <fieldset class="profile_fieldset">
+                            <legend>Interested in</legend>
+                            <div class="shf_items">
+                                {% for superhero in current_user.superheroes%}
+                                <div class="item">
+                                    <img src="{{superhero.image}}" alt="" />
+                                    <span>{{superhero.name}}</span>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </fieldset>
+                        {% if current_user.reviews or frappe.session.user == current_user.name %}
+                            <fieldset class="profile_fieldset profile_fieldset100">
+                                <legend>Expert Review</legend>
+                                <div class="expert_review">
+                                    <div class="content">
+                                        {% if current_user.reviews %}
+                                            {% for review in current_user.reviews%}
+                                                <p>{{review.comment}}</p>
+                                                <strong>{{review.reviewer_name}}, {{review.desigantion}} {{review.organisation}}</strong>
+                                            {% endfor %}
+                                        {% else %}
+                                            <p>You haven't received any reviews as of now.</p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </fieldset>
+                        {% endif %}
+                        {% if current_user.partners or frappe.session.user == current_user.name %}
+                            <fieldset class="profile_fieldset profile_fieldset100">
+                                <legend>Partners/Supporters</legend>
+                                <div class="partners_wrapper">
+                                    {% if current_user.partners %}
+                                        {% for badge in current_user.partners %}
+                                            <div class="partners_content">
+                                                <img src="{{badge.image}}" alt="" />
+                                                <div class="sign-designation">
+                                                    <strong>{{badge.name}}</strong>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    {% else %}
+                                        <p>No Partners/Supporters.</p>
+                                    {% endif %}
+                                    </div>
+                            </fieldset>
+                        {% endif %}
+                    </div>
+                    <div class="action_content panel">
+                        {% if current_user.actions%}
+                        {% for action in current_user.actions %}
+                        <div class="action_item">
+                            <div class="action_item_head">
+                                <p>
+                                    <svg viewBox="0 0 20 20">
+                                        <path fill="#51A76A"
+                                            d="M10.25,2.375c-4.212,0-7.625,3.413-7.625,7.625s3.413,7.625,7.625,7.625s7.625-3.413,7.625-7.625S14.462,2.375,10.25,2.375M10.651,16.811v-0.403c0-0.221-0.181-0.401-0.401-0.401s-0.401,0.181-0.401,0.401v0.403c-3.443-0.201-6.208-2.966-6.409-6.409h0.404c0.22,0,0.401-0.181,0.401-0.401S4.063,9.599,3.843,9.599H3.439C3.64,6.155,6.405,3.391,9.849,3.19v0.403c0,0.22,0.181,0.401,0.401,0.401s0.401-0.181,0.401-0.401V3.19c3.443,0.201,6.208,2.965,6.409,6.409h-0.404c-0.22,0-0.4,0.181-0.4,0.401s0.181,0.401,0.4,0.401h0.404C16.859,13.845,14.095,16.609,10.651,16.811 M12.662,12.412c-0.156,0.156-0.409,0.159-0.568,0l-2.127-2.129C9.986,10.302,9.849,10.192,9.849,10V5.184c0-0.221,0.181-0.401,0.401-0.401s0.401,0.181,0.401,0.401v4.651l2.011,2.008C12.818,12.001,12.818,12.256,12.662,12.412">
+                                        </path>
+                                    </svg>
+                                    <span>{{action.creation}}</span>
+                                </p>
+                                {% if frappe.session.user == current_user.name %}
+                                <div class="dropdown">
+                                        <a href="dropdown-toggle" data-toggle="dropdown">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                                              <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                                            </svg>
+                                        </a>
+                                      <ul class="dropdown-menu" role="menu">
+                                        <li><a class="dropdown-item" href="#" onClick="highlight('{{current_user.username}}','{{action.event_id}}')">Highlight</a></li>
+                                        <li><a class="dropdown-item" href="/record-actions/{{action.event_id}}/edit">Edit</a></li>
+                                        <li><a class="dropdown-item" href="/request-actions-review/new?events={{action.event_id}}" target="_blank">Request Review</a></li>
+                                        <li><a class="dropdown-item" href="#" onClick="delete_event('{{action.event_id}}')">Delete</a></li>
+                                      </ul>
+                                    </div>
+                                    {% endif %}
+                            </div>
+                          
+                            <h3>{{action.title}}
+                                {% if action.review %}
+                                    <div class="vouched_by">
+                                            <svg id="Layer_1" data-name="Layer 1" viewBox="0 0 122.88 116.87"><polygon fill="#00ade9" points="61.37 8.24 80.43 0 90.88 17.79 111.15 22.32 109.15 42.85 122.88 58.43 109.2 73.87 111.15 94.55 91 99 80.43 116.87 61.51 108.62 42.45 116.87 32 99.08 11.73 94.55 13.73 74.01 0 58.43 13.68 42.99 11.73 22.32 31.88 17.87 42.45 0 61.37 8.24 61.37 8.24"/><path fill="#ffffff" d="M37.92,65c-6.07-6.53,3.25-16.26,10-10.1,2.38,2.17,5.84,5.34,8.24,7.49L74.66,39.66C81.1,33,91.27,42.78,84.91,49.48L61.67,77.2a7.13,7.13,0,0,1-9.9.44C47.83,73.89,42.05,68.5,37.92,65Z"/></svg>
+                                            <span>Verified by: {{ action.review.reviewer_name }}</span>
+                                        </div>
+                                {% endif %}
+                            </h3>
+                            
+                            {% if action.location_name %}
+                                <p>
+                                    <svg viewBox="0 0 20 20">
+                                        <path fill="#51A76A"
+                                            d="M10,1.375c-3.17,0-5.75,2.548-5.75,5.682c0,6.685,5.259,11.276,5.483,11.469c0.152,0.132,0.382,0.132,0.534,0c0.224-0.193,5.481-4.784,5.483-11.469C15.75,3.923,13.171,1.375,10,1.375 M10,17.653c-1.064-1.024-4.929-5.127-4.929-10.596c0-2.68,2.212-4.861,4.929-4.861s4.929,2.181,4.929,4.861C14.927,12.518,11.063,16.627,10,17.653 M10,3.839c-1.815,0-3.286,1.47-3.286,3.286s1.47,3.286,3.286,3.286s3.286-1.47,3.286-3.286S11.815,3.839,10,3.839 M10,9.589c-1.359,0-2.464-1.105-2.464-2.464S8.641,4.661,10,4.661s2.464,1.105,2.464,2.464S11.359,9.589,10,9.589">
+                                        </path>
+                                    </svg>
+                                    {% if action.location_name %}
+                                    <span>{{action.location_name}}</span>
+                                    {% else %}
+                                    <span>Location not available !</span>
+                                    {% endif %}
+                                </p>
+                            {% endif %}
+                            {% if action.description %}
+                            <p class="action_description">{{action.description}}</p>
+                            {% endif %}
+                        </div>
+                        {% endfor%}
+                        {% else %}
+                        Please add actions to be displayed in this section !
+                        {% endif %}
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block script %}
+<script>{% include "www/user-profile/index.js" %}</script>
+<script>
+    function highlight(username,event_id){
+        frappe.call({
+			method: 'solve_ninja.api.common.highlight_event',
+			args: {
+				"username": username,
+                "event_id": event_id
+			},
+			callback: function(r) {
+				if (!r.exc) {
+					window.location.reload(true);
+				}
+			},
+			freeze: true,
+			freeze_message: __('...highlighting Event')
+		});
+// 		var raw = JSON.stringify({
+//           "username": username,
+//           "event_id": event_id
+//         });
+        
+//         var requestOptions = {
+//           method: 'POST',
+//           body: raw,
+//           credentials: 'omit', 
+//         };
+        
+//         fetch("https://solveninja.org/api/method/solve_ninja.api.common.highlight_event", requestOptions)
+//             .then(response => response.text())
+//             .then(result => {
+//                 window.location.reload(true);
+//             })
+//             .catch(error => {
+//                 alert('Oops! some problem occured while highlighting this event. If this is a recurring issue, please connect with Reap Benefit team')
+//                 console.log('error', error)
+//             });
+            
+    }
+    function delete_event(event_id){
+        frappe.confirm('Are you sure you want to Delete?',
+            () => {
+                console.log(event_id)
+                frappe.call({
+					method: 'solve_ninja.api.common.delete_event',
+					args: {
+						'event': event_id,
+					},
+					callback: function(r) {
+						if (!r.exc) {
+							window.location.reload(true);
+						}
+					},
+					freeze: true,
+					freeze_message: __('...Deleting Event')
+				});
+            }, () => {
+                // action to perform if No is selected
+            }
+        )  
+    }
+    function download_profile(user){
+        frappe.call({
+			method: 'solve_ninja.api.common.download_profile',
+			args: {
+				'user': user,
+			},
+			callback: function(r) {
+				if (!r.exc) {
+					let w = window.open(
+        				"https://solveninja.org/printview?" +
+        					"doctype=" +
+        					encodeURIComponent("User") +
+        					"&name=" +
+        					encodeURIComponent(user) +
+        					"&trigger_print=1&no_letterhead=1&letterhead=No%20Letterhead&settings=%7B%7D&_lang=en"+
+        					"&format=" +
+        					encodeURIComponent("User Profile")
+            		);
+            		if (!w) {
+            			frappe.msgprint(__("Please enable pop-ups"));
+            			return;
+            		}
+				}
+			},
+			freeze: true,
+			freeze_message: __('...Downloading Profile')
+		});
+    }
+</script>
+{% endblock %}

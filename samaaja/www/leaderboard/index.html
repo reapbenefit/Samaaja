@@ -1,0 +1,16 @@
+{% extends "templates/web.html" %}
+
+{% block title %}{{ _('Solve Ninja - Leaderboard') }}{% endblock %}
+{% block script %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>{% include "www/leaderboard/index.js" %}</script>
+{% endblock %}
+{% block content %}
+{% include 'www/leaderboard/templates/banner.html' %}
+{% include 'www/leaderboard/templates/verified_cm_section.html' %}
+{% include 'www/leaderboard/templates/leaderboard_section.html' %}
+{% include 'www/leaderboard/templates/active_cities.html' %}
+{% include 'www/leaderboard/templates/campaign_section.html' %}
+
+
+{% endblock %}

@@ -1,0 +1,37 @@
+<div class="vn_box">
+    {% if campaign.accept_petitions %}
+    <a href="{{ campaign.route }}" target="_blank">
+    {% else %}
+    <div>
+    {% endif %}
+        <div class="img_wrapper">
+            <img src="{{ campaign.header_logo }}" alt="{{ campaign.title }}" />
+        </div>
+        <div class="vn_box_content">
+            <p class="name">
+                {{ campaign.title }}
+            </p>
+            <div class="vnb_stats">
+                <p>
+                    <span>Creator:</span>
+                    <span><b>{{ campaign.full_name }}</b></span>
+                </p>
+                <p class="vnb_focus">
+                    <span>Petitions signed:</span>
+                    <span><i>{{ campaign.petition_count }}</i></span>
+                </p>
+                <p class="vnb_focus">
+                {% if campaign.accept_petitions %}
+                <span class="indicator-pill whitespace-nowrap green active_tag" style="margin-left: 6px;"><span>Active</span></span>
+                {% else %}
+                <span class="indicator-pill whitespace-nowrap grey active_tag" style="margin-left: 6px;"><span>Inactive</span></span>
+                {% endif %}
+                </p>
+            </div>
+        </div>
+    {% if campaign.accept_petitions %}
+    </a>
+    {% else %}
+    </div>
+    {% endif %}
+</div>

@@ -1,0 +1,27 @@
+<div class="wrapper-grey">
+    <div class="verified_ninjas email_campaigns">
+        <div class="vn_header">
+            <div class="vn_title">
+                <span>Campaigns for Change</span>
+                <small>Explore live campaigns. Sign, share, and take a stand for what's right.</small>
+            </div>
+        </div>
+        {% if campaigns|length == 0 %}
+            <div class="no_campaigns">
+                <p>No campaigns available at the moment.</p>
+            </div>
+        {% else %}
+            <div class="vn_content">
+                {% for campaign in campaigns %}
+                    {{ frappe.render_template('www/leaderboard/templates/campaign.html', {"campaign": campaign}) }}
+                {% endfor %}
+            </div>
+            {% if campaigns|length > 10 %}
+                <div class="vn_all">
+                    <a href=""><button class="main_btn">View All</button></a>
+                </div>
+            {% endif %}
+        {% endif %}
+        
+    </div>
+</div>
