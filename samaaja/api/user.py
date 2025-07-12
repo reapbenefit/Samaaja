@@ -65,17 +65,21 @@ def submit_user_review(review):
 @frappe.whitelist(allow_guest=True)
 def get_ninjas(verified=False, page_length=None, start=0):
 	Events = frappe.qb.DocType("Events")
-	UserReview = frappe.qb.DocType("User Review")
+	User = frappe.qb.DocType("User")
 
 	query = (
-		frappe.qb.from_(UserReview)
+		frappe.qb.from_(User)
 		.select(
-			UserReview.user.as_("user"),
-			UserReview.name.as_("name"),
-			UserReview.user_image.as_("user_image"),
-			#UserReview.verified_by.as_("verified_by"),
+			User.full_name.as_("full_name"),
+			User.name.as_("name"),
+			#User.city.as_("city"),
+			User.user_image.as_("user_image"),
+			#User.verified_by.as_("verified_by"),
 			User.username.as_("username"),
 			#User.headline.as_("focus_area"),
+		)
+		.where(
+			User.name.notin(["solveninja@reapbenefit.org", "gautamp@reapbenefit.org"])
 		)
 		.orderby(
 			User.creation, order=frappe.qb.asc
