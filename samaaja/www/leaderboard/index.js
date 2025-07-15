@@ -22,7 +22,7 @@ frappe.ready(function() {
         clear_filters()
         get_users()
     })
-    $("#ninja").keyup(function(event) {
+    $("#change_maker").keyup(function(event) {
         if (event.keyCode === 13) {
             $("#search").click();
         }
@@ -49,7 +49,7 @@ frappe.ready(function() {
 var get_filters = function() {
     // $("#btn_load_more").hide()
     return {
-        "ninja": $("#ninja").val(),
+        "change_maker": $("#change_maker").val(),
         "organization": $("#organization").val(),
         "city": $("#city").val(),
         "hr_range": $("#hr-range").val(),
@@ -58,7 +58,7 @@ var get_filters = function() {
 };
 
 var clear_filters = function() {
-    $("#ninja").val("")
+    $("#change_maker").val("")
     $("#organization").val("")
     $("#city").val("")
     $("#hr-range").val("")
@@ -115,7 +115,7 @@ var get_users = function(filters={}) {
                         <div class="lb_row lb_row_result">
                             <div class="lb_col col_rank">${rank}</div>
                             ${rrh}
-                            <div class="lb_col col_name"><a href="/cm-profile/${leader.username}">${leader.full_name}</a></div>
+                            <div class="lb_col col_name"><a href="/user-profile/${leader.username}">${leader.full_name}</a></div>
                             <div class="lb_col col_city">${city}</div>
                             <div class="lb_col col_hours">${leader.hours_invested}</div>
                             <div class="lb_col col_actions">${leader.contribution_count}</div>
@@ -181,7 +181,7 @@ var get_city_wise_action_count_user_based = function() {
 
 var get_verified_users = function() {
     frappe.call({
-        method: "samaaja.api.user.get_ninjas",
+        method: "samaaja.api.user.get_change_makers",
         args: {
                 "verified": true,
                 "page_length": frappe.flags.page_length,

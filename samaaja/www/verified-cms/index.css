@@ -56,16 +56,17 @@ h1, h2, h3, h4, h5, h6{
     width: 100%;
     background-image: linear-gradient(
   0deg,
-    #34568f 0%,
-    #5675a3 20%,
-    #7894b7 40%,
-    #9ab3cb 60%,
-    #cbd8e4 80%,
-    #ffffff 100%
+  hsl(199deg 32% 25%) 0%,
+  hsl(194deg 44% 26%) 11%,
+  hsl(190deg 58% 26%) 22%,
+  hsl(185deg 79% 25%) 33%,
+  hsl(181deg 100% 23%) 44%,
+  hsl(177deg 100% 25%) 56%,
+  hsl(172deg 91% 28%) 67%,
+  hsl(164deg 63% 35%) 78%,
+  hsl(153deg 47% 42%) 89%,
+  hsl(137deg 35% 49%) 100%
 );
-
-
-
     
 }
 .banner_content_wrapper{
@@ -76,8 +77,8 @@ h1, h2, h3, h4, h5, h6{
     box-sizing: border-box;
 }
 .banner_content_wrapper h1{
-    color: #34568f;
-    font-size: 44px;
+    color: #fff;
+    font-size: 54px;
     line-height: 65px;
     font-weight: bold;
     font-family: Tahoma, sans-serif;
@@ -85,8 +86,8 @@ h1, h2, h3, h4, h5, h6{
     text-align: center;
 }
 .banner_content_wrapper h2{
-    color: #090909;
-    font-size: 32px;
+    color: #fff;
+    font-size: 42px;
     line-height: 48px;
     font-weight: bold;
     font-family: Tahoma, sans-serif;
@@ -94,10 +95,10 @@ h1, h2, h3, h4, h5, h6{
     text-align: center;
 }
 .banner_content_wrapper h3{
-    font-size: 24px;
+    font-size: 30px;
     line-height: 36px;
     text-align: center;
-    color: #090909;
+    color: #BAE4D0;
     margin: 0 0 50px;
 }
 .b_content{
@@ -117,7 +118,7 @@ h1, h2, h3, h4, h5, h6{
 .b_content_box span{
     font-size: 18px;
     font-weight: 600;
-    color: #fff6e5;
+    color: #fff;
     text-align: center;
 }
 .bcb_divider{
@@ -140,11 +141,11 @@ h1, h2, h3, h4, h5, h6{
 }
 .b_cta p{
     margin: 10px 0 0;
-    color: #fff6e5;
+    color: #BAE4D0;
 }
 .b_cta a{
     text-decoration: underline;
-    color: #fff6e5;
+    color: #BAE4D0;
 }
 @media only screen and (max-width: 1023px) {
     .bcb_divider{
@@ -156,18 +157,18 @@ h1, h2, h3, h4, h5, h6{
         padding: 30px 16px;
     }
     .banner_content_wrapper h1{
+        font-size: 42px;
+        line-height: 48px;
+        margin: 0 0 10px;
+    }
+    .banner_content_wrapper h2{
         font-size: 32px;
         line-height: 38px;
         margin: 0 0 10px;
     }
-    .banner_content_wrapper h2{
-        font-size: 24px;
-        line-height: 28px;
-        margin: 0 0 10px;
-    }
     .banner_content_wrapper h3{
-        font-size: 14px;
-        line-height: 18px;
+        font-size: 18px;
+        line-height: 24px;
     }
     .b_content{
         align-items: flex-start;
@@ -211,15 +212,13 @@ h1, h2, h3, h4, h5, h6{
     font-size: 40px;
     line-height: 48px;
     font-weight: 700;
-    color: #34568f;
+    color: #2B4754;
     display: flex;
     flex-direction: column;
 }
 .vn_title small{
-    font-size: 24px;
-    font-weight: 600;
+    font-size: 18px;
     line-height: 24px;
-    color: #8e918f;
     margin: 10px 0 0;
 }
 .vn_stats{
@@ -233,7 +232,7 @@ h1, h2, h3, h4, h5, h6{
     align-items: flex-end;
 }
 .vn_stats_wrapper svg{
-    height: 85px;
+    height: 54px;
 }
 .vn_stats .stats_box{
     display: flex;
@@ -241,14 +240,12 @@ h1, h2, h3, h4, h5, h6{
     margin: 0 0 0 10px;
 }
 .vn_stats .stats_box strong{
-    font-size: 54px;
-    line-height: 60px;
-    color: #34568f;
+    font-size: 32px;
+    line-height: 38px;
+    color: #2B4754;
 }
 .vn_stats .stats_box span{
     color: #8e918f;
-    font-size: 32px;
-    line-height: 38px;
 }
 .vn_sb_divider{
     margin: 0 30px;
@@ -259,7 +256,7 @@ h1, h2, h3, h4, h5, h6{
 .vn_content{
     margin: 40px -24px 0;
     display: flex;
-    justify-content: left;
+    justify-content: center;
     flex-wrap: wrap;
 }
 .vn_box{
@@ -331,6 +328,7 @@ h1, h2, h3, h4, h5, h6{
     margin: 0;
 }
 .vnb_stats p span{
+    margin-right: 5px;
     color: #8e918f;
     line-height: 1;
 }
@@ -362,25 +360,7 @@ p.vnb_focus span:first-child{
     font-size: 18px;
     width: 200px;
 }
-.email_campaigns .vn_box .img_wrapper{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.email_campaigns p.vnb_focus{
-    flex-direction: row;
-    margin-top: 8px;
-}
-.no_campaigns{
-    text-align: center;
-    margin: 50px 0 0;
-    font-style: italic;
-}
 @media only screen and (max-width: 1241px) {
-    .vn_header{
-        flex-direction: column;
-        align-items: flex-start;
-    }
     .vn_content{
         margin: 40px -20px 0;
     }
@@ -449,7 +429,7 @@ p.vnb_focus span:first-child{
     font-size: 40px;
     line-height: 48px;
     font-weight: 700;
-    color: #34568f;
+    color: #2B4754;
 }
 .filter-bar {
     margin: 25px 0;
@@ -510,11 +490,9 @@ p.vnb_focus span:first-child{
     font-weight: 600;
     width: 10%;
     text-align: center;
-    display: none;
-
 }
 .col_name{
-    width: 35%;
+    width: 25%;
     font-size: 18px;
     font-weight: 600;
 }
@@ -535,16 +513,6 @@ p.vnb_focus span:first-child{
 .col_actions{
     width: 15%;
     text-align: right;
-}
-.lb_cta{
-    margin: 20px 0 0;
-    display: flex;
-    justify-content: center;
-}
-.lb_cta button{
-    font-weight: 600;
-    font-size: 18px;
-    width: 200px;
 }
 @media only screen and (max-width: 767px) {
     .leaderboard_wrapper{
@@ -616,19 +584,13 @@ p.vnb_focus span:first-child{
     font-size: 40px;
     line-height: 48px;
     font-weight: 700;
-    color: #34568f;
-}
-.cities_filter{
-    margin: 15px 0 20px;
-}
-.cities_filter .hours-select{
-    min-height: 30px;
+    color: #2B4754;
 }
 .ac_content{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 10px 0 0;
+    margin: 30px 0 0;
 }
 .ac_list{
     width: 70%;

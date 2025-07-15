@@ -1,36 +1,35 @@
 {
  "actions": [],
- "allow_import": 1,
  "allow_rename": 1,
- "autoname": "field:category",
- "creation": "2022-07-14 14:09:30.690828",
+ "autoname": "field:user",
+ "creation": "2025-07-13 12:14:57.335320",
  "doctype": "DocType",
- "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "category",
-  "icon"
+  "user",
+  "qr"
  ],
  "fields": [
   {
-   "allow_in_quick_entry": 1,
-   "fieldname": "category",
-   "fieldtype": "Data",
-   "label": "Category",
+   "fieldname": "user",
+   "fieldtype": "Link",
+   "label": "User",
+   "options": "User",
    "unique": 1
   },
   {
-   "fieldname": "icon",
-   "fieldtype": "Attach",
-   "label": "Icon"
+   "fieldname": "qr",
+   "fieldtype": "Attach Image",
+   "label": "QR"
   }
  ],
+ "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-07-13 13:52:31.812513",
- "modified_by": "saxenankit@gmail.com",
+ "modified": "2025-07-13 12:29:53.491582",
+ "modified_by": "Administrator",
  "module": "Samaaja",
- "name": "Event Category",
+ "name": "User Profile QR",
  "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
@@ -47,10 +46,8 @@
    "write": 1
   }
  ],
- "quick_entry": 1,
  "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": [],
- "track_changes": 1
+ "states": []
 }

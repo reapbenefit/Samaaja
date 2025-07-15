@@ -8,7 +8,12 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "type"
+  "type",
+  "lft",
+  "rgt",
+  "is_group",
+  "old_parent",
+  "parent_event_type"
  ],
  "fields": [
   {
@@ -17,15 +22,51 @@
    "fieldtype": "Data",
    "label": "Type",
    "unique": 1
+  },
+  {
+   "fieldname": "lft",
+   "fieldtype": "Int",
+   "hidden": 1,
+   "label": "Left",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "rgt",
+   "fieldtype": "Int",
+   "hidden": 1,
+   "label": "Right",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "is_group",
+   "fieldtype": "Check",
+   "label": "Is Group"
+  },
+  {
+   "fieldname": "old_parent",
+   "fieldtype": "Link",
+   "label": "Old Parent",
+   "options": "Event Type"
+  },
+  {
+   "fieldname": "parent_event_type",
+   "fieldtype": "Link",
+   "ignore_user_permissions": 1,
+   "label": "Parent Event Type",
+   "options": "Event Type"
   }
  ],
  "index_web_pages_for_search": 1,
+ "is_tree": 1,
  "links": [],
- "modified": "2025-05-08 11:03:11.195026",
+ "modified": "2025-07-12 16:09:26.481438",
  "modified_by": "Administrator",
  "module": "Samaaja",
  "name": "Event Type",
  "naming_rule": "By fieldname",
+ "nsm_parent_field": "parent_event_type",
  "owner": "Administrator",
  "permissions": [
   {
@@ -42,6 +83,7 @@
   }
  ],
  "quick_entry": 1,
+ "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],

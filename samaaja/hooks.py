@@ -213,13 +213,28 @@ profile_url_prefix = "/users/"
 
 
 doc_events = {
+   "Events": {
+        "on_update": [
+            "samaaja.doc_events.events.update_subcategory",
+            "samaaja.doc_events.events.update_profile_hook",
+        ],
+        "after_insert": [
+			"samaaja.doc_events.events.after_insert",
+            "samaaja.doc_events.events.update_profile_hook",
+		],
+        "on_trash": "samaaja.doc_events.events.update_profile_hook",
+    },
     "User": {
-        "before_save": "samaaja.overrides.user.make_user_images_public",
-        "before_insert": "samaaja.overrides.user.generate_username_if_missing",
-        "after_insert": "samaaja.overrides.user.create_user_metadata",
-        "on_trash": "samaaja.overrides.user.delete_user_metadata",
+        "after_insert": "samaaja.doc_events.user.after_insert",
+        "on_trash": "samaaja.doc_events.user.on_trash"
+    },
+    "Organization":{
+        "before_save":"samaaja.api.common.update_organization_id_case"
+    },
+    "User Metadata": {
+        "validate": "samaaja.doc_events.user_metadata.on_save"
     },
     "Energy Point Log": {
-        "before_insert": "samaaja.overrides.energy_point_log.before_insert"
+        "after_insert": "samaaja.doc_events.energy_point_log.handle_energy_point_log"
     }
 }

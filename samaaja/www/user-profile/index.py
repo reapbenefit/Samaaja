@@ -1,5 +1,6 @@
 import frappe
 from frappe.utils import logger
+from frappe.query_builder import DocType
 
 sitemap = 1
 no_cache = 1
@@ -41,7 +42,18 @@ def get_context(context):
 		"Has Role", {"parent": user, "role": "System Manager"}
 	)
 
-	context.ninja_profile = frappe.get_doc("Ninja Profile", context.current_user.name) if frappe.db.exists("Ninja Profile", context.current_user.name) else None
+	UserReview = DocType("User Review")
+	query = (
+		frappe.qb.from_(UserReview)
+		.select("*")
+		.where(UserReview.user == context.current_user.name)
+		.limit(1)
+	)
+	result = query.run(as_dict=True)
+	user_profile_review = result[0] if result else None
+
+	if user_profile_review:
+		context.current_user_is_profile_verified = True
 	context.user_metadata = frappe.get_doc("User Metadata", context.current_user.name) if frappe.db.exists("User Metadata", context.current_user.name) else None
 
 	# All actions
@@ -62,12 +74,12 @@ def get_context(context):
 		action.review_exists = frappe.db.exists("Events Review", {"events": action.event_id, "status": "Accepted"})
 		if action.review_exists:
 			action.review = frappe.get_doc("Events Review", action.review_exists)
-		if action.highlight == '1':
+		logger.info(f'highlight status {action.highlight}')
+		if action.highlight == 1:
 			context.current_user.highlighted_action = {
 				'title': action.title,
 				'description': action.description
 			}
-
 	# Badges
 	user_badges = frappe.db.get_all('User badge',
 		filters={'user': context.current_user.name, 'active': 1},
@@ -112,13 +124,13 @@ def get_context(context):
 		LIMIT 3
 	""", context.current_user.name, as_dict=True)
 
-	""" for cat in categories:
+	for cat in categories:
 		if cat.category:
 			cat_doc = frappe.get_doc('Event Category', cat.category)
 			superheroes.append({
 				'name': cat_doc.name,
 				'image': cat_doc.icon
-			}) """
+			})
 
 	context.current_user.superheroes = superheroes
 

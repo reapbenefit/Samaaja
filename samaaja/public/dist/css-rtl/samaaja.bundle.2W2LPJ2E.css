@@ -1,4 +1,4 @@
-/* ../../../../../tmp/tmp-1596-dO2KOSB2pUvS/samaaja/samaaja/public/css/samaaja.bundle.css */
+/* ../../../../../tmp/tmp-2567-gFd0LqlUKt0O/samaaja/samaaja/public/css/samaaja.bundle.css */
 :root {
   --text-3-5xl: 24px;
   --text-3-8xl: 34px;
@@ -34,15 +34,15 @@
   display: flex;
   flex-direction: column;
   margin-bottom: 0.6rem;
-  padding-left: 252px;
-  padding-right: 1rem;
+  padding-right: 252px;
+  padding-left: 1rem;
   padding-bottom: 7px;
   box-shadow: var(--shadow-sm);
   position: relative;
 }
 .profile-info .profile-dropdown {
   position: absolute;
-  right: 18px;
+  left: 18px;
   top: 18px;
 }
 .profile-info .profile-dropdown .dropdown-toggle:after {
@@ -63,7 +63,7 @@
   z-index: 1;
   position: relative;
   top: 188px;
-  left: 40px;
+  right: 40px;
   width: -moz-fit-content;
   width: fit-content;
 }
@@ -73,8 +73,8 @@
     width: -moz-fit-content;
     width: fit-content;
     position: relative;
-    left: 50%;
-    transform: translateX(-50%);
+    right: 50%;
+    transform: translateX(50%);
   }
   .profile-info {
     position: relative;
@@ -89,7 +89,7 @@
   }
   .profile-dropdown {
     position: absolute;
-    right: 0;
+    left: 0;
   }
   .profile-meta {
     padding: 18px;
@@ -227,14 +227,14 @@
   height: fit-content;
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.16);
   border-radius: var(--border-radius-sm);
-  margin-left: 0.5rem;
+  margin-right: 0.5rem;
 }
 .pagination {
   display: inline-block;
 }
 .pagination a {
   color: black;
-  float: left;
+  float: right;
   padding: 8px 16px;
   text-decoration: none;
 }
@@ -316,14 +316,14 @@ div.profile-page {
 .stats-page-container #leaderboard-table th {
   padding-top: 12px;
   padding-bottom: 12px;
-  text-align: left;
+  text-align: right;
   background-color: #fff;
 }
 .stats-page-container .leaderboard-profile-image {
   border-radius: 50%;
   width: 100px;
   height: 100px;
-  margin-right: 5px;
+  margin-left: 5px;
 }
 .stats-page-container .leaderboard-name {
   color: #3c4043;
@@ -404,7 +404,7 @@ div.profile-page {
     width: 170px;
   }
   .stats-page-container .bar {
-    margin-left: 15px;
+    margin-right: 15px;
   }
   .stats-page-container .first-section {
     margin-top: 30px !important;
@@ -421,15 +421,15 @@ div.profile-page {
 }
 @media only screen and (max-width: 992px) {
   .container.stats-page-container {
-    padding-left: 1.2rem !important;
     padding-right: 1.2rem !important;
+    padding-left: 1.2rem !important;
   }
   .stats-page-container .bar-city-name {
     font-size: 1.1rem;
   }
   .container.container-profile {
-    padding-left: 1.2rem !important;
     padding-right: 1.2rem !important;
+    padding-left: 1.2rem !important;
   }
 }
-/*# sourceMappingURL=samaaja.bundle.3STWSNYF.css.map */
+/*# sourceMappingURL=samaaja.bundle.2W2LPJ2E.css.map */

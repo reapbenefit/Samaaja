@@ -43,7 +43,7 @@ Recipients:
 {% endif %}
 
 Warm regards,
-Solve Ninja Team
+Samaaja Team
 </pre>
 `;
 	frm.get_field("message_examples").$wrapper.html(template);

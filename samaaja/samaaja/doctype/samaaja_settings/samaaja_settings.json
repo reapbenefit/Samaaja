@@ -32,7 +32,9 @@
   "top_cities_chart_setting_section",
   "top_cities_title",
   "top_cities_max_cities",
-  "top_cities_max_days"
+  "top_cities_max_days",
+  "pincode_section",
+  "pincode_key"
  ],
  "fields": [
   {
@@ -188,12 +190,23 @@
    "fieldname": "recent_actions",
    "fieldtype": "Section Break",
    "label": "Recent Actions"
+  },
+  {
+   "fieldname": "pincode_section",
+   "fieldtype": "Section Break",
+   "label": "Pin Code Lookup",
+   "options": "sg sg\n dsg dg dfs\ng \ndg dfs"
+  },
+  {
+   "fieldname": "pincode_key",
+   "fieldtype": "Data",
+   "label": "Pin Code API Key"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2023-05-16 00:18:09.503268",
+ "modified": "2025-07-12 16:30:50.948783",
  "modified_by": "Administrator",
  "module": "Samaaja",
  "name": "Samaaja Settings",
@@ -210,6 +223,7 @@
    "write": 1
   }
  ],
+ "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []

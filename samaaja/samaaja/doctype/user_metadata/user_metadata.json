@@ -13,7 +13,6 @@
   "city",
   "state",
   "org_id",
-  "verified_by",
   "action_section",
   "last_action",
   "last_action_date",
@@ -25,7 +24,8 @@
   "contributions",
   "hours_invested",
   "wa_id",
-  "last_active_date_bot"
+  "last_active_date_bot",
+  "rank"
  ],
  "fields": [
   {
@@ -57,11 +57,6 @@
    "fieldtype": "Link",
    "label": "User Organization",
    "options": "User Organization"
-  },
-  {
-   "fieldname": "verified_by",
-   "fieldtype": "Data",
-   "label": "Verified By"
   },
   {
    "fieldname": "column_break_gnch",
@@ -132,13 +127,18 @@
   },
   {
    "fieldname": "last_active_date_bot",
-   "fieldtype": "Data",
+   "fieldtype": "Datetime",
    "label": "Last Active Date Bot"
   },
   {
    "fieldname": "pincode",
    "fieldtype": "Data",
    "label": "Pin Code"
+  },
+  {
+   "fieldname": "rank",
+   "fieldtype": "Int",
+   "label": "Rank"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -148,7 +148,7 @@
    "link_fieldname": "user"
   }
  ],
- "modified": "2025-07-10 22:49:47.423185",
+ "modified": "2025-07-12 15:04:43.450850",
  "modified_by": "Administrator",
  "module": "Samaaja",
  "name": "User Metadata",

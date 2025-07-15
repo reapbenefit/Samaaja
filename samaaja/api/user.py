@@ -63,31 +63,47 @@ def submit_user_review(review):
 	return review
 
 @frappe.whitelist(allow_guest=True)
-def get_ninjas(verified=False, page_length=None, start=0):
-	Events = frappe.qb.DocType("Events")
+def get_change_makers(verified=False, page_length=None, start=0):
+	UserReview = frappe.qb.DocType("User Review")
 	User = frappe.qb.DocType("User")
+	UserMetadata = frappe.qb.DocType("User Metadata")
 
-	query = (
-		frappe.qb.from_(User)
-		.select(
-			User.full_name.as_("full_name"),
-			User.name.as_("name"),
-			#User.city.as_("city"),
-			User.user_image.as_("user_image"),
-			#User.verified_by.as_("verified_by"),
-			User.username.as_("username"),
-			#User.headline.as_("focus_area"),
+	query=''
+	if verified:
+		query = (
+			frappe.qb.from_(UserReview)
+			.join(User)
+			.on(UserReview.user == User.name)
+			.join(UserMetadata)
+			.on(UserMetadata.user == User.name)
+			.select(
+				User.full_name.as_("full_name"),
+				User.name.as_("name"),
+				UserMetadata.city.as_("city"),
+				User.user_image.as_("user_image"),
+				User.username.as_("username"),
+				User.interest.as_("focus_area"),
+				UserReview.reviewer_name.as_("verified_by"),
+			)
+			.where(UserReview.status == "Accepted")
+			.orderby(User.creation, order=frappe.qb.asc)
 		)
-		.where(
-			User.name.notin(["solveninja@reapbenefit.org", "gautamp@reapbenefit.org"])
+	else:
+		query = (
+			frappe.qb.from_(User)
+			.left_join(UserMetadata)
+			.on(UserMetadata.user == User.name)
+			.select(
+				User.full_name.as_("full_name"),
+				User.name.as_("name"),
+				UserMetadata.city.as_("city"),
+				User.user_image.as_("user_image"),
+				User.username.as_("username"),
+				User.interest.as_("focus_area"),
+			)
+			.orderby(User.creation, order=frappe.qb.asc)
 		)
-		.orderby(
-			User.creation, order=frappe.qb.asc
-		)
-	)
-	#if verified:
-	#	query = query.where((User.verified_by.isnotnull()) & (User.verified_by != ''))
-	
+
 	if page_length:
 		query = query.limit(page_length)
 	

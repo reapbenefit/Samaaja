@@ -1,0 +1,24 @@
+{% extends "templates/web.html" %}
+
+{% block title %}{{ _('Samaaja - Change Makers') }}{% endblock %}
+{% block script %}
+    <script>{% include "www/verified-cms/index.js" %}</script>
+{% endblock %}
+{% block content %}
+{% include 'www/leaderboard/templates/banner.html' %}
+<div class="wrapper-grey">
+    <div class="verified_cms">
+        <div class="vn_header">
+            <div class="vn_title">
+                <span>Verified Change Makers</span>
+                <small>Change Makers vetted for their bias action.</small>
+            </div>
+        </div>
+        <div class="vn_content">
+        </div>
+        <div class="vn_all">
+            <button class="main_btn" id="btn_load_more">Load More</button>
+        </div>
+    </div>
+</div>
+{% endblock %}

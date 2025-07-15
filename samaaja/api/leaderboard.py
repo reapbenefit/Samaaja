@@ -16,7 +16,7 @@ states_of_india = [
 	"Uttar Pradesh", "Uttarakhand", "West Bengal", ""
 ]
 
-def get_active_ninja_count():
+def get_active_cm_count():
 	return frappe.db.count("User", {"enabled": 1})
 
 def get_action_count():
@@ -167,11 +167,11 @@ def get_state_wise_user_count(page_length=10):
 
 	return result
 
-def update_user_rank():
-    """
+""" def update_user_rank():
+  
     Fetch all Ninja Profile records with hours_invested > 0.0,
     ordered by hours_invested descending, and update each record's rank.
-    """
+    
     profiles = frappe.get_all(
         "Ninja Profile",
         fields=["name", "hours_invested"],
@@ -187,7 +187,7 @@ def update_user_rank():
             rank,
             update_modified=False
         )
-
+ """
 @frappe.whitelist(allow_guest=True)
 def search_users_(filters=None, raw=False, page_length=10, start=0):
 	start = cint(start)
@@ -195,14 +195,14 @@ def search_users_(filters=None, raw=False, page_length=10, start=0):
 	
 	filters = json.loads(filters) if filters else {}
 
-	# if filters.get("hr_range") or filters.get("city") or filters.get("organization") or filters.get("ninja"):
+	# if filters.get("hr_range") or filters.get("city") or filters.get("organization") or filters.get("change_maker"):
 	# 	raw = True
 	# 	start = 0
 
 	# Define Doctypes
 	User = DocType("User")
 	Events = DocType("Events")
-	NinjaProfile = DocType("Ninja Profile")
+	UserMetadata = DocType("User Metadata")
 
 	# Check if recent rank filtering is needed
 	recent_rank_based_on = filters.get("recent_rank_based_on")
@@ -214,19 +214,18 @@ def search_users_(filters=None, raw=False, page_length=10, start=0):
 	elif recent_rank_based_on == "Last Month":
 		time_condition = now_datetime() - timedelta(days=30)
 
-	# Base Query: Always Fetch Rank from `Ninja Profile`
 	user_count = frappe.db.count("User", {"enabled": 1})
 	query = (
 		frappe.qb.from_(User)
-		.join(NinjaProfile).on(User.name == NinjaProfile.name)
+		.left_join(UserMetadata).on(User.name == UserMetadata.user)
 		.select(
 			User.name,
 			User.username,
-			User.city,
-			Coalesce(NinjaProfile.rank, user_count).as_("rank"),  # Always get rank from Ninja Profile
-			User.org_id,
+			UserMetadata.city,
+			Coalesce(UserMetadata.rank, user_count).as_("rank"),  # Always get rank from User Metadata
+			UserMetadata.org_id,
 			User.user_image,
-			User.location,
+			#User.location,
 			User.full_name,
 		)
 	)
@@ -241,8 +240,8 @@ def search_users_(filters=None, raw=False, page_length=10, start=0):
 				Sum(Events.hours_invested).as_("recent_rank")  # ✅ FIXED: Use rank() as a window function
 			)
 			.groupby(
-				User.name, User.username, User.city, User.org_id, User.user_image, 
-				User.location, User.full_name, NinjaProfile.rank
+				User.name, User.username, UserMetadata.city, UserMetadata.org_id, User.user_image, 
+				User.location, User.full_name, UserMetadata.rank
 			)
 			.orderby(Sum(Events.hours_invested), order=Order.desc)
 			.orderby(User.full_name, order=Order.asc)
@@ -262,37 +261,36 @@ def search_users_(filters=None, raw=False, page_length=10, start=0):
 				query = query.having(Coalesce(Sum(Events.hours_invested), 0) > min_hr)
 
 	else:
-		# When `recent_rank_based_on` is not set, use Ninja Profile
 		query = (
 			query.select(
-				Coalesce(NinjaProfile.hours_invested, 0).as_("hours_invested"),
-				Coalesce(NinjaProfile.contributions, 0).as_("contribution_count"),
+				Coalesce(UserMetadata.hours_invested, 0).as_("hours_invested"),
+				Coalesce(UserMetadata.contributions, 0).as_("contribution_count"),
 			)
-			.orderby(Coalesce(NinjaProfile.rank, 99999).as_("rank"), order=Order.asc)
+			.orderby(Coalesce(UserMetadata.rank, 99999).as_("rank"), order=Order.asc)
 			.orderby(User.full_name, order=Order.asc)
 		)
 		# Apply `hr_range` Filter in Python (If Needed)
 		if filters.get("hr_range"):
 			if "-" in filters.get("hr_range"):
 				min_hr, max_hr = map(flt, filters.get("hr_range").split("-"))
-				query = query.where(NinjaProfile.hours_invested.between(min_hr, max_hr))
+				query = query.where(UserMetadata.hours_invested.between(min_hr, max_hr))
 			
 			elif "+" in filters.get("hr_range"):
 				min_hr = flt(filters.get("hr_range").replace("+", ""))
-				query = query.where(NinjaProfile.hours_invested > min_hr)
+				query = query.where(UserMetadata.hours_invested > min_hr)
 
 	query = query.where(User.enabled == 1)
-	query = query.where(NinjaProfile.rank != 0)
+	query = query.where(UserMetadata.rank != 0)
 	
 	# Apply Filters Dynamically
 	if filters.get("organization"):
-		query = query.where(User.org_id == filters["organization"])
+		query = query.where(UserMetadata.org_id == filters["organization"])
 	
 	if filters.get("city"):
-		query = query.where(User.city == filters["city"])
+		query = query.where(UserMetadata.city == filters["city"])
 
-	if filters.get("ninja"):
-		full_name_filter = f"%{filters['ninja'].lower()}%"
+	if filters.get("change_maker"):
+		full_name_filter = f"%{filters['change_maker'].lower()}%"
 		query = query.where(Lower(User.full_name).like(full_name_filter))
 	# Apply Pagination
 	if not raw:
@@ -338,7 +336,7 @@ def filter_users(users, filters):
 	for user in users:
 		add_user = True
 
-		if filters.get("ninja") and filters["ninja"].lower() not in user["full_name"].lower():
+		if filters.get("change_maker") and filters["change_maker"].lower() not in user["full_name"].lower():
 			add_user = False
 
 		if filters.get("organization") and user["org_id"] != filters["organization"]:

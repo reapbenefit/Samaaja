@@ -14,6 +14,10 @@ import frappe
 from frappe import _
 from frappe.utils import flt
 import requests
+from frappe.utils import get_url
+
+logger.set_log_level("DEBUG")
+logger = frappe.logger("api", allow_site=True, file_count=50)
 
 def custom_response(message=None, data={}, status_code=200, error=False):
     """
@@ -232,17 +236,17 @@ def add_user():
         user_doc = build_user_doc(user_data, mobile)
         user_doc.insert(ignore_permissions=True)
 
-        # Enqueue ninja profile update in background
+        # Enqueue profile update in background
         frappe.enqueue(
-            "solve_ninja.api.common.update_ninja_profile",
+            "samaaja.api.common.update_profile",
             user=user_doc.name,
             user_data=user_data,
             queue='default',
-            job_name=f"Update ninja profile for {user_doc.name}",
+            job_name=f"Update profile for {user_doc.name}",
             now=False
         )
         frappe.enqueue(
-            "solve_ninja.api.common.update_user_metadata",
+            "samaaja.api.common.update_user_metadata",
             user=user_doc.name,
             user_data=user_data,
             queue='default',
@@ -250,7 +254,7 @@ def add_user():
             now=False
         )
         
-        data = f"https://solveninja.org/user-profile/{user_doc.username}"
+        data = f"https://samaaja.org/user-profile/{user_doc.username}"
 
     except Exception as e:
         logger.error(f"Error occurred while registering user with mobile - {mobile}")
@@ -306,7 +310,7 @@ def fetch_profile():
        
         user_data = json.loads(frappe.request.data)
         mobile_no=user_data.get("mobile")
-        user_profile_link='https://solveninja.org/user-profile/'
+        user_profile_link='https://samaaja.org/user-profile/'
 
         if mobile_no:
             user_doc = frappe.db.get_all('User', filters={'mobile_no':mobile_no },fields=['username'])
@@ -606,9 +610,9 @@ def search_users_(filters=None, raw=None, page_length=10, start=0):
     for count, data in enumerate(users, 1):
         data["sr"] = count+start
         
-    # users_recent_rank = get_ninja_recent_rank(filters.get("recent_rank_based_on")) if filters else get_ninja_recent_rank(limit=limit, offset=offset)
+    # users_recent_rank = get_change_maker_recent_rank(filters.get("recent_rank_based_on")) if filters else get_change_maker_recent_rank(limit=limit, offset=offset)
     if filters and filters.get("recent_rank_based_on"):
-        users_recent_rank = get_ninja_recent_rank(filters.get("recent_rank_based_on"))
+        users_recent_rank = get_change_maker_recent_rank(filters.get("recent_rank_based_on"))
         users = merge_users(users_recent_rank, users, "name")
     # else:
     #     users = merge_users(users, users_recent_rank, "name")
@@ -630,8 +634,8 @@ def search_users_(filters=None, raw=None, page_length=10, start=0):
         users_ = []
         for user in users:
             add_user = True
-            if filters.get("ninja"):
-                if filters.get("ninja").lower() not in user.get("full_name").lower():
+            if filters.get("change_maker"):
+                if filters.get("change_maker").lower() not in user.get("full_name").lower():
                     add_user = False
 
             if filters.get("organization") and user.org_id != filters.get("organization"):
@@ -657,7 +661,7 @@ def download_profile(user=None):
     if not frappe.db.exists("User Profile QR", user):
         params = {
             "size": 200,
-            "centerImageUrl": "https://solveninja.org/files/solve-ninja-logo22f1bc.png",
+            "centerImageUrl": get_url+"/files/Samaaja.png",
             "text": f"{frappe.utils.get_url()}/user-profile/{doc.username}"
         }
         try:
@@ -675,12 +679,12 @@ def download_profile(user=None):
                     "qr": file.file_url
                 }).insert(ignore_permissions=True)
         except Exception as e:
+            logger.error(e)
             frappe.log_error()
             frappe.throw("Unable to download Profile")
-            
     return True
 
-def get_ninja_recent_rank(recent_rank_based_on=None):
+def get_change_maker_recent_rank(recent_rank_based_on=None):
     # if not recent_rank_based_on or recent_rank_based_on in ["Overall"]:
     #     return []
     
@@ -766,9 +770,11 @@ def fetch_data_gov_in(pincode):
     if not pincode:
         frappe.throw("Pincode is required")
 
-    api_key = frappe.conf.get("data_gov_api_key")
-    if not api_key:
-        frappe.throw("API Key not found in site config")
+    samaaja_settings = frappe.get_single("Samaaja Settings")
+
+    api_key = samaaja_settings.pincode_key
+    #if not api_key:
+    #    frappe.throw("API Key not found in site config")
 
     url = "https://api.data.gov.in/resource/5c2f62fe-5afa-4119-a499-fec9d604d5bd"
     params = {
@@ -857,12 +863,12 @@ def update_user_metadata(user, user_data):
             user_metadata.org_id = user_data.get("org_id")
         user_metadata.save(ignore_permissions=True)
     
-def update_ninja_profile(user, user_data):
+def update_profile(user, user_data):
     """
-    Updates Ninja Profile record with wa_id if available.
+    Updates Profile record with wa_id if available.
     """
-    if user_data.get("wa_id") and frappe.db.exists("Ninja Profile", user):
-        frappe.db.set_value("Ninja Profile", user, "wa_id", user_data.get("wa_id"))
+    if user_data.get("wa_id") and frappe.db.exists("User Metadata", user):
+        frappe.db.set_value("User Metadata", user, "wa_id", user_data.get("wa_id"))
 
 @frappe.whitelist()
 def get_action_count():
@@ -884,7 +890,7 @@ def get_action_count():
         mobile_no = validate_and_normalize_mobile(mobile_no)
         user = f"{mobile_no}@solveninja.org"
         
-        action_count = frappe.db.get_value('Ninja Profile', user, "contributions")
+        action_count = frappe.db.get_value('User Metadata', user, "contributions")
         data = {"action_count": action_count}
 
     except Exception as e:
