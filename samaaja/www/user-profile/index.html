@@ -137,7 +137,7 @@
                                         <div class="content">
                                             {% for review in current_user.reviews%}
                                                 <p>{{review.comment}}</p>
-                                                <strong>{{review.reviewer_name}}, {{review.desigantion}} {{review.organisation}}</strong>
+                                                <strong>{{review.reviewer_name}}, {{review.designation}} {{review.organisation}}</strong>
                                             {% endfor %}
                                         </div>
                                     </div>
@@ -294,7 +294,7 @@
                                         {% if current_user.reviews %}
                                             {% for review in current_user.reviews%}
                                                 <p>{{review.comment}}</p>
-                                                <strong>{{review.reviewer_name}}, {{review.desigantion}} {{review.organisation}}</strong>
+                                                <strong>{{review.reviewer_name}}, {{review.designation}} {{review.organisation}}</strong>
                                             {% endfor %}
                                         {% else %}
                                             <p>You haven't received any reviews as of now.</p>

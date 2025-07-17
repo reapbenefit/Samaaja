@@ -93,7 +93,7 @@ def get_context(context):
 		badge_doc = frappe.get_doc('Badge', user_badge.badge)
 		tags = badge_doc.get_tags()
 
-		if 'skill' in tags:
+		if badge_doc.badge_type == "Skill":
 			context.current_user.skills.append({
 				"name": badge_doc.title,
 				"image": badge_doc.icon,
@@ -110,7 +110,7 @@ def get_context(context):
 	context.current_user.reviews = frappe.get_all(
 		"User Review",
 		filters={"user": context.current_user.name, "status": "Accepted"},
-		fields=["review_title", "reviewer_name", "desigantion", "comment", "organisation"]
+		fields=["review_title", "reviewer_name", "designation", "comment", "organisation"]
 	)
 
 	# Superheroes (top categories)

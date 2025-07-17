@@ -280,7 +280,7 @@ def search_users_(filters=None, raw=False, page_length=10, start=0):
 				query = query.where(UserMetadata.hours_invested > min_hr)
 
 	query = query.where(User.enabled == 1)
-	query = query.where(UserMetadata.rank != 0)
+	#query = query.where(UserMetadata.rank != 0)
 	
 	# Apply Filters Dynamically
 	if filters.get("organization"):

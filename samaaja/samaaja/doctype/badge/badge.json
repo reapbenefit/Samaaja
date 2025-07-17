@@ -48,6 +48,12 @@
    "fieldname": "priority",
    "fieldtype": "Int",
    "label": "Order"
+  },
+  {
+   "fieldname": "badge_type",
+   "fieldtype": "Select",
+   "label": "Badge Type",
+   "options": "Skill\nPartner"
   }
  ],
  "index_web_pages_for_search": 1,

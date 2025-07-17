@@ -64,7 +64,7 @@ web_include_js = ""
 # ------------
 
 # before_install = "samaaja.install.before_install"
-# after_install = "samaaja.install.after_install"
+# after_migrate  = "samaaja.setup.samaaja_setup.setup_samaaja"
 
 # Uninstallation
 # ------------
@@ -235,6 +235,6 @@ doc_events = {
         "validate": "samaaja.doc_events.user_metadata.on_save"
     },
     "Energy Point Log": {
-        "after_insert": "samaaja.doc_events.energy_point_log.handle_energy_point_log"
+        "before_insert": "samaaja.doc_events.energy_point_log.before_insert"
     }
 }
