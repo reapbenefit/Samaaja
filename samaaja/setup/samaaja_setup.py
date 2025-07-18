@@ -260,7 +260,7 @@ def create_badges_and_energy_point_rules():
                 print(f"Failed to insert rule for badge: {badge['title']}. Error: {e}")
 
 def enable_energy_points():
-    ss = frappe.get_single("System Settings")
+    ss = frappe.get_single("Energy Point Settings")
     ss.enable_energy_points = 1  # ✅ Enable Energy Points
     ss.save()
     frappe.db.commit()
@@ -344,7 +344,77 @@ def create_events():
             doc.insert(ignore_permissions=True)
             frappe.db.commit()
             doc.save(ignore_permissions=True)
-            
+
+def create_campaign_templates():
+    data = [
+        {
+            "title": "Clean-Up Drive",
+            "header_logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTb89_HRfrOIehYifLckaAT8CgX5SU6jDigZg&s",
+            "email_subject_template": "Join the Clean-Up Drive for a Greener Tomorrow!",
+            "email_body_template": "Let’s come together for a community clean-up. Join hands to make our parks, roads, and riversides clean and green again. Participate in the drive, bring your friends, and let’s make a visible difference together.",
+            "recipient_name": "Rahul Poddar",
+            "recipient_email": "rahul@impactyaan.com",
+            "route": "campaign/clean-up-drive",
+            "partner": "Reap Benefit",
+            "logo": "https://media.licdn.com/dms/image/v2/D560BAQHLz7j54BE1-Q/company-logo_200_200/company-logo_200_200/0/1709957751243?e=2147483647&v=beta&t=APWWYHiiyk6J5uWs3hlljeyDo9ihZRJYzTK_kz8Tz9g"
+        },
+        {
+            "title": "Cleanliness & Hygiene Awareness",
+            "header_logo": "https://www.sterloc.com/blog/wp-content/uploads/2021/11/cleanliness-and-hygiene.jpg",
+            "email_subject_template": "Clean Hands, Safe Homes: Hygiene Awareness Drive",
+            "email_body_template": "Access to sanitation and hygiene education saves lives. Be part of our community campaign promoting healthy hygiene habits, distributing kits, and conducting interactive handwashing demos in schools and households. Volunteer with us and help build a healthier tomorrow.",
+            "recipient_name": "Ankit Saxena",
+            "recipient_email": "ankit@impactyaan.com",
+            "route": "campaign/cleanliness-hygiene-awareness",
+            "partner": "Impactyaan",
+            "logo": "https://media.licdn.com/dms/image/v2/D560BAQG0XJIGaxZqcg/company-logo_100_100/B56ZaMIcyuHUAQ-/0/1746107747953/impactyaan_logo?e=2147483647&v=beta&t=OvbPqig2XHpCILlRSx6BPxFAcN76Yu3AKI3V6Z1W8GE"
+        },
+        {
+            "title": "Tree Planting & Reforestation",
+            "header_logo": "https://dva1blx501zrw.cloudfront.net/uploaded_images/us/images/2443/original/shutterstock_604290230.jpg",
+            "email_subject_template": "Plant for the Planet: One Tree, One Future",
+            "email_body_template": "Urban and rural green cover is vanishing—but we can reverse that. Join our Tree Planting campaign focused on native species, local biodiversity, and community ownership. Lend your hands to the soil—let’s root change together.",
+            "recipient_name": "Pranav Prabhu",
+            "recipient_email": "pranav@oasishq.org",
+            "route": "campaign/tree-plantation-reforestation",
+            "partner": "Oasis",
+            "logo": "https://oasishq.org/assets/oasis/images/logo.svg"
+        }
+    ]
+
+    for entry in data:
+        doc = frappe.get_doc({
+            "doctype": "Campaign Template",
+            "title": entry["title"],
+            "header_logo": entry["header_logo"],
+            "email_subject_template": entry["email_subject_template"],
+            "email_body_template": entry["email_body_template"],
+            "published": 1,
+            "accept_petitions": 1,
+            "organization_name": "Samaaja",
+            "route": entry["route"],
+            "recipients": [
+                {
+                    "doctype": "Campaign Recipient",
+                    "recipient_name": entry["recipient_name"],
+                    "email": entry["recipient_email"],
+                    "is_selected_by_default": 1
+                }
+            ],
+            "partners": [
+                {
+                    "doctype": "Campaign Partner",
+                    "partner_name": entry["partner"],
+                    "logo": entry["logo"]
+                }
+            ]
+        })
+
+        doc.insert(ignore_permissions=True)
+
+    frappe.db.commit()
+
+
 @frappe.whitelist()
 def setup_samaaja():
     print("🔥 Setting up samaaja")
@@ -355,4 +425,7 @@ def setup_samaaja():
     enable_energy_points()
     create_users()
     create_events()
+    create_campaign_templates()
     print("🔥 Setting up samaaja successful!")
+    frappe.msgprint("Samaaja setup completed successfully.")
+
