@@ -661,7 +661,7 @@ def download_profile(user=None):
     if not frappe.db.exists("User Profile QR", user):
         params = {
             "size": 200,
-            "centerImageUrl": get_url+"/files/Samaaja.png",
+            "centerImageUrl": get_url()+"/files/Samaaja.png",
             "text": f"{frappe.utils.get_url()}/user-profile/{doc.username}"
         }
         try:
