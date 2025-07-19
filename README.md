@@ -3,23 +3,16 @@
 
 Samaaja is an open source software solution for rapidly building location based civic services connected with volunteer, human interactions. It comes with all necessary UI and management features and can be easily extended into web applications and external mobile apps and systems via built-in APIs.
 
-Visit [Samaaja.org](https://samaaja.org/)
-
-For documentation, visit [**fossunited.github.io/Samaaja**](https://fossunited.github.io/Samaaja/)
+Visit [samaaja.org](https://samaaja.org/)
 
 ### Installation
 
-* [**Install Bench & Frappe**](https://github.com/frappe/bench#installation)
+Refer [Install Samaaja](https://samaaja.org/install)
 
-* Download the Samaaja app
+### 🙏 Credits
 
-      bench get-app https://github.com/fossunited/Samaaja
-      
-
-* Install the app on your site
-
-      bench --site <your-site-name-here> install-app samaaja
-
+- [Frappe Framework](https://github.com/frappe/frappe)
+- [Samaaja](https://github.com/reapbenefit/Samaaja) by FOSS United / ReapBenefit and maintained by [Impactyaan](https://impactyaan.com)
 
 
 
