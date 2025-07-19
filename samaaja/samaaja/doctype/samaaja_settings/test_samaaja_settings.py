@@ -1,4 +1,4 @@
-# Copyright (c) 2023, FOSS United and Contributors
+# Copyright (c) 2023, Impactyaan and Contributors
 # See license.txt
 
 # import frappe

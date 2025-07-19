@@ -30,7 +30,7 @@ def get_context(context):
 		raise frappe.DoesNotExistError("User not found or not allowed")
 
 	if not context.current_user:
-		context.template = "wwwf/404.html"
+		context.template = "www/404.html"
 		return context
 
 	context.title = f"{context.current_user.full_name.title()} Profile"
@@ -115,23 +115,21 @@ def get_context(context):
 
 	# Superheroes (top categories)
 	superheroes = []
-	categories = frappe.db.sql("""
-		SELECT e.category AS category, COUNT(*) 
-		FROM `tabEvents` e
-		WHERE e.user = %s
-		GROUP BY 1
-		ORDER BY 2 DESC
-		LIMIT 3
-	""", context.current_user.name, as_dict=True)
+	if context.current_user.interest:
+		interests = [i.strip() for i in context.current_user.interest.split(",")]
 
-	for cat in categories:
-		if cat.category:
-			cat_doc = frappe.get_doc('Event Category', cat.category)
-			superheroes.append({
-				'name': cat_doc.name,
-				'image': cat_doc.icon
-			})
+		for interest in interests:
+			cat_doc = frappe.get_doc('Event Category', interest)
+			if cat_doc:
+				superheroes.append({
+					'name': interest,
+					'image': cat_doc.icon
+				})
+			else:
+				superheroes.append({
+						'name': interest,
+					})
 
-	context.current_user.superheroes = superheroes
+		context.current_user.superheroes = superheroes
 
 	# return context

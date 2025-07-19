@@ -2,9 +2,9 @@ from . import __version__ as app_version
 
 app_name = "samaaja"
 app_title = "Samaaja"
-app_publisher = "FOSS United"
+app_publisher = "Impactyaan"
 app_description = "Samaaja is an open source software solution for rapidly building location based civic services connected with volunteer, human interactions. It comes with all necessary UI and management features and can be easily extended into web applications and external mobile apps and systems via built-in APIs."
-app_email = "abhinav.raut@zerodha.com"
+app_email = "ankit@impactyaan.com"
 app_license = "MIT"
 
 # Includes in <head>

@@ -37,42 +37,58 @@ def create_event_types():
             }).insert()
 
 def create_event_categories_and_subcategories():
-    # Define categories and their corresponding subcategories
+    # Define categories with icons and subcategories
     event_structure = {
-        "Education & Awareness": [
+        "Education & Awareness": {
+            "icon": "https://static.thenounproject.com/png/7062467-512.png",  
+            "sub_category": [
             "School Outreach",
             "Girl Education",
             "Teacher Training Program"
-        ],
-        "Health & Sanitisation": [
+            ]
+        },
+        "Health & Sanitisation": {
+            "icon": "https://static.thenounproject.com/png/2583590-512.png",  
+            "sub_category": [
             "Health Camps",
             "Hygiene & Sanitation"
-        ],
-        "Civic And Climate Action": [
+            ]
+        },
+        "Civic And Climate Action": {
+            "icon": "https://static.thenounproject.com/png/1795959-512.png", 
+            "sub_category": [
             "Pollution",
             "Waste Management",
             "Tree Planting & Reforestation"
-        ],
-        "Livelihood & Skill Building": [
+            ]
+        },
+        "Livelihood & Skill Building": {
+            "icon": "https://static.thenounproject.com/png/5517807-512.png",  
+            "sub_category": [
             "Vocational Training",
             "Entrepreneurship Support",
             "Artisans Support System"
-        ],
-        "Civic & Governance": [
+            ]
+        },
+        "Civic & Governance": {
+            "icon": "https://static.thenounproject.com/png/1152481-512.png",  
+            "sub_category": [
             "Civic Reporting",
             "Policy Engagement"
-        ]
-    }
+            ]
+        }
+        }
 
-    for category, subcategories in event_structure.items():
+    for category, details in event_structure.items():
         # Insert Event Category if not exists
         if not frappe.db.exists("Event Category", {"category": category}):
             frappe.get_doc({
                 "doctype": "Event Category",
-                "category": category
+                "category": category,
+                "icon": details["icon"]
             }).insert()
 
-        for subcat in subcategories:
+        for subcat in details["sub_category"]:
             # Insert Event Sub Category if not exists
             if not frappe.db.exists("Event Sub Category", {
                 "subcategory": subcat,
@@ -267,16 +283,16 @@ def enable_energy_points():
 
 def create_users():
     user_data = [
-        {"first_name": "Ayesha", "full_name": "Ayesha Khan", "email": "Ayesha@samaaja.org", "age": 22, "gender": "Female", "city": "Lucknow", "state": "Uttar Pradesh"},
-        {"first_name": "Rohan", "full_name": "Rohan Mehta", "email": "Rohan@samaaja.org", "age": 29, "gender": "Male", "city": "Ahmedabad", "state": "Gujarat"},
-        {"first_name": "Sneha", "full_name": "Sneha Reddy", "email": "Sneha@samaaja.org", "age": 19, "gender": "Female", "city": "Hyderabad", "state": "Telangana"},
-        {"first_name": "Aditya", "full_name": "Aditya Sharma", "email": "Aditya@samaaja.org", "age": 34, "gender": "Male", "city": "New Delhi", "state": "Delhi"},
-        {"first_name": "Priya", "full_name": "Priya Menon", "email": "Priya@samaaja.org", "age": 27, "gender": "Female", "city": "Kochi", "state": "Kerala"},
-        {"first_name": "Kabir", "full_name": "Kabir Singh", "email": "Kabir@samaaja.org", "age": 21, "gender": "Male", "city": "Mohali", "state": "Punjab"},
-        {"first_name": "Meera", "full_name": "Meera Banerjee", "email": "Meera@samaaja.org", "age": 31, "gender": "Female", "city": "Kolkata", "state": "West Bengal"},
-        {"first_name": "Aniket", "full_name": "Aniket Joshi", "email": "Aniket@samaaja.org", "age": 25, "gender": "Male", "city": "Pune", "state": "Maharashtra"},
-        {"first_name": "Iqra", "full_name": "Iqra Sheikh", "email": "Iqra@samaaja.org", "age": 18, "gender": "Female", "city": "Bhopal", "state": "Madhya Pradesh"},
-        {"first_name": "Harshad", "full_name": "Harshad Iyer", "email": "Harshad@samaaja.org", "age": 30, "gender": "Male", "city": "Bengaluru", "state": "Karnataka"},
+        {"first_name": "Ayesha", "full_name": "Ayesha Khan", "email": "ayesha@samaaja.org", "age": 22, "gender": "Female", "city": "Lucknow", "state": "Uttar Pradesh"},
+        {"first_name": "Rohan", "full_name": "Rohan Mehta", "email": "rohan@samaaja.org", "age": 29, "gender": "Male", "city": "Ahmedabad", "state": "Gujarat"},
+        {"first_name": "Sneha", "full_name": "Sneha Reddy", "email": "sneha@samaaja.org", "age": 19, "gender": "Female", "city": "Hyderabad", "state": "Telangana"},
+        {"first_name": "Aditya", "full_name": "Aditya Sharma", "email": "aditya@samaaja.org", "age": 34, "gender": "Male", "city": "New Delhi", "state": "Delhi"},
+        {"first_name": "Priya", "full_name": "Priya Menon", "email": "priya@samaaja.org", "age": 27, "gender": "Female", "city": "Kochi", "state": "Kerala"},
+        {"first_name": "Kabir", "full_name": "Kabir Singh", "email": "kabir@samaaja.org", "age": 21, "gender": "Male", "city": "Mohali", "state": "Punjab"},
+        {"first_name": "Meera", "full_name": "Meera Banerjee", "email": "meera@samaaja.org", "age": 31, "gender": "Female", "city": "Kolkata", "state": "West Bengal"},
+        {"first_name": "Aniket", "full_name": "Aniket Joshi", "email": "aniket@samaaja.org", "age": 25, "gender": "Male", "city": "Pune", "state": "Maharashtra"},
+        {"first_name": "Iqra", "full_name": "Iqra Sheikh", "email": "iqra@samaaja.org", "age": 18, "gender": "Female", "city": "Bhopal", "state": "Madhya Pradesh"},
+        {"first_name": "Harshad", "full_name": "Harshad Iyer", "email": "harshad@samaaja.org", "age": 30, "gender": "Male", "city": "Bengaluru", "state": "Karnataka"},
     ]
 
     for u in user_data:
