@@ -1,0 +1,38 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-07-20 23:23:36.235750",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "feature_name",
+  "icon"
+ ],
+ "fields": [
+  {
+   "fieldname": "feature_name",
+   "fieldtype": "Data",
+   "label": "Feature Name"
+  },
+  {
+   "fieldname": "icon",
+   "fieldtype": "Attach",
+   "label": "Icon"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-07-20 23:25:58.481619",
+ "modified_by": "Administrator",
+ "module": "Samaaja",
+ "name": "Samaaja Feature Item",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

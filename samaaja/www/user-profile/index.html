@@ -47,7 +47,7 @@
                 <div class="ctas_wrapper show_mob"> 
                     {% if frappe.session.user == current_user.name or current_user.is_system_manager %}
                         <a  href="/record-actions/new" target="_new"><button class="btn btn_fill">Add Action</button></a>
-                        <a class="btn btn_outline" href="" target="_blank">Contact Mentor</a>
+                        <a class="btn btn_outline" href="" target="_blank">Ask for help</a>
                         <a class="btn btn_outline" href="/request-expert-recommendations/new?user={{current_user.name}}" target="_blank">Request Review</a>
                         <a class="btn btn_outline download-btn" href="#" onClick="download_profile('{{current_user.name}}')">Download Profile</a>
                     {% endif %}
@@ -229,7 +229,7 @@
                 <div class="ctas_wrapper">
                     {% if frappe.session.user == current_user.name or current_user.is_system_manager %}
                         <a  href="/record-actions/new" target="_new"><button class="btn btn_fill">Add Action</button></a>
-                        <a class="btn btn_outline" href="" target="_blank">Contact Mentor</a>
+                        <a class="btn btn_outline" href="" target="_blank">Ask for help</a>
                         <a class="btn btn_outline" href="/request-expert-recommendations/new?user={{current_user.name}}" target="_blank">Request Review</a>
                         <a class="btn btn_outline download-btn" href="#" onClick="download_profile('{{current_user.name}}')">Download Profile</a>
                     {% endif %}

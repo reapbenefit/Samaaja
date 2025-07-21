@@ -1,4 +1,5 @@
 import frappe
+import json
 
 def create_event_types():
     parent_types = ["Workshop / Seminar", "Awareness Drive", "Investigation/Audit", "Campaign"]
@@ -89,16 +90,11 @@ def create_event_categories_and_subcategories():
             }).insert()
 
         for subcat in details["sub_category"]:
-            # Insert Event Sub Category if not exists
-            if not frappe.db.exists("Event Sub Category", {
-                "subcategory": subcat,
-                "event_category": category
-            }):
-                frappe.get_doc({
-                    "doctype": "Event Sub Category",
-                    "subcategory": subcat,
-                    "event_category": category
-                }).insert()
+            if not frappe.db.exists("Event Sub Category", {"subcategory": subcat}):
+              frappe.get_doc({
+                  "doctype": "Event Sub Category",
+                  "subcategory": subcat
+              }).insert()
 
 def create_event_sources():
     sources = [
@@ -254,9 +250,9 @@ def create_badges_and_energy_point_rules():
             frappe.db.commit()
            
         # Create Energy Point Rule
-        if not frappe.db.exists("Energy Point Rule", {"name": badge["title"]+" Eb Rule"}):
+        if not frappe.db.exists("Energy Point Rule", {"name": badge["title"]+" Rule"}):
             rule = frappe.new_doc("Energy Point Rule")
-            rule.rule_name = badge["title"]+" Eb Rule"
+            rule.rule_name = badge["title"]+" Rule"
             rule.reference_doctype = "Events"
             rule.user_field = "user"
             rule.subject = f"Earned {badge['title']} badge!"
@@ -399,39 +395,41 @@ def create_campaign_templates():
     ]
 
     for entry in data:
-        doc = frappe.get_doc({
-            "doctype": "Campaign Template",
-            "title": entry["title"],
-            "header_logo": entry["header_logo"],
-            "email_subject_template": entry["email_subject_template"],
-            "email_body_template": entry["email_body_template"],
-            "published": 1,
-            "accept_petitions": 1,
-            "organization_name": "Samaaja",
-            "route": entry["route"],
-            "recipients": [
-                {
-                    "doctype": "Campaign Recipient",
-                    "recipient_name": entry["recipient_name"],
-                    "email": entry["recipient_email"],
-                    "is_selected_by_default": 1
-                }
-            ],
-            "partners": [
-                {
-                    "doctype": "Campaign Partner",
-                    "partner_name": entry["partner"],
-                    "logo": entry["logo"]
-                }
-            ]
-        })
+        if not frappe.db.exists("Campaign Template", {"title": entry["title"]}):
 
-        doc.insert(ignore_permissions=True)
+          doc = frappe.get_doc({
+              "doctype": "Campaign Template",
+              "title": entry["title"],
+              "header_logo": entry["header_logo"],
+              "email_subject_template": entry["email_subject_template"],
+              "email_body_template": entry["email_body_template"],
+              "published": 1,
+              "accept_petitions": 1,
+              "organization_name": "Samaaja",
+              "route": entry["route"],
+              "recipients": [
+                  {
+                      "doctype": "Campaign Recipient",
+                      "recipient_name": entry["recipient_name"],
+                      "email": entry["recipient_email"],
+                      "is_selected_by_default": 1
+                  }
+              ],
+              "partners": [
+                  {
+                      "doctype": "Campaign Partner",
+                      "partner_name": entry["partner"],
+                      "logo": entry["logo"]
+                  }
+              ]
+          })
 
-    frappe.db.commit()
+          doc.insert(ignore_permissions=True)
+
+          frappe.db.commit()
 
 def create_print_format():
-    if not frappe.db.exists("Print Format", {"name": "Samaaja QR Profile"}):
+    if not frappe.db.exists("Print Format", {"name": "User Profile"}):
         html = """
        <div class="hidden">
     {% set actions = frappe.get_all("Events", {"user": doc.name}, page_length=1, order_by="creation desc", pluck="creation") %}
@@ -1059,6 +1057,151 @@ def create_print_format():
         print_format.insert(ignore_permissions=True)
         frappe.db.commit()
 
+def create_discussions_web_page():
+    if frappe.db.exists("Web Page", "discussions"):
+        print("Web Page already exists.")
+        return
+
+    doc = frappe.get_doc({
+        "doctype": "Web Page",
+        "title": "Discussions",
+        "route": "discussions",
+        "published": 1,
+        "content_type": "Page Builder",
+        "full_width": 1,
+        "show_title": 0,
+        "show_sidebar": 0,
+        "enable_comments": 0,
+        "page_blocks": [
+            {
+                "doctype": "Web Page Block",
+                "web_template": "Discussions",
+                "web_template_values": json.dumps({
+                    "title": "Samaaja conversations",
+                    "cta_title": "New conversation",
+                    "docname": "discussions",
+                    "single_thread": 0
+                }),
+                "add_container": 1,
+                "add_top_padding": 1,
+                "add_bottom_padding": 1
+            }
+        ]
+    })
+
+    doc.insert(ignore_permissions=True)
+    frappe.db.commit()
+
+def create_sample_discussions():
+    titles = [
+        "How can civic engagement improve local governance?",
+        "Innovative methods to increase girl education enrollment?",
+        "What’s your opinion on tree planting initiatives?",
+        "How can vocational training be more inclusive?",
+        "Is policy advocacy working at the grassroots level?"
+    ]
+
+    replies = [
+        "Great question! In our area, regular ward meetings helped.",
+        "We used peer mentors and that really boosted attendance.",
+        "I’ve seen mixed results, but engaging communities helps.",
+        "Yes, especially when tied to local job markets.",
+        "Grassroots voices are rising, but more training is needed."
+    ]
+
+    for i in range(5):
+        title = titles[i]
+        reply_text = replies[i]
+
+        # Check if Discussion Topic with this title already exists
+        existing_topic = frappe.db.exists("Discussion Topic", {"title": title})
+        
+        if not existing_topic:
+            # Create Discussion Topic
+            topic = frappe.get_doc({
+                "doctype": "Discussion Topic",
+                "title": title,
+                "reference_doctype": "Web Page",
+                "reference_docname": "discussions",
+                "owner":"kabir@samaaja.org"
+            }).insert(ignore_permissions=True)
+
+            # Create Discussion Reply linked to the topic
+            frappe.get_doc({
+                "doctype": "Discussion Reply",
+                "topic": topic.name,
+                "reply": reply_text,
+                "owner":"sneha@samaaja.org"
+            }).insert(ignore_permissions=True)
+
+            frappe.db.commit()
+
+def website_settings():
+    settings = frappe.get_single("Website Settings")
+    settings.home_page = "leaderboard"
+    settings.banner_image = "/assets/samaaja/images/Samaaja.png"
+    settings.save()
+    frappe.db.commit()
+
+def create_samaaja_settings():
+    # Sample data — update as needed
+    data = {
+        "samaaja_icon":"/assets/samaaja/images/Samaaja.png",
+        "tagline": "Samaaja: Where Changemakers Grow Together",
+        "blurb": "#GrowWithSamaaja",
+        "summary": "An open-source platform for non-profits to design, activate, and scale changemaker communities",
+        "join_title": "Join Samaaja Conversations",
+        "join_link": "/discussions",
+
+        "total_members_label": "Total Members",
+        "actions_taken_label": "Actions Taken",
+        "hours_invested_label": "Hours Invested",
+        "verified_members_label": "Verified Members",
+        "verified_members_summary": "Members who have been vetted and verified.",
+        "most_active_members_label": "Most Active Members",
+        "most_active_members_summary": "Top contributors who lead the change.",
+        "most_active_cities_label": "Most Active Cities",
+        "most_active_cities_summary": "Cities showing the greatest participation.",
+
+        "samaaja_feature_list": [
+            {
+                "feature_name": "Dynamic Portfolio",
+                "icon": "/assets/samaaja/images/build_skills.png"
+            },
+            {
+                "feature_name": "Leaderboards",
+                "icon": "/assets/samaaja/images/access_mentorship.png"
+            },
+            {
+                "feature_name": "Build Expertise",
+                "icon": "/assets/samaaja/images/land_internships.png"
+            },
+            {
+                "feature_name": "Funding Opportunities",
+                "icon": "/assets/samaaja/images/seeds_funds.png"
+            }
+        ]
+    }
+
+    # Load the single doc (or create if doesn't exist — handled by frappe.get_single)
+    doc = frappe.get_single("Samaaja Settings")
+
+    # Set scalar fields
+    for field, value in data.items():
+        if field != "samaaja_feature_list":
+            doc.set(field, value)
+
+    # Clear and set feature list (child table)
+    doc.set("samaaja_feature_list", [])
+    for feature in data["samaaja_feature_list"]:
+        doc.append("samaaja_feature_list", {
+            "feature_name": feature["feature_name"],
+            "icon": feature["icon"]
+        })
+
+    # Save the document
+    doc.save(ignore_permissions=True)
+    frappe.db.commit()
 
 
 @frappe.whitelist()
@@ -1073,6 +1216,10 @@ def setup_samaaja():
     create_events()
     create_campaign_templates()
     create_print_format()
+    create_discussions_web_page()
+    create_sample_discussions()
+    website_settings()
+    create_samaaja_settings()
     print("🔥 Setting up samaaja successful!")
     frappe.msgprint("Samaaja setup completed successfully.")
 

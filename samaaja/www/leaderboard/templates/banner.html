@@ -1,31 +1,23 @@
 <div class="banner_wrapper">
     <div class="banner_content_wrapper">
-        <h1>Samaaja: Where Changemakers Grow Together</h1>
-        <h2>#GrowWithSamaaja</h2>
-        <h3>An open-source platform for non-profits to design, activate, and scale changemaker communities</h3>
+        <h1>{{samaaja_settings.tagline}}</h1>
+        <h2>{{samaaja_settings.blurb}}</h2>
+        <h3>{{samaaja_settings.summary}}</h3>
         <div class="b_content">
-            <div class="b_content_box">
-                <img src="./assets/samaaja/images/build_skills.png" alt="" />
-                <span>Dynamic Portfolio</span>
-            </div>
-            <div class="bcb_divider"></div>
-            <div class="b_content_box">
-                <img src="./assets/samaaja/images/access_mentorship.png" alt="" />
-                <span>Leaderboards</span>
-            </div>
-            <div class="bcb_divider"></div>
-            <div class="b_content_box">
-                <img src="./assets/samaaja/images/land_internships.png" alt="" />
-                <span>Build Expertise</span>
-            </div>
-            <div class="bcb_divider"></div>
-            <div class="b_content_box">
-                <img src="./assets/samaaja/images/seeds_funds.png" alt="" />
-                <span>Funding Opportunities</span>
-            </div>
+            
+            {% for feature in samaaja_settings.samaaja_feature_list%}
+                <div class="b_content_box">
+                    <img src="{{feature.icon}}" alt="" />
+                    <span>{{feature.feature_name}} </span>
+                </div>
+                {% if not loop.last %}
+                    <div class="bcb_divider"></div>
+                {% endif %}
+             {% endfor %}
+            
         </div>
         <div class="b_cta">
-            <a href="" target="_blank"><button class="secondry_btn">Join Now</button></a>
+            <a href="{{samaaja_settings.join_link}}" target="_blank"><button class="secondry_btn">{{samaaja_settings.join_title}}</button></a>
             <p>Already A Member? <a href="" target="_blank">Click to Login</a></p>
         </div>
     </div>

@@ -658,14 +658,17 @@ def download_profile(user=None):
     
     doc = frappe.get_doc("User", user)
     file = None
+    samaaja_settings_doc = frappe.get_single("Samaaja Settings")
+    url = ''
     if not frappe.db.exists("User Profile QR", user):
         params = {
             "size": 200,
-            "centerImageUrl": get_url()+"/files/Samaaja.png",
+            "centerImageUrl": frappe.utils.get_url()+"/"+samaaja_settings_doc.samaaja_icon,
             "text": f"{frappe.utils.get_url()}/user-profile/{doc.username}"
         }
         try:
-            r = requests.get(f"""https://quickchart.io/qr?text={params.get("text")}&centerImageUrl={params.get("centerImageUrl")}&size={params.get("size")}""")
+            url= f"""https://quickchart.io/qr?text={params.get("text")}&centerImageUrl={params.get("centerImageUrl")}&size={params.get("size")}"""
+            r = requests.get(url)
             file_args = {
                 "doctype": "File",
                 "file_name": f"{user}.png",
