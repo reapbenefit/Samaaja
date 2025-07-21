@@ -146,6 +146,13 @@ h1, h2, h3, h4, h5, h6{
     text-decoration: underline;
     color: #fff6e5;
 }
+.cta-wrapper {
+    display: flex;
+    justify-content: center;   /* center horizontally */
+    gap: 1rem;
+    
+    flex-wrap: wrap;           /* optional for small screens */
+  }
 @media only screen and (max-width: 1023px) {
     .bcb_divider{
         margin: 0 30px;

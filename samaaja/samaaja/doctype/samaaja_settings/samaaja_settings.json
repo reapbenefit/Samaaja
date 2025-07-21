@@ -12,8 +12,10 @@
   "tagline",
   "blurb",
   "summary",
-  "join_title",
-  "join_link",
+  "join_conversations_title",
+  "join_conversations_link",
+  "join_forum_title",
+  "join_forum_link",
   "samaaja_feature_list",
   "total_members_label",
   "actions_taken_label",
@@ -240,16 +242,6 @@
    "label": "Summary"
   },
   {
-   "fieldname": "join_title",
-   "fieldtype": "Data",
-   "label": "Join Samaaja Conversations Title"
-  },
-  {
-   "fieldname": "join_link",
-   "fieldtype": "Data",
-   "label": "Join Samaaja Conversations Link"
-  },
-  {
    "fieldname": "samaaja_feature_list",
    "fieldtype": "Table",
    "label": "Samaaja Feature List",
@@ -304,12 +296,32 @@
    "fieldname": "most_active_cities_summary",
    "fieldtype": "Data",
    "label": "Most Active Cities Summary"
+  },
+  {
+   "fieldname": "join_conversations_title",
+   "fieldtype": "Data",
+   "label": "Join Samaaja Conversations Title"
+  },
+  {
+   "fieldname": "join_conversations_link",
+   "fieldtype": "Data",
+   "label": "Join Samaaja Conversations Link"
+  },
+  {
+   "fieldname": "join_forum_title",
+   "fieldtype": "Data",
+   "label": "Join Samaaja Forum Label"
+  },
+  {
+   "fieldname": "join_forum_link",
+   "fieldtype": "Data",
+   "label": "Join Samaaja Forum Link"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2025-07-21 11:26:45.184200",
+ "modified": "2025-07-21 21:50:29.791918",
  "modified_by": "Administrator",
  "module": "Samaaja",
  "name": "Samaaja Settings",
