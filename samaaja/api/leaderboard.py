@@ -378,3 +378,30 @@ def get_campaigns(page_length=10, start=0):
 	)
 	results = query.run(as_dict=True)
 	return results
+
+def get_opportunities(page_length=10, start=0):
+    start = cint(start)
+    page_length = cint(page_length)
+    OpportunityTemplate = DocType("Opportunity Template")
+
+    query = (
+        frappe.qb.from_(OpportunityTemplate)
+        .select(
+            OpportunityTemplate.title,
+            OpportunityTemplate.owner,
+            OpportunityTemplate.published,
+            OpportunityTemplate.accept_applications,
+            OpportunityTemplate.deadline,
+            OpportunityTemplate.header_logo,
+			OpportunityTemplate.name,
+        )
+        .where(
+            (OpportunityTemplate.published == 1) &
+            (OpportunityTemplate.accept_applications == 1)
+        )
+        .orderby(OpportunityTemplate.creation, order=frappe.qb.desc)
+        .limit(page_length)
+        .offset(start)
+    )
+
+    return query.run(as_dict=True)

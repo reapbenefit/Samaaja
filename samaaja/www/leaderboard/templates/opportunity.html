@@ -1,0 +1,25 @@
+<div class="vn_box">
+    <a href="/application-for-opportunity/new?opportunity={{ opportunity.name }}">
+        <div class="img_wrapper">
+            <img src="{{ opportunity.header_logo }}" alt="{{ opportunity.title }}" />
+        </div>
+        <div class="vn_box_content">
+            <p class="name">
+                {{ opportunity.title }}
+            </p>
+            <div class="vnb_stats">
+                <p class="vnb_focus">
+                    <span>Deadline:</span>
+                    <span><i>{{ opportunity.deadline }}</i></span>
+                </p>
+                <p class="vnb_focus">
+                {% if opportunity.accept_applications %}
+                <span class="indicator-pill whitespace-nowrap green active_tag" style="margin-left: 6px;"><span>Active</span></span>
+                {% else %}
+                <span class="indicator-pill whitespace-nowrap grey active_tag" style="margin-left: 6px;"><span>Inactive</span></span>
+                {% endif %}
+                </p>
+            </div>
+        </div>
+    </a>
+</div>

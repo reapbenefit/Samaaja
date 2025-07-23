@@ -1,5 +1,6 @@
 import frappe
 import json
+from datetime import datetime, timedelta
 
 def create_event_types():
     parent_types = ["Workshop / Seminar", "Awareness Drive", "Investigation/Audit", "Campaign"]
@@ -1206,6 +1207,55 @@ def create_samaaja_settings():
     doc.save(ignore_permissions=True)
     frappe.db.commit()
 
+def create_opportunity_types():
+    types = ["Mentorship", "Funding", "Speaker"]
+    for t in types:
+        if not frappe.db.exists("Opportunity Type", t):
+            doc = frappe.get_doc({
+                "doctype": "Opportunity Type",
+                "type": t
+            })
+            doc.insert()
+
+def create_opportunity_templates():
+    opportunities = [
+        {
+            "title": "🌱 Mentorship Circle – Learn from the best!",
+            "opp_type": "Mentorship",
+            "opp_description": "Join a curated circle of mentors from various domains and receive personalized guidance.",
+            "eligibility_criteria": "Open to youth between 18-30 years who are part of social impact projects.",
+            "header_logo": "/assets/samaaja/images/mentorship.jpeg"
+        },
+        {
+            "title": "Apply Now: The Change Maker Fund – Fuel Your Idea for Social Impact!",
+            "opp_type": "Funding",
+            "opp_description": "Grants of up to ₹2,00,000 for grassroots social impact initiatives.",
+            "eligibility_criteria": "Applicants must demonstrate a working prototype or a clear implementation plan.",
+            "header_logo": "/assets/samaaja/images/funding.jpeg"
+        },
+        {
+            "title": "🎤 Speak at Change Maker Adda – Share Your Story, Inspire Many!",
+            "opp_type": "Speaker",
+            "opp_description": "An opportunity to share your social change journey with hundreds of young leaders.",
+            "eligibility_criteria": "Open to all individuals with lived experiences in community transformation.",
+            "header_logo": "/assets/samaaja/images/speaker.jpeg"
+        }
+    ]
+
+    for opp in opportunities:
+        if not frappe.db.exists("Opportunity Template", {"title": opp["title"]}):
+            doc = frappe.get_doc({
+                "doctype": "Opportunity Template",
+                "published": 1,
+                "accept_applications": 1,
+                "title": opp["title"],
+                "header_logo": opp["header_logo"],
+                "deadline": (datetime.today() + timedelta(days=30)).strftime("%Y-%m-%d"),
+                "opp_description": opp["opp_description"],
+                "eligibility_criteria": opp["eligibility_criteria"],
+                "opp_type": opp["opp_type"]
+            })
+            doc.insert()
 
 @frappe.whitelist()
 def setup_samaaja():
@@ -1223,6 +1273,8 @@ def setup_samaaja():
     create_sample_discussions()
     website_settings()
     create_samaaja_settings()
+    create_opportunity_types()
+    create_opportunity_templates()
     print("🔥 Setting up samaaja successful!")
     frappe.msgprint("Samaaja setup completed successfully.")
 

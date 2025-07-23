@@ -202,7 +202,7 @@ page_renderer = [
 
 website_route_rules = [
     {"from_route": "/user-profile/<username>", "to_route": "user-profile"},
-    {"from_route": "/campaign/<route>", "to_route": "campaign"},
+    {"from_route": "/campaign/<route>", "to_route": "campaign"}
 ]
 
 has_website_permission = {
