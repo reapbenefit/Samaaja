@@ -6,11 +6,7 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "user",
-  "badge",
-  "column_break_ihwt5",
-  "active",
-  "badge_count"
+  "badge_type"
  ],
  "fields": [
   {
@@ -45,39 +41,14 @@
   }
  ],
  "index_web_pages_for_search": 1,
- "links": [
-  {
-   "custom": 1,
-   "group": "Energy Point Rule",
-   "link_doctype": "Energy Point Rule",
-   "link_fieldname": "badge"
-  },
-  {
-   "custom": 1,
-   "group": "User badge",
-   "link_doctype": "User badge",
-   "link_fieldname": "badge"
-  }
- ],
- "modified": "2025-03-28 16:42:16.801556",
+ "links": [],
+ "modified": "2025-07-15 23:50:41.907725",
  "modified_by": "Administrator",
  "module": "Samaaja",
  "name": "User badge",
  "owner": "Administrator",
- "permissions": [
-  {
-   "create": 1,
-   "delete": 1,
-   "email": 1,
-   "export": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "System Manager",
-   "share": 1,
-   "write": 1
-  }
- ],
+ "permissions": [],
+ "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],

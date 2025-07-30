@@ -7,14 +7,16 @@
  "engine": "InnoDB",
  "field_order": [
   "user",
+  "status",
   "column_break_3",
   "published_on",
   "reviews_section",
   "review_title",
   "rating",
   "column_break_n7ihn",
+  "email",
   "reviewer_name",
-  "desigantion",
+  "designation",
   "organisation",
   "section_break_gd9ic",
   "comment"
@@ -67,11 +69,6 @@
    "label": "Reviewer Name"
   },
   {
-   "fieldname": "desigantion",
-   "fieldtype": "Data",
-   "label": "Desigantion"
-  },
-  {
    "fieldname": "organisation",
    "fieldtype": "Data",
    "label": "Organisation"
@@ -79,10 +76,27 @@
   {
    "fieldname": "section_break_gd9ic",
    "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Pending\nAccepted\nRejected"
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email",
+   "options": "Email"
+  },
+  {
+   "fieldname": "designation",
+   "fieldtype": "Data",
+   "label": "Designation"
   }
  ],
  "links": [],
- "modified": "2023-11-09 17:06:26.877138",
+ "modified": "2025-07-08 23:21:33.342034",
  "modified_by": "Administrator",
  "module": "Samaaja",
  "name": "User Review",
@@ -102,6 +116,7 @@
    "write": 1
   }
  ],
+ "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],

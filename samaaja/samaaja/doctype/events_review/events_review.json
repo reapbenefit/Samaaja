@@ -1,0 +1,136 @@
+{
+ "actions": [],
+ "creation": "2024-06-03 14:07:09.569002",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "events",
+  "column_break_3",
+  "status",
+  "published_on",
+  "reviews_section",
+  "review_title",
+  "rating",
+  "column_break_n7ihn",
+  "reviewer_name",
+  "designation",
+  "organisation",
+  "email",
+  "section_break_gd9ic",
+  "comment"
+ ],
+ "fields": [
+  {
+   "fieldname": "events",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Events",
+   "options": "Events"
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Pending\nAccepted\nRejected"
+  },
+  {
+   "fieldname": "published_on",
+   "fieldtype": "Data",
+   "label": "Published on"
+  },
+  {
+   "fieldname": "reviews_section",
+   "fieldtype": "Section Break",
+   "label": "Reviews"
+  },
+  {
+   "fieldname": "review_title",
+   "fieldtype": "Data",
+   "label": "Review Title"
+  },
+  {
+   "fieldname": "rating",
+   "fieldtype": "Rating",
+   "in_list_view": 1,
+   "label": "Rating"
+  },
+  {
+   "fieldname": "column_break_n7ihn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "reviewer_name",
+   "fieldtype": "Data",
+   "label": "Reviewer Name"
+  },
+  {
+   "fieldname": "designation",
+   "fieldtype": "Data",
+   "label": "Designation"
+  },
+  {
+   "fieldname": "organisation",
+   "fieldtype": "Data",
+   "label": "Organisation"
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email",
+   "options": "Email"
+  },
+  {
+   "fieldname": "section_break_gd9ic",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "comment",
+   "fieldtype": "Small Text",
+   "label": "Comment"
+  }
+ ],
+ "links": [],
+ "modified": "2025-07-08 23:22:33.020523",
+ "modified_by": "Administrator",
+ "module": "Samaaja",
+ "name": "Events Review",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "select": 1,
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Guest",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

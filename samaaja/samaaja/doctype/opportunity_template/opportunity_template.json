@@ -1,0 +1,117 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:title",
+ "creation": "2025-07-22 20:43:02.075680",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "title",
+  "opp_type",
+  "route",
+  "column_break_paebb",
+  "published",
+  "accept_applications",
+  "header_logo",
+  "deadline",
+  "section_break_zkjlh",
+  "opp_description",
+  "eligibility_criteria"
+ ],
+ "fields": [
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Opportunity Header",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "route",
+   "fieldtype": "Data",
+   "label": "Route"
+  },
+  {
+   "fieldname": "column_break_paebb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "published",
+   "fieldtype": "Check",
+   "label": "Published"
+  },
+  {
+   "default": "0",
+   "fieldname": "accept_applications",
+   "fieldtype": "Check",
+   "label": "Accept Applications"
+  },
+  {
+   "fieldname": "header_logo",
+   "fieldtype": "Attach Image",
+   "label": "Header Logo",
+   "reqd": 1
+  },
+  {
+   "fieldname": "deadline",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Application Deadline",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_zkjlh",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "opp_description",
+   "fieldtype": "Text",
+   "in_list_view": 1,
+   "label": "Opportunity Description",
+   "reqd": 1
+  },
+  {
+   "fieldname": "eligibility_criteria",
+   "fieldtype": "Text",
+   "in_list_view": 1,
+   "label": "Eligibility Criteria",
+   "reqd": 1
+  },
+  {
+   "fieldname": "opp_type",
+   "fieldtype": "Link",
+   "label": "Opportunity Type",
+   "options": "Opportunity Type",
+   "reqd": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-07-23 07:20:35.861562",
+ "modified_by": "Administrator",
+ "module": "Samaaja",
+ "name": "Opportunity Template",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

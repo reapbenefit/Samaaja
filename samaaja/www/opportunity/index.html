@@ -1,0 +1,29 @@
+<div class="opportunity-detail wrapper-grey">
+    <h1>{{ opportunity.title }}</h1>
+
+    <img src="{{ opportunity.header_logo }}" alt="{{ opportunity.title }}" style="max-width: 400px; margin: 20px 0;" />
+
+    <p><strong>Deadline:</strong> {{ opportunity.deadline }}</p>
+
+    <hr>
+
+    <h3>Description</h3>
+    <div class="rich-text">
+        {{ opportunity.opp_description | safe }}
+    </div>
+
+    <h3>Eligibility Criteria</h3>
+    <div class="rich-text">
+        {{ opportunity.eligibility_criteria | safe }}
+    </div>
+
+    {% if show_apply_button %}
+        <div style="margin-top: 30px;">
+            <a href="/apply-for-opportunity/{{ opportunity.route}}">
+                <button class="main_btn">Apply Now</button>
+            </a>
+        </div>
+    {% else %}
+        <p style="color: grey;">This opportunity is not accepting applications at the moment.</p>
+    {% endif %}
+</div>

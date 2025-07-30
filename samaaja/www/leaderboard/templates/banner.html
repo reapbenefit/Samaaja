@@ -1,0 +1,28 @@
+<div class="banner_wrapper">
+    <div class="banner_content_wrapper">
+        <h1>{{samaaja_settings.tagline}}</h1>
+        <h2>{{samaaja_settings.blurb}}</h2>
+        <h3>{{samaaja_settings.summary}}</h3>
+        <div class="b_content">
+            
+            {% for feature in samaaja_settings.samaaja_feature_list%}
+                <div class="b_content_box">
+                    <img src="{{feature.icon}}" alt="" />
+                    <span>{{feature.feature_name}} </span>
+                </div>
+                {% if not loop.last %}
+                    <div class="bcb_divider"></div>
+                {% endif %}
+             {% endfor %}
+            
+        </div>
+        <div class="cta-wrapper">
+            <div class="b_cta">
+                <a href="{{samaaja_settings.join_forum_link}}" target="_blank"><button class="secondry_btn">{{samaaja_settings.join_forum_title}}</button></a>
+            </div>
+            <div class="b_cta">
+                <a href="{{samaaja_settings.join_conversations_link}}" target="_blank"><button class="secondry_btn">{{samaaja_settings.join_conversations_title}}</button></a>
+            </div>
+        </div>
+    </div>
+</div>

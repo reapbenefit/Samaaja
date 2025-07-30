@@ -1,0 +1,147 @@
+.campaign_email_wrapper{
+    width: 100%;
+    background: linear-gradient(180deg, rgba(232, 255, 238, 0.00) 5.73%, #E8FFEE 23.44%, #E7F5FF 100%);
+    padding: 0 0 32px 0;
+    color: #2B4754;
+}
+.ce_header_wrapper{
+    width: 100%;
+    padding: 1rem;
+    box-sizing: border-box;
+    background: #ffffff;
+    border-bottom: 1px solid #e2e6e9;
+}
+.ce_header{
+    width: 100%;
+    max-width: 1290px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+}
+.ce_header img{
+    max-height: 50px;
+}
+.ce_header span{
+    font-size: 2.5rem;
+    margin: 0 0 0 16px;
+}
+.ce_body_wrapper{
+    width: 100%;
+    max-width: 1290px;
+    margin: 32px auto 0;
+    background: #ffffff;
+    padding: 32px;
+    box-sizing: border-box;
+    border-radius: 32px;
+    box-shadow: 4px 8px 30px 0px rgba(0, 0, 0, 0.12);
+}
+.ce_body_title{
+    font-size: 24px;
+    font-weight: 700;
+    color: #2B4754;
+    text-align: center;
+}
+.ce_body_content{
+    display: flex;
+    justify-content: space-between;
+    margin: 30px 0 0;
+}
+.ce_body_left{
+    width: 35%;
+}
+.ce_checklist{
+    width: 100%;
+}
+.ce_body_left h3{
+    font-size: 20px;
+    padding: 0 0 15px 0;
+    margin: 0;
+}
+.checklist ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.checklist ul li{
+    display: flex;
+    justify-content: flex-start;
+    margin: 0 0 10px 0;
+    align-items: flex-start;
+}
+.checklist ul li input{
+    margin: 5px 10px 0 0;
+    flex-shrink: 0;
+}
+.ce_update{
+    margin: 50px 0 0;
+}
+.ce_update_item{
+    padding: 0 0 20px;
+}
+.ce_update_item small{
+    color: #4c5a67;
+}
+.ce_update_item p{
+    margin: 0;
+}
+.ce_partners{
+    margin: 50px 0 0;
+}
+.ce_partners_img{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.ce_partners_img img{
+    height: 60px;
+    margin: 5px;
+}
+.ce_body_right{
+    width: 60%;
+}
+.ce_body_right form, .form_item, .form_item input, .form_item textarea{
+    width: 100%;
+}
+.ce_body_right form .error{
+    color: #ff0000;
+}
+.form_item{
+    margin: 15px 0 0;
+}
+.form_item.item2{
+    display: flex;
+    justify-content: space-between;
+}
+.form_item_50{
+    width: 47%;
+}
+.form_item textarea{
+    min-height: 150px;
+}
+.form_item span{
+    color: #ff0000;
+}
+.disclaimer{
+    margin: 20px 0 0;
+    font-size: 12px;
+    color: #4c5a67;
+}
+.ce_body_right form button{
+    width: 50%;
+    margin-bottom: 16px;
+    background-color: #52A769;
+    color: #ffffff;
+    outline: 0;
+    border: 0;
+    padding: 15px 0;
+    border-radius: 32px;
+    box-sizing: border-box;
+    font-size: 20px;
+    font-weight: 700;
+}
+.alignright{
+    text-align: right;
+}
+.ce_body_writeup{
+    margin: 50px 0 0;
+}

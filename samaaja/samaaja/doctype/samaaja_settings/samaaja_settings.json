@@ -7,7 +7,27 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "leaderboard_tab",
+  "samaaja_icon",
+  "tagline",
+  "blurb",
+  "summary",
+  "join_conversations_title",
+  "join_conversations_link",
+  "join_forum_title",
+  "join_forum_link",
+  "samaaja_feature_list",
+  "total_members_label",
+  "actions_taken_label",
+  "hours_invested_label",
+  "verified_members_label",
+  "verified_members_summary",
+  "most_active_members_label",
+  "most_active_members_summary",
+  "most_active_cities_label",
+  "most_active_cities_summary",
   "profile_tab",
+  "badge_section_html",
   "profile_page_section",
   "default_profile_banner",
   "hide_default_tabs",
@@ -18,7 +38,6 @@
   "badge_section_section",
   "override_badge_section",
   "badge_section_title",
-  "badge_section_html",
   "tab_break_ze49d",
   "location_section",
   "geolocation_api_url",
@@ -32,7 +51,9 @@
   "top_cities_chart_setting_section",
   "top_cities_title",
   "top_cities_max_cities",
-  "top_cities_max_days"
+  "top_cities_max_days",
+  "pincode_section",
+  "pincode_key"
  ],
  "fields": [
   {
@@ -188,12 +209,119 @@
    "fieldname": "recent_actions",
    "fieldtype": "Section Break",
    "label": "Recent Actions"
+  },
+  {
+   "fieldname": "pincode_section",
+   "fieldtype": "Section Break",
+   "label": "Pin Code Lookup",
+   "options": "sg sg\n dsg dg dfs\ng \ndg dfs"
+  },
+  {
+   "fieldname": "pincode_key",
+   "fieldtype": "Data",
+   "label": "Pin Code API Key"
+  },
+  {
+   "fieldname": "leaderboard_tab",
+   "fieldtype": "Tab Break",
+   "label": "Leaderboard Page"
+  },
+  {
+   "fieldname": "tagline",
+   "fieldtype": "Data",
+   "label": "Tagline"
+  },
+  {
+   "fieldname": "blurb",
+   "fieldtype": "Data",
+   "label": "Blurb"
+  },
+  {
+   "fieldname": "summary",
+   "fieldtype": "Data",
+   "label": "Summary"
+  },
+  {
+   "fieldname": "samaaja_feature_list",
+   "fieldtype": "Table",
+   "label": "Samaaja Feature List",
+   "options": "Samaaja Feature Item"
+  },
+  {
+   "fieldname": "samaaja_icon",
+   "fieldtype": "Attach",
+   "label": "Samaaja Icon"
+  },
+  {
+   "fieldname": "total_members_label",
+   "fieldtype": "Data",
+   "label": "Total Members Label"
+  },
+  {
+   "fieldname": "actions_taken_label",
+   "fieldtype": "Data",
+   "label": "Actions Taken Label"
+  },
+  {
+   "fieldname": "hours_invested_label",
+   "fieldtype": "Data",
+   "label": "Hours Invested Label"
+  },
+  {
+   "fieldname": "verified_members_label",
+   "fieldtype": "Data",
+   "label": "Verified Members Label"
+  },
+  {
+   "fieldname": "verified_members_summary",
+   "fieldtype": "Data",
+   "label": "Verified Members Summary"
+  },
+  {
+   "fieldname": "most_active_members_label",
+   "fieldtype": "Data",
+   "label": "Most Active Members Label"
+  },
+  {
+   "fieldname": "most_active_members_summary",
+   "fieldtype": "Data",
+   "label": "Most Active Members Summary"
+  },
+  {
+   "fieldname": "most_active_cities_label",
+   "fieldtype": "Data",
+   "label": "Most Active Cities Label"
+  },
+  {
+   "fieldname": "most_active_cities_summary",
+   "fieldtype": "Data",
+   "label": "Most Active Cities Summary"
+  },
+  {
+   "fieldname": "join_conversations_title",
+   "fieldtype": "Data",
+   "label": "Join Samaaja Conversations Title"
+  },
+  {
+   "fieldname": "join_conversations_link",
+   "fieldtype": "Data",
+   "label": "Join Samaaja Conversations Link"
+  },
+  {
+   "fieldname": "join_forum_title",
+   "fieldtype": "Data",
+   "label": "Join Samaaja Forum Label"
+  },
+  {
+   "fieldname": "join_forum_link",
+   "fieldtype": "Data",
+   "label": "Join Samaaja Forum Link"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2023-05-16 00:18:09.503268",
+ "modified": "2025-07-21 21:50:29.791918",
  "modified_by": "Administrator",
  "module": "Samaaja",
  "name": "Samaaja Settings",
@@ -210,6 +338,7 @@
    "write": 1
   }
  ],
+ "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []

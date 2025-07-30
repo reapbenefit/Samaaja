@@ -8,7 +8,8 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "category"
+  "category",
+  "icon"
  ],
  "fields": [
   {
@@ -17,12 +18,17 @@
    "fieldtype": "Data",
    "label": "Category",
    "unique": 1
+  },
+  {
+   "fieldname": "icon",
+   "fieldtype": "Attach",
+   "label": "Icon"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-05-08 11:02:51.301388",
- "modified_by": "Administrator",
+ "modified": "2025-07-13 13:52:31.812513",
+ "modified_by": "saxenankit@gmail.com",
  "module": "Samaaja",
  "name": "Event Category",
  "naming_rule": "By fieldname",
@@ -42,6 +48,7 @@
   }
  ],
  "quick_entry": 1,
+ "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],

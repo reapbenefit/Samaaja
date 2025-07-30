@@ -5,13 +5,27 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "details_section",
   "user",
   "profile_badges",
   "column_break_gnch",
+  "pincode",
   "city",
   "state",
   "org_id",
-  "verified_by"
+  "action_section",
+  "last_action",
+  "last_action_date",
+  "column_break_8unk",
+  "last_action_type",
+  "last_action_sub_type",
+  "last_action_category",
+  "other_details_section",
+  "contributions",
+  "hours_invested",
+  "wa_id",
+  "last_active_date_bot",
+  "rank"
  ],
  "fields": [
   {
@@ -45,13 +59,86 @@
    "options": "User Organization"
   },
   {
-   "fieldname": "verified_by",
-   "fieldtype": "Data",
-   "label": "Verified By"
-  },
-  {
    "fieldname": "column_break_gnch",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "details_section",
+   "fieldtype": "Section Break",
+   "label": "Details"
+  },
+  {
+   "fieldname": "action_section",
+   "fieldtype": "Section Break",
+   "label": "Action"
+  },
+  {
+   "fieldname": "last_action",
+   "fieldtype": "Link",
+   "label": "Last Action",
+   "options": "Events"
+  },
+  {
+   "fieldname": "last_action_date",
+   "fieldtype": "Datetime",
+   "label": "Last Action Date"
+  },
+  {
+   "fieldname": "column_break_8unk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "last_action_type",
+   "fieldtype": "Link",
+   "label": "Last Action Type",
+   "options": "Event Type"
+  },
+  {
+   "fieldname": "last_action_sub_type",
+   "fieldtype": "Link",
+   "label": "Last Action Sub Type",
+   "options": "Event Type"
+  },
+  {
+   "fieldname": "last_action_category",
+   "fieldtype": "Link",
+   "label": "Last Action Category",
+   "options": "Event Category"
+  },
+  {
+   "fieldname": "other_details_section",
+   "fieldtype": "Section Break",
+   "label": "Other Details"
+  },
+  {
+   "fieldname": "contributions",
+   "fieldtype": "Int",
+   "label": "Contributions"
+  },
+  {
+   "fieldname": "hours_invested",
+   "fieldtype": "Float",
+   "label": "Hours Invested"
+  },
+  {
+   "fieldname": "wa_id",
+   "fieldtype": "Data",
+   "label": "WhatsApp ID"
+  },
+  {
+   "fieldname": "last_active_date_bot",
+   "fieldtype": "Datetime",
+   "label": "Last Active Date Bot"
+  },
+  {
+   "fieldname": "pincode",
+   "fieldtype": "Data",
+   "label": "Pin Code"
+  },
+  {
+   "fieldname": "rank",
+   "fieldtype": "Int",
+   "label": "Rank"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -61,7 +148,7 @@
    "link_fieldname": "user"
   }
  ],
- "modified": "2025-05-08 10:39:45.511802",
+ "modified": "2025-07-12 15:04:43.450850",
  "modified_by": "Administrator",
  "module": "Samaaja",
  "name": "User Metadata",
@@ -81,6 +168,7 @@
    "write": 1
   }
  ],
+ "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []

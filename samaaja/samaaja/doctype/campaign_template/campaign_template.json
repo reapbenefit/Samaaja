@@ -1,0 +1,190 @@
+{
+ "actions": [],
+ "allow_guest_to_view": 1,
+ "allow_rename": 1,
+ "creation": "2025-06-16 03:04:06.196531",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "title",
+  "route",
+  "column_break_paebb",
+  "published",
+  "accept_petitions",
+  "header_logo",
+  "organization_name",
+  "section_break_zkjlh",
+  "email_subject_template",
+  "email_body_template",
+  "recipients",
+  "updates",
+  "partners",
+  "additional_info",
+  "thank_you_email_section",
+  "thank_you_email_subject",
+  "column_break_5axoc",
+  "send_thank_you_email",
+  "section_break_mpl0a",
+  "thank_you_email_body",
+  "message_examples"
+ ],
+ "fields": [
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Title",
+   "reqd": 1
+  },
+  {
+   "fieldname": "route",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Route",
+   "unique": 1
+  },
+  {
+   "fieldname": "column_break_paebb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "published",
+   "fieldtype": "Check",
+   "label": "Published"
+  },
+  {
+   "default": "0",
+   "fieldname": "accept_petitions",
+   "fieldtype": "Check",
+   "label": "Accept Petitions"
+  },
+  {
+   "fieldname": "header_logo",
+   "fieldtype": "Attach Image",
+   "label": "Header Logo",
+   "reqd": 1
+  },
+  {
+   "fieldname": "organization_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Organization Name"
+  },
+  {
+   "fieldname": "section_break_zkjlh",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "email_subject_template",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Email Subject Template",
+   "reqd": 1
+  },
+  {
+   "fieldname": "email_body_template",
+   "fieldtype": "Text Editor",
+   "label": "Email Body Template",
+   "reqd": 1
+  },
+  {
+   "fieldname": "recipients",
+   "fieldtype": "Table",
+   "label": "Recipient List",
+   "options": "Campaign Recipient",
+   "reqd": 1
+  },
+  {
+   "fieldname": "updates",
+   "fieldtype": "Table",
+   "label": "Updates",
+   "options": "Campaign Update"
+  },
+  {
+   "fieldname": "partners",
+   "fieldtype": "Table",
+   "label": "Partners",
+   "options": "Campaign Partner"
+  },
+  {
+   "fieldname": "additional_info",
+   "fieldtype": "Text Editor",
+   "label": "Additional Info"
+  },
+  {
+   "collapsible": 1,
+   "collapsible_depends_on": "send_thank_you_email",
+   "fieldname": "thank_you_email_section",
+   "fieldtype": "Section Break",
+   "label": "Thank You Email"
+  },
+  {
+   "depends_on": "send_thank_you_email",
+   "fieldname": "thank_you_email_subject",
+   "fieldtype": "Data",
+   "label": "Subject",
+   "mandatory_depends_on": "send_thank_you_email"
+  },
+  {
+   "fieldname": "column_break_5axoc",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "send_thank_you_email",
+   "fieldtype": "Check",
+   "label": "Send Thank You Email"
+  },
+  {
+   "fieldname": "section_break_mpl0a",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "depends_on": "send_thank_you_email",
+   "fieldname": "thank_you_email_body",
+   "fieldtype": "Text Editor",
+   "label": "Body",
+   "mandatory_depends_on": "send_thank_you_email"
+  },
+  {
+   "fieldname": "message_examples",
+   "fieldtype": "HTML"
+  }
+ ],
+ "has_web_view": 1,
+ "index_web_pages_for_search": 1,
+ "links": [
+  {
+   "link_doctype": "Campaign Petition",
+   "link_fieldname": "campaign"
+  }
+ ],
+ "modified": "2025-07-08 14:00:27.262365",
+ "modified_by": "Administrator",
+ "module": "Samaaja",
+ "name": "Campaign Template",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "title"
+}

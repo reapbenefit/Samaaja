@@ -12,11 +12,13 @@
   "column_break_auos",
   "title",
   "type",
+  "sub_type",
   "status",
   "category",
   "subcategory",
   "column_break_vejr",
   "description",
+  "highlight",
   "reporting_section",
   "anonymous",
   "user",
@@ -47,7 +49,12 @@
   "hours_invested",
   "verified_by",
   "column_break_bour",
-  "feedback"
+  "feedback",
+  "lft",
+  "rgt",
+  "is_group",
+  "old_parent",
+  "parent_events"
  ],
  "fields": [
   {
@@ -263,14 +270,62 @@
   {
    "fieldname": "column_break_hykn",
    "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "highlight",
+   "fieldtype": "Check",
+   "label": "Highlight"
+  },
+  {
+   "fieldname": "lft",
+   "fieldtype": "Int",
+   "hidden": 1,
+   "label": "Left",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "rgt",
+   "fieldtype": "Int",
+   "hidden": 1,
+   "label": "Right",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "is_group",
+   "fieldtype": "Check",
+   "label": "Is Group"
+  },
+  {
+   "fieldname": "old_parent",
+   "fieldtype": "Link",
+   "label": "Old Parent",
+   "options": "Events"
+  },
+  {
+   "fieldname": "parent_events",
+   "fieldtype": "Link",
+   "ignore_user_permissions": 1,
+   "label": "Parent Events",
+   "options": "Events"
+  },
+  {
+   "fieldname": "sub_type",
+   "fieldtype": "Link",
+   "label": "Sub Type",
+   "options": "Event Type"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-05-08 14:05:10.706475",
+ "modified": "2025-07-12 16:13:36.269308",
  "modified_by": "Administrator",
  "module": "Samaaja",
  "name": "Events",
+ "nsm_parent_field": "parent_events",
  "owner": "Administrator",
  "permissions": [
   {
@@ -286,6 +341,7 @@
    "write": 1
   }
  ],
+ "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],

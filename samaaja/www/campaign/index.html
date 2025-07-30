@@ -1,0 +1,131 @@
+{% extends "templates/web.html" %}
+{% block title %}{{ campaign.title or 'Campaign' }}{% endblock %}
+
+{% block content %}
+<div class="campaign_email_wrapper" data-name="{{ campaign.name }}">
+    <div class="ce_header_wrapper">
+        <div class="ce_header">
+            <img src="{{ campaign.header_logo or '' }}" alt="" />
+            <span>{{ campaign.organization_name or '' }}</span>
+        </div>
+    </div>
+    <div class="ce_body_wrapper">
+        <div class="ce_body">
+            <div class="ce_body_title">{{ campaign.title or '' }}</div>
+            <div class="ce_body_content">
+                <div class="ce_body_left">
+                    <div class="ce_checklist">
+                        <h3>To:</h3>
+                        <div class="checklist">
+                            <ul>
+                                {% for r in recipients %}
+                                <li>
+                                    <input type="checkbox"
+                                        name="recipients"
+                                        value="{{ r.recipient_name }}"
+                                        {% if r.is_selected_by_default %}checked disabled{% endif %}>
+                                    <span>{{ r.recipient_name }}</span>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% if updates %}
+                            <div class="ce_update">
+                                <h3>Update</h3>
+                                {% for u in updates %}
+                                <div class="ce_update_item">
+                                    <small>{{ frappe.format(u.date, "Date") }}</small>
+                                    <p>{{ u.description }}</p>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                        {% if partners %}
+                            <div class="ce_partners">
+                                <h3>Campaign Partners:</h3>
+                                <p>{{ campaign.partner_names or '' }}</p>
+                                <div class="ce_partners_img">
+                                    {% for p in partners %}
+                                    <img src="{{ p.logo }}" alt="{{ p.name }}">
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="ce_body_right">
+                    <form>
+                        <div class="form_item">
+                            <label>Subject:<span>*</span></label>
+                            <input type="text" name="subject" value="{{ campaign.email_subject_template }}" required />
+                            <small class="error">Subject is required</small>
+                        </div>
+                        <div class="form_item">
+                            <label>Message:</label>
+                            <div id="editor-container">{{ campaign.email_body_template | safe }}</div>
+                            <input type="hidden" name="message_body" id="message_body">
+                            <small class="error" id="message-error" style="display:none;">Message is required</small>
+                        </div>
+                        <div class="form_item item2">
+                            <div class="form_item_50">
+                                <label>First name:</label>
+                                <input type="text" name="first_name" />
+                            </div>
+                            <div class="form_item_50">
+                                <label>Last name:</label>
+                                <input type="text" name="last_name" />
+                            </div>
+                        </div>
+                        <div class="form_item">
+                            <label>Your email address:<span>*</span></label>
+                            <input type="text" name="email" required />
+                            <small class="error">Email is required</small>
+                        </div>
+                        <div class="form_item">
+                            <label>First line of address:</label>
+                            <input type="text" name="address_line_1" />
+                        </div>
+                        <div class="form_item item2">
+                            <div class="form_item_50">
+                                <label>Town:<span>*</span></label>
+                                <input type="text" name="town" required />
+                                <small class="error">Town is required</small>
+                            </div>
+                            <div class="form_item_50">
+                                <label>Pincode:</label>
+                                <input type="text" name="pincode" />
+                            </div>
+                        </div>
+                        <div class="disclaimer">
+                            Recipients will receive your name, email address and address.
+                            Your personal information will be kept private and held securely.
+                            By submitting information you are agreeing to Jhatkaa keeping you informed about campaigns and agree to the use of cookies in accordance with our
+                            <a href="">privacy policy</a>.
+                        </div>
+                        <div class="form_item alignright">
+                            <button type="button" id="submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            {% if campaign.additional_info %}
+                <div class="ce_body_writeup">
+                    {{ campaign.additional_info }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+    <script>{% include "www/campaign/index.js" %}</script>
+
+{% endblock %}

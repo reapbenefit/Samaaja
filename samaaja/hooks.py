@@ -2,9 +2,9 @@ from . import __version__ as app_version
 
 app_name = "samaaja"
 app_title = "Samaaja"
-app_publisher = "FOSS United"
+app_publisher = "Impactyaan"
 app_description = "Samaaja is an open source software solution for rapidly building location based civic services connected with volunteer, human interactions. It comes with all necessary UI and management features and can be easily extended into web applications and external mobile apps and systems via built-in APIs."
-app_email = "abhinav.raut@zerodha.com"
+app_email = "ankit@impactyaan.com"
 app_license = "MIT"
 
 # Includes in <head>
@@ -64,7 +64,7 @@ web_include_js = ""
 # ------------
 
 # before_install = "samaaja.install.before_install"
-# after_install = "samaaja.install.after_install"
+# after_migrate  = "samaaja.setup.samaaja_setup.setup_samaaja"
 
 # Uninstallation
 # ------------
@@ -196,8 +196,13 @@ page_renderer = [
     "samaaja.page_renderers.ProfilePage",
 ]
 
-website_redirects = [
+""" website_redirects = [
     {"source": "/update-profile/", "target": "/edit-profile/"},
+] """
+
+website_route_rules = [
+    {"from_route": "/user-profile/<username>", "to_route": "user-profile"},
+    {"from_route": "/campaign/<route>", "to_route": "campaign"}
 ]
 
 has_website_permission = {
@@ -208,13 +213,28 @@ profile_url_prefix = "/users/"
 
 
 doc_events = {
+   "Events": {
+        "on_update": [
+            "samaaja.doc_events.events.update_subcategory",
+            "samaaja.doc_events.events.update_profile_hook",
+        ],
+        "after_insert": [
+			"samaaja.doc_events.events.after_insert",
+            "samaaja.doc_events.events.update_profile_hook",
+		],
+        "on_trash": "samaaja.doc_events.events.update_profile_hook",
+    },
     "User": {
-        "before_save": "samaaja.overrides.user.make_user_images_public",
-        "before_insert": "samaaja.overrides.user.generate_username_if_missing",
-        "after_insert": "samaaja.overrides.user.create_user_metadata",
-        "on_trash": "samaaja.overrides.user.delete_user_metadata",
+        "after_insert": "samaaja.doc_events.user.after_insert",
+        "on_trash": "samaaja.doc_events.user.on_trash"
+    },
+    "Organization":{
+        "before_save":"samaaja.api.common.update_organization_id_case"
+    },
+    "User Metadata": {
+        "validate": "samaaja.doc_events.user_metadata.on_save"
     },
     "Energy Point Log": {
-        "before_insert": "samaaja.overrides.energy_point_log.before_insert"
+        "before_insert": "samaaja.doc_events.energy_point_log.before_insert"
     }
 }
