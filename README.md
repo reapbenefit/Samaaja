@@ -5,6 +5,9 @@ Samaaja is an open source software solution for rapidly building location based 
 
 Visit [samaaja.org](https://samaaja.org/)
 
+### Latest stable branch
+`version-15`
+
 ### Installation
 
 Refer [Install Samaaja](https://samaaja.org/install)
