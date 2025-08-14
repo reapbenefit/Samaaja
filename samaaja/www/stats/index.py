@@ -15,7 +15,7 @@ def get_context(context):
         """
         SELECT u.name, u.username, u.first_name, u.user_image, u.city as location, sum(e.hours_invested) as hours_invested, count(*) as total_actions from `tabUser` u 
         inner join `tabEvents` e on e.user = u.name where u.enabled = 1
-        and e.creation::date > current_date - interval %(day)s day
+        and DATE(e.creation) > current_date - interval %(day)s day
         group by u.name order by count(*) desc limit %(page_size)s;
         """,
         values={
@@ -29,7 +29,7 @@ def get_context(context):
     context.top_cities = frappe.db.sql(
         """
         SELECT l.city, count(*) as count from `tabLocation` l inner join `tabEvents` e on e.location = l.name
-        where e.creation::date > current_date - interval %(day)s day
+        where DATE(e.creation) > current_date - interval %(day)s day
         and l.city is NOT NULL
         group by city order by count(*) desc limit %(page_length)s
         """,
