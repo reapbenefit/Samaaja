@@ -51,8 +51,13 @@
   }
  ],
  "index_web_pages_for_search": 1,
- "links": [],
- "modified": "2023-04-09 19:52:24.564252",
+ "links": [
+  {
+   "link_doctype": "Microskill",
+   "link_fieldname": "badge"
+  }
+ ],
+ "modified": "2025-09-17 13:31:01.063750",
  "modified_by": "Administrator",
  "module": "Samaaja",
  "name": "Badge",
