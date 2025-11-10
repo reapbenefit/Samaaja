@@ -13,6 +13,7 @@
   "review_title",
   "rating",
   "column_break_n7ihn",
+  "email",
   "reviewer_name",
   "desigantion",
   "organisation",
@@ -79,10 +80,16 @@
   {
    "fieldname": "section_break_gd9ic",
    "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email",
+   "options": "Email"
   }
  ],
  "links": [],
- "modified": "2023-11-09 17:06:26.877138",
+ "modified": "2025-06-09 09:04:06.927798",
  "modified_by": "Administrator",
  "module": "Samaaja",
  "name": "User Review",

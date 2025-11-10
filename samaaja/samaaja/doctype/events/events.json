@@ -40,13 +40,17 @@
   {
    "fieldname": "title",
    "fieldtype": "Data",
-   "label": "Title"
+   "in_list_view": 1,
+   "label": "Title",
+   "reqd": 1
   },
   {
    "fieldname": "type",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Type",
-   "options": "Event Type"
+   "options": "Event Type",
+   "reqd": 1
   },
   {
    "fieldname": "status",
@@ -57,14 +61,17 @@
   {
    "fieldname": "category",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Category",
-   "options": "Event Category"
+   "options": "Event Category",
+   "reqd": 1
   },
   {
    "fieldname": "subcategory",
    "fieldtype": "Link",
    "label": "Sub category",
-   "options": "Event Sub Category"
+   "options": "Event Sub Category",
+   "reqd": 1
   },
   {
    "fieldname": "attachment1",
@@ -92,7 +99,8 @@
    "description": "Email address of user who created this event",
    "fieldname": "user",
    "fieldtype": "Data",
-   "label": "User"
+   "label": "User",
+   "search_index": 1
   },
   {
    "fieldname": "location",
@@ -101,21 +109,25 @@
    "options": "Location"
   },
   {
+   "default": "12.9244925",
    "fieldname": "latitude",
    "fieldtype": "Data",
    "hidden": 1,
    "label": "Latitude"
   },
   {
+   "default": "77.5905634",
    "fieldname": "longitude",
    "fieldtype": "Data",
    "hidden": 1,
-   "label": "Longitude"
+   "label": "Longitude",
+   "reqd": 1
   },
   {
    "fieldname": "description",
    "fieldtype": "Long Text",
-   "label": "Description"
+   "label": "Description",
+   "reqd": 1
   },
   {
    "fieldname": "url",
@@ -139,20 +151,23 @@
    "label": "Impacted entities"
   },
   {
-   "default": "0",
+   "default": "1",
    "fieldname": "impacted_entity_count",
    "fieldtype": "Data",
-   "label": "Impacted entity count"
+   "label": "Impacted entity count",
+   "reqd": 1
   },
   {
    "fieldname": "column_break_19",
    "fieldtype": "Column Break"
   },
   {
+   "default": "Default",
    "fieldname": "impacted_entity_unit",
    "fieldtype": "Link",
    "label": "Impacted entity unit",
-   "options": "Impacted Entity Unit"
+   "options": "Impacted Entity Unit",
+   "reqd": 1
   },
   {
    "fieldname": "section_break_2",
@@ -186,13 +201,15 @@
   {
    "fieldname": "sub_type",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Sub Type",
-   "options": "Event Type"
+   "options": "Event Type",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-05-20 18:14:24.260236",
+ "modified": "2025-07-21 00:59:44.132547",
  "modified_by": "Administrator",
  "module": "Samaaja",
  "name": "Events",

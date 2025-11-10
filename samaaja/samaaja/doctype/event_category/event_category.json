@@ -8,7 +8,8 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "category"
+  "category",
+  "description"
  ],
  "fields": [
   {
@@ -16,11 +17,16 @@
    "fieldtype": "Data",
    "label": "Category",
    "unique": 1
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Data",
+   "label": "Description"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-06-13 12:41:45.964533",
+ "modified": "2025-07-04 10:31:47.000624",
  "modified_by": "Administrator",
  "module": "Samaaja",
  "name": "Event Category",

@@ -13,7 +13,8 @@
   "rgt",
   "is_group",
   "old_parent",
-  "parent_event_type"
+  "parent_event_type",
+  "description"
  ],
  "fields": [
   {
@@ -56,12 +57,17 @@
    "fieldtype": "Link",
    "label": "Parent Event Type",
    "options": "Event Type"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Data",
+   "label": "Description"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_tree": 1,
  "links": [],
- "modified": "2025-05-15 23:28:35.782591",
+ "modified": "2025-07-04 10:05:20.626727",
  "modified_by": "Administrator",
  "module": "Samaaja",
  "name": "Event Type",

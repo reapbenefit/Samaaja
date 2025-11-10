@@ -14,7 +14,24 @@
   "city",
   "state",
   "org_id",
-  "verified_by"
+  "verified_by",
+  "email_id",
+  "section_break_38wsy",
+  "is_ninja_in_focus",
+  "media",
+  "column_break_hw6eh",
+  "testimonial",
+  "column_break_xo7p4",
+  "story",
+  "section_break_9nkiz",
+  "is_mentor",
+  "mentor_expertise",
+  "mentor_status",
+  "column_break_sjltu",
+  "mentor_quote",
+  "section_break_7e0mn",
+  "is_city_chapter_lead",
+  "chapter_lead_achivement"
  ],
  "fields": [
   {
@@ -65,6 +82,104 @@
    "fieldname": "verified_by",
    "fieldtype": "Data",
    "label": "Verified By"
+  },
+  {
+   "fieldname": "email_id",
+   "fieldtype": "Data",
+   "label": "Email"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_ninja_in_focus",
+   "fieldtype": "Check",
+   "label": "Ninja in focus ?",
+   "mandatory_depends_on": "is_ninja_in_focus"
+  },
+  {
+   "depends_on": "is_ninja_in_focus",
+   "fieldname": "media",
+   "fieldtype": "Attach",
+   "label": "Media",
+   "mandatory_depends_on": "is_ninja_in_focus"
+  },
+  {
+   "depends_on": "is_ninja_in_focus",
+   "fieldname": "testimonial",
+   "fieldtype": "Small Text",
+   "label": "Testimonial",
+   "mandatory_depends_on": "is_ninja_in_focus"
+  },
+  {
+   "depends_on": "is_ninja_in_focus",
+   "fieldname": "story",
+   "fieldtype": "Text",
+   "label": "Story",
+   "mandatory_depends_on": "is_ninja_in_focus"
+  },
+  {
+   "fieldname": "section_break_9nkiz",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_mentor",
+   "fieldtype": "Check",
+   "label": "Is Mentor"
+  },
+  {
+   "depends_on": "is_mentor",
+   "fieldname": "mentor_expertise",
+   "fieldtype": "Data",
+   "label": "Mentor Expertise",
+   "mandatory_depends_on": "is_mentor"
+  },
+  {
+   "depends_on": "is_mentor",
+   "fieldname": "mentor_status",
+   "fieldtype": "Select",
+   "label": "Mentor Status",
+   "mandatory_depends_on": "is_mentor",
+   "options": "\nAvailable\nSlots Full"
+  },
+  {
+   "fieldname": "column_break_sjltu",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "is_mentor",
+   "fieldname": "mentor_quote",
+   "fieldtype": "Small Text",
+   "label": "Mentor Quote",
+   "mandatory_depends_on": "is_mentor"
+  },
+  {
+   "fieldname": "section_break_38wsy",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_hw6eh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_xo7p4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_city_chapter_lead",
+   "fieldtype": "Check",
+   "label": "Is City Chapter Lead"
+  },
+  {
+   "fieldname": "section_break_7e0mn",
+   "fieldtype": "Section Break"
+  },
+  {
+   "depends_on": "is_city_chapter_lead",
+   "fieldname": "chapter_lead_achivement",
+   "fieldtype": "Data",
+   "label": "Chapter Lead Achivement",
+   "mandatory_depends_on": "is_city_chapter_lead"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -74,7 +189,7 @@
    "link_fieldname": "user"
   }
  ],
- "modified": "2025-09-22 10:14:14.903269",
+ "modified": "2025-11-07 04:03:10.278584",
  "modified_by": "Administrator",
  "module": "Samaaja",
  "name": "User Metadata",
