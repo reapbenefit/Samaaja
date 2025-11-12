@@ -18,6 +18,7 @@
   "email_id",
   "section_break_38wsy",
   "is_ninja_in_focus",
+  "active_since",
   "media",
   "column_break_hw6eh",
   "testimonial",
@@ -180,6 +181,13 @@
    "fieldtype": "Data",
    "label": "Chapter Lead Achivement",
    "mandatory_depends_on": "is_city_chapter_lead"
+  },
+  {
+   "depends_on": "is_ninja_in_focus",
+   "fieldname": "active_since",
+   "fieldtype": "Date",
+   "label": "Active Since",
+   "mandatory_depends_on": "is_ninja_in_focus"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -189,7 +197,7 @@
    "link_fieldname": "user"
   }
  ],
- "modified": "2025-11-07 04:03:10.278584",
+ "modified": "2025-11-11 14:10:24.898214",
  "modified_by": "Administrator",
  "module": "Samaaja",
  "name": "User Metadata",
