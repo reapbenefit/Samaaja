@@ -16,6 +16,8 @@
   "org_id",
   "verified_by",
   "email_id",
+  "publish_status",
+  "year_of_birth",
   "section_break_38wsy",
   "is_ninja_in_focus",
   "active_since",
@@ -88,6 +90,15 @@
    "fieldname": "email_id",
    "fieldtype": "Data",
    "label": "Email"
+  },
+  {
+   "default": "Publish",
+   "fieldname": "publish_status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Publish Status",
+   "options": "\nPublish\nUnpublish"
   },
   {
    "default": "0",
@@ -188,6 +199,11 @@
    "fieldtype": "Date",
    "label": "Active Since",
    "mandatory_depends_on": "is_ninja_in_focus"
+  },
+  {
+   "fieldname": "year_of_birth",
+   "fieldtype": "Int",
+   "label": "Year of Birth"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -197,7 +213,7 @@
    "link_fieldname": "user"
   }
  ],
- "modified": "2025-11-11 14:10:24.898214",
+ "modified": "2025-12-02 08:42:40.608353",
  "modified_by": "Administrator",
  "module": "Samaaja",
  "name": "User Metadata",
