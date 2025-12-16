@@ -208,8 +208,13 @@
   }
  ],
  "index_web_pages_for_search": 1,
- "links": [],
- "modified": "2025-07-21 00:59:44.132547",
+ "links": [
+  {
+   "link_doctype": "Event Source Metadata",
+   "link_fieldname": "event_id"
+  }
+ ],
+ "modified": "2025-12-04 19:13:10.066416",
  "modified_by": "Administrator",
  "module": "Samaaja",
  "name": "Events",

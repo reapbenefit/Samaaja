@@ -9,6 +9,7 @@
   "user",
   "profile_badges",
   "summary",
+  "partner",
   "column_break_gnch",
   "pincode",
   "city",
@@ -204,6 +205,12 @@
    "fieldname": "year_of_birth",
    "fieldtype": "Int",
    "label": "Year of Birth"
+  },
+  {
+   "fieldname": "partner",
+   "fieldtype": "Link",
+   "label": "Partner",
+   "options": "Partner"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -213,7 +220,7 @@
    "link_fieldname": "user"
   }
  ],
- "modified": "2025-12-02 08:42:40.608353",
+ "modified": "2025-12-15 13:44:26.351132",
  "modified_by": "Administrator",
  "module": "Samaaja",
  "name": "User Metadata",
