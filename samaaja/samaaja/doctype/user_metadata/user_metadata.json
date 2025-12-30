@@ -10,6 +10,7 @@
   "profile_badges",
   "summary",
   "partner",
+  "tags",
   "column_break_gnch",
   "pincode",
   "city",
@@ -190,7 +191,7 @@
   {
    "depends_on": "is_city_chapter_lead",
    "fieldname": "chapter_lead_achivement",
-   "fieldtype": "Data",
+   "fieldtype": "Text",
    "label": "Chapter Lead Achivement",
    "mandatory_depends_on": "is_city_chapter_lead"
   },
@@ -211,6 +212,12 @@
    "fieldtype": "Link",
    "label": "Partner",
    "options": "Partner"
+  },
+  {
+   "fieldname": "tags",
+   "fieldtype": "Table MultiSelect",
+   "label": "Tags",
+   "options": "User Tag Detail"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -220,7 +227,7 @@
    "link_fieldname": "user"
   }
  ],
- "modified": "2025-12-15 13:44:26.351132",
+ "modified": "2025-12-23 09:54:29.823888",
  "modified_by": "Administrator",
  "module": "Samaaja",
  "name": "User Metadata",
