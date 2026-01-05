@@ -7,22 +7,18 @@
  "field_order": [
   "details_section",
   "user",
-  "profile_badges",
   "column_break_gnch",
-  "pincode",
-  "city",
-  "state",
-  "org_id",
+  "location",
   "action_section",
   "last_action",
   "last_action_date",
+  "contributions",
+  "hours_invested",
   "column_break_8unk",
   "last_action_type",
   "last_action_sub_type",
   "last_action_category",
   "other_details_section",
-  "contributions",
-  "hours_invested",
   "wa_id",
   "last_active_date_bot",
   "rank"
@@ -36,41 +32,18 @@
    "unique": 1
   },
   {
-   "fieldname": "profile_badges",
-   "fieldtype": "Small Text",
-   "label": "Profile Badges"
-  },
-  {
-   "fieldname": "city",
-   "fieldtype": "Link",
-   "label": "City",
-   "options": "Samaaja Cities"
-  },
-  {
-   "fieldname": "state",
-   "fieldtype": "Select",
-   "label": "State",
-   "options": "\nAndaman and Nicobar Islands\nAndhra Pradesh\nArunachal Pradesh\nAssam\nBihar\nChandigarh\nChhattisgarh\nDadra and Nagar Haveli and Daman and Diu\nDelhi\nGoa\nGujarat\nHaryana\nHimachal Pradesh\nJammu and Kashmir\nJharkhand\nKarnataka\nKerala\nLadakh\nLakshadweep Islands\nMadhya Pradesh\nMaharashtra\nManipur\nMeghalaya\nMizoram\nNagaland\nOdisha\nOther Territory\nPondicherry\nPunjab\nRajasthan\nSikkim\nTamil Nadu\nTelangana\nTripura\nUttar Pradesh\nUttarakhand\nWest Bengal"
-  },
-  {
-   "fieldname": "org_id",
-   "fieldtype": "Link",
-   "label": "User Organization",
-   "options": "User Organization"
-  },
-  {
    "fieldname": "column_break_gnch",
    "fieldtype": "Column Break"
   },
   {
    "fieldname": "details_section",
    "fieldtype": "Section Break",
-   "label": "Details"
+   "label": "Personal Details"
   },
   {
    "fieldname": "action_section",
    "fieldtype": "Section Break",
-   "label": "Action"
+   "label": "Actions Details"
   },
   {
    "fieldname": "last_action",
@@ -108,12 +81,12 @@
   {
    "fieldname": "other_details_section",
    "fieldtype": "Section Break",
-   "label": "Other Details"
+   "label": "Engagement Details"
   },
   {
    "fieldname": "contributions",
    "fieldtype": "Int",
-   "label": "Contributions"
+   "label": "Action Count"
   },
   {
    "fieldname": "hours_invested",
@@ -131,14 +104,15 @@
    "label": "Last Active Date Bot"
   },
   {
-   "fieldname": "pincode",
-   "fieldtype": "Data",
-   "label": "Pin Code"
-  },
-  {
    "fieldname": "rank",
    "fieldtype": "Int",
    "label": "Rank"
+  },
+  {
+   "fieldname": "location",
+   "fieldtype": "Link",
+   "label": "User Location",
+   "options": "Location"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -148,7 +122,7 @@
    "link_fieldname": "user"
   }
  ],
- "modified": "2025-07-12 15:04:43.450850",
+ "modified": "2026-01-05 11:07:51.530933",
  "modified_by": "Administrator",
  "module": "Samaaja",
  "name": "User Metadata",

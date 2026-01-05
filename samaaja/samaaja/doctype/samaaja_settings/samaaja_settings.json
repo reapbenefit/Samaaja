@@ -26,6 +26,9 @@
   "most_active_members_summary",
   "most_active_cities_label",
   "most_active_cities_summary",
+  "section_break_zzox",
+  "show_opportunities_section_",
+  "show_campaign_section_",
   "profile_tab",
   "badge_section_html",
   "profile_page_section",
@@ -316,12 +319,28 @@
    "fieldname": "join_forum_link",
    "fieldtype": "Data",
    "label": "Join Samaaja Forum Link"
+  },
+  {
+   "default": "1",
+   "fieldname": "show_opportunities_section_",
+   "fieldtype": "Check",
+   "label": "Show Opportunities Section ?"
+  },
+  {
+   "fieldname": "section_break_zzox",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "1",
+   "fieldname": "show_campaign_section_",
+   "fieldtype": "Check",
+   "label": "Show Campaign Section ?"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2025-07-21 21:50:29.791918",
+ "modified": "2026-01-05 17:00:44.201425",
  "modified_by": "Administrator",
  "module": "Samaaja",
  "name": "Samaaja Settings",

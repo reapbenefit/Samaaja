@@ -10,7 +10,11 @@
 {% include 'www/leaderboard/templates/verified_cm_section.html' %}
 {% include 'www/leaderboard/templates/leaderboard_section.html' %}
 {% include 'www/leaderboard/templates/active_cities.html' %}
-{% include 'www/leaderboard/templates/campaign_section.html' %}
+{% if samaaja_settings.show_opportunities_section_ %}
 {% include 'www/leaderboard/templates/opportunity_section.html' %}
+{% endif %}
+{% if samaaja_settings.show_campaign_section_ %}
+{% include 'www/leaderboard/templates/campaign_section.html' %}}
+{% endif %}
 
 {% endblock %}

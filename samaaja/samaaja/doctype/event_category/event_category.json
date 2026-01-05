@@ -9,7 +9,12 @@
  "engine": "InnoDB",
  "field_order": [
   "category",
-  "icon"
+  "icon",
+  "lft",
+  "rgt",
+  "is_group",
+  "old_parent",
+  "parent_event_category"
  ],
  "fields": [
   {
@@ -23,15 +28,51 @@
    "fieldname": "icon",
    "fieldtype": "Attach",
    "label": "Icon"
+  },
+  {
+   "fieldname": "lft",
+   "fieldtype": "Int",
+   "hidden": 1,
+   "label": "Left",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "rgt",
+   "fieldtype": "Int",
+   "hidden": 1,
+   "label": "Right",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "is_group",
+   "fieldtype": "Check",
+   "label": "Is Group"
+  },
+  {
+   "fieldname": "old_parent",
+   "fieldtype": "Link",
+   "label": "Old Parent",
+   "options": "Event Category"
+  },
+  {
+   "fieldname": "parent_event_category",
+   "fieldtype": "Link",
+   "ignore_user_permissions": 1,
+   "label": "Parent Event Category",
+   "options": "Event Category"
   }
  ],
  "index_web_pages_for_search": 1,
+ "is_tree": 1,
  "links": [],
- "modified": "2025-07-13 13:52:31.812513",
- "modified_by": "saxenankit@gmail.com",
+ "modified": "2026-01-05 16:39:12.881038",
+ "modified_by": "Administrator",
  "module": "Samaaja",
  "name": "Event Category",
  "naming_rule": "By fieldname",
+ "nsm_parent_field": "parent_event_category",
  "owner": "Administrator",
  "permissions": [
   {

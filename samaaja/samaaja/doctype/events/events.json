@@ -84,12 +84,6 @@
    "options": "Event Category"
   },
   {
-   "fieldname": "subcategory",
-   "fieldtype": "Link",
-   "label": "Sub Category",
-   "options": "Event Sub Category"
-  },
-  {
    "fieldname": "attachment1",
    "fieldtype": "Attach",
    "label": "Attachment #1"
@@ -317,11 +311,17 @@
    "fieldtype": "Link",
    "label": "Sub Type",
    "options": "Event Type"
+  },
+  {
+   "fieldname": "subcategory",
+   "fieldtype": "Link",
+   "label": "Sub Category",
+   "options": "Event Category"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-07-12 16:13:36.269308",
+ "modified": "2026-01-05 16:40:31.102927",
  "modified_by": "Administrator",
  "module": "Samaaja",
  "name": "Events",

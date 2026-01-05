@@ -10,7 +10,6 @@
   "geolocation",
   "latitude",
   "longitude",
-  "description",
   "address",
   "landmark",
   "pin",
@@ -18,18 +17,10 @@
   "state",
   "district",
   "ward_name",
-  "ward_number",
-  "assembly_constituency",
-  "loksabha_constituency",
   "village_name",
-  "village_number",
-  "hobli_name",
-  "hobli_number",
   "taluka",
-  "polzone",
   "grama_panchayath",
   "taluk_panchayath",
-  "rwa",
   "location_updated"
  ],
  "fields": [
@@ -61,11 +52,6 @@
    "label": "District"
   },
   {
-   "fieldname": "assembly_constituency",
-   "fieldtype": "Data",
-   "label": "Assembly Constituency"
-  },
-  {
    "fieldname": "village_name",
    "fieldtype": "Data",
    "label": "Village name"
@@ -76,11 +62,6 @@
    "label": "Taluka"
   },
   {
-   "fieldname": "polzone",
-   "fieldtype": "Data",
-   "label": "Polzone"
-  },
-  {
    "fieldname": "grama_panchayath",
    "fieldtype": "Data",
    "label": "Gram Panchayath"
@@ -89,11 +70,6 @@
    "fieldname": "taluk_panchayath",
    "fieldtype": "Data",
    "label": "Taluka Panchayath"
-  },
-  {
-   "fieldname": "rwa",
-   "fieldtype": "Data",
-   "label": "Resident welfare association (rwa)"
   },
   {
    "fieldname": "pin",
@@ -112,31 +88,6 @@
    "options": "\nAndaman and Nicobar Islands\nAndhra Pradesh\nArunachal Pradesh\nAssam\nBihar\nChandigarh\nChhattisgarh\nDadra and Nagar Haveli and Daman and Diu\nDelhi\nGoa\nGujarat\nHaryana\nHimachal Pradesh\nJammu and Kashmir\nJharkhand\nKarnataka\nKerala\nLadakh\nLakshadweep Islands\nMadhya Pradesh\nMaharashtra\nManipur\nMeghalaya\nMizoram\nNagaland\nOdisha\nOther Territory\nPondicherry\nPunjab\nRajasthan\nSikkim\nTamil Nadu\nTelangana\nTripura\nUttar Pradesh\nUttarakhand\nWest Bengal"
   },
   {
-   "fieldname": "hobli_name",
-   "fieldtype": "Data",
-   "label": "Hobli name"
-  },
-  {
-   "fieldname": "hobli_number",
-   "fieldtype": "Data",
-   "label": "Hobli Number"
-  },
-  {
-   "fieldname": "village_number",
-   "fieldtype": "Data",
-   "label": "Village Number"
-  },
-  {
-   "fieldname": "loksabha_constituency",
-   "fieldtype": "Data",
-   "label": "Loksabha Constituency"
-  },
-  {
-   "fieldname": "description",
-   "fieldtype": "Long Text",
-   "label": "Description"
-  },
-  {
    "description": "Select a <b>Point</b> on the map to autofill the latitude &amp; longitude",
    "fieldname": "geolocation",
    "fieldtype": "Geolocation",
@@ -148,11 +99,6 @@
    "label": "Ward name"
   },
   {
-   "fieldname": "ward_number",
-   "fieldtype": "Data",
-   "label": "Ward No"
-  },
-  {
    "default": "0",
    "fieldname": "location_updated",
    "fieldtype": "Check",
@@ -161,7 +107,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-04-23 16:02:32.472238",
+ "modified": "2026-01-05 11:02:51.345494",
  "modified_by": "Administrator",
  "module": "Samaaja",
  "name": "Location",
@@ -180,6 +126,7 @@
    "write": 1
   }
  ],
+ "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []
