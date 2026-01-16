@@ -12,6 +12,7 @@
   "partner",
   "tags",
   "column_break_gnch",
+  "full_name",
   "pincode",
   "city",
   "state",
@@ -218,6 +219,14 @@
    "fieldtype": "Table MultiSelect",
    "label": "Tags",
    "options": "User Tag Detail"
+  },
+  {
+   "fieldname": "full_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Full Name",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
@@ -227,7 +236,7 @@
    "link_fieldname": "user"
   }
  ],
- "modified": "2025-12-23 09:54:29.823888",
+ "modified": "2026-01-09 13:18:34.184205",
  "modified_by": "Administrator",
  "module": "Samaaja",
  "name": "User Metadata",
@@ -249,5 +258,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "title_field": "full_name"
 }

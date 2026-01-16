@@ -36,3 +36,13 @@ def username(doc, _):
             username = prefix + random_string(size)
 
         doc.username = username.lower().replace(".", "").replace(" ", "")
+
+def after_insert(doc, _):
+    create_user_metadata(doc)
+
+def create_user_metadata(doc):
+    if not frappe.db.exists("User Metadata", {"user": doc.name}) and doc.name != "Administrator":
+        frappe.get_doc({
+            "doctype": "User Metadata",
+            "user": doc.name
+        }).insert(ignore_permissions=True)

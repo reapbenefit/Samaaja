@@ -210,7 +210,8 @@ profile_url_prefix = "/users/"
 doc_events = {
     "User": {
         "before_save": "samaaja.overrides.user.before_save",
-        "before_insert": "samaaja.overrides.user.username"
+        "before_insert": "samaaja.overrides.user.username",
+        "after_insert": "samaaja.overrides.user.after_insert"
     },
     "Energy Point Log": {
         "before_insert": "samaaja.overrides.energy_point_log.before_insert"
