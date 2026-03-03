@@ -7,7 +7,10 @@ def update_user_metadata_location(doc):
     """
     Enqueue-safe method to update location (city, state) from pincode.
     """
-    location_data = fetch_data_gov_in(doc.pincode)
+    pincode = doc.get('pincode')
+    if not pincode:
+        return
+    location_data = fetch_data_gov_in(pincode)
     if location_data.get("records"):
         record = location_data["records"][0]
         city = record["district"].title()
@@ -25,6 +28,6 @@ def on_save(doc, method):
     """
     Hook to update location fields when User Metadata is saved.
     """
-    if doc.pincode:
+    if doc.get('pincode'):
         update_user_metadata_location(doc)
         
