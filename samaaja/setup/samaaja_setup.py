@@ -293,15 +293,47 @@ def create_users():
     ]
 
     for u in user_data:
-        # Ensure city exists in Samaaja Cities
-        if not frappe.db.exists("Samaaja Cities", {"city_name": u["city"]}):
-            city_doc = frappe.get_doc({
-                "doctype": "Samaaja Cities",
-                "city_name": u["city"],
-                "state": u["state"]  # assuming Samaaja Cities has a "state" field too
-            })
-            city_doc.insert(ignore_permissions=True)
-            frappe.db.commit()
+        # Ensure State exists
+        state_name = u.get("state")
+        if not state_name:
+            continue
+
+        if not frappe.db.exists("State", {"state_name": state_name}):
+            frappe.get_doc(
+                {"doctype": "State", "state_name": state_name}
+            ).insert(ignore_permissions=True)
+
+        state_docname = frappe.db.get_value("State", {"state_name": state_name}, "name") or state_name
+
+        # Ensure District exists (used as the "city" list in leaderboard)
+        district_name = u.get("city")
+        if not district_name:
+            continue
+
+        if not frappe.db.exists("District", {"district_name": district_name}):
+            frappe.get_doc(
+                {"doctype": "District", "district_name": district_name, "state": state_docname}
+            ).insert(ignore_permissions=True)
+
+        district_docname = (
+            frappe.db.get_value("District", {"district_name": district_name}, "name") or district_name
+        )
+
+        # Ensure Location exists (one per user city/state)
+        location_name = frappe.db.exists(
+            "Location",
+            {"city": district_name, "district": district_docname, "state": state_docname},
+        )
+        if not location_name:
+            location = frappe.get_doc(
+                {
+                    "doctype": "Location",
+                    "city": district_name,
+                    "district": district_docname,
+                    "state": state_docname,
+                }
+            ).insert(ignore_permissions=True)
+            location_name = location.name
 
         # Create User if not exists
         if not frappe.db.exists("User", u["email"]):
@@ -315,18 +347,16 @@ def create_users():
                 "new_password": "samaaja@123"
             })
             user.insert(ignore_permissions=True)
-            frappe.db.commit()
             
         if not frappe.db.exists("User Metadata", u["email"]):
             # Create User Metadata
             meta = frappe.get_doc({
                 "doctype": "User Metadata",
                 "user": u["email"],
-                "city": u["city"],
-                "state": u["state"]
+                "location": location_name,
             })
             meta.insert(ignore_permissions=True)
-            frappe.db.commit()
+    frappe.db.commit()
 
 def create_events():
     events = [
