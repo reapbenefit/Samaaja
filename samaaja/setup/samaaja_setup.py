@@ -39,7 +39,7 @@ def create_event_types():
             }).insert()
 
 def create_event_categories_and_subcategories():
-    # Define categories with icons and subcategories
+    # Event Category is a tree (parent categories + child categories as subcategories)
     event_structure = {
         "Education & Awareness": {
             "icon": "https://static.thenounproject.com/png/7062467-512.png",  
@@ -82,20 +82,30 @@ def create_event_categories_and_subcategories():
         }
 
     for category, details in event_structure.items():
-        # Insert Event Category if not exists
+        # Parent node
         if not frappe.db.exists("Event Category", {"category": category}):
-            frappe.get_doc({
-                "doctype": "Event Category",
-                "category": category,
-                "icon": details["icon"]
-            }).insert()
+            frappe.get_doc(
+                {
+                    "doctype": "Event Category",
+                    "category": category,
+                    "icon": details["icon"],
+                    "is_group": 1,
+                }
+            ).insert(ignore_permissions=True)
 
+        parent_name = frappe.db.get_value("Event Category", {"category": category}, "name")
+
+        # Child nodes (subcategories)
         for subcat in details["sub_category"]:
-            if not frappe.db.exists("Event Sub Category", {"subcategory": subcat}):
-              frappe.get_doc({
-                  "doctype": "Event Sub Category",
-                  "subcategory": subcat
-              }).insert()
+            if not frappe.db.exists("Event Category", {"category": subcat}):
+                frappe.get_doc(
+                    {
+                        "doctype": "Event Category",
+                        "category": subcat,
+                        "parent_event_category": parent_name,
+                        "is_group": 0,
+                    }
+                ).insert(ignore_permissions=True)
 
 def create_event_sources():
     sources = [
