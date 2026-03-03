@@ -8,17 +8,6 @@ from datetime import timedelta
 
 
 
-states_of_india = [
-	"Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Goa",
-	"Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand", "Karnataka", "Kerala",
-	"Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland",
-	"Odisha", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura",
-	"Uttar Pradesh", "Uttarakhand", "West Bengal", ""
-]
-
-def get_active_cm_count():
-	return frappe.db.count("User", {"enabled": 1})
-
 def get_action_count():
 	return frappe.db.count("Events")
 
@@ -37,43 +26,14 @@ def get_total_invested_hours():
 	return result[0]["hours_invested"]
 
 @frappe.whitelist(allow_guest=True)
-def get_city_wise_action_count(page_length=10):
-	Events = frappe.qb.DocType("Events")
-	Location = frappe.qb.DocType("Location")
-
-	query = (
-		frappe.qb.from_(Events)
-		.join(Location)
-		.on(Events.location == Location.name)
-		.select(
-			Count(Events.name).as_("action_count"),
-			Location.city.as_("city")
-		)
-		.where(
-			(Location.city.isnotnull()) & (Location.city.notin(["NULL"]))
-		)
-		.groupby(
-			Location.city
-		).orderby(
-			Count(Events.name), order=frappe.qb.desc
-		).limit(page_length)
-	)
-
-	# Run the query with debug enabled
-	result = query.run(as_dict=True)
-	all_actions = get_action_count()
-
-	total_actions = [row.action_count for row in result]
-	total_actions = sum(total_actions)
-	for row in result:
-		row.percentage = frappe.utils.cint((row.action_count/total_actions) * 100)
-
-	return result
-
-@frappe.whitelist(allow_guest=True)
-def get_city_wise_action_count_user_based(page_length=10, recent_rank_based_on=None):
+def get_location_wise_action_count_user_based(page_length=10, recent_rank_based_on=None):
 	Events = frappe.qb.DocType("Events")
 	UserMetadata = frappe.qb.DocType("User Metadata")
+	Location = frappe.qb.DocType("Location")
+	District = frappe.qb.DocType("District")
+
+	location_field_name = frappe.db.get_single_value("Samaaja Settings", "location_field_name")
+	
 
 	# Base Query
 	user_with_events = (
@@ -81,8 +41,7 @@ def get_city_wise_action_count_user_based(page_length=10, recent_rank_based_on=N
 		.join(Events).on(Events.user == UserMetadata.name)  # Ensure 'user' field in Events points to User's 'name'
 		.select(UserMetadata.name)
 		.where(
-			(UserMetadata.city.isnotnull()) &  # Ensure city is not null
-			(UserMetadata.city.notin(states_of_india)) &  # Exclude cities in the list
+			(UserMetadata.location.isnotnull()) &  # Ensure city is not null
 			(Events.name.isnotnull())  # Ensure events exist for the user
 		)
 	)
@@ -98,96 +57,50 @@ def get_city_wise_action_count_user_based(page_length=10, recent_rank_based_on=N
 	user_with_events = user_with_events.run(as_dict=True)
 	users = list(set([user.name for user in user_with_events]))
 	result = []
-	if users:
+	if not users:
+		return result
+	if location_field_name == "district":
 		# Query to get the number of users grouped by city, with conditions on a list of usernames
-		user_count_by_city = (
+		user_count_by_location = (
 			qb.from_(UserMetadata)
-			.select(UserMetadata.city, Count(UserMetadata.name).as_("action_count"))  # count users per city
+			.join(Location).on(UserMetadata.location == Location.name)
+			.join(District).on(Location.district == District.name)
+			.select(District.district_name.as_("location"), Count(UserMetadata.name).as_("action_count"))  # count users per city
 			.where(
 				UserMetadata.name.isin(users)  # filter by a list of usernames
 			)
-			.groupby(UserMetadata.city)  # group by user city
+			.groupby(District.district_name.as_("location"))  # group by user city
+			.orderby(
+				Count(UserMetadata.name), order=frappe.qb.desc  # Order cities alphabetically
+			)
+			.limit(page_length)  # limit to 10 results
+		)
+	else:
+		user_count_by_location = (
+			qb.from_(UserMetadata)
+			.join(Location).on(UserMetadata.location == Location.name)
+			.select(getattr(Location,location_field_name).as_("location"), Count(UserMetadata.name).as_("action_count"))  # count users per city
+			.where(
+				UserMetadata.name.isin(users)  # filter by a list of usernames
+			)
+			.groupby(getattr(Location, location_field_name).as_("location"))  # group by user city
 			.orderby(
 				Count(UserMetadata.name), order=frappe.qb.desc  # Order cities alphabetically
 			)
 			.limit(page_length)  # limit to 10 results
 		)
 
-		# Execute the query and fetch the results
-		result = user_count_by_city.run(as_dict=True)
+	# Execute the query and fetch the results
+	result = user_count_by_location.run(as_dict=True)
 
-		total_actions = [row.action_count for row in result]
-		total_actions = sum(total_actions)
-		for row in result:
-			row.percentage = frappe.utils.cint((row.action_count/total_actions) * 100)
-
-	return result
-
-@frappe.whitelist(allow_guest=True)
-def get_state_wise_user_count(page_length=10):
-	# Events = frappe.qb.DocType("Events")
-	# Location = frappe.qb.DocType("Location")
-
-	result = frappe.db.get_all('User',
-		filters={
-			'enabled': 1,
-			'state': ('is', 'set')
-		},
-		fields=['count(name) as user_count', 'state'],
-		group_by='state',
-		order_by='count(name) desc',
-		page_length=page_length
-	)
-	# query = (
-	# 	frappe.qb.from_(Events)
-	# 	.join(Location)
-	# 	.on(Events.location == Location.name)
-	# 	.select(
-	# 		Count(Events.name).as_("action_count"),
-	# 		Location.city.as_("city")
-	# 	)
-	# 	.where(
-	# 		Location.city.isnotnull()
-	# 	)
-	# 	.groupby(
-	# 		Location.city
-	# 	).orderby(
-	# 		Count(Events.name), order=frappe.qb.desc
-	# 	).limit(page_length)
-	# )
-
-	# Run the query with debug enabled
-	# result = query.run(as_dict=True)
-	# all_actions = get_action_count()
-
-	total_users = [row.user_count for row in result]
-	total_users = sum(total_users)
+	total_actions = [row.action_count for row in result]
+	total_actions = sum(total_actions)
 	for row in result:
-		row.percentage = frappe.utils.cint((row.user_count/total_users) * 100)
+		row.percentage = frappe.utils.cint((row.action_count/total_actions) * 100)
 
 	return result
 
-""" def update_user_rank():
-  
-    Fetch all Ninja Profile records with hours_invested > 0.0,
-    ordered by hours_invested descending, and update each record's rank.
-    
-    profiles = frappe.get_all(
-        "Ninja Profile",
-        fields=["name", "hours_invested"],
-        filters={"hours_invested": [">", 0.0]},
-        order_by="hours_invested desc"
-    )
 
-    for rank, p in enumerate(profiles, start=1):
-        frappe.db.set_value(
-            "Ninja Profile",
-            p.name,
-            "rank",
-            rank,
-            update_modified=False
-        )
- """
 @frappe.whitelist(allow_guest=True)
 def search_users_(filters=None, raw=False, page_length=10, start=0):
 	start = cint(start)
@@ -221,9 +134,8 @@ def search_users_(filters=None, raw=False, page_length=10, start=0):
 		.select(
 			User.name,
 			User.username,
-			UserMetadata.city,
+			UserMetadata.location,
 			Coalesce(UserMetadata.rank, user_count).as_("rank"),  # Always get rank from User Metadata
-			UserMetadata.org_id,
 			User.user_image,
 			#User.location,
 			User.full_name,

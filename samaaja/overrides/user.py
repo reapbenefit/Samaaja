@@ -1,8 +1,7 @@
 """Overrides for User doctype"""
 
 import frappe
-from frappe.utils import random_string
-from samaaja.samaaja.utils import make_image_public
+from samaaja.utils.utils import make_image_public
 
 
 def make_user_images_public(doc, method=None):

@@ -40,6 +40,7 @@
    "read_only": 1
   },
   {
+   "default": "0",
    "fieldname": "is_group",
    "fieldtype": "Check",
    "label": "Is Group"
@@ -61,7 +62,7 @@
  "index_web_pages_for_search": 1,
  "is_tree": 1,
  "links": [],
- "modified": "2025-07-12 16:09:26.481438",
+ "modified": "2026-03-01 16:13:12.501337",
  "modified_by": "Administrator",
  "module": "Samaaja",
  "name": "Event Type",
@@ -78,6 +79,19 @@
    "read": 1,
    "report": 1,
    "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Samaaja",
+   "select": 1,
    "share": 1,
    "write": 1
   }

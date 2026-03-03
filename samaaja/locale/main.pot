@@ -1,0 +1,2230 @@
+# Translations template for Samaaja.
+# Copyright (C) 2026 Impactyaan
+# This file is distributed under the same license as the Samaaja project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samaaja VERSION\n"
+"Report-Msgid-Bugs-To: ankit@impactyaan.com\n"
+"POT-Creation-Date: 2026-02-25 08:15+0000\n"
+"PO-Revision-Date: 2026-02-25 08:15+0000\n"
+"Last-Translator: ankit@impactyaan.com\n"
+"Language-Team: ankit@impactyaan.com\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.13.1\n"
+
+#. Label of a field in the review-action Web Form
+#: samaaja/samaaja/web_form/review_action/review_action.json
+msgid " विवरण"
+msgstr ""
+
+#: samaaja/www/user-profile/index.html:420
+msgid "...Deleting Event"
+msgstr ""
+
+#: samaaja/www/user-profile/index.html:452
+msgid "...Downloading Profile"
+msgstr ""
+
+#: samaaja/www/user-profile/index.html:401
+msgid "...highlighting Event"
+msgstr ""
+
+#. Introduction text of the flag-a-user Web Form
+#: samaaja/samaaja/web_form/flag_a_user/flag_a_user.json
+msgid "<div class=\"ql-editor read-mode\"><p><br></p></div>"
+msgstr ""
+
+#. Introduction text of the record-actions Web Form
+#: samaaja/samaaja/web_form/record_actions/record_actions.json
+msgid "<div class=\"ql-editor read-mode\"><p><strong style=\"font-size: 24px;\">Record all the actions you have taken!</strong></p><p><span style=\"color: red;\">*</span> marked fields are mandatory.</p></div>"
+msgstr ""
+
+#. Label of a Check field in DocType 'Opportunity Template'
+#: samaaja/samaaja/doctype/opportunity_template/opportunity_template.json
+msgid "Accept Applications"
+msgstr ""
+
+#. Label of a Check field in DocType 'Campaign Template'
+#: samaaja/samaaja/doctype/campaign_template/campaign_template.json
+msgid "Accept Petitions"
+msgstr ""
+
+#. Option for the 'Status' (Select) field in DocType 'Events Review'
+#. Option for the 'Status' (Select) field in DocType 'User Review'
+#. Option in a Select field in the expert-recommendation Web Form
+#. Option in a Select field in the review-action Web Form
+#: samaaja/samaaja/doctype/events_review/events_review.json
+#: samaaja/samaaja/doctype/user_review/user_review.json
+#: samaaja/samaaja/web_form/expert_recommendation/expert_recommendation.json
+#: samaaja/samaaja/web_form/review_action/review_action.json
+msgid "Accepted"
+msgstr ""
+
+#. Label of a field in the request-review Web Form
+#. Label of a field in the review-action Web Form
+#: samaaja/samaaja/web_form/request_review/request_review.json
+#: samaaja/samaaja/web_form/review_action/review_action.json
+msgid "Action"
+msgstr ""
+
+#. Label of a Int field in DocType 'User Metadata'
+#: samaaja/samaaja/doctype/user_metadata/user_metadata.json
+msgid "Action Count"
+msgstr ""
+
+#. Label of a Section Break field in DocType 'User Metadata'
+#: samaaja/samaaja/doctype/user_metadata/user_metadata.json
+msgid "Actions Details"
+msgstr ""
+
+#. Label of a Data field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Actions Taken Label"
+msgstr ""
+
+#. Label of a Data field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Actions Taken label"
+msgstr ""
+
+#. Label of a Data field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Actions absent text"
+msgstr ""
+
+#. Label of a Data field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Actions label"
+msgstr ""
+
+#. Label of a Check field in DocType 'Badge'
+#. Label of a Check field in DocType 'User badge'
+#: samaaja/samaaja/doctype/badge/badge.json
+#: samaaja/samaaja/doctype/user_badge/user_badge.json
+msgid "Active"
+msgstr ""
+
+#. Label of a Check field in DocType 'Samaaja Profile Tabs'
+#: samaaja/samaaja/doctype/samaaja_profile_tabs/samaaja_profile_tabs.json
+msgid "Active Tab"
+msgstr ""
+
+#. Label of a Data field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Add Action Button Label"
+msgstr ""
+
+#. Label of a Text Editor field in DocType 'Campaign Template'
+#: samaaja/samaaja/doctype/campaign_template/campaign_template.json
+msgid "Additional Info"
+msgstr ""
+
+#. Label of a Long Text field in DocType 'Location'
+#: samaaja/samaaja/doctype/location/location.json
+msgid "Address"
+msgstr ""
+
+#. Label of a Data field in DocType 'Campaign Petition'
+#: samaaja/samaaja/doctype/campaign_petition/campaign_petition.json
+msgid "Address Line 1"
+msgstr ""
+
+#. Label of a Link field in DocType 'Flag'
+#. Label of a Link field in DocType 'Flag Type'
+#: samaaja/samaaja/doctype/flag/flag.json
+#: samaaja/samaaja/doctype/flag_type/flag_type.json
+msgid "Amended From"
+msgstr ""
+
+#. Option in a Select field in the edit-your-profile Web Form
+#: samaaja/samaaja/web_form/edit_your_profile/edit_your_profile.json
+msgid "Andaman and Nicobar Islands"
+msgstr ""
+
+#. Option in a Select field in the edit-your-profile Web Form
+#: samaaja/samaaja/web_form/edit_your_profile/edit_your_profile.json
+msgid "Andhra Pradesh"
+msgstr ""
+
+#. Label of a Check field in DocType 'Events'
+#: samaaja/samaaja/doctype/events/events.json
+msgid "Anonymous"
+msgstr ""
+
+#. Label of a field in the edit-actions Web Form
+#: samaaja/samaaja/web_form/edit_actions/edit_actions.json
+msgid "Any relevant URLs"
+msgstr ""
+
+#. Label of a Date field in DocType 'Opportunity Template'
+#: samaaja/samaaja/doctype/opportunity_template/opportunity_template.json
+msgid "Application Deadline"
+msgstr ""
+
+#. Option in a Select field in the edit-your-profile Web Form
+#: samaaja/samaaja/web_form/edit_your_profile/edit_your_profile.json
+msgid "Arunachal Pradesh"
+msgstr ""
+
+#. Label of a Data field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Ask for Help Button Label"
+msgstr ""
+
+#. Option in a Select field in the edit-your-profile Web Form
+#: samaaja/samaaja/web_form/edit_your_profile/edit_your_profile.json
+msgid "Assam"
+msgstr ""
+
+#. Label of a Section Break field in DocType 'Samaaja Asset'
+#: samaaja/samaaja/doctype/samaaja_asset/samaaja_asset.json
+msgid "Asset Overview"
+msgstr ""
+
+#: samaaja/samaaja/doctype/campaign_template/campaign_template.py:24
+msgid "At least one recipient must be selected by default for the campaign template."
+msgstr ""
+
+#. Label of a Attach field in DocType 'Flag'
+#. Label of a field in the flag-a-user Web Form
+#. Label of a field in the flag-an-action Web Form
+#: samaaja/samaaja/doctype/flag/flag.json
+#: samaaja/samaaja/web_form/flag_a_user/flag_a_user.json
+#: samaaja/samaaja/web_form/flag_an_action/flag_an_action.json
+msgid "Attachment"
+msgstr ""
+
+#. Label of a Attach field in DocType 'Events'
+#: samaaja/samaaja/doctype/events/events.json
+msgid "Attachment #1"
+msgstr ""
+
+#. Label of a Attach field in DocType 'Events'
+#: samaaja/samaaja/doctype/events/events.json
+msgid "Attachment #2"
+msgstr ""
+
+#. Label of a Section Break field in DocType 'Events'
+#: samaaja/samaaja/doctype/events/events.json
+msgid "Attachments"
+msgstr ""
+
+#. Label of a Data field in DocType 'Events'
+#: samaaja/samaaja/doctype/events/events.json
+msgid "Authority"
+msgstr ""
+
+#: samaaja/www/reported-profile.html:21
+msgid "Back to Home"
+msgstr ""
+
+#. Name of a DocType
+#. Label of a Link field in DocType 'User badge'
+#: samaaja/samaaja/doctype/badge/badge.json
+#: samaaja/samaaja/doctype/user_badge/user_badge.json
+msgid "Badge"
+msgstr ""
+
+#. Label of a Int field in DocType 'User badge'
+#: samaaja/samaaja/doctype/user_badge/user_badge.json
+msgid "Badge Count"
+msgstr ""
+
+#. Label of a Select field in DocType 'Badge'
+#: samaaja/samaaja/doctype/badge/badge.json
+msgid "Badge Type"
+msgstr ""
+
+#. Description of the 'Order' (Int) field in DocType 'Badge'
+#: samaaja/samaaja/doctype/badge/badge.json
+msgid "Badges on the profile page are ordered by their order."
+msgstr ""
+
+#. Label of a Tab Break field in DocType 'Samaaja Asset'
+#: samaaja/samaaja/doctype/samaaja_asset/samaaja_asset.json
+msgid "Basic Info"
+msgstr ""
+
+#. Option in a Select field in the edit-your-profile Web Form
+#: samaaja/samaaja/web_form/edit_your_profile/edit_your_profile.json
+msgid "Bihar"
+msgstr ""
+
+#. Label of a field in the edit-your-profile Web Form
+#: samaaja/samaaja/web_form/edit_your_profile/edit_your_profile.json
+msgid "Bio"
+msgstr ""
+
+#. Label of a Data field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Bio Absent Text"
+msgstr ""
+
+#. Label of a Data field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Bio label"
+msgstr ""
+
+#. Label of a field in the edit-your-profile Web Form
+#: samaaja/samaaja/web_form/edit_your_profile/edit_your_profile.json
+msgid "Birth Date"
+msgstr ""
+
+#. Label of a Data field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Blurb"
+msgstr ""
+
+#. Label of a Text Editor field in DocType 'Campaign Template'
+#: samaaja/samaaja/doctype/campaign_template/campaign_template.json
+msgid "Body"
+msgstr ""
+
+#. Label of a Text Editor field in DocType 'Opportunity Application'
+#: samaaja/samaaja/doctype/opportunity_application/opportunity_application.json
+msgid "Brief Description of Idea for which Fund support is needed"
+msgstr ""
+
+#. Label of a Link field in DocType 'Campaign Petition'
+#: samaaja/samaaja/doctype/campaign_petition/campaign_petition.json
+msgid "Campaign"
+msgstr ""
+
+#. Name of a DocType
+#: samaaja/samaaja/doctype/campaign_partner/campaign_partner.json
+msgid "Campaign Partner"
+msgstr ""
+
+#. Name of a DocType
+#. Linked DocType in Campaign Template's connections
+#: samaaja/samaaja/doctype/campaign_petition/campaign_petition.json
+#: samaaja/samaaja/doctype/campaign_template/campaign_template.json
+msgid "Campaign Petition"
+msgstr ""
+
+#. Name of a DocType
+#: samaaja/samaaja/doctype/campaign_petition_recipient/campaign_petition_recipient.json
+msgid "Campaign Petition Recipient"
+msgstr ""
+
+#. Name of a DocType
+#: samaaja/samaaja/doctype/campaign_recipient/campaign_recipient.json
+msgid "Campaign Recipient"
+msgstr ""
+
+#. Name of a DocType
+#: samaaja/samaaja/doctype/campaign_template/campaign_template.json
+msgid "Campaign Template"
+msgstr ""
+
+#. Name of a DocType
+#: samaaja/samaaja/doctype/campaign_update/campaign_update.json
+msgid "Campaign Update"
+msgstr ""
+
+#: samaaja/www/campaign/index.py:13
+msgid "Campaign not found for the given route or not accepting petitions."
+msgstr ""
+
+#. Label of a Data field in DocType 'Event Category'
+#. Label of a Link field in DocType 'Events'
+#. Label of a Link field in DocType 'Samaaja Asset'
+#. Label of a Data field in DocType 'Samaaja Asset Category'
+#. Label of a field in the record-actions Web Form
+#: samaaja/samaaja/doctype/event_category/event_category.json
+#: samaaja/samaaja/doctype/events/events.json
+#: samaaja/samaaja/doctype/samaaja_asset/samaaja_asset.json
+#: samaaja/samaaja/doctype/samaaja_asset_category/samaaja_asset_category.json
+#: samaaja/samaaja/web_form/record_actions/record_actions.json
+msgid "Category"
+msgstr ""
+
+#. Label of a Data field in DocType 'User Category'
+#: samaaja/samaaja/doctype/user_category/user_category.json
+msgid "Category Name"
+msgstr ""
+
+#. Option in a Select field in the edit-your-profile Web Form
+#: samaaja/samaaja/web_form/edit_your_profile/edit_your_profile.json
+msgid "Chandigarh"
+msgstr ""
+
+#. Option in a Select field in the edit-your-profile Web Form
+#: samaaja/samaaja/web_form/edit_your_profile/edit_your_profile.json
+msgid "Chhattisgarh"
+msgstr ""
+
+#. Label of a Data field in DocType 'Location'
+#. Label of a field in the edit-your-profile Web Form
+#: samaaja/samaaja/doctype/location/location.json
+#: samaaja/samaaja/web_form/edit_your_profile/edit_your_profile.json
+msgid "City"
+msgstr ""
+
+#. Description of a field in the record-actions Web Form
+#: samaaja/samaaja/web_form/record_actions/record_actions.json
+msgid "Click on the map to select the location where the action took place. This helps us understand your local impact better."
+msgstr ""
+
+#. Label of a Datetime field in DocType 'Samaaja Asset'
+#: samaaja/samaaja/doctype/samaaja_asset/samaaja_asset.json
+msgid "Close Time"
+msgstr ""
+
+#. Description of a field in the edit-your-profile Web Form
+#: samaaja/samaaja/web_form/edit_your_profile/edit_your_profile.json
+msgid "Comma separated values"
+msgstr ""
+
+#. Label of a Small Text field in DocType 'Events Review'
+#. Label of a Small Text field in DocType 'User Review'
+#: samaaja/samaaja/doctype/events_review/events_review.json
+#: samaaja/samaaja/doctype/user_review/user_review.json
+msgid "Comment"
+msgstr ""
+
+#. Label of a Code field in DocType 'Samaaja Profile Tabs'
+#: samaaja/samaaja/doctype/samaaja_profile_tabs/samaaja_profile_tabs.json
+msgid "Content"
+msgstr ""
+
+#. Option in a Select field in the edit-your-profile Web Form
+#: samaaja/samaaja/web_form/edit_your_profile/edit_your_profile.json
+msgid "Dadra and Nagar Haveli and Daman and Diu"
+msgstr ""
+
+#. Label of a Date field in DocType 'Campaign Update'
+#: samaaja/samaaja/doctype/campaign_update/campaign_update.json
+msgid "Date"
+msgstr ""
+
+#. Label of a Data field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Delete Confirmation Text"
+msgstr ""
+
+#. Label of a Data field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Delete Menu Item Label"
+msgstr ""
+
+#: samaaja/samaaja/web_form/edit_actions/edit_actions.js:5
+msgid "Delete this action"
+msgstr ""
+
+#. Option in a Select field in the edit-your-profile Web Form
+#: samaaja/samaaja/web_form/edit_your_profile/edit_your_profile.json
+msgid "Delhi"
+msgstr ""
+
+#. Label of a Long Text field in DocType 'Badge'
+#. Label of a Small Text field in DocType 'Campaign Update'
+#. Label of a Long Text field in DocType 'Events'
+#. Label of a Long Text field in DocType 'Flag'
+#. Label of a Long Text field in DocType 'Samaaja Asset'
+#. Label of a Small Text field in DocType 'User Category'
+#. Label of a field in the edit-actions Web Form
+#. Label of a field in the flag-a-user Web Form
+#. Label of a field in the flag-an-action Web Form
+#. Label of a field in the record-actions Web Form
+#: samaaja/samaaja/doctype/badge/badge.json
+#: samaaja/samaaja/doctype/campaign_update/campaign_update.json
+#: samaaja/samaaja/doctype/events/events.json
+#: samaaja/samaaja/doctype/flag/flag.json
+#: samaaja/samaaja/doctype/samaaja_asset/samaaja_asset.json
+#: samaaja/samaaja/doctype/user_category/user_category.json
+#: samaaja/samaaja/web_form/edit_actions/edit_actions.json
+#: samaaja/samaaja/web_form/flag_a_user/flag_a_user.json
+#: samaaja/samaaja/web_form/flag_an_action/flag_an_action.json
+#: samaaja/samaaja/web_form/record_actions/record_actions.json
+msgid "Description"
+msgstr ""
+
+#. Label of a Data field in DocType 'Events Review'
+#. Label of a Data field in DocType 'User Review'
+#: samaaja/samaaja/doctype/events_review/events_review.json
+#: samaaja/samaaja/doctype/user_review/user_review.json
+msgid "Designation"
+msgstr ""
+
+#. Label of a Tab Break field in DocType 'Events'
+#: samaaja/samaaja/doctype/events/events.json
+msgid "Details"
+msgstr ""
+
+#. Label of a Check field in DocType 'Samaaja Profile Tabs'
+#: samaaja/samaaja/doctype/samaaja_profile_tabs/samaaja_profile_tabs.json
+msgid "Disable Tab"
+msgstr ""
+
+#. Name of a DocType
+#. Label of a Link field in DocType 'Location'
+#: samaaja/samaaja/doctype/district/district.json
+#: samaaja/samaaja/doctype/location/location.json
+msgid "District"
+msgstr ""
+
+#. Label of a Data field in DocType 'District'
+#: samaaja/samaaja/doctype/district/district.json
+msgid "District Code"
+msgstr ""
+
+#. Label of a Data field in DocType 'District'
+#: samaaja/samaaja/doctype/district/district.json
+msgid "District name"
+msgstr ""
+
+#. Label of a Data field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Download Profile Button Label"
+msgstr ""
+
+#. Title of the edit-actions Web Form
+#: samaaja/samaaja/web_form/edit_actions/edit_actions.json
+msgid "Edit Actions"
+msgstr ""
+
+#. Label of a Data field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Edit Menu Item Label"
+msgstr ""
+
+#. Title of the edit-your-profile Web Form
+#: samaaja/samaaja/web_form/edit_your_profile/edit_your_profile.json
+msgid "Edit profile"
+msgstr ""
+
+#. Label of a Text field in DocType 'Opportunity Template'
+#: samaaja/samaaja/doctype/opportunity_template/opportunity_template.json
+msgid "Eligibility Criteria"
+msgstr ""
+
+#. Label of a Data field in DocType 'Campaign Petition Recipient'
+#. Label of a Data field in DocType 'Campaign Recipient'
+#. Label of a Data field in DocType 'Events Review'
+#. Label of a Data field in DocType 'Opportunity Application'
+#. Label of a Data field in DocType 'User Review'
+#: samaaja/samaaja/doctype/campaign_petition_recipient/campaign_petition_recipient.json
+#: samaaja/samaaja/doctype/campaign_recipient/campaign_recipient.json
+#: samaaja/samaaja/doctype/events_review/events_review.json
+#: samaaja/samaaja/doctype/opportunity_application/opportunity_application.json
+#: samaaja/samaaja/doctype/user_review/user_review.json
+msgid "Email"
+msgstr ""
+
+#. Label of a Data field in DocType 'Campaign Petition'
+#: samaaja/samaaja/doctype/campaign_petition/campaign_petition.json
+msgid "Email Address"
+msgstr ""
+
+#. Label of a Text Editor field in DocType 'Campaign Template'
+#: samaaja/samaaja/doctype/campaign_template/campaign_template.json
+msgid "Email Body Template"
+msgstr ""
+
+#. Label of a Data field in DocType 'Campaign Template'
+#: samaaja/samaaja/doctype/campaign_template/campaign_template.json
+msgid "Email Subject Template"
+msgstr ""
+
+#. Description of the 'User' (Data) field in DocType 'Events'
+#: samaaja/samaaja/doctype/events/events.json
+msgid "Email address of user who created this event"
+msgstr ""
+
+#. Description of the 'User' (Data) field in DocType 'User Organization'
+#: samaaja/samaaja/doctype/user_organization/user_organization.json
+msgid "Email of user belonging to the organization"
+msgstr ""
+
+#. Label of a Section Break field in DocType 'User Metadata'
+#: samaaja/samaaja/doctype/user_metadata/user_metadata.json
+msgid "Engagement Details"
+msgstr ""
+
+#: samaaja/samaaja/doctype/location/location.js:25
+msgid "Entered coordinates are different than the coordinates of location selected on the map. <br>Are you sure you want to save?"
+msgstr ""
+
+#. Name of a DocType
+#: samaaja/samaaja/doctype/event_category/event_category.json
+msgid "Event Category"
+msgstr ""
+
+#. Label of a Section Break field in DocType 'Events'
+#: samaaja/samaaja/doctype/events/events.json
+msgid "Event Info"
+msgstr ""
+
+#. Name of a DocType
+#: samaaja/samaaja/doctype/event_source/event_source.json
+msgid "Event Source"
+msgstr ""
+
+#. Name of a DocType
+#: samaaja/samaaja/doctype/event_status/event_status.json
+msgid "Event Status"
+msgstr ""
+
+#. Name of a DocType
+#: samaaja/samaaja/doctype/event_sub_category/event_sub_category.json
+msgid "Event Sub Category"
+msgstr ""
+
+#. Name of a DocType
+#: samaaja/samaaja/doctype/event_type/event_type.json
+msgid "Event Type"
+msgstr ""
+
+#. Name of a DocType
+#. Label of a Link field in DocType 'Events Review'
+#. Linked DocType in User Metadata's connections
+#: samaaja/samaaja/doctype/events/events.json
+#: samaaja/samaaja/doctype/events_review/events_review.json
+#: samaaja/samaaja/doctype/user_metadata/user_metadata.json
+msgid "Events"
+msgstr ""
+
+#. Name of a DocType
+#: samaaja/samaaja/doctype/events_review/events_review.json
+msgid "Events Review"
+msgstr ""
+
+#. Description of the 'Map action points query' (Code) field in DocType
+#. 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid ""
+"Example query-<br>\n"
+"select CAST('Fixed pothole' AS text) AS description, latitude, longitude from `tabLocation`;\n"
+"<br><br>\n"
+"Data returned from this query will be used to show points on the map "
+msgstr ""
+
+#. Label of a Data field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Expert Review label"
+msgstr ""
+
+#. Label of a Data field in DocType 'User Metadata'
+#: samaaja/samaaja/doctype/user_metadata/user_metadata.json
+msgid "Father/Spouse Name"
+msgstr ""
+
+#. Label of a Data field in DocType 'Samaaja Feature Item'
+#: samaaja/samaaja/doctype/samaaja_feature_item/samaaja_feature_item.json
+msgid "Feature Name"
+msgstr ""
+
+#. Label of a Long Text field in DocType 'Events'
+#: samaaja/samaaja/doctype/events/events.json
+msgid "Feedback"
+msgstr ""
+
+#. Label of a Section Break field in DocType 'Events'
+#: samaaja/samaaja/doctype/events/events.json
+msgid "Feedback & Closure"
+msgstr ""
+
+#. Label of a Data field in DocType 'Campaign Petition'
+#. Label of a field in the edit-your-profile Web Form
+#: samaaja/samaaja/doctype/campaign_petition/campaign_petition.json
+#: samaaja/samaaja/web_form/edit_your_profile/edit_your_profile.json
+msgid "First Name"
+msgstr ""
+
+#. Name of a DocType
+#: samaaja/samaaja/doctype/flag/flag.json
+msgid "Flag"
+msgstr ""
+
+#. Name of a DocType
+#: samaaja/samaaja/doctype/flag_status/flag_status.json
+msgid "Flag Status"
+msgstr ""
+
+#. Name of a DocType
+#: samaaja/samaaja/doctype/flag_type/flag_type.json
+msgid "Flag Type"
+msgstr ""
+
+#. Label of a Data field in DocType 'Flag'
+#: samaaja/samaaja/doctype/flag/flag.json
+msgid "Flagged by"
+msgstr ""
+
+#. Label of a Link field in DocType 'Flag'
+#. Label of a field in the flag-a-user Web Form
+#. Label of a field in the flag-an-action Web Form
+#: samaaja/samaaja/doctype/flag/flag.json
+#: samaaja/samaaja/web_form/flag_a_user/flag_a_user.json
+#: samaaja/samaaja/web_form/flag_an_action/flag_an_action.json
+msgid "Flagged doctype"
+msgstr ""
+
+#. Label of a Data field in DocType 'Flag'
+#. Label of a field in the flag-a-user Web Form
+#. Label of a field in the flag-an-action Web Form
+#: samaaja/samaaja/doctype/flag/flag.json
+#: samaaja/samaaja/web_form/flag_a_user/flag_a_user.json
+#: samaaja/samaaja/web_form/flag_an_action/flag_an_action.json
+msgid "Flagged document"
+msgstr ""
+
+#. Label of a field in the edit-your-profile Web Form
+#: samaaja/samaaja/web_form/edit_your_profile/edit_your_profile.json
+msgid "Focus Area"
+msgstr ""
+
+#. Label of a Data field in DocType 'Events'
+#: samaaja/samaaja/doctype/events/events.json
+msgid "Followup count"
+msgstr ""
+
+#. Label of a Data field in DocType 'Opportunity Application'
+#: samaaja/samaaja/doctype/opportunity_application/opportunity_application.json
+msgid "Full Name"
+msgstr ""
+
+#. Label of a field in the edit-your-profile Web Form
+#: samaaja/samaaja/web_form/edit_your_profile/edit_your_profile.json
+msgid "Gender"
+msgstr ""
+
+#. Label of a Geolocation field in DocType 'Location'
+#: samaaja/samaaja/doctype/location/location.json
+msgid "Geolocation"
+msgstr ""
+
+#. Label of a Data field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Geolocation API URL"
+msgstr ""
+
+#. Option in a Select field in the edit-your-profile Web Form
+#: samaaja/samaaja/web_form/edit_your_profile/edit_your_profile.json
+msgid "Goa"
+msgstr ""
+
+#. Label of a Section Break field in DocType 'Events'
+#: samaaja/samaaja/doctype/events/events.json
+msgid "Govt Engagement"
+msgstr ""
+
+#. Label of a Data field in DocType 'Location'
+#: samaaja/samaaja/doctype/location/location.json
+msgid "Gram Panchayat Name"
+msgstr ""
+
+#. Name of a role
+#: samaaja/samaaja/doctype/events_review/events_review.json
+#: samaaja/samaaja/doctype/user_category/user_category.json
+msgid "Guest"
+msgstr ""
+
+#. Option in a Select field in the edit-your-profile Web Form
+#: samaaja/samaaja/web_form/edit_your_profile/edit_your_profile.json
+msgid "Gujarat"
+msgstr ""
+
+#. Option in a Select field in the edit-your-profile Web Form
+#: samaaja/samaaja/web_form/edit_your_profile/edit_your_profile.json
+msgid "Haryana"
+msgstr ""
+
+#. Label of a Check field in DocType 'Events'
+#: samaaja/samaaja/doctype/events/events.json
+msgid "Has engaged government"
+msgstr ""
+
+#. Label of a Attach Image field in DocType 'Campaign Template'
+#. Label of a Attach Image field in DocType 'Opportunity Template'
+#: samaaja/samaaja/doctype/campaign_template/campaign_template.json
+#: samaaja/samaaja/doctype/opportunity_template/opportunity_template.json
+msgid "Header Logo"
+msgstr ""
+
+#. Label of a Color field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Hero background base color"
+msgstr ""
+
+#. Label of a Data field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Hero section CTA 1 label"
+msgstr ""
+
+#. Label of a Data field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Hero section CTA 1 link"
+msgstr ""
+
+#. Label of a Data field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Hero section CTA 2 label"
+msgstr ""
+
+#. Label of a Data field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Hero section CTA 2 link"
+msgstr ""
+
+#. Label of a Color field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Hero section text color"
+msgstr ""
+
+#. Label of a Check field in DocType 'Events'
+#: samaaja/samaaja/doctype/events/events.json
+msgid "Highlight"
+msgstr ""
+
+#. Label of a Data field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Highlight Menu Item Label"
+msgstr ""
+
+#. Label of a Data field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Highlight absent text"
+msgstr ""
+
+#. Label of a Data field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Highlight label"
+msgstr ""
+
+#. Option in a Select field in the edit-your-profile Web Form
+#: samaaja/samaaja/web_form/edit_your_profile/edit_your_profile.json
+msgid "Himachal Pradesh"
+msgstr ""
+
+#. Label of a Float field in DocType 'Events'
+#. Label of a Float field in DocType 'User Metadata'
+#. Label of a field in the record-actions Web Form
+#: samaaja/samaaja/doctype/events/events.json
+#: samaaja/samaaja/doctype/user_metadata/user_metadata.json
+#: samaaja/samaaja/web_form/record_actions/record_actions.json
+msgid "Hours Invested"
+msgstr ""
+
+#. Label of a Data field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Hours Invested Label"
+msgstr ""
+
+#. Label of a Data field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Hours Invested label"
+msgstr ""
+
+#. Label of a field in the edit-actions Web Form
+#: samaaja/samaaja/web_form/edit_actions/edit_actions.json
+msgid "Hours invested"
+msgstr ""
+
+#. Label of a Attach field in DocType 'Badge'
+#. Label of a Attach field in DocType 'Event Category'
+#. Label of a Attach field in DocType 'Samaaja Feature Item'
+#: samaaja/samaaja/doctype/badge/badge.json
+#: samaaja/samaaja/doctype/event_category/event_category.json
+#: samaaja/samaaja/doctype/samaaja_feature_item/samaaja_feature_item.json
+msgid "Icon"
+msgstr ""
+
+#. Description of the 'Login Required' (Check) field in DocType 'Samaaja
+#. Profile Dropdown Option'
+#: samaaja/samaaja/doctype/samaaja_profile_dropdown_option/samaaja_profile_dropdown_option.json
+msgid "If login is required to view this dropdown."
+msgstr ""
+
+#. Description of a field in the record-actions Web Form
+#: samaaja/samaaja/web_form/record_actions/record_actions.json
+msgid "If you choose to record actions anonymously, your profile will not be created."
+msgstr ""
+
+#. Label of a Tab Break field in DocType 'Events'
+#: samaaja/samaaja/doctype/events/events.json
+msgid "Impact & Feedback"
+msgstr ""
+
+#. Label of a Section Break field in DocType 'Events'
+#: samaaja/samaaja/doctype/events/events.json
+msgid "Impacted Entities"
+msgstr ""
+
+#. Label of a Data field in DocType 'Events'
+#: samaaja/samaaja/doctype/events/events.json
+msgid "Impacted Entity Count"
+msgstr ""
+
+#. Label of a Link field in DocType 'Events'
+#. Name of a DocType
+#: samaaja/samaaja/doctype/events/events.json
+#: samaaja/samaaja/doctype/impacted_entity_unit/impacted_entity_unit.json
+msgid "Impacted Entity Unit"
+msgstr ""
+
+#. Label of a field in the expert-recommendation Web Form
+#. Label of a field in the review-action Web Form
+#: samaaja/samaaja/web_form/expert_recommendation/expert_recommendation.json
+#: samaaja/samaaja/web_form/review_action/review_action.json
+msgid "Information is Correct?"
+msgstr ""
+
+#. Label of a Data field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Interested in label"
+msgstr ""
+
+#: samaaja/www/campaign/index.py:12
+msgid "Invalid Campaign"
+msgstr ""
+
+#. Label of a Check field in DocType 'User Category'
+#: samaaja/samaaja/doctype/user_category/user_category.json
+msgid "Is Active"
+msgstr ""
+
+#. Label of a Check field in DocType 'Event Category'
+#. Label of a Check field in DocType 'Event Type'
+#. Label of a Check field in DocType 'Events'
+#: samaaja/samaaja/doctype/event_category/event_category.json
+#: samaaja/samaaja/doctype/event_type/event_type.json
+#: samaaja/samaaja/doctype/events/events.json
+msgid "Is Group"
+msgstr ""
+
+#. Label of a Check field in DocType 'Campaign Recipient'
+#: samaaja/samaaja/doctype/campaign_recipient/campaign_recipient.json
+msgid "Is Selected by Default"
+msgstr ""
+
+#. Option in a Select field in the edit-your-profile Web Form
+#: samaaja/samaaja/web_form/edit_your_profile/edit_your_profile.json
+msgid "Jammu and Kashmir"
+msgstr ""
+
+#. Option in a Select field in the edit-your-profile Web Form
+#: samaaja/samaaja/web_form/edit_your_profile/edit_your_profile.json
+msgid "Jharkhand"
+msgstr ""
+
+#. Option in a Select field in the edit-your-profile Web Form
+#: samaaja/samaaja/web_form/edit_your_profile/edit_your_profile.json
+msgid "Karnataka"
+msgstr ""
+
+#. Option in a Select field in the edit-your-profile Web Form
+#: samaaja/samaaja/web_form/edit_your_profile/edit_your_profile.json
+msgid "Kerala"
+msgstr ""
+
+#. Option in a Select field in the edit-your-profile Web Form
+#: samaaja/samaaja/web_form/edit_your_profile/edit_your_profile.json
+msgid "Ladakh"
+msgstr ""
+
+#. Option in a Select field in the edit-your-profile Web Form
+#: samaaja/samaaja/web_form/edit_your_profile/edit_your_profile.json
+msgid "Lakshadweep Islands"
+msgstr ""
+
+#. Label of a Data field in DocType 'Location'
+#: samaaja/samaaja/doctype/location/location.json
+msgid "Landmark"
+msgstr ""
+
+#. Label of a Link field in DocType 'User Metadata'
+#: samaaja/samaaja/doctype/user_metadata/user_metadata.json
+msgid "Last Action"
+msgstr ""
+
+#. Label of a Link field in DocType 'User Metadata'
+#: samaaja/samaaja/doctype/user_metadata/user_metadata.json
+msgid "Last Action Category"
+msgstr ""
+
+#. Label of a Datetime field in DocType 'User Metadata'
+#: samaaja/samaaja/doctype/user_metadata/user_metadata.json
+msgid "Last Action Date"
+msgstr ""
+
+#. Label of a Link field in DocType 'User Metadata'
+#: samaaja/samaaja/doctype/user_metadata/user_metadata.json
+msgid "Last Action Sub Type"
+msgstr ""
+
+#. Label of a Link field in DocType 'User Metadata'
+#: samaaja/samaaja/doctype/user_metadata/user_metadata.json
+msgid "Last Action Type"
+msgstr ""
+
+#. Label of a Datetime field in DocType 'User Metadata'
+#: samaaja/samaaja/doctype/user_metadata/user_metadata.json
+msgid "Last Active Date Bot"
+msgstr ""
+
+#. Label of a Data field in DocType 'Campaign Petition'
+#. Label of a field in the edit-your-profile Web Form
+#: samaaja/samaaja/doctype/campaign_petition/campaign_petition.json
+#: samaaja/samaaja/web_form/edit_your_profile/edit_your_profile.json
+msgid "Last Name"
+msgstr ""
+
+#. Label of a Data field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Last activity label"
+msgstr ""
+
+#. Label of a Data field in DocType 'Events'
+#. Label of a Float field in DocType 'Location'
+#. Label of a field in the record-actions Web Form
+#: samaaja/samaaja/doctype/events/events.json
+#: samaaja/samaaja/doctype/location/location.json
+#: samaaja/samaaja/web_form/record_actions/record_actions.json
+msgid "Latitude"
+msgstr ""
+
+#. Label of a Tab Break field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Leaderboard Page"
+msgstr ""
+
+#. Label of a Section Break field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Leaderboard Setting"
+msgstr ""
+
+#. Label of a Int field in DocType 'Event Category'
+#. Label of a Int field in DocType 'Event Type'
+#. Label of a Int field in DocType 'Events'
+#: samaaja/samaaja/doctype/event_category/event_category.json
+#: samaaja/samaaja/doctype/event_type/event_type.json
+#: samaaja/samaaja/doctype/events/events.json
+msgid "Left"
+msgstr ""
+
+#. Label of a Link field in DocType 'Events'
+#. Label of a Section Break field in DocType 'Events'
+#. Name of a DocType
+#. Label of a Link field in DocType 'Samaaja Asset'
+#. Label of a Section Break field in DocType 'Samaaja Settings'
+#. Label of a Link field in DocType 'User Organization'
+#: samaaja/samaaja/doctype/events/events.json
+#: samaaja/samaaja/doctype/location/location.json
+#: samaaja/samaaja/doctype/samaaja_asset/samaaja_asset.json
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+#: samaaja/samaaja/doctype/user_organization/user_organization.json
+msgid "Location"
+msgstr ""
+
+#. Label of a Tab Break field in DocType 'Events'
+#: samaaja/samaaja/doctype/events/events.json
+msgid "Location & Authority"
+msgstr ""
+
+#. Label of a Section Break field in DocType 'Samaaja Asset'
+#: samaaja/samaaja/doctype/samaaja_asset/samaaja_asset.json
+msgid "Location & Contact"
+msgstr ""
+
+#. Label of a Tab Break field in DocType 'Samaaja Asset'
+#: samaaja/samaaja/doctype/samaaja_asset/samaaja_asset.json
+msgid "Location & Timing"
+msgstr ""
+
+#. Label of a Data field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Location Absent text"
+msgstr ""
+
+#. Label of a Check field in DocType 'Location'
+#: samaaja/samaaja/doctype/location/location.json
+msgid "Location Updated"
+msgstr ""
+
+#. Label of a Check field in DocType 'Samaaja Profile Dropdown Option'
+#: samaaja/samaaja/doctype/samaaja_profile_dropdown_option/samaaja_profile_dropdown_option.json
+msgid "Login Required"
+msgstr ""
+
+#. Label of a Data field in DocType 'Events'
+#. Label of a Float field in DocType 'Location'
+#. Label of a field in the record-actions Web Form
+#: samaaja/samaaja/doctype/events/events.json
+#: samaaja/samaaja/doctype/location/location.json
+#: samaaja/samaaja/web_form/record_actions/record_actions.json
+msgid "Longitude"
+msgstr ""
+
+#. Option in a Select field in the edit-your-profile Web Form
+#: samaaja/samaaja/web_form/edit_your_profile/edit_your_profile.json
+msgid "Madhya Pradesh"
+msgstr ""
+
+#. Option in a Select field in the edit-your-profile Web Form
+#: samaaja/samaaja/web_form/edit_your_profile/edit_your_profile.json
+msgid "Maharashtra"
+msgstr ""
+
+#. Option in a Select field in the edit-your-profile Web Form
+#: samaaja/samaaja/web_form/edit_your_profile/edit_your_profile.json
+msgid "Manipur"
+msgstr ""
+
+#. Label of a Code field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Map action points query"
+msgstr ""
+
+#. Label of a Int field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Max cities"
+msgstr ""
+
+#. Label of a Int field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Max days"
+msgstr ""
+
+#. Option in a Select field in the edit-your-profile Web Form
+#: samaaja/samaaja/web_form/edit_your_profile/edit_your_profile.json
+msgid "Meghalaya"
+msgstr ""
+
+#. Label of a Text Editor field in DocType 'Campaign Petition'
+#: samaaja/samaaja/doctype/campaign_petition/campaign_petition.json
+msgid "Message Body"
+msgstr ""
+
+#. Option in a Select field in the edit-your-profile Web Form
+#: samaaja/samaaja/web_form/edit_your_profile/edit_your_profile.json
+msgid "Mizoram"
+msgstr ""
+
+#. Label of a Data field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Most Active Cities Label"
+msgstr ""
+
+#. Label of a Data field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Most Active Cities Summary"
+msgstr ""
+
+#. Label of a Data field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Most Active Members Label"
+msgstr ""
+
+#. Label of a Data field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Most Active Members Summary"
+msgstr ""
+
+#. Option in a Select field in the edit-your-profile Web Form
+#: samaaja/samaaja/web_form/edit_your_profile/edit_your_profile.json
+msgid "Nagaland"
+msgstr ""
+
+#. Label of a Data field in DocType 'User Organization'
+#: samaaja/samaaja/doctype/user_organization/user_organization.json
+msgid "Name"
+msgstr ""
+
+#. Label of a Data field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Name of the field for location based leaderboard"
+msgstr ""
+
+#. Label of a Data field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Name of the field for picking location in user profile"
+msgstr ""
+
+#. Label of a Data field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "No Partners Text"
+msgstr ""
+
+#. Label of a Data field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "No Reviews Text"
+msgstr ""
+
+#: samaaja/www/reported-profile.html:3
+msgid "Not Found"
+msgstr ""
+
+#: samaaja/api/common.py:552
+msgid "Not Permitted"
+msgstr ""
+
+#. Option in a Select field in the edit-your-profile Web Form
+#: samaaja/samaaja/web_form/edit_your_profile/edit_your_profile.json
+msgid "Odisha"
+msgstr ""
+
+#. Label of a Link field in DocType 'Event Category'
+#. Label of a Link field in DocType 'Event Type'
+#. Label of a Link field in DocType 'Events'
+#: samaaja/samaaja/doctype/event_category/event_category.json
+#: samaaja/samaaja/doctype/event_type/event_type.json
+#: samaaja/samaaja/doctype/events/events.json
+msgid "Old Parent"
+msgstr ""
+
+#. Label of a Datetime field in DocType 'Samaaja Asset'
+#: samaaja/samaaja/doctype/samaaja_asset/samaaja_asset.json
+msgid "Open Time"
+msgstr ""
+
+#. Label of a Section Break field in DocType 'Samaaja Asset'
+#: samaaja/samaaja/doctype/samaaja_asset/samaaja_asset.json
+msgid "Operational Info"
+msgstr ""
+
+#. Label of a Link field in DocType 'Opportunity Application'
+#: samaaja/samaaja/doctype/opportunity_application/opportunity_application.json
+msgid "Opportunity"
+msgstr ""
+
+#. Name of a DocType
+#: samaaja/samaaja/doctype/opportunity_application/opportunity_application.json
+msgid "Opportunity Application"
+msgstr ""
+
+#. Label of a Text field in DocType 'Opportunity Template'
+#: samaaja/samaaja/doctype/opportunity_template/opportunity_template.json
+msgid "Opportunity Description"
+msgstr ""
+
+#. Label of a Data field in DocType 'Opportunity Template'
+#: samaaja/samaaja/doctype/opportunity_template/opportunity_template.json
+msgid "Opportunity Header"
+msgstr ""
+
+#. Name of a DocType
+#: samaaja/samaaja/doctype/opportunity_template/opportunity_template.json
+msgid "Opportunity Template"
+msgstr ""
+
+#. Label of a Link field in DocType 'Opportunity Template'
+#. Name of a DocType
+#: samaaja/samaaja/doctype/opportunity_template/opportunity_template.json
+#: samaaja/samaaja/doctype/opportunity_type/opportunity_type.json
+msgid "Opportunity Type"
+msgstr ""
+
+#. Label of a Int field in DocType 'Badge'
+#: samaaja/samaaja/doctype/badge/badge.json
+msgid "Order"
+msgstr ""
+
+#. Label of a Data field in DocType 'Events Review'
+#. Label of a Data field in DocType 'User Review'
+#: samaaja/samaaja/doctype/events_review/events_review.json
+#: samaaja/samaaja/doctype/user_review/user_review.json
+msgid "Organisation"
+msgstr ""
+
+#. Label of a Data field in DocType 'Campaign Template'
+#: samaaja/samaaja/doctype/campaign_template/campaign_template.json
+msgid "Organization Name"
+msgstr ""
+
+#. Option in a Select field in the edit-your-profile Web Form
+#: samaaja/samaaja/web_form/edit_your_profile/edit_your_profile.json
+msgid "Other Territory"
+msgstr ""
+
+#. Label of a Data field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Overview label"
+msgstr ""
+
+#. Label of a Int field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Page size"
+msgstr ""
+
+#. Label of a Link field in DocType 'Event Category'
+#: samaaja/samaaja/doctype/event_category/event_category.json
+msgid "Parent Event Category"
+msgstr ""
+
+#. Label of a Link field in DocType 'Event Type'
+#: samaaja/samaaja/doctype/event_type/event_type.json
+msgid "Parent Event Type"
+msgstr ""
+
+#. Label of a Link field in DocType 'Events'
+#: samaaja/samaaja/doctype/events/events.json
+msgid "Parent Events"
+msgstr ""
+
+#. Option for the 'Badge Type' (Select) field in DocType 'Badge'
+#: samaaja/samaaja/doctype/badge/badge.json
+msgid "Partner"
+msgstr ""
+
+#. Label of a Data field in DocType 'Campaign Partner'
+#: samaaja/samaaja/doctype/campaign_partner/campaign_partner.json
+msgid "Partner Name"
+msgstr ""
+
+#. Label of a Table field in DocType 'Campaign Template'
+#: samaaja/samaaja/doctype/campaign_template/campaign_template.json
+msgid "Partners"
+msgstr ""
+
+#. Label of a Data field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Partners/Supporters Label"
+msgstr ""
+
+#. Option for the 'Status' (Select) field in DocType 'Events Review'
+#. Option for the 'Status' (Select) field in DocType 'User Review'
+#. Option in a Select field in the review-action Web Form
+#: samaaja/samaaja/doctype/events_review/events_review.json
+#: samaaja/samaaja/doctype/user_review/user_review.json
+#: samaaja/samaaja/web_form/review_action/review_action.json
+msgid "Pending"
+msgstr ""
+
+#. Label of a Section Break field in DocType 'User Metadata'
+#: samaaja/samaaja/doctype/user_metadata/user_metadata.json
+msgid "Personal Details"
+msgstr ""
+
+#. Label of a Data field in DocType 'Samaaja Asset'
+#: samaaja/samaaja/doctype/samaaja_asset/samaaja_asset.json
+msgid "Phone Number"
+msgstr ""
+
+#. Label of a field in the edit-actions Web Form
+#: samaaja/samaaja/web_form/edit_actions/edit_actions.json
+msgid "Photo #1"
+msgstr ""
+
+#. Label of a field in the edit-actions Web Form
+#: samaaja/samaaja/web_form/edit_actions/edit_actions.json
+msgid "Photo #2"
+msgstr ""
+
+#. Label of a Data field in DocType 'Location'
+#: samaaja/samaaja/doctype/location/location.json
+msgid "Pin"
+msgstr ""
+
+#. Label of a Data field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Pin Code API Key"
+msgstr ""
+
+#. Label of a Section Break field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Pin Code Lookup"
+msgstr ""
+
+#. Label of a Data field in DocType 'Campaign Petition'
+#: samaaja/samaaja/doctype/campaign_petition/campaign_petition.json
+msgid "Pincode"
+msgstr ""
+
+#. Label of a Attach field in DocType 'Opportunity Application'
+#: samaaja/samaaja/doctype/opportunity_application/opportunity_application.json
+msgid "Pitch Document"
+msgstr ""
+
+#: samaaja/www/user-profile/index.html:446
+msgid "Please enable pop-ups"
+msgstr ""
+
+#. Option in a Select field in the edit-your-profile Web Form
+#: samaaja/samaaja/web_form/edit_your_profile/edit_your_profile.json
+msgid "Pondicherry"
+msgstr ""
+
+#. Label of a Data field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Profile Label"
+msgstr ""
+
+#. Label of a Tab Break field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Profile Page"
+msgstr ""
+
+#. Label of a field in the edit-your-profile Web Form
+#: samaaja/samaaja/web_form/edit_your_profile/edit_your_profile.json
+msgid "Profile picture"
+msgstr ""
+
+#. Label of a Check field in DocType 'Campaign Template'
+#. Label of a Check field in DocType 'Opportunity Template'
+#: samaaja/samaaja/doctype/campaign_template/campaign_template.json
+#: samaaja/samaaja/doctype/opportunity_template/opportunity_template.json
+msgid "Published"
+msgstr ""
+
+#. Label of a Data field in DocType 'Events Review'
+#. Label of a Data field in DocType 'User Review'
+#: samaaja/samaaja/doctype/events_review/events_review.json
+#: samaaja/samaaja/doctype/user_review/user_review.json
+msgid "Published on"
+msgstr ""
+
+#. Option in a Select field in the edit-your-profile Web Form
+#: samaaja/samaaja/web_form/edit_your_profile/edit_your_profile.json
+msgid "Punjab"
+msgstr ""
+
+#. Label of a Attach Image field in DocType 'User Profile QR'
+#: samaaja/samaaja/doctype/user_profile_qr/user_profile_qr.json
+msgid "QR"
+msgstr ""
+
+#. Description of the 'SQL Query' (Code) field in DocType 'Badge'
+#: samaaja/samaaja/doctype/badge/badge.json
+msgid ""
+"Query should return ID of Users to whom this badge is applicable\n"
+"<br>\n"
+"\n"
+"Example query- select name from `tabUser`; <br>\n"
+"Would assign the badge to all users\n"
+msgstr ""
+
+#. Option in a Select field in the edit-your-profile Web Form
+#: samaaja/samaaja/web_form/edit_your_profile/edit_your_profile.json
+msgid "Rajasthan"
+msgstr ""
+
+#. Label of a Rating field in DocType 'Events'
+#. Label of a Rating field in DocType 'Events Review'
+#. Label of a Rating field in DocType 'Samaaja Asset'
+#. Label of a Rating field in DocType 'User Review'
+#: samaaja/samaaja/doctype/events/events.json
+#: samaaja/samaaja/doctype/events_review/events_review.json
+#: samaaja/samaaja/doctype/samaaja_asset/samaaja_asset.json
+#: samaaja/samaaja/doctype/user_review/user_review.json
+msgid "Rating"
+msgstr ""
+
+#: samaaja/templates/includes/navbar/navbar_items.html:101
+msgid "Read Only Mode"
+msgstr ""
+
+#. Label of a Section Break field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Recent Actions"
+msgstr ""
+
+#. Label of a Table field in DocType 'Campaign Template'
+#: samaaja/samaaja/doctype/campaign_template/campaign_template.json
+msgid "Recipient List"
+msgstr ""
+
+#. Label of a Data field in DocType 'Campaign Recipient'
+#: samaaja/samaaja/doctype/campaign_recipient/campaign_recipient.json
+msgid "Recipient Name"
+msgstr ""
+
+#. Label of a field in the record-actions Web Form
+#: samaaja/samaaja/web_form/record_actions/record_actions.json
+msgid "Record Anonymously (No email required)"
+msgstr ""
+
+#. Title of the record-actions Web Form
+#: samaaja/samaaja/web_form/record_actions/record_actions.json
+msgid "Record Your Action"
+msgstr ""
+
+#. Option for the 'Status' (Select) field in DocType 'Events Review'
+#. Option for the 'Status' (Select) field in DocType 'User Review'
+#. Option in a Select field in the expert-recommendation Web Form
+#. Option in a Select field in the review-action Web Form
+#: samaaja/samaaja/doctype/events_review/events_review.json
+#: samaaja/samaaja/doctype/user_review/user_review.json
+#: samaaja/samaaja/web_form/expert_recommendation/expert_recommendation.json
+#: samaaja/samaaja/web_form/review_action/review_action.json
+msgid "Rejected"
+msgstr ""
+
+#. Button label of the flag-a-user Web Form
+#: samaaja/samaaja/web_form/flag_a_user/flag_a_user.json
+msgid "Report"
+msgstr ""
+
+#. Title of the flag-an-action Web Form
+#: samaaja/samaaja/web_form/flag_an_action/flag_an_action.json
+msgid "Report action"
+msgstr ""
+
+#. Success title of the flag-a-user Web Form
+#: samaaja/samaaja/web_form/flag_a_user/flag_a_user.json
+msgid "Report submitted"
+msgstr ""
+
+#. Title of the flag-a-user Web Form
+#: samaaja/samaaja/web_form/flag_a_user/flag_a_user.json
+#: samaaja/www/profiles/profile.html:94
+msgid "Report user"
+msgstr ""
+
+#. Label of a Section Break field in DocType 'Events'
+#: samaaja/samaaja/doctype/events/events.json
+msgid "Reporting"
+msgstr ""
+
+#. Label of a Data field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Request Review Button Label"
+msgstr ""
+
+#. Label of a Attach field in DocType 'Opportunity Application'
+#: samaaja/samaaja/doctype/opportunity_application/opportunity_application.json
+msgid "Resume"
+msgstr ""
+
+#. Label of a Data field in DocType 'Events Review'
+#. Label of a Data field in DocType 'User Review'
+#: samaaja/samaaja/doctype/events_review/events_review.json
+#: samaaja/samaaja/doctype/user_review/user_review.json
+msgid "Review Title"
+msgstr ""
+
+#. Label of a Data field in DocType 'Events Review'
+#. Label of a Data field in DocType 'User Review'
+#: samaaja/samaaja/doctype/events_review/events_review.json
+#: samaaja/samaaja/doctype/user_review/user_review.json
+msgid "Reviewer Name"
+msgstr ""
+
+#. Label of a Section Break field in DocType 'Events Review'
+#. Label of a Section Break field in DocType 'User Review'
+#: samaaja/samaaja/doctype/events_review/events_review.json
+#: samaaja/samaaja/doctype/user_review/user_review.json
+msgid "Reviews"
+msgstr ""
+
+#. Label of a Int field in DocType 'Event Category'
+#. Label of a Int field in DocType 'Event Type'
+#. Label of a Int field in DocType 'Events'
+#: samaaja/samaaja/doctype/event_category/event_category.json
+#: samaaja/samaaja/doctype/event_type/event_type.json
+#: samaaja/samaaja/doctype/events/events.json
+msgid "Right"
+msgstr ""
+
+#. Label of a Data field in DocType 'Campaign Template'
+#. Label of a Data field in DocType 'Opportunity Template'
+#. Label of a Data field in DocType 'Samaaja Profile Dropdown Option'
+#: samaaja/samaaja/doctype/campaign_template/campaign_template.json
+#: samaaja/samaaja/doctype/opportunity_template/opportunity_template.json
+#: samaaja/samaaja/doctype/samaaja_profile_dropdown_option/samaaja_profile_dropdown_option.json
+msgid "Route"
+msgstr ""
+
+#. Label of a Code field in DocType 'Badge'
+#: samaaja/samaaja/doctype/badge/badge.json
+msgid "SQL Query"
+msgstr ""
+
+#: samaaja/config/desktop.py:8
+msgid "Samaaja"
+msgstr ""
+
+#: samaaja/www/verified-cms/index.html:3
+msgid "Samaaja - Change Makers"
+msgstr ""
+
+#: samaaja/www/leaderboard/index.html:3
+msgid "Samaaja - Leaderboard"
+msgstr ""
+
+#: samaaja/www/user-profile/index.html:3
+msgid "Samaaja - User Profile"
+msgstr ""
+
+#. Name of a DocType
+#: samaaja/samaaja/doctype/samaaja_asset/samaaja_asset.json
+msgid "Samaaja Asset"
+msgstr ""
+
+#. Name of a DocType
+#: samaaja/samaaja/doctype/samaaja_asset_category/samaaja_asset_category.json
+msgid "Samaaja Asset Category"
+msgstr ""
+
+#. Name of a DocType
+#: samaaja/samaaja/doctype/samaaja_asset_status/samaaja_asset_status.json
+msgid "Samaaja Asset Status"
+msgstr ""
+
+#. Name of a DocType
+#: samaaja/samaaja/doctype/samaaja_asset_sub_category/samaaja_asset_sub_category.json
+msgid "Samaaja Asset Sub Category"
+msgstr ""
+
+#. Name of a DocType
+#: samaaja/samaaja/doctype/samaaja_asset_type/samaaja_asset_type.json
+msgid "Samaaja Asset Type"
+msgstr ""
+
+#. Name of a DocType
+#: samaaja/samaaja/doctype/samaaja_feature_item/samaaja_feature_item.json
+msgid "Samaaja Feature Item"
+msgstr ""
+
+#. Label of a Table field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Samaaja Feature List"
+msgstr ""
+
+#. Label of a Attach field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Samaaja Icon"
+msgstr ""
+
+#. Name of a DocType
+#: samaaja/samaaja/doctype/samaaja_profile_dropdown_option/samaaja_profile_dropdown_option.json
+msgid "Samaaja Profile Dropdown Option"
+msgstr ""
+
+#. Name of a DocType
+#: samaaja/samaaja/doctype/samaaja_profile_tabs/samaaja_profile_tabs.json
+msgid "Samaaja Profile Tabs"
+msgstr ""
+
+#. Name of a DocType
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Samaaja Settings"
+msgstr ""
+
+#. Button label of the edit-your-profile Web Form
+#. Button label of the expert-recommendation Web Form
+#. Button label of the flag-an-action Web Form
+#. Button label of the record-actions Web Form
+#. Button label of the request-expert-recommendations Web Form
+#: samaaja/samaaja/web_form/edit_your_profile/edit_your_profile.json
+#: samaaja/samaaja/web_form/expert_recommendation/expert_recommendation.json
+#: samaaja/samaaja/web_form/flag_an_action/flag_an_action.json
+#: samaaja/samaaja/web_form/record_actions/record_actions.json
+#: samaaja/samaaja/web_form/request_expert_recommendations/request_expert_recommendations.json
+msgid "Save"
+msgstr ""
+
+#. Description of the 'Geolocation' (Geolocation) field in DocType 'Location'
+#: samaaja/samaaja/doctype/location/location.json
+msgid "Select a <b>Point</b> on the map to autofill the latitude &amp; longitude"
+msgstr ""
+
+#. Label of a Table field in DocType 'Campaign Petition'
+#: samaaja/samaaja/doctype/campaign_petition/campaign_petition.json
+msgid "Selected Recipients"
+msgstr ""
+
+#. Label of a Check field in DocType 'Campaign Template'
+#: samaaja/samaaja/doctype/campaign_template/campaign_template.json
+msgid "Send Thank You Email"
+msgstr ""
+
+#. Label of a field in the record-actions Web Form
+#: samaaja/samaaja/web_form/record_actions/record_actions.json
+msgid "Set Location on Map (Optional)"
+msgstr ""
+
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.js:6
+msgid "Setup Samaaja"
+msgstr ""
+
+#. Label of a Text Editor field in DocType 'Opportunity Application'
+#: samaaja/samaaja/doctype/opportunity_application/opportunity_application.json
+msgid "Share with us why you would be great candidate for this opportunity?"
+msgstr ""
+
+#. Label of a Check field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Show CTA 1 on Hero Section"
+msgstr ""
+
+#. Label of a Check field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Show CTA 2 on Hero Section"
+msgstr ""
+
+#. Label of a Check field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Show Campaign Section ?"
+msgstr ""
+
+#. Label of a Check field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Show Opportunities Section ?"
+msgstr ""
+
+#. Option in a Select field in the edit-your-profile Web Form
+#: samaaja/samaaja/web_form/edit_your_profile/edit_your_profile.json
+msgid "Sikkim"
+msgstr ""
+
+#. Option for the 'Badge Type' (Select) field in DocType 'Badge'
+#: samaaja/samaaja/doctype/badge/badge.json
+msgid "Skill"
+msgstr ""
+
+#. Label of a Data field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Skill Badges label"
+msgstr ""
+
+#. Label of a Data field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Skill badges absent text"
+msgstr ""
+
+#. Label of a Data field in DocType 'Event Source'
+#. Label of a Link field in DocType 'Events'
+#: samaaja/samaaja/doctype/event_source/event_source.json
+#: samaaja/samaaja/doctype/events/events.json
+msgid "Source"
+msgstr ""
+
+#. Label of a Attach field in DocType 'Opportunity Application'
+#: samaaja/samaaja/doctype/opportunity_application/opportunity_application.json
+msgid "Speaker Presentation"
+msgstr ""
+
+#. Label of a Text field in DocType 'Opportunity Application'
+#: samaaja/samaaja/doctype/opportunity_application/opportunity_application.json
+msgid "Speaker Topic"
+msgstr ""
+
+#. Label of a Link field in DocType 'District'
+#. Label of a Link field in DocType 'Location'
+#. Name of a DocType
+#. Label of a field in the edit-your-profile Web Form
+#: samaaja/samaaja/doctype/district/district.json
+#: samaaja/samaaja/doctype/location/location.json
+#: samaaja/samaaja/doctype/state/state.json
+#: samaaja/samaaja/web_form/edit_your_profile/edit_your_profile.json
+msgid "State"
+msgstr ""
+
+#. Label of a Data field in DocType 'State'
+#: samaaja/samaaja/doctype/state/state.json
+msgid "State Code"
+msgstr ""
+
+#. Label of a Data field in DocType 'State'
+#: samaaja/samaaja/doctype/state/state.json
+msgid "State Name"
+msgstr ""
+
+#. Label of a Tab Break field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Stats Page"
+msgstr ""
+
+#. Label of a Data field in DocType 'Event Status'
+#. Label of a Link field in DocType 'Events'
+#. Label of a Select field in DocType 'Events Review'
+#. Label of a Link field in DocType 'Flag'
+#. Label of a Link field in DocType 'Samaaja Asset'
+#. Label of a Data field in DocType 'Samaaja Asset Status'
+#. Label of a Select field in DocType 'User Review'
+#: samaaja/samaaja/doctype/event_status/event_status.json
+#: samaaja/samaaja/doctype/events/events.json
+#: samaaja/samaaja/doctype/events_review/events_review.json
+#: samaaja/samaaja/doctype/flag/flag.json
+#: samaaja/samaaja/doctype/samaaja_asset/samaaja_asset.json
+#: samaaja/samaaja/doctype/samaaja_asset_status/samaaja_asset_status.json
+#: samaaja/samaaja/doctype/user_review/user_review.json
+msgid "Status"
+msgstr ""
+
+#. Label of a Data field in DocType 'Event Sub Category'
+#. Label of a Link field in DocType 'Events'
+#. Label of a Link field in DocType 'Samaaja Asset'
+#. Label of a Data field in DocType 'Samaaja Asset Sub Category'
+#. Label of a field in the record-actions Web Form
+#: samaaja/samaaja/doctype/event_sub_category/event_sub_category.json
+#: samaaja/samaaja/doctype/events/events.json
+#: samaaja/samaaja/doctype/samaaja_asset/samaaja_asset.json
+#: samaaja/samaaja/doctype/samaaja_asset_sub_category/samaaja_asset_sub_category.json
+#: samaaja/samaaja/web_form/record_actions/record_actions.json
+msgid "Sub Category"
+msgstr ""
+
+#. Label of a Link field in DocType 'Events'
+#. Label of a field in the record-actions Web Form
+#: samaaja/samaaja/doctype/events/events.json
+#: samaaja/samaaja/web_form/record_actions/record_actions.json
+msgid "Sub Type"
+msgstr ""
+
+#. Label of a Data field in DocType 'Campaign Petition'
+#. Label of a Data field in DocType 'Campaign Template'
+#: samaaja/samaaja/doctype/campaign_petition/campaign_petition.json
+#: samaaja/samaaja/doctype/campaign_template/campaign_template.json
+msgid "Subject"
+msgstr ""
+
+#. Button label of the review-action Web Form
+#: samaaja/samaaja/web_form/review_action/review_action.json
+msgid "Submit Review"
+msgstr ""
+
+#. Button label of the request-review Web Form
+#: samaaja/samaaja/web_form/request_review/request_review.json
+msgid "Submit for Review"
+msgstr ""
+
+#. Label of a Data field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Summary"
+msgstr ""
+
+#. Name of a role
+#: samaaja/samaaja/doctype/badge/badge.json
+#: samaaja/samaaja/doctype/campaign_petition/campaign_petition.json
+#: samaaja/samaaja/doctype/campaign_template/campaign_template.json
+#: samaaja/samaaja/doctype/district/district.json
+#: samaaja/samaaja/doctype/event_category/event_category.json
+#: samaaja/samaaja/doctype/event_source/event_source.json
+#: samaaja/samaaja/doctype/event_status/event_status.json
+#: samaaja/samaaja/doctype/event_sub_category/event_sub_category.json
+#: samaaja/samaaja/doctype/event_type/event_type.json
+#: samaaja/samaaja/doctype/events/events.json
+#: samaaja/samaaja/doctype/events_review/events_review.json
+#: samaaja/samaaja/doctype/flag/flag.json
+#: samaaja/samaaja/doctype/flag_status/flag_status.json
+#: samaaja/samaaja/doctype/flag_type/flag_type.json
+#: samaaja/samaaja/doctype/impacted_entity_unit/impacted_entity_unit.json
+#: samaaja/samaaja/doctype/location/location.json
+#: samaaja/samaaja/doctype/opportunity_application/opportunity_application.json
+#: samaaja/samaaja/doctype/opportunity_template/opportunity_template.json
+#: samaaja/samaaja/doctype/opportunity_type/opportunity_type.json
+#: samaaja/samaaja/doctype/samaaja_asset/samaaja_asset.json
+#: samaaja/samaaja/doctype/samaaja_asset_category/samaaja_asset_category.json
+#: samaaja/samaaja/doctype/samaaja_asset_status/samaaja_asset_status.json
+#: samaaja/samaaja/doctype/samaaja_asset_sub_category/samaaja_asset_sub_category.json
+#: samaaja/samaaja/doctype/samaaja_asset_type/samaaja_asset_type.json
+#: samaaja/samaaja/doctype/samaaja_profile_tabs/samaaja_profile_tabs.json
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+#: samaaja/samaaja/doctype/state/state.json
+#: samaaja/samaaja/doctype/user_category/user_category.json
+#: samaaja/samaaja/doctype/user_metadata/user_metadata.json
+#: samaaja/samaaja/doctype/user_organization/user_organization.json
+#: samaaja/samaaja/doctype/user_profile_qr/user_profile_qr.json
+#: samaaja/samaaja/doctype/user_review/user_review.json
+msgid "System Manager"
+msgstr ""
+
+#. Label of a Int field in DocType 'Samaaja Profile Tabs'
+#: samaaja/samaaja/doctype/samaaja_profile_tabs/samaaja_profile_tabs.json
+msgid "Tab Order"
+msgstr ""
+
+#. Description of the 'Tab Order' (Int) field in DocType 'Samaaja Profile Tabs'
+#: samaaja/samaaja/doctype/samaaja_profile_tabs/samaaja_profile_tabs.json
+msgid "Tabs are ordered by this value"
+msgstr ""
+
+#. Label of a Data field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Tagline"
+msgstr ""
+
+#. Label of a Data field in DocType 'Location'
+#: samaaja/samaaja/doctype/location/location.json
+msgid "Taluka"
+msgstr ""
+
+#. Option in a Select field in the edit-your-profile Web Form
+#: samaaja/samaaja/web_form/edit_your_profile/edit_your_profile.json
+msgid "Tamil Nadu"
+msgstr ""
+
+#. Label of a Select field in DocType 'Samaaja Profile Dropdown Option'
+#: samaaja/samaaja/doctype/samaaja_profile_dropdown_option/samaaja_profile_dropdown_option.json
+msgid "Target"
+msgstr ""
+
+#. Option in a Select field in the edit-your-profile Web Form
+#: samaaja/samaaja/web_form/edit_your_profile/edit_your_profile.json
+msgid "Telangana"
+msgstr ""
+
+#. Label of a Section Break field in DocType 'Campaign Template'
+#: samaaja/samaaja/doctype/campaign_template/campaign_template.json
+msgid "Thank You Email"
+msgstr ""
+
+#. Success message of the flag-a-user Web Form
+#: samaaja/samaaja/web_form/flag_a_user/flag_a_user.json
+msgid ""
+"Thank you for submitting the report,\n"
+"Your report is under review."
+msgstr ""
+
+#: samaaja/templates/includes/navbar/navbar_items.html:99
+msgid "This site is in read only mode, full functionality will be restored soon."
+msgstr ""
+
+#. Label of a Data field in DocType 'Badge'
+#. Label of a Data field in DocType 'Campaign Template'
+#. Label of a Data field in DocType 'Events'
+#. Label of a Data field in DocType 'Flag'
+#. Label of a Data field in DocType 'Flag Status'
+#. Label of a Data field in DocType 'Samaaja Asset'
+#. Label of a Data field in DocType 'Samaaja Profile Dropdown Option'
+#. Label of a Data field in DocType 'Samaaja Profile Tabs'
+#. Label of a Small Text field in DocType 'Samaaja Settings'
+#. Label of a field in the edit-actions Web Form
+#. Label of a field in the flag-a-user Web Form
+#. Label of a field in the flag-an-action Web Form
+#. Label of a field in the record-actions Web Form
+#: samaaja/samaaja/doctype/badge/badge.json
+#: samaaja/samaaja/doctype/campaign_template/campaign_template.json
+#: samaaja/samaaja/doctype/events/events.json
+#: samaaja/samaaja/doctype/flag/flag.json
+#: samaaja/samaaja/doctype/flag_status/flag_status.json
+#: samaaja/samaaja/doctype/samaaja_asset/samaaja_asset.json
+#: samaaja/samaaja/doctype/samaaja_profile_dropdown_option/samaaja_profile_dropdown_option.json
+#: samaaja/samaaja/doctype/samaaja_profile_tabs/samaaja_profile_tabs.json
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+#: samaaja/samaaja/web_form/edit_actions/edit_actions.json
+#: samaaja/samaaja/web_form/flag_a_user/flag_a_user.json
+#: samaaja/samaaja/web_form/flag_an_action/flag_an_action.json
+#: samaaja/samaaja/web_form/record_actions/record_actions.json
+msgid "Title"
+msgstr ""
+
+#. Label of a Section Break field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Top cities setting"
+msgstr ""
+
+#. Label of a Data field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Total Members Label"
+msgstr ""
+
+#. Label of a Data field in DocType 'Campaign Petition'
+#: samaaja/samaaja/doctype/campaign_petition/campaign_petition.json
+msgid "Town"
+msgstr ""
+
+#. Option in a Select field in the edit-your-profile Web Form
+#: samaaja/samaaja/web_form/edit_your_profile/edit_your_profile.json
+msgid "Tripura"
+msgstr ""
+
+#. Label of a Data field in DocType 'Event Type'
+#. Label of a Link field in DocType 'Events'
+#. Label of a Link field in DocType 'Flag'
+#. Label of a Data field in DocType 'Opportunity Type'
+#. Label of a Link field in DocType 'Samaaja Asset'
+#. Label of a Data field in DocType 'Samaaja Asset Type'
+#. Label of a field in the flag-a-user Web Form
+#. Label of a field in the flag-an-action Web Form
+#. Label of a field in the record-actions Web Form
+#: samaaja/samaaja/doctype/event_type/event_type.json
+#: samaaja/samaaja/doctype/events/events.json
+#: samaaja/samaaja/doctype/flag/flag.json
+#: samaaja/samaaja/doctype/opportunity_type/opportunity_type.json
+#: samaaja/samaaja/doctype/samaaja_asset/samaaja_asset.json
+#: samaaja/samaaja/doctype/samaaja_asset_type/samaaja_asset_type.json
+#: samaaja/samaaja/web_form/flag_a_user/flag_a_user.json
+#: samaaja/samaaja/web_form/flag_an_action/flag_an_action.json
+#: samaaja/samaaja/web_form/record_actions/record_actions.json
+msgid "Type"
+msgstr ""
+
+#. Label of a Data field in DocType 'Events'
+#. Label of a Data field in DocType 'Samaaja Asset'
+#: samaaja/samaaja/doctype/events/events.json
+#: samaaja/samaaja/doctype/samaaja_asset/samaaja_asset.json
+msgid "URL"
+msgstr ""
+
+#. Label of a Data field in DocType 'Impacted Entity Unit'
+#: samaaja/samaaja/doctype/impacted_entity_unit/impacted_entity_unit.json
+msgid "Unit"
+msgstr ""
+
+#. Button label of the edit-actions Web Form
+#: samaaja/samaaja/web_form/edit_actions/edit_actions.json
+msgid "Update"
+msgstr ""
+
+#. Label of a Table field in DocType 'Campaign Template'
+#: samaaja/samaaja/doctype/campaign_template/campaign_template.json
+msgid "Updates"
+msgstr ""
+
+#. Label of a field in the record-actions Web Form
+#: samaaja/samaaja/web_form/record_actions/record_actions.json
+msgid "Upload #1"
+msgstr ""
+
+#. Label of a field in the record-actions Web Form
+#: samaaja/samaaja/web_form/record_actions/record_actions.json
+msgid "Upload #2"
+msgstr ""
+
+#. Label of a field in the record-actions Web Form
+#: samaaja/samaaja/web_form/record_actions/record_actions.json
+msgid "Upload Photos / Documents"
+msgstr ""
+
+#. Label of a Data field in DocType 'Events'
+#. Label of a Data field in DocType 'Samaaja Asset'
+#. Label of a Data field in DocType 'User badge'
+#. Label of a Link field in DocType 'User Metadata'
+#. Label of a Data field in DocType 'User Organization'
+#. Label of a Link field in DocType 'User Profile QR'
+#. Label of a Link field in DocType 'User Review'
+#. Label of a field in the request-expert-recommendations Web Form
+#: samaaja/samaaja/doctype/events/events.json
+#: samaaja/samaaja/doctype/samaaja_asset/samaaja_asset.json
+#: samaaja/samaaja/doctype/user_badge/user_badge.json
+#: samaaja/samaaja/doctype/user_metadata/user_metadata.json
+#: samaaja/samaaja/doctype/user_organization/user_organization.json
+#: samaaja/samaaja/doctype/user_profile_qr/user_profile_qr.json
+#: samaaja/samaaja/doctype/user_review/user_review.json
+#: samaaja/samaaja/web_form/request_expert_recommendations/request_expert_recommendations.json
+msgid "User"
+msgstr ""
+
+#. Name of a DocType
+#. Label of a Link field in DocType 'User Metadata'
+#: samaaja/samaaja/doctype/user_category/user_category.json
+#: samaaja/samaaja/doctype/user_metadata/user_metadata.json
+msgid "User Category"
+msgstr ""
+
+#. Label of a Section Break field in DocType 'Samaaja Asset'
+#: samaaja/samaaja/doctype/samaaja_asset/samaaja_asset.json
+msgid "User Details"
+msgstr ""
+
+#. Label of a Link field in DocType 'User Metadata'
+#: samaaja/samaaja/doctype/user_metadata/user_metadata.json
+msgid "User Location"
+msgstr ""
+
+#. Name of a DocType
+#: samaaja/samaaja/doctype/user_metadata/user_metadata.json
+msgid "User Metadata"
+msgstr ""
+
+#. Name of a DocType
+#. Label of a field in the edit-your-profile Web Form
+#: samaaja/samaaja/doctype/user_organization/user_organization.json
+#: samaaja/samaaja/web_form/edit_your_profile/edit_your_profile.json
+msgid "User Organization"
+msgstr ""
+
+#. Name of a DocType
+#: samaaja/samaaja/doctype/user_profile_qr/user_profile_qr.json
+msgid "User Profile QR"
+msgstr ""
+
+#. Name of a DocType
+#: samaaja/samaaja/doctype/user_review/user_review.json
+msgid "User Review"
+msgstr ""
+
+#. Name of a DocType
+#: samaaja/samaaja/doctype/user_badge/user_badge.json
+msgid "User badge"
+msgstr ""
+
+#. Description of the 'User' (Data) field in DocType 'Samaaja Asset'
+#: samaaja/samaaja/doctype/samaaja_asset/samaaja_asset.json
+msgid "User email reporting the asset"
+msgstr ""
+
+#. Option in a Select field in the edit-your-profile Web Form
+#: samaaja/samaaja/web_form/edit_your_profile/edit_your_profile.json
+msgid "Uttar Pradesh"
+msgstr ""
+
+#. Option in a Select field in the edit-your-profile Web Form
+#: samaaja/samaaja/web_form/edit_your_profile/edit_your_profile.json
+msgid "Uttarakhand"
+msgstr ""
+
+#. Label of a Data field in DocType 'Events'
+#: samaaja/samaaja/doctype/events/events.json
+msgid "Verified By"
+msgstr ""
+
+#. Label of a Data field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Verified By label"
+msgstr ""
+
+#. Label of a Data field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Verified Change Maker label"
+msgstr ""
+
+#. Label of a Data field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Verified Members Label"
+msgstr ""
+
+#. Label of a Data field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "Verified Members Summary"
+msgstr ""
+
+#. Label of a Data field in DocType 'Location'
+#: samaaja/samaaja/doctype/location/location.json
+msgid "Village name"
+msgstr ""
+
+#. Label of a Data field in DocType 'Location'
+#: samaaja/samaaja/doctype/location/location.json
+msgid "Ward/Block Name"
+msgstr ""
+
+#. Option in a Select field in the edit-your-profile Web Form
+#: samaaja/samaaja/web_form/edit_your_profile/edit_your_profile.json
+msgid "West Bengal"
+msgstr ""
+
+#. Label of a Text field in DocType 'Opportunity Application'
+#: samaaja/samaaja/doctype/opportunity_application/opportunity_application.json
+msgid "What Help do you need from Mentor"
+msgstr ""
+
+#. Label of a Data field in DocType 'User Metadata'
+#: samaaja/samaaja/doctype/user_metadata/user_metadata.json
+msgid "WhatsApp ID"
+msgstr ""
+
+#. Description of the 'Title' (Small Text) field in DocType 'Samaaja Settings'
+#: samaaja/samaaja/doctype/samaaja_settings/samaaja_settings.json
+msgid "You can write HTML here."
+msgstr ""
+
+#. Label of a field in the record-actions Web Form
+#: samaaja/samaaja/web_form/record_actions/record_actions.json
+msgid "Your Details"
+msgstr ""
+
+#. Label of a field in the record-actions Web Form
+#: samaaja/samaaja/web_form/record_actions/record_actions.json
+msgid "Your Email"
+msgstr ""
+
+#. Success message of the record-actions Web Form
+#: samaaja/samaaja/web_form/record_actions/record_actions.json
+msgid "Your action has been recorded!"
+msgstr ""
+
+#. Success message of the edit-actions Web Form
+#: samaaja/samaaja/web_form/edit_actions/edit_actions.json
+msgid "Your action has been updated"
+msgstr ""
+
+#. Success message of the edit-your-profile Web Form
+#: samaaja/samaaja/web_form/edit_your_profile/edit_your_profile.json
+msgid "Your profile has been updated."
+msgstr ""
+
+#. Option for the 'Target' (Select) field in DocType 'Samaaja Profile Dropdown
+#. Option'
+#: samaaja/samaaja/doctype/samaaja_profile_dropdown_option/samaaja_profile_dropdown_option.json
+msgid "_blank"
+msgstr ""
+
+#. Option for the 'Target' (Select) field in DocType 'Samaaja Profile Dropdown
+#. Option'
+#: samaaja/samaaja/doctype/samaaja_profile_dropdown_option/samaaja_profile_dropdown_option.json
+msgid "_self"
+msgstr ""
+
+#. Label of a Attach Image field in DocType 'Campaign Partner'
+#: samaaja/samaaja/doctype/campaign_partner/campaign_partner.json
+msgid "logo"
+msgstr ""
+
+#. Label of a Data field in DocType 'Flag Type'
+#: samaaja/samaaja/doctype/flag_type/flag_type.json
+msgid "title"
+msgstr ""
+
+#. Label of a field in the expert-recommendation Web Form
+#. Label of a field in the request-expert-recommendations Web Form
+#. Label of a field in the request-review Web Form
+#. Label of a field in the review-action Web Form
+#: samaaja/samaaja/web_form/expert_recommendation/expert_recommendation.json
+#: samaaja/samaaja/web_form/request_expert_recommendations/request_expert_recommendations.json
+#: samaaja/samaaja/web_form/request_review/request_review.json
+#: samaaja/samaaja/web_form/review_action/review_action.json
+msgid "ईमेल"
+msgstr ""
+
+#. Title of the review-action Web Form
+#: samaaja/samaaja/web_form/review_action/review_action.json
+msgid "कार्य समीक्षा "
+msgstr ""
+
+#. Title of the request-review Web Form
+#: samaaja/samaaja/web_form/request_review/request_review.json
+msgid "कार्य समीक्षा अनुरोध"
+msgstr ""
+
+#. Title of the request-expert-recommendations Web Form
+#: samaaja/samaaja/web_form/request_expert_recommendations/request_expert_recommendations.json
+msgid "नया विशेषज्ञ अनुरोध"
+msgstr ""
+
+#. Label of a field in the expert-recommendation Web Form
+#. Label of a field in the request-expert-recommendations Web Form
+#. Label of a field in the request-review Web Form
+#. Label of a field in the review-action Web Form
+#: samaaja/samaaja/web_form/expert_recommendation/expert_recommendation.json
+#: samaaja/samaaja/web_form/request_expert_recommendations/request_expert_recommendations.json
+#: samaaja/samaaja/web_form/request_review/request_review.json
+#: samaaja/samaaja/web_form/review_action/review_action.json
+msgid "पद"
+msgstr ""
+
+#. Title of the expert-recommendation Web Form
+#: samaaja/samaaja/web_form/expert_recommendation/expert_recommendation.json
+msgid "विशेषज्ञ सिफारिश"
+msgstr ""
+
+#. Label of a field in the expert-recommendation Web Form
+#. Label of a field in the request-expert-recommendations Web Form
+#. Label of a field in the request-review Web Form
+#. Label of a field in the review-action Web Form
+#: samaaja/samaaja/web_form/expert_recommendation/expert_recommendation.json
+#: samaaja/samaaja/web_form/request_expert_recommendations/request_expert_recommendations.json
+#: samaaja/samaaja/web_form/request_review/request_review.json
+#: samaaja/samaaja/web_form/review_action/review_action.json
+msgid "संगठन"
+msgstr ""
+
+#. Label of a field in the expert-recommendation Web Form
+#. Label of a field in the request-expert-recommendations Web Form
+#. Label of a field in the request-review Web Form
+#. Label of a field in the review-action Web Form
+#: samaaja/samaaja/web_form/expert_recommendation/expert_recommendation.json
+#: samaaja/samaaja/web_form/request_expert_recommendations/request_expert_recommendations.json
+#: samaaja/samaaja/web_form/request_review/request_review.json
+#: samaaja/samaaja/web_form/review_action/review_action.json
+msgid "समीक्षक का नाम"
+msgstr ""
+

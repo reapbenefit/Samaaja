@@ -56,6 +56,21 @@ def get_context(context):
 		context.current_user_is_profile_verified = True
 	context.user_metadata = frappe.get_doc("User Metadata", context.current_user.name) if frappe.db.exists("User Metadata", context.current_user.name) else None
 
+	user_profile_location_field = frappe.db.get_single_value("Samaaja Settings", "user_profile_location_field") or "city"
+	
+	if context.user_metadata and context.user_metadata.location:
+		# Use db lookups to avoid permission errors for Guest on public pages
+		if user_profile_location_field == "district":
+			district = frappe.db.get_value("Location", context.user_metadata.location, "district")
+			context.current_user.location = frappe.db.get_value("District", district, "district_name") if district else ""
+		else:
+			context.current_user.location = frappe.db.get_value(
+				"Location",
+				context.user_metadata.location,
+				user_profile_location_field,
+			)
+		context.current_user.location = context.current_user.location or ""
+
 	# All actions
 	context.current_user.actions = frappe.db.sql("""
 		SELECT e.name AS event_id, e.title, e.type, e.category, e.description, e.location,
@@ -113,23 +128,38 @@ def get_context(context):
 		fields=["review_title", "reviewer_name", "designation", "comment", "organisation"]
 	)
 
-	# Superheroes (top categories)
-	superheroes = []
-	if context.current_user.interest:
-		interests = [i.strip() for i in context.current_user.interest.split(",")]
-
-		for interest in interests:
-			cat_doc = frappe.get_doc('Event Category', interest)
-			if cat_doc:
-				superheroes.append({
-					'name': interest,
-					'image': cat_doc.icon
-				})
-			else:
-				superheroes.append({
-						'name': interest,
-					})
-
-		context.current_user.superheroes = superheroes
-
-	# return context
+	samaaja_settings = frappe.get_single("Samaaja Settings")
+	
+	context.current_user.verified_change_maker_label = samaaja_settings.verified_change_maker_label
+	context.current_user.last_activity_label = samaaja_settings.last_activity_label
+	context.current_user.hours_label = samaaja_settings.hours_label
+	context.current_user.actions_label = samaaja_settings.actions_label
+	context.current_user.bio_label = samaaja_settings.bio_label
+	context.current_user.skill_badges_label = samaaja_settings.skill_badges_label
+	context.current_user.overview_label = samaaja_settings.overview_label
+	context.current_user.highlight_label = samaaja_settings.highlight_label
+	context.current_user.interested_in_label = samaaja_settings.interested_in_label
+	context.current_user.expert_review_label = samaaja_settings.expert_review_label
+	context.current_user.action_label = samaaja_settings.action_label
+	context.current_user.no_bio_text = samaaja_settings.no_bio_text
+	context.current_user.location_absent_text = samaaja_settings.location_absent_text
+	context.current_user.highlight_absent_text = samaaja_settings.highlight_absent_text
+	context.current_user.verified_by_label = samaaja_settings.verified_by_label
+	context.current_user.skill_badges_absent_text = samaaja_settings.skill_badges_absent_text
+	context.current_user.action_absent_text = samaaja_settings.actions_absent_text
+	context.current_user.profile_label = samaaja_settings.profile_label
+	
+	# Button labels
+	context.current_user.add_action_label = samaaja_settings.add_action_label
+	context.current_user.ask_for_help_label = samaaja_settings.ask_for_help_label
+	context.current_user.request_review_label = samaaja_settings.request_review_label
+	context.current_user.download_profile_label = samaaja_settings.download_profile_label
+	context.current_user.highlight_label_menu = samaaja_settings.highlight_label_menu
+	context.current_user.edit_label = samaaja_settings.edit_label
+	context.current_user.delete_label = samaaja_settings.delete_label
+	context.current_user.delete_confirm_text = samaaja_settings.delete_confirm_text
+	
+	# Review and partner labels
+	context.current_user.no_reviews_text = samaaja_settings.no_reviews_text
+	context.current_user.partners_supporters_label = samaaja_settings.partners_supporters_label
+	context.current_user.no_partners_text = samaaja_settings.no_partners_text

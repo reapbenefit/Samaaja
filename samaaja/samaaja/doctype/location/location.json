@@ -13,14 +13,13 @@
   "address",
   "landmark",
   "pin",
-  "city",
   "state",
   "district",
+  "city",
+  "taluka",
   "ward_name",
   "village_name",
-  "taluka",
   "grama_panchayath",
-  "taluk_panchayath",
   "location_updated"
  ],
  "fields": [
@@ -48,8 +47,9 @@
   },
   {
    "fieldname": "district",
-   "fieldtype": "Data",
-   "label": "District"
+   "fieldtype": "Link",
+   "label": "District",
+   "options": "District"
   },
   {
    "fieldname": "village_name",
@@ -64,12 +64,7 @@
   {
    "fieldname": "grama_panchayath",
    "fieldtype": "Data",
-   "label": "Gram Panchayath"
-  },
-  {
-   "fieldname": "taluk_panchayath",
-   "fieldtype": "Data",
-   "label": "Taluka Panchayath"
+   "label": "Gram Panchayat Name"
   },
   {
    "fieldname": "pin",
@@ -83,9 +78,9 @@
   },
   {
    "fieldname": "state",
-   "fieldtype": "Select",
+   "fieldtype": "Link",
    "label": "State",
-   "options": "\nAndaman and Nicobar Islands\nAndhra Pradesh\nArunachal Pradesh\nAssam\nBihar\nChandigarh\nChhattisgarh\nDadra and Nagar Haveli and Daman and Diu\nDelhi\nGoa\nGujarat\nHaryana\nHimachal Pradesh\nJammu and Kashmir\nJharkhand\nKarnataka\nKerala\nLadakh\nLakshadweep Islands\nMadhya Pradesh\nMaharashtra\nManipur\nMeghalaya\nMizoram\nNagaland\nOdisha\nOther Territory\nPondicherry\nPunjab\nRajasthan\nSikkim\nTamil Nadu\nTelangana\nTripura\nUttar Pradesh\nUttarakhand\nWest Bengal"
+   "options": "State"
   },
   {
    "description": "Select a <b>Point</b> on the map to autofill the latitude &amp; longitude",
@@ -96,7 +91,7 @@
   {
    "fieldname": "ward_name",
    "fieldtype": "Data",
-   "label": "Ward name"
+   "label": "Ward/Block Name"
   },
   {
    "default": "0",
@@ -107,7 +102,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-01-05 11:02:51.345494",
+ "modified": "2026-01-07 12:43:26.579042",
  "modified_by": "Administrator",
  "module": "Samaaja",
  "name": "Location",

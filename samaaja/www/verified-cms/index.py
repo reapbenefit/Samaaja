@@ -1,7 +1,7 @@
 import frappe
 
 from samaaja.api.leaderboard import get_active_cm_count, get_total_invested_hours
-from samaaja.utils import human_format
+from samaaja.utils.utils import human_format
 
 
 sitemap = 1

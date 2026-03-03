@@ -9,13 +9,17 @@
  "field_order": [
   "leaderboard_tab",
   "samaaja_icon",
+  "hero_bg_color",
+  "hero_text_color",
   "tagline",
   "blurb",
   "summary",
-  "join_conversations_title",
-  "join_conversations_link",
-  "join_forum_title",
-  "join_forum_link",
+  "show_cta_1",
+  "show_cta_2",
+  "cta1_label",
+  "cta1_link",
+  "cta2_label",
+  "cta2_link",
   "samaaja_feature_list",
   "total_members_label",
   "actions_taken_label",
@@ -29,18 +33,39 @@
   "section_break_zzox",
   "show_opportunities_section_",
   "show_campaign_section_",
+  "section_break_pfyo",
+  "location_field_name",
+  "user_profile_location_field",
   "profile_tab",
-  "badge_section_html",
-  "profile_page_section",
-  "default_profile_banner",
-  "hide_default_tabs",
-  "dropdown_options",
-  "profile_banner_section_section",
-  "override_profile_banner",
-  "profile_banner_html",
-  "badge_section_section",
-  "override_badge_section",
-  "badge_section_title",
+  "verified_change_maker_label",
+  "location_absent_text",
+  "last_activity_label",
+  "hours_label",
+  "actions_label",
+  "bio_label",
+  "no_bio_text",
+  "skill_badges_label",
+  "overview_label",
+  "highlight_label",
+  "interested_in_label",
+  "expert_review_label",
+  "action_label",
+  "highlight_absent_text",
+  "actions_absent_text",
+  "verified_by_label",
+  "skill_badges_absent_text",
+  "profile_label",
+  "add_action_label",
+  "ask_for_help_label",
+  "request_review_label",
+  "download_profile_label",
+  "highlight_label_menu",
+  "edit_label",
+  "delete_label",
+  "delete_confirm_text",
+  "no_reviews_text",
+  "partners_supporters_label",
+  "no_partners_text",
   "tab_break_ze49d",
   "location_section",
   "geolocation_api_url",
@@ -61,79 +86,9 @@
  "fields": [
   {
    "collapsible": 1,
-   "fieldname": "profile_page_section",
-   "fieldtype": "Section Break",
-   "label": "Profile page"
-  },
-  {
-   "depends_on": "eval:doc.override_badge_section == 0",
-   "fieldname": "badge_section_title",
-   "fieldtype": "Data",
-   "label": "Badge section title",
-   "width": "100"
-  },
-  {
-   "fieldname": "dropdown_options",
-   "fieldtype": "Table",
-   "label": "Profile dropdown options",
-   "options": "Samaaja Profile Dropdown Option"
-  },
-  {
-   "default": "0",
-   "fieldname": "hide_default_tabs",
-   "fieldtype": "Check",
-   "label": "Hide default tabs"
-  },
-  {
-   "collapsible": 1,
    "fieldname": "location_section",
    "fieldtype": "Section Break",
    "label": "Location"
-  },
-  {
-   "collapsible": 1,
-   "fieldname": "badge_section_section",
-   "fieldtype": "Section Break",
-   "label": "Profile badge section"
-  },
-  {
-   "depends_on": "eval:doc.override_badge_section == 1",
-   "description": "Use {{current_user}} to access the User document.\nExample use case-\n{{current_user.username}} has following badges\n",
-   "fieldname": "badge_section_html",
-   "fieldtype": "Code",
-   "label": "Badge section HTML",
-   "options": "HTML"
-  },
-  {
-   "default": "0",
-   "fieldname": "override_badge_section",
-   "fieldtype": "Check",
-   "label": "Override badge section"
-  },
-  {
-   "collapsible": 1,
-   "fieldname": "profile_banner_section_section",
-   "fieldtype": "Section Break",
-   "label": "Profile banner section"
-  },
-  {
-   "default": "0",
-   "fieldname": "override_profile_banner",
-   "fieldtype": "Check",
-   "label": "Override profile banner section"
-  },
-  {
-   "depends_on": "eval:doc.override_profile_banner == 1",
-   "description": "Use {{current_user}} to access the User document.\nExample use case-\n{{current_user.username}} has following badges\n",
-   "fieldname": "profile_banner_html",
-   "fieldtype": "Code",
-   "label": "Profile banner HTML",
-   "options": "HTML"
-  },
-  {
-   "fieldname": "default_profile_banner",
-   "fieldtype": "Attach Image",
-   "label": "Default profile banner"
   },
   {
    "fieldname": "geolocation_api_url",
@@ -230,21 +185,6 @@
    "label": "Leaderboard Page"
   },
   {
-   "fieldname": "tagline",
-   "fieldtype": "Data",
-   "label": "Tagline"
-  },
-  {
-   "fieldname": "blurb",
-   "fieldtype": "Data",
-   "label": "Blurb"
-  },
-  {
-   "fieldname": "summary",
-   "fieldtype": "Data",
-   "label": "Summary"
-  },
-  {
    "fieldname": "samaaja_feature_list",
    "fieldtype": "Table",
    "label": "Samaaja Feature List",
@@ -301,26 +241,6 @@
    "label": "Most Active Cities Summary"
   },
   {
-   "fieldname": "join_conversations_title",
-   "fieldtype": "Data",
-   "label": "Join Samaaja Conversations Title"
-  },
-  {
-   "fieldname": "join_conversations_link",
-   "fieldtype": "Data",
-   "label": "Join Samaaja Conversations Link"
-  },
-  {
-   "fieldname": "join_forum_title",
-   "fieldtype": "Data",
-   "label": "Join Samaaja Forum Label"
-  },
-  {
-   "fieldname": "join_forum_link",
-   "fieldtype": "Data",
-   "label": "Join Samaaja Forum Link"
-  },
-  {
    "default": "1",
    "fieldname": "show_opportunities_section_",
    "fieldtype": "Check",
@@ -335,12 +255,259 @@
    "fieldname": "show_campaign_section_",
    "fieldtype": "Check",
    "label": "Show Campaign Section ?"
+  },
+  {
+   "fieldname": "hero_text_color",
+   "fieldtype": "Color",
+   "label": "Hero section text color"
+  },
+  {
+   "fieldname": "hero_bg_color",
+   "fieldtype": "Color",
+   "label": "Hero background base color"
+  },
+  {
+   "fieldname": "tagline",
+   "fieldtype": "Data",
+   "label": "Tagline"
+  },
+  {
+   "fieldname": "blurb",
+   "fieldtype": "Data",
+   "label": "Blurb"
+  },
+  {
+   "fieldname": "summary",
+   "fieldtype": "Data",
+   "label": "Summary"
+  },
+  {
+   "default": "1",
+   "fieldname": "show_cta_1",
+   "fieldtype": "Check",
+   "label": "Show CTA 1 on Hero Section"
+  },
+  {
+   "default": "1",
+   "fieldname": "show_cta_2",
+   "fieldtype": "Check",
+   "label": "Show CTA 2 on Hero Section"
+  },
+  {
+   "fieldname": "cta1_label",
+   "fieldtype": "Data",
+   "label": "Hero section CTA 1 label"
+  },
+  {
+   "fieldname": "cta1_link",
+   "fieldtype": "Data",
+   "label": "Hero section CTA 1 link"
+  },
+  {
+   "fieldname": "cta2_label",
+   "fieldtype": "Data",
+   "label": "Hero section CTA 2 label"
+  },
+  {
+   "fieldname": "cta2_link",
+   "fieldtype": "Data",
+   "label": "Hero section CTA 2 link"
+  },
+  {
+   "fieldname": "section_break_pfyo",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "District",
+   "fieldname": "location_field_name",
+   "fieldtype": "Data",
+   "label": "Name of the field for location based leaderboard"
+  },
+  {
+   "default": "district",
+   "fieldname": "user_profile_location_field",
+   "fieldtype": "Data",
+   "label": "Name of the field for picking location in user profile"
+  },
+  {
+   "default": "Verified Change Maker",
+   "fieldname": "verified_change_maker_label",
+   "fieldtype": "Data",
+   "label": "Verified Change Maker label"
+  },
+  {
+   "default": "Last activity",
+   "fieldname": "last_activity_label",
+   "fieldtype": "Data",
+   "label": "Last activity label"
+  },
+  {
+   "default": "Hours Invested",
+   "fieldname": "hours_label",
+   "fieldtype": "Data",
+   "label": "Hours Invested label"
+  },
+  {
+   "default": "Actions Taken",
+   "fieldname": "actions_label",
+   "fieldtype": "Data",
+   "label": "Actions Taken label"
+  },
+  {
+   "default": "Bio",
+   "fieldname": "bio_label",
+   "fieldtype": "Data",
+   "label": "Bio label"
+  },
+  {
+   "default": "Skill Badges",
+   "fieldname": "skill_badges_label",
+   "fieldtype": "Data",
+   "label": "Skill Badges label"
+  },
+  {
+   "default": "Overview",
+   "fieldname": "overview_label",
+   "fieldtype": "Data",
+   "label": "Overview label"
+  },
+  {
+   "default": "Highlight",
+   "fieldname": "highlight_label",
+   "fieldtype": "Data",
+   "label": "Highlight label"
+  },
+  {
+   "default": "Interested in",
+   "fieldname": "interested_in_label",
+   "fieldtype": "Data",
+   "label": "Interested in label"
+  },
+  {
+   "default": "Expert Review",
+   "fieldname": "expert_review_label",
+   "fieldtype": "Data",
+   "label": "Expert Review label"
+  },
+  {
+   "default": "Actions",
+   "fieldname": "action_label",
+   "fieldtype": "Data",
+   "label": "Actions label"
+  },
+  {
+   "default": "Looks like you don't have a bio. You may login and add your bio",
+   "fieldname": "no_bio_text",
+   "fieldtype": "Data",
+   "label": "Bio Absent Text"
+  },
+  {
+   "default": "Login and add your location !",
+   "fieldname": "location_absent_text",
+   "fieldtype": "Data",
+   "label": "Location Absent text"
+  },
+  {
+   "default": "Highlight an action to be displayed in this section !",
+   "fieldname": "highlight_absent_text",
+   "fieldtype": "Data",
+   "label": "Highlight absent text"
+  },
+  {
+   "default": "Please add actions to be displayed in this section !",
+   "fieldname": "actions_absent_text",
+   "fieldtype": "Data",
+   "label": "Actions absent text"
+  },
+  {
+   "default": "Verified by",
+   "fieldname": "verified_by_label",
+   "fieldtype": "Data",
+   "label": "Verified By label"
+  },
+  {
+   "default": "To start activating skill badges share the details of action taken by you!",
+   "fieldname": "skill_badges_absent_text",
+   "fieldtype": "Data",
+   "label": "Skill badges absent text"
+  },
+  {
+   "default": "Profile",
+   "fieldname": "profile_label",
+   "fieldtype": "Data",
+   "label": "Profile Label"
+  },
+  {
+   "default": "Add Action",
+   "fieldname": "add_action_label",
+   "fieldtype": "Data",
+   "label": "Add Action Button Label"
+  },
+  {
+   "default": "Ask for help",
+   "fieldname": "ask_for_help_label",
+   "fieldtype": "Data",
+   "label": "Ask for Help Button Label"
+  },
+  {
+   "default": "Request Review",
+   "fieldname": "request_review_label",
+   "fieldtype": "Data",
+   "label": "Request Review Button Label"
+  },
+  {
+   "default": "Download Profile",
+   "fieldname": "download_profile_label",
+   "fieldtype": "Data",
+   "label": "Download Profile Button Label"
+  },
+  {
+   "default": "Highlight",
+   "fieldname": "highlight_label_menu",
+   "fieldtype": "Data",
+   "label": "Highlight Menu Item Label"
+  },
+  {
+   "default": "Edit",
+   "fieldname": "edit_label",
+   "fieldtype": "Data",
+   "label": "Edit Menu Item Label"
+  },
+  {
+   "default": "Delete",
+   "fieldname": "delete_label",
+   "fieldtype": "Data",
+   "label": "Delete Menu Item Label"
+  },
+  {
+   "default": "Are you sure you want to Delete?",
+   "fieldname": "delete_confirm_text",
+   "fieldtype": "Data",
+   "label": "Delete Confirmation Text"
+  },
+  {
+   "default": "You haven't received any reviews as of now.",
+   "fieldname": "no_reviews_text",
+   "fieldtype": "Data",
+   "label": "No Reviews Text"
+  },
+  {
+   "default": "Partners/Supporters",
+   "fieldname": "partners_supporters_label",
+   "fieldtype": "Data",
+   "label": "Partners/Supporters Label"
+  },
+  {
+   "default": "No Partners/Supporters.",
+   "fieldname": "no_partners_text",
+   "fieldtype": "Data",
+   "label": "No Partners Text"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2026-01-05 17:00:44.201425",
+ "modified": "2026-03-02 17:35:11.877399",
  "modified_by": "Administrator",
  "module": "Samaaja",
  "name": "Samaaja Settings",

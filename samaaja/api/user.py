@@ -63,29 +63,62 @@ def submit_user_review(review):
 	return review
 
 @frappe.whitelist(allow_guest=True)
-def get_change_makers(verified=False, page_length=None, start=0):
+def get_change_makers(verified='false', page_length=None, start=0):
+	"""
+	Get list of user names (for pagination/listing).
+	Returns only user names, not full profile data.
+	
+	Args:
+		verified: 'true' or 'false' to filter verified users
+		page_length: Number of records per page
+		start: Offset for pagination
+		
+	Returns:
+		Dict with 'users' (list of user names) and 'total_count'
+	"""
 	UserReview = frappe.qb.DocType("User Review")
 	User = frappe.qb.DocType("User")
 	UserMetadata = frappe.qb.DocType("User Metadata")
+	
+	# Build base query for counting total records
+	if verified == 'true':
+		# For verified users, count distinct users with accepted reviews
+		total_count = frappe.db.sql("""
+			SELECT COUNT(DISTINCT ur.user) as count
+			FROM `tabUser Review` ur
+			INNER JOIN `tabUser` u ON ur.user = u.name
+			INNER JOIN `tabUser Metadata` um ON um.user = u.name
+			WHERE ur.status = 'Accepted'
+			AND u.enabled = 1
+			AND u.full_name != 'Administrator'
+			AND u.full_name != 'Guest'
+		""", as_dict=True)[0]['count']
+	else:
+		# For all users, count all users
+		total_count = (
+			frappe.qb.from_(User)
+			.left_join(UserMetadata)
+			.on(UserMetadata.user == User.name)
+			.select(Count(User.name))
+			.where(User.enabled == 1)
+			.where(User.full_name != "Administrator")
+			.where(User.full_name != "Guest")
+			.run()[0][0]
+		)
 
-	query=''
-	if verified:
+	# Build query for fetching user names only
+	if verified == 'true':
 		query = (
 			frappe.qb.from_(UserReview)
 			.join(User)
 			.on(UserReview.user == User.name)
 			.join(UserMetadata)
 			.on(UserMetadata.user == User.name)
-			.select(
-				User.full_name.as_("full_name"),
-				User.name.as_("name"),
-				UserMetadata.city.as_("city"),
-				User.user_image.as_("user_image"),
-				User.username.as_("username"),
-				User.interest.as_("focus_area"),
-				UserReview.reviewer_name.as_("verified_by"),
-			)
+			.select(User.name)
 			.where(UserReview.status == "Accepted")
+			.where(User.enabled == 1)
+			.where(User.full_name != "Administrator")
+			.where(User.full_name != "Guest")
 			.orderby(User.creation, order=frappe.qb.asc)
 		)
 	else:
@@ -93,14 +126,10 @@ def get_change_makers(verified=False, page_length=None, start=0):
 			frappe.qb.from_(User)
 			.left_join(UserMetadata)
 			.on(UserMetadata.user == User.name)
-			.select(
-				User.full_name.as_("full_name"),
-				User.name.as_("name"),
-				UserMetadata.city.as_("city"),
-				User.user_image.as_("user_image"),
-				User.username.as_("username"),
-				User.interest.as_("focus_area"),
-			)
+			.select(User.name)
+			.where(User.enabled == 1)
+			.where(User.full_name != "Administrator")
+			.where(User.full_name != "Guest")
 			.orderby(User.creation, order=frappe.qb.asc)
 		)
 
@@ -109,12 +138,95 @@ def get_change_makers(verified=False, page_length=None, start=0):
 	
 	if start:
 		query = query.offset(start)
-	# Run the query with debug enabled
+	
+	# Run the query - returns list of dicts with 'name' key
 	result = query.run(as_dict=True)
 	
-	for row in result:
-		row.user_profile = frappe.utils.get_url(f"/user-profile/{row.username}")
-	return result
+	# Extract just the names
+	user_names = [row['name'] for row in result]
+	users = []
+	for user_name in user_names:
+		user = get_user_profile(user_name)
+		users.append(user)
+
+	return {
+		"users": users,
+		"total_count": total_count
+	}
+
+
+@frappe.whitelist(allow_guest=True)
+def get_user_profile(user_name):
+	"""
+	Get complete user profile data for a given user name.
+	Aggregates data from User, User Metadata, Location, District, etc.
+	
+	Args:
+		user_name: User name
+		
+	Returns:
+		Dict with complete user profile data
+	"""
+	if not user_name:
+		frappe.throw("user_name is required")
+	
+	
+	# Get User document
+	if not frappe.db.exists("User", user_name):
+		frappe.throw(f"User '{user_name}' not found")
+	
+	user = frappe.get_doc("User", user_name)
+	
+	# Get User Metadata (may not exist for all users)
+	user_metadata = None
+	if frappe.db.exists("User Metadata", user_name):
+		user_metadata = frappe.get_doc("User Metadata", user_name)
+	
+	# Resolve display location safely (some users may not have a location yet)
+	location = ""
+	location_field_name = frappe.db.get_single_value("Samaaja Settings", "location_field_name") or "city"
+	if user_metadata and user_metadata.location:
+		# Use db lookups to avoid permission errors for Guest on public pages
+		if location_field_name == "district":
+			district = frappe.db.get_value("Location", user_metadata.location, "district")
+			location = frappe.db.get_value("District", district, "district_name") if district else ""
+			location = location or ""
+		else:
+			location = frappe.db.get_value("Location", user_metadata.location, location_field_name) or ""
+	
+	# Get verification status
+	verified_by = None
+	is_verified = False
+	user_review = frappe.db.get_value(
+		"User Review",
+		{"user": user_name, "status": "Accepted"},
+		"name"
+	)
+	if user_review:
+		is_verified = True
+		review_doc = frappe.get_doc("User Review", user_review)
+		verified_by = review_doc.reviewer_name
+	
+	# Build profile data
+	profile = {
+		"name": user.name,
+		"full_name": user.full_name or "",
+		"first_name": user.first_name or "",
+		"last_name": user.last_name or "",
+		"email": user.email or "",
+		"mobile_no": user.mobile_no or "",
+		"gender": user.gender or "",
+		"user_image": user.user_image,
+		"focus_area": user.interest,
+		"location": location,
+		"is_verified": is_verified,
+		"verified_by": verified_by,
+		"user_profile": frappe.utils.get_url(f"/user-profile/{user.username}") if user.username else None,
+		"contributions": (user_metadata.contributions or 0) if user_metadata else 0,
+		"hours_invested": (user_metadata.hours_invested or 0) if user_metadata else 0,
+	}
+	
+	return profile
 
 def get_user_badges(user, badge_type=None):
 	badges = frappe.get_all("Badge", filters=[["_user_tags", "like", f"%{badge_type}%"]], pluck="name")
@@ -158,3 +270,18 @@ def user_interested_in(user):
 		LIMIT 3""", user,as_dict=True)
 
 	return [d['category'] for d in user_event_details_category]
+
+@frappe.whitelist(allow_guest=True)
+def get_genders():
+	return frappe.get_all("Gender", fields=["gender"], order_by="gender asc")
+
+def get_active_cm_count():
+	User = frappe.qb.DocType("User")
+	return (
+		frappe.qb.from_(User)
+		.select(Count(User.name))
+		.where(User.enabled == 1)
+		.where(User.full_name != "Administrator")
+		.where(User.full_name != "Guest")
+		.run()[0][0]
+	)

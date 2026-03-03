@@ -238,3 +238,5 @@ doc_events = {
         "before_insert": "samaaja.doc_events.energy_point_log.before_insert"
     }
 }
+
+fixtures = ["Client Script"]

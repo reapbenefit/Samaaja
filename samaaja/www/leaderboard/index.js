@@ -1,8 +1,15 @@
 frappe.ready(function() {
-    // get_verified_users()
+    // Initialize pagination flags for all users section
+    if (typeof frappe.flags.start === 'undefined') {
+        frappe.flags.start = 0;
+    }
+    if (typeof frappe.flags.page_length === 'undefined') {
+        frappe.flags.page_length = 10;
+    }
+    get_all_users()
     
     reset_limit_and_start()
-    get_city_wise_action_count_user_based()
+    get_location_wise_action_count_user_based()
     get_users(get_filters())
     $("#search").click(()=>{
         reset_limit_and_start()
@@ -15,7 +22,7 @@ frappe.ready(function() {
         get_users(get_filters())
     })
     $("#rank-based-on-city").change(()=>{
-        get_city_wise_action_count_user_based()
+        get_location_wise_action_count_user_based()
     })
     $("#clear").click(()=>{
         reset_limit_and_start()
@@ -30,20 +37,10 @@ frappe.ready(function() {
     $("#btn_load_more").click(()=>{ 
         get_users(get_filters())
     })
-    $(".contribute-button").click(()=>{
-        if (navigator.doNotTrack != 1 && !window.is_404) {
-            let browser = frappe.utils.get_browser();
-            frappe.call("frappe.website.doctype.web_page_view.web_page_view.make_view_log", {
-                path: "contribute",
-                referrer: null,
-                browser: browser.name,
-                version: browser.version,
-                url: location.origin,
-                user_tz: Intl.DateTimeFormat().resolvedOptions().timeZone
-            })
-        }
-        window.open("http://wa.me/918095500118?text=cmp")
-    })
+    $(".vn_all a").click(function(e) {
+        e.preventDefault();
+        get_all_users();
+    });
 });
 
 var get_filters = function() {
@@ -145,20 +142,19 @@ var get_users = function(filters={}) {
     });
 }
 
-var get_city_wise_action_count_user_based = function() {
+var get_location_wise_action_count_user_based = function() {
     frappe.call({
-        method: "samaaja.api.leaderboard.get_city_wise_action_count_user_based",
+        method: "samaaja.api.leaderboard.get_location_wise_action_count_user_based",
         args: {
             "recent_rank_based_on": $("#rank-based-on-city").val(),
         },
         callback: function(result) {
             let html = '';
-
             if (result.message && result.message.length > 0) {
                 result.message.forEach(r => {
                     html += `
                         <div class="ac_item_box">
-                            <strong>${r.city}</strong>
+                            <strong>${r.location}</strong>
                             <div class="progress_bar">
                                 <div class="progress" style="width: ${r.percentage}%"></div>
                                 <span>${r.action_count}</span>
@@ -179,63 +175,81 @@ var get_city_wise_action_count_user_based = function() {
     });
 };
 
-var get_verified_users = function() {
+
+var get_all_users = function() {
     frappe.call({
         method: "samaaja.api.user.get_change_makers",
         args: {
-                "verified": true,
+                "verified": 'false',
                 "page_length": frappe.flags.page_length,
                 "start": frappe.flags.start,
         },
         freeze: true,
-        freeze_message: "...Searcing Users",
+        freeze_message: "...Searching Users",
         callback: function(result) {
-            if (result.message?.length) {
-                $(".vn_content").html("")
-                result.message.forEach(user => {
-                    let city = user.city ? `, ${user.city}`: ""
-                    let html = `<div class="vn_box"><a href="${user.user_profile}"`;
+            console.log("result.message", result.message);
+            const users = result.message.users || [];
+            const total_count = result.message?.total_count || 0;
+            
+            if (users.length) {
+                // Only clear content on first load (when start is 0)
+                if (frappe.flags.start === 0) {
+                    $("#verified_cm_content").html("");
+                }
+                users.forEach(user => {
+                    let location = user.location ? `${user.location} ` : "";
+                    let html = `<div class="vn_box"><a href="${user.user_profile}">`;
                     if (user.user_image) {
                         html += `<div class="img_wrapper">
-                                    <img src="${ user.user_image}" alt="" />
-                                </div>`
-                    }
-                    else {
+                                    <img src="${user.user_image}" alt="" />
+                                </div>`;
+                    } else {
                         html += `<div class="user_avatar">
                             ${frappe.get_abbr(user.full_name)}
-                        </div>`
+                        </div>`;
                     }
                     html += `<div class="vn_box_content">
-                            <p class="name">${ user.full_name } ${ city }</p>
+                            <p class="name">${user.full_name}<br>${location}</p>
                             <div class="vnb_stats">
                                 <p class="vnb_focus">
                                     <span>Focus area:</span>
-                                    <span><i>${ user.focus_area }</i></span>
+                                    <span><i>${user.focus_area || ''}</i></span>
                                 </p>
                             </div>
-                        </div>`
+                        </div>`;
                     
                     if (user.verified_by) {
                         html += `<div class="verified_badge">
                                 <svg id="Layer_1" data-name="Layer 1" viewBox="0 0 122.88 116.87"><polygon fill="#00ade9" points="61.37 8.24 80.43 0 90.88 17.79 111.15 22.32 109.15 42.85 122.88 58.43 109.2 73.87 111.15 94.55 91 99 80.43 116.87 61.51 108.62 42.45 116.87 32 99.08 11.73 94.55 13.73 74.01 0 58.43 13.68 42.99 11.73 22.32 31.88 17.87 42.45 0 61.37 8.24 61.37 8.24"></polygon><path fill="#ffffff" d="M37.92,65c-6.07-6.53,3.25-16.26,10-10.1,2.38,2.17,5.84,5.34,8.24,7.49L74.66,39.66C81.1,33,91.27,42.78,84.91,49.48L61.67,77.2a7.13,7.13,0,0,1-9.9.44C47.83,73.89,42.05,68.5,37.92,65Z"></path></svg>
-                            </div>`
+                            </div>`;
                     }
-                    html += "</a></div>"
-                    $(".vn_content").append(html)
+                    html += "</a></div>";
+                    $("#verified_cm_content").append(html);
                 });
-                frappe.flags.start += $('.vn_box').length
+                frappe.flags.start += users.length;
+                
+                // Show/hide "View More" button based on whether there are more users
+                const current_count = $('.vn_box').length;
+                if (current_count >= total_count) {
+                    $(".vn_all").hide();
+                } else {
+                    $(".vn_all").show();
+                }
+            } else {
+                // No more users, hide the button
+                $(".vn_all").hide();
             }
-            // $(".lb_content").html(html)
+             $(".lb_content").html(html)
         }
     });
 }
 
 var get_city_wise_action_count = function() {
     frappe.call({
-        method: "samaaja.api.leaderboard.get_city_wise_action_count",
+        method: "samaaja.api.leaderboard.get_city_wdfise_action_count",
         callback: function(result) {
             if (result.message?.length) {
-                let labels = result.message.map(obj => obj.city);
+                let labels = result.message.map(obj => obj.district);
                 let data = result.message.map(obj => obj.action_count);
                 const ctx = document.getElementById('myChart').getContext('2d');
                 const myChart = new Chart(ctx, {

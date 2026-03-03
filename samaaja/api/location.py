@@ -81,3 +81,22 @@ def new_location(location_data):
         location["is_new"] = True
     
     return location
+
+
+
+@frappe.whitelist(allow_guest=True)
+def get_districts(state):
+    return frappe.get_all(
+        "District",
+        filters={"state": state},
+        fields=["name", "district_name"],
+        order_by="district_name asc"
+    )
+
+@frappe.whitelist(allow_guest=True)
+def get_states():
+    return frappe.get_all(
+        "State",
+        fields=["name", "state_name"],
+        order_by="state_name asc"
+    )

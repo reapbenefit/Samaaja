@@ -20,12 +20,12 @@ def after_insert(doc, method=None):
     - Updates last action metadata on the linked  Profile.
     - Updates top 3 event categories in the User's interest field.
     """
-    update_action_detail_in_profile(doc)
+    update_action_detail_in_user_metadata(doc)
     update_user_interest_from_top_categories(doc.user)
 
-def update_action_detail_in_profile(doc):
+def update_action_detail_in_user_metadata(doc):
     """
-    Updates the Profile with the latest action details when an Event is created or modified.
+    Updates the User Metadata with the latest action details when an Event is created or modified.
 
     Args:
         doc (Document): The Event document that triggered the hook.

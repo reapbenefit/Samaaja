@@ -48,25 +48,12 @@ h1, h2, h3, h4, h5, h6{
     font-size: 20px;
     font-weight: 400;
     background: transparent;
-    color: #fff;
-    border: 1px solid #fff;
+    /* color and border-color are now set dynamically from samaaja_settings.hero_text_color field */
 }
 .secondry_btn:focus{outline: 0}
 .banner_wrapper{
     width: 100%;
-    background-image: linear-gradient(
-  0deg,
-    #34568f 0%,
-    #5675a3 20%,
-    #7894b7 40%,
-    #9ab3cb 60%,
-    #cbd8e4 80%,
-    #ffffff 100%
-);
-
-
-
-    
+    /* background-color is now set dynamically from samaaja_settings.hero_color field */
 }
 .banner_content_wrapper{
     width: 100%;
@@ -76,7 +63,7 @@ h1, h2, h3, h4, h5, h6{
     box-sizing: border-box;
 }
 .banner_content_wrapper h1{
-    color: #34568f;
+    
     font-size: 44px;
     line-height: 65px;
     font-weight: bold;
@@ -85,7 +72,7 @@ h1, h2, h3, h4, h5, h6{
     text-align: center;
 }
 .banner_content_wrapper h2{
-    color: #090909;
+    
     font-size: 32px;
     line-height: 48px;
     font-weight: bold;
@@ -97,7 +84,7 @@ h1, h2, h3, h4, h5, h6{
     font-size: 24px;
     line-height: 36px;
     text-align: center;
-    color: #090909;
+    
     margin: 0 0 50px;
 }
 .b_content{
@@ -117,14 +104,14 @@ h1, h2, h3, h4, h5, h6{
 .b_content_box span{
     font-size: 18px;
     font-weight: 600;
-    color: #fff6e5;
+   
     text-align: center;
 }
 .bcb_divider{
     margin: 0 50px;
     width: 1px;
     height: 50px;
-    background-color: #BAE4D0;
+    /* background-color is now set dynamically from samaaja_settings.hero_text_color field */
 }
 .b_cta{
     margin: 50px 0 0;
@@ -140,11 +127,11 @@ h1, h2, h3, h4, h5, h6{
 }
 .b_cta p{
     margin: 10px 0 0;
-    color: #fff6e5;
+    /* color is now set dynamically from samaaja_settings.hero_text_color field */
 }
 .b_cta a{
     text-decoration: underline;
-    color: #fff6e5;
+    /* color is now set dynamically from samaaja_settings.hero_text_color field */
 }
 .cta-wrapper {
     display: flex;
@@ -237,25 +224,31 @@ h1, h2, h3, h4, h5, h6{
 }
 .vn_stats_wrapper{
     display: flex;
-    align-items: flex-end;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
 }
 .vn_stats_wrapper svg{
-    height: 85px;
+    height: 73.5px;
+    width: auto;
+    flex-shrink: 0;
 }
 .vn_stats .stats_box{
     display: flex;
     flex-direction: column;
-    margin: 0 0 0 10px;
+    align-items: flex-start;
+    justify-content: center;
+    text-align: left;
 }
 .vn_stats .stats_box strong{
-    font-size: 54px;
-    line-height: 60px;
+    font-size: 40.5px;
+    line-height: 45px;
     color: #34568f;
 }
 .vn_stats .stats_box span{
     color: #8e918f;
-    font-size: 32px;
-    line-height: 38px;
+    font-size: 24px;
+    line-height: 28.5px;
 }
 .vn_sb_divider{
     margin: 0 30px;
@@ -282,6 +275,8 @@ h1, h2, h3, h4, h5, h6{
 .vn_box a{
     text-decoration: none;
     color: inherit;
+    display: flex;
+    flex-direction: column;
 }
 .verified_badge{
     position: absolute;
@@ -416,7 +411,7 @@ p.vnb_focus span:first-child{
         width: 42%;
     }
     .vn_stats_wrapper svg{
-        height: 46px;
+        height: 45px;
     }
     .vn_stats_wrapper:nth-child(3){
         justify-content: flex-end;
@@ -426,8 +421,8 @@ p.vnb_focus span:first-child{
         width: auto;
     }
     .vn_stats .stats_box strong{
-        font-size: 24px;
-        line-height: 30px;
+        font-size: 18px;
+        line-height: 22.5px;
     }
     .vn_sb_divider{
         display: none;
