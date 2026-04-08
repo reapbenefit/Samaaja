@@ -477,6 +477,25 @@
 .action_description::-webkit-scrollbar-thumb:hover {
   background: #555; 
 }
+.action_attachment a{
+    color: #0d6efd !important;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: underline !important;
+    display: inline-block;
+    cursor: pointer;
+}
+.action_attachment a:visited{
+    color: #0d6efd !important;
+}
+.action_attachment a:hover{
+    color: #dc3545 !important;
+}
+.action_attachment a:focus-visible{
+    outline: 2px solid #dc3545;
+    outline-offset: 2px;
+    border-radius: 4px;
+}
 .action_item_head svg{
     width: 20px;
     height: 20px;

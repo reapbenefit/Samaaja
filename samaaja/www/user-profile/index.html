@@ -193,6 +193,20 @@
                                 {% if action.description %}
                                 <p class="action_description">{{action.description}}</p>
                                 {% endif %}
+                                {% if action.attachment1 %}
+                                <div class="action_attachment">
+                                    <a href="{{ action.attachment1 }}" target="_blank" rel="noopener noreferrer">
+                                        {{ current_user.attachment_label }}
+                                    </a>
+                                </div>
+                                {% endif %}
+                                {% if action.attachment2 %}
+                                <div class="action_attachment">
+                                    <a href="{{ action.attachment2 }}" target="_blank" rel="noopener noreferrer">
+                                        {{ current_user.attachment_label }}
+                                    </a>
+                                </div>
+                                {% endif %}
                             </div>
                             {% endfor %}
                             {%else%}
@@ -368,6 +382,20 @@
                             {% endif %}
                             {% if action.description %}
                             <p class="action_description">{{action.description}}</p>
+                            {% endif %}
+                            {% if action.attachment1 %}
+                            <div class="action_attachment">
+                                <a href="{{ action.attachment1 }}" target="_blank" rel="noopener noreferrer">
+                                    {{ current_user.attachment_label }}
+                                </a>
+                            </div>
+                            {% endif %}
+                            {% if action.attachment2 %}
+                            <div class="action_attachment">
+                                <a href="{{ action.attachment2 }}" target="_blank" rel="noopener noreferrer">
+                                    {{ current_user.attachment_label }}
+                                </a>
+                            </div>
                             {% endif %}
                         </div>
                         {% endfor%}

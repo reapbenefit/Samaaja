@@ -26,80 +26,63 @@ def get_total_invested_hours():
 	return result[0]["hours_invested"]
 
 @frappe.whitelist(allow_guest=True)
-def get_location_wise_action_count_user_based(page_length=10, recent_rank_based_on=None):
-	Events = frappe.qb.DocType("Events")
-	UserMetadata = frappe.qb.DocType("User Metadata")
-	Location = frappe.qb.DocType("Location")
-	District = frappe.qb.DocType("District")
+def get_location_wise_action_count(page_length=10, recent_rank_based_on=None):
+    Events = frappe.qb.DocType("Events")
+    UserMetadata = frappe.qb.DocType("User Metadata")
+    Location = frappe.qb.DocType("Location")
+    District = frappe.qb.DocType("District")
 
-	location_field_name = frappe.db.get_single_value("Samaaja Settings", "location_field_name")
-	
+    location_field_name = frappe.db.get_single_value("Samaaja Settings", "location_field_name")
 
-	# Base Query
-	user_with_events = (
-		frappe.qb.from_(UserMetadata)
-		.join(Events).on(Events.user == UserMetadata.name)  # Ensure 'user' field in Events points to User's 'name'
-		.select(UserMetadata.name)
-		.where(
-			(UserMetadata.location.isnotnull()) &  # Ensure city is not null
-			(Events.name.isnotnull())  # Ensure events exist for the user
-		)
-	)
+    action_count = Count(Events.name)
 
-	# Apply filters if present
-	if recent_rank_based_on:
-		if recent_rank_based_on == "Last 15 Days":
-			user_with_events = user_with_events.where(Events.creation >= frappe.utils.add_days(frappe.utils.nowdate(), -15))
-		elif recent_rank_based_on == "Last Month":
-			user_with_events = user_with_events.where(Events.creation >= frappe.utils.add_days(frappe.utils.nowdate(), -30))
+    # Base query (START from Events)
+    query = (
+        qb.from_(Events)
+        .join(UserMetadata).on(Events.user == UserMetadata.name)
+        .join(Location).on(UserMetadata.location == Location.name)
+        .where(UserMetadata.location.isnotnull())
+    )
 
-	# Execute Query
-	user_with_events = user_with_events.run(as_dict=True)
-	users = list(set([user.name for user in user_with_events]))
-	result = []
-	if not users:
-		return result
-	if location_field_name == "district":
-		# Query to get the number of users grouped by city, with conditions on a list of usernames
-		user_count_by_location = (
-			qb.from_(UserMetadata)
-			.join(Location).on(UserMetadata.location == Location.name)
-			.join(District).on(Location.district == District.name)
-			.select(District.district_name.as_("location"), Count(UserMetadata.name).as_("action_count"))  # count users per city
-			.where(
-				UserMetadata.name.isin(users)  # filter by a list of usernames
-			)
-			.groupby(District.district_name.as_("location"))  # group by user city
-			.orderby(
-				Count(UserMetadata.name), order=frappe.qb.desc  # Order cities alphabetically
-			)
-			.limit(page_length)  # limit to 10 results
-		)
-	else:
-		user_count_by_location = (
-			qb.from_(UserMetadata)
-			.join(Location).on(UserMetadata.location == Location.name)
-			.select(getattr(Location,location_field_name).as_("location"), Count(UserMetadata.name).as_("action_count"))  # count users per city
-			.where(
-				UserMetadata.name.isin(users)  # filter by a list of usernames
-			)
-			.groupby(getattr(Location, location_field_name).as_("location"))  # group by user city
-			.orderby(
-				Count(UserMetadata.name), order=frappe.qb.desc  # Order cities alphabetically
-			)
-			.limit(page_length)  # limit to 10 results
-		)
+    # Time filter
+    if recent_rank_based_on:
+        if recent_rank_based_on == "Last 15 Days":
+            query = query.where(Events.creation >= frappe.utils.add_days(frappe.utils.nowdate(), -15))
+        elif recent_rank_based_on == "Last Month":
+            query = query.where(Events.creation >= frappe.utils.add_days(frappe.utils.nowdate(), -30))
 
-	# Execute the query and fetch the results
-	result = user_count_by_location.run(as_dict=True)
+    # Location logic
+    if location_field_name == "district":
+        query = (
+            query.join(District).on(Location.district == District.name)
+            .select(
+                District.district_name.as_("location"),
+                action_count.as_("action_count")
+            )
+            .groupby(District.district_name)
+            .orderby(action_count, order=frappe.qb.desc)
+        )
+    else:
+        location_field = getattr(Location, location_field_name)
 
-	total_actions = [row.action_count for row in result]
-	total_actions = sum(total_actions)
-	for row in result:
-		row.percentage = frappe.utils.cint((row.action_count/total_actions) * 100)
+        query = (
+            query.select(
+                location_field.as_("location"),
+                action_count.as_("action_count")
+            )
+            .groupby(location_field)
+            .orderby(action_count, order=frappe.qb.desc)
+        )
 
-	return result
+    result = query.limit(page_length).run(as_dict=True)
 
+    # Percentage calculation
+    total_actions = sum([row.action_count for row in result]) or 1
+
+    for row in result:
+        row.percentage = frappe.utils.cint((row.action_count / total_actions) * 100)
+
+    return result
 
 @frappe.whitelist(allow_guest=True)
 def search_users_(filters=None, raw=False, page_length=10, start=0):

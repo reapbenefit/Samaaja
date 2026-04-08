@@ -144,7 +144,7 @@ var get_users = function(filters={}) {
 
 var get_location_wise_action_count_user_based = function() {
     frappe.call({
-        method: "samaaja.api.leaderboard.get_location_wise_action_count_user_based",
+        method: "samaaja.api.leaderboard.get_location_wise_action_count",
         args: {
             "recent_rank_based_on": $("#rank-based-on-city").val(),
         },

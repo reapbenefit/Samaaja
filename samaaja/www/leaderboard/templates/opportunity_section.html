@@ -2,13 +2,13 @@
     <div class="verified_cms email_campaigns">
         <div class="vn_header">
             <div class="vn_title">
-                <span>On Ground Success Stories</span>
-                <small>Learn from the groud - success stories, challenges and small innovation changing the landscape</small>
+                <span>{{ samaaja_settings.opportunity_label }}</span>
+                <small>{{ samaaja_settings.opportunity_summary }}</small>
             </div>
         </div>
         {% if opportunities|length == 0 %}
             <div class="no_opportunities">
-                <p>No Opportunities available at the moment.</p>
+                <p>{{ samaaja_settings.no_opportunity_text }}</p>
             </div>
         {% else %}
             <div class="vn_content">
@@ -18,7 +18,7 @@
             </div>
             {% if opportunities|length > 10 %}
                 <div class="vn_all">
-                    <a href=""><button class="main_btn">View All</button></a>
+                    <a href=""><button class="main_btn">{{ samaaja_settings.view_all}}</button></a>
                 </div>
             {% endif %}
         {% endif %}

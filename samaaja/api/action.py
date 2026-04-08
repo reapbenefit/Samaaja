@@ -26,3 +26,31 @@ def delete(doc_name):
 
     # Return a success response
     return custom_response("OK", status_code=HTTPStatus.OK)
+
+
+
+@frappe.whitelist()
+def get_event_type_query(get_child_types: bool=False, parent_event: str|None=None):
+
+    if get_child_types:
+        if parent_event:
+            return frappe.db.sql("""
+                SELECT name
+                FROM `tabEvent Type`
+                WHERE parent_event_type = %(parent_event)s
+                AND is_group = 0
+            """, {
+                "parent_event": parent_event
+            })
+        else:
+            return frappe.db.sql("""
+                SELECT name
+                FROM `tabEvent Type`
+                WHERE is_group = 0
+                """)
+    else:
+        return frappe.db.sql("""
+            SELECT name
+            FROM `tabEvent Type`
+            WHERE is_group = 1
+            """)

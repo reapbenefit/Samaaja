@@ -30,6 +30,13 @@
   "most_active_members_summary",
   "most_active_cities_label",
   "most_active_cities_summary",
+  "campaign_label",
+  "campaign_summary",
+  "no_campaigns_text",
+  "opportunity_label",
+  "opportunity_summary",
+  "no_opportunity_text",
+  "view_all",
   "section_break_zzox",
   "show_opportunities_section_",
   "show_campaign_section_",
@@ -66,6 +73,7 @@
   "no_reviews_text",
   "partners_supporters_label",
   "no_partners_text",
+  "attachment_label",
   "tab_break_ze49d",
   "location_section",
   "geolocation_api_url",
@@ -502,12 +510,52 @@
    "fieldname": "no_partners_text",
    "fieldtype": "Data",
    "label": "No Partners Text"
+  },
+  {
+   "fieldname": "campaign_label",
+   "fieldtype": "Data",
+   "label": "Campaign Label"
+  },
+  {
+   "fieldname": "campaign_summary",
+   "fieldtype": "Data",
+   "label": "Campaign Summary"
+  },
+  {
+   "fieldname": "no_campaigns_text",
+   "fieldtype": "Data",
+   "label": "Campaign Not Present Text"
+  },
+  {
+   "fieldname": "view_all",
+   "fieldtype": "Data",
+   "label": "View All Label"
+  },
+  {
+   "fieldname": "opportunity_label",
+   "fieldtype": "Data",
+   "label": "Opportunity Label"
+  },
+  {
+   "fieldname": "opportunity_summary",
+   "fieldtype": "Data",
+   "label": "Opportunity Summary"
+  },
+  {
+   "fieldname": "no_opportunity_text",
+   "fieldtype": "Data",
+   "label": "Opportunity Not Present Text"
+  },
+  {
+   "fieldname": "attachment_label",
+   "fieldtype": "Data",
+   "label": "Attachment Label"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2026-03-02 17:35:11.877399",
+ "modified": "2026-03-25 10:25:48.690069",
  "modified_by": "Administrator",
  "module": "Samaaja",
  "name": "Samaaja Settings",

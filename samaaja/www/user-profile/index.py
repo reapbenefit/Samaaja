@@ -75,6 +75,7 @@ def get_context(context):
 	context.current_user.actions = frappe.db.sql("""
 		SELECT e.name AS event_id, e.title, e.type, e.category, e.description, e.location,
 		       e.creation, e.highlight, e.verified_by, e.hours_invested,
+			   e.attachment1, e.attachment2,
 		       l.district AS location_name
 		FROM `tabEvents` e
 		LEFT JOIN `tabLocation` l ON l.name = e.location
@@ -163,3 +164,4 @@ def get_context(context):
 	context.current_user.no_reviews_text = samaaja_settings.no_reviews_text
 	context.current_user.partners_supporters_label = samaaja_settings.partners_supporters_label
 	context.current_user.no_partners_text = samaaja_settings.no_partners_text
+	context.current_user.attachment_label = samaaja_settings.attachment_label
