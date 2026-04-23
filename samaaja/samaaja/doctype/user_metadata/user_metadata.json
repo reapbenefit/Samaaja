@@ -9,6 +9,9 @@
   "user",
   "profile_badges",
   "summary",
+  "ai_summary_last_updated",
+  "ai_summary_status",
+  "ai_summary_processing_started_at",
   "partner",
   "tags",
   "column_break_gnch",
@@ -227,6 +230,22 @@
    "in_standard_filter": 1,
    "label": "Full Name",
    "read_only": 1
+  },
+  {
+   "fieldname": "ai_summary_last_updated",
+   "fieldtype": "Datetime",
+   "label": "AI Summary Last Updated"
+  },
+  {
+   "fieldname": "ai_summary_status",
+   "fieldtype": "Select",
+   "label": "AI Summary Status",
+   "options": "\nProcessing\nPending\nSuccess\nFailed"
+  },
+  {
+   "fieldname": "ai_summary_processing_started_at",
+   "fieldtype": "Datetime",
+   "label": "AI Summary Processing Started At"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -236,7 +255,7 @@
    "link_fieldname": "user"
   }
  ],
- "modified": "2026-01-09 13:18:34.184205",
+ "modified": "2026-04-23 10:05:42.029547",
  "modified_by": "Administrator",
  "module": "Samaaja",
  "name": "User Metadata",
