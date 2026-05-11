@@ -1,4 +1,5 @@
 {
+ "_comments": "[{\"comment\": \"Action Failed<br><br>Document Links Row #1: Invalid doctype or fieldname.<br>('DocType', 'Action')\", \"by\": \"Administrator\", \"name\": \"s3i27f4fao\"}, {\"comment\": \"Action Failed<br><br>Document Links Row #1: Invalid doctype or fieldname.<br>('DocType', 'Action')\", \"by\": \"Administrator\", \"name\": \"sik5lesj35\"}]",
  "actions": [],
  "allow_import": 1,
  "allow_rename": 1,
@@ -67,7 +68,7 @@
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Type",
-   "options": "Event Type"
+   "options": "Action Type"
   },
   {
    "fieldname": "status",
@@ -81,7 +82,7 @@
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Category",
-   "options": "Event Category"
+   "options": "Action Category"
   },
   {
    "fieldname": "attachment1",
@@ -97,7 +98,7 @@
    "fieldname": "source",
    "fieldtype": "Link",
    "label": "Source",
-   "options": "Event Source"
+   "options": "Action Source"
   },
   {
    "default": "0",
@@ -310,18 +311,18 @@
    "fieldname": "sub_type",
    "fieldtype": "Link",
    "label": "Sub Type",
-   "options": "Event Type"
+   "options": "Action Type"
   },
   {
    "fieldname": "subcategory",
    "fieldtype": "Link",
    "label": "Sub Category",
-   "options": "Event Category"
+   "options": "Action Category"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-03-01 16:12:15.034975",
+ "modified": "2026-05-11 07:08:54.298519",
  "modified_by": "Administrator",
  "module": "Samaaja",
  "name": "Events",

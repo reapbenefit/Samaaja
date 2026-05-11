@@ -13,3 +13,12 @@ def make_image_public(path):
         file.save(ignore_permissions=True)
         return file.file_url
     return path
+
+def validate_mobile_no(mobile_no: str) -> bool:
+    if not mobile_no:
+        return False
+    if len(mobile_no) != 10:
+        return False
+    if not mobile_no.isdigit():
+        return False
+    return True

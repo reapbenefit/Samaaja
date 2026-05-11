@@ -5,8 +5,18 @@ from frappe import qb
 from frappe.query_builder import DocType, Order
 from frappe.query_builder.functions import Coalesce, Sum, Count, Lower
 from datetime import timedelta
+from samaaja.services.leaderboard import LeaderboardManager
+from samaaja.utils.custom_response import custom_response
 
 
+@frappe.whitelist()
+def user_leaderboard(org_name: str = None):
+	try:
+		leaderboard_data = LeaderboardManager.get_leaderboard()
+		return leaderboard_data.to_custom_response()
+	except Exception as e:
+		frappe.log_error(frappe.get_traceback(), "Failed to fetch leaderboard")
+		return custom_response("Failed to fetch leaderboard", None, 500, True)
 
 def get_action_count():
 	return frappe.db.count("Events")

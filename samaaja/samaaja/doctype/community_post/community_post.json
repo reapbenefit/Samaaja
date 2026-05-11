@@ -1,0 +1,94 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-05-08 17:34:59.317323",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "post_details_section",
+  "title",
+  "description",
+  "media",
+  "user",
+  "action",
+  "tag",
+  "post_analytics_section",
+  "like_count"
+ ],
+ "fields": [
+  {
+   "fieldname": "post_details_section",
+   "fieldtype": "Section Break",
+   "label": "Post Details"
+  },
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "label": "Title"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Text",
+   "label": "Description"
+  },
+  {
+   "fieldname": "media",
+   "fieldtype": "Attach",
+   "label": "Media"
+  },
+  {
+   "fieldname": "user",
+   "fieldtype": "Link",
+   "label": "User",
+   "options": "User"
+  },
+  {
+   "fieldname": "post_analytics_section",
+   "fieldtype": "Section Break",
+   "label": "Post Analytics"
+  },
+  {
+   "fieldname": "like_count",
+   "fieldtype": "Int",
+   "label": "Likes"
+  },
+  {
+   "fieldname": "action",
+   "fieldtype": "Link",
+   "label": "Action",
+   "options": "Action"
+  },
+  {
+   "fieldname": "tag",
+   "fieldtype": "Data",
+   "label": "Tag"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-05-11 16:12:20.874682",
+ "modified_by": "ankit@impactyaan.com",
+ "module": "Samaaja",
+ "name": "Community Post",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

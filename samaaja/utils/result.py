@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from typing import Any, Dict
-from samaaja.api.common import custom_response
+from samaaja.utils.custom_response import custom_response
 
 @dataclass
 class Result:

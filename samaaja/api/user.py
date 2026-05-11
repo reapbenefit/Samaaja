@@ -1,8 +1,9 @@
 import frappe
 import json
-from samaaja.api.common import custom_response
 from frappe.query_builder.functions import Count, Sum
-
+from samaaja.utils.result import Result
+from samaaja.services.user import UserManager
+from samaaja.utils.custom_response import custom_response
 
 @frappe.whitelist()
 def new():
@@ -47,6 +48,44 @@ def new():
 		frappe.db.rollback()
 		return custom_response(str(e), None, 500, True)
 
+@frappe.whitelist(allow_guest=True)
+def create_user():
+	try:
+		user_data = frappe.request.get_json()
+		user_name = user_data.get("name")
+		user_mobile_no = user_data.get("mobile_no")
+		user_gender = user_data.get("gender")
+		user_category = user_data.get("category")
+		user_bio = user_data.get("bio")
+		user_dob = user_data.get("dob") 
+
+		if not user_name:
+			frappe.throw("Name is required")
+		if not user_mobile_no:
+			frappe.throw("Mobile number is required")
+		if not user_gender:
+			frappe.throw("Gender is required")
+		if not user_category:
+			frappe.throw("Category is required")
+		if not user_bio:
+			frappe.throw("Bio is required")	
+		if not user_dob:
+			frappe.throw("Date of birth is required")
+		result = UserManager.create(
+			user_name,
+			user_dob,
+			user_gender,
+			user_category,
+			user_mobile_no,
+			user_bio
+		)
+		return result.to_custom_response()
+	except Exception as e:
+		frappe.log_error(
+			frappe.get_traceback(),
+			"Failed to create user"
+		)
+		return custom_response("Failed to create user", None, 500, True)
 
 @frappe.whitelist(allow_guest=True)
 def submit_user_review(review):
@@ -285,3 +324,38 @@ def get_active_cm_count():
 		.where(User.full_name != "Guest")
 		.run()[0][0]
 	)
+
+@frappe.whitelist(allow_guest=True)
+def complete_user_profile():
+	request_json = frappe.request.get_json()
+	user_email = request_json.get("user_email")
+	user_mobile_no = request_json.get("user_mobile_no")
+	user_gender = request_json.get("user_gender")
+	user_category = request_json.get("user_category")
+	user_bio = request_json.get("user_bio")
+	user_dob = request_json.get("user_dob")
+	if not user_email:
+		return custom_response("user_email is required", None, 400)
+	if not user_mobile_no:
+		return custom_response("user_mobile_no is required", None, 400)
+	if not user_gender:
+		return custom_response("user_gender is required", None, 400)
+	if not user_category:
+		return custom_response("user_category is required", None, 400)
+	if not user_bio:
+		return custom_response("user_bio is required", None, 400)	
+	if not user_dob:
+			return custom_response("user_dob is required", None, 400)
+	result = UserManager.complete_user_profile(user_email, user_mobile_no, user_gender,user_category,user_bio,user_dob)
+	return result.to_custom_response()
+
+@frappe.whitelist()
+def user_profile(user_email: str = None):
+	try:
+		if not user_email:
+			return custom_response("user_email is required", None, 400)
+		result = UserManager.get_profile(user_email)
+		return result.to_custom_response()
+	except Exception as e:
+		frappe.log_error(frappe.get_traceback(), "Failed to get user profile")
+		return custom_response("Failed to get user profile", None, 500, True)
