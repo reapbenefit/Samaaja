@@ -250,11 +250,21 @@ class UserManager:
             login_manager = LoginManager()
             login_manager.login_as(user)
 
+            user_doc = frappe.get_doc("User", user)
+            if not user_doc.api_key:
+                user_doc.api_key = frappe.generate_hash(length=15)
+
+            api_secret = frappe.generate_hash(length=15)
+
+            user_doc.api_secret = api_secret
+            user_doc.save(ignore_permissions=True)
 
             return Result.success(
                 "User logged in successfully",
                 data={
-                    "user": user
+                    "user": user,
+                    "api_key": user_doc.api_key,
+                    "api_secret": api_secret
                 }
             )
         except Exception as e:
