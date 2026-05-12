@@ -5,5 +5,5 @@
 from frappe.tests.utils import FrappeTestCase
 
 
-class TestUserbadge(FrappeTestCase):
+class TestUserBadge(FrappeTestCase):
 	pass

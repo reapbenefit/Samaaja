@@ -1,16 +1,22 @@
 from samaaja.utils.result import Result
 import frappe
 from samaaja.services.user import UserManager
-from frappe.utils import get_url
-
+from io import BytesIO
+from werkzeug.datastructures import FileStorage
+from frappe.utils.image import optimize_image
+from frappe.utils.file_manager import save_file
+from frappe.model.naming import set_new_name
 
 class CommunityPostManager:
     def __init__(self):
         pass
 
     @staticmethod
-    def get() -> Result:
+    def get(limit=10, offset=0) -> Result:
         try:
+            limit = int(limit)
+            offset = int(offset)
+
             posts = frappe.db.sql("""
                 SELECT 
                     `name`,
@@ -23,19 +29,30 @@ class CommunityPostManager:
                     `tag`
                 FROM `tabCommunity Post`
                 ORDER BY `creation` DESC
-            """, as_dict=True)
+                LIMIT %s OFFSET %s
+            """, (limit, offset), as_dict=True)
+
+            media_base_url = frappe.conf.media_base_url
 
             for post in posts:
                 user_profile = UserManager.get_profile(post["user"])
+
                 post["user_profile"] = user_profile.data
-                post["id"]=post["name"]
-                
+                post["id"] = post["name"]
+
                 if post["media"]:
-                    post["media"]=get_url(post["media"])
+                    post["media"] = f"{media_base_url}{post['media']}"
+
             return Result.success(
                 "Community posts fetched successfully",
-                data=posts
+                data={
+                    "posts": posts,
+                    "limit": limit,
+                    "offset": offset,
+                    "has_more": len(posts) == limit
+                }
             )
+
         except Exception as e:
             frappe.log_error(
                 frappe.get_traceback(),
@@ -46,14 +63,32 @@ class CommunityPostManager:
                 "Failed to fetch community posts",
                 error_data=str(e)
             )
-        
+    
     @staticmethod
     def create(title: str, description: str, media: str, user: str, action_doc:str, tag:str) -> Result:
         try:
             post = frappe.new_doc("Community Post")
             post.title = title
             post.description = description
-            post.media = media
+            set_new_name(post)
+            if isinstance (media,str):
+                post.media = media
+            elif isinstance(media,FileStorage):
+                file_content = media.stream.read()
+
+                # optimize image
+                optimized_content = optimize_image(
+                    BytesIO(file_content),
+                    content_type=media.content_type
+                )   
+                saved_file = save_file(
+                        fname=media.filename,
+                        content=optimized_content.getvalue(),
+                        is_private=0,
+                        dt="Community Post",
+                        dn=post.name
+                    )
+                post.media = saved_file.file_url
             post.user = user
             post.action=action_doc
             post.tag = tag

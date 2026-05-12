@@ -6,6 +6,12 @@ from frappe.query_builder import DocType
 from frappe.query_builder.functions import Count 
 from frappe.utils import logger
 from pypika.terms import Order
+from frappe.utils.file_manager import save_file
+from werkzeug.datastructures import FileStorage
+from frappe.utils.image import optimize_image
+from io import BytesIO
+from frappe.model.naming import set_new_name
+from typing import Optional
 
 logger.set_log_level("DEBUG")
 logger = frappe.logger("samaaja", allow_site=True, file_count=50)
@@ -107,6 +113,62 @@ class ActionManager:
 
         # Step 3: Convert the list to a comma-separated string
         return ", ".join(category_list)
+
+    @staticmethod
+    def create(
+    description: str,
+    hours_invested: float,
+    category: str,
+    user: str,
+    media=None,
+    title: Optional[str] = None
+    ) -> Result:
+        try:
+            action = frappe.new_doc("Action")
+            set_new_name(action)
+            if title:
+                action.title = title
+            elif description and len(description) > 100:
+                action.title = f"{description[:100]}..."
+            else:
+                action.title = description
+            action.description = description
+            action.hours_invested = hours_invested
+            action_category = frappe.db.get_value("Action Category", {"category": category}, "name")
+            if action_category:
+                action.category = action_category
+            action.user = user
+
+            if media:
+                file_content = media.stream.read()
+
+                # optimize image
+                optimized_content = optimize_image(
+                    BytesIO(file_content),
+                    content_type=media.content_type
+                )   
+                saved_file = save_file(
+                        fname=media.filename,
+                        content=optimized_content.getvalue(),
+                        is_private=0,
+                        dt="Action",
+                        dn=action.name
+                    )
+                action.attachment_1 = saved_file.file_url
+            
+            action.insert(ignore_permissions=True)
+            return Result.success("Action created successfully")
+        except Exception as e:
+            frappe.log_error(
+                frappe.get_traceback(),
+                "Failed to create action"
+            )
+            return Result.failure(str(e))
+            
+    @staticmethod
+    def create_from_dashboard(title: str, description: str, hours_invested: float, category: str):
+        if not frappe.session.user == "Guest":
+            ActionManager.create(title, description, hours_invested, category, frappe.session.user)
 
 def update_action_details_in_user_metadata(doc_name: str):
     """Module-level wrapper for frappe.enqueue dotted-path imports."""

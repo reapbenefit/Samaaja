@@ -1,6 +1,33 @@
 import frappe
 from http import HTTPStatus
 from samaaja.api.common import custom_response
+from samaaja.services.action import ActionManager
+
+@frappe.whitelist(methods=["POST"])
+def create():
+    try:
+        title = frappe.form_dict.get("title")
+        description = frappe.form_dict.get("description")
+        hours_invested = frappe.form_dict.get("hours_invested")
+        category = frappe.form_dict.get("category")
+        media = frappe.request.files.get("attachments")
+
+        return ActionManager.create(
+                                    title=title,
+                                    description=description,
+                                    hours_invested=hours_invested,
+                                    category=category,
+                                    user=frappe.session.user,
+                                    media=media
+                                ).to_custom_response()
+    except Exception as e:
+        frappe.log_error(
+            frappe.get_traceback(),
+            "Failed to create action"
+        )
+        return custom_response("Failed to create action", status_code=500)
+
+
 
 @frappe.whitelist(methods=["DELETE"])
 def delete(doc_name):

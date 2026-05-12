@@ -9,10 +9,7 @@
  "field_order": [
   "title",
   "icon",
-  "query",
-  "description",
-  "priority",
-  "active"
+  "description"
  ],
  "fields": [
   {
@@ -27,38 +24,14 @@
    "label": "Icon"
   },
   {
-   "description": "Query should return ID of Users to whom this badge is applicable\n<br>\n\nExample query- select name from `tabUser`; <br>\nWould assign the badge to all users\n",
-   "fieldname": "query",
-   "fieldtype": "Code",
-   "label": "SQL Query"
-  },
-  {
-   "default": "0",
-   "fieldname": "active",
-   "fieldtype": "Check",
-   "label": "Active"
-  },
-  {
    "fieldname": "description",
    "fieldtype": "Long Text",
    "label": "Description"
-  },
-  {
-   "description": "Badges on the profile page are ordered by their order.",
-   "fieldname": "priority",
-   "fieldtype": "Int",
-   "label": "Order"
-  },
-  {
-   "fieldname": "badge_type",
-   "fieldtype": "Select",
-   "label": "Badge Type",
-   "options": "Skill\nPartner"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-04-09 19:52:24.564252",
+ "modified": "2026-05-12 08:21:40.194449",
  "modified_by": "Administrator",
  "module": "Samaaja",
  "name": "Badge",
@@ -78,6 +51,7 @@
    "write": 1
   }
  ],
+ "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],

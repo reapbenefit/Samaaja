@@ -1,15 +1,20 @@
 from samaaja.utils.result import Result
 import frappe
-from frappe.utils import get_url
 from samaaja.services.action import ActionManager
 from frappe.utils import logger
 from samaaja.utils.utils import validate_mobile_no
 from datetime import datetime
+from frappe.auth import LoginManager
+
 
 logger.set_log_level("DEBUG")
 logger = frappe.logger("samaaja", allow_site=True, file_count=50)
+media_base_url = frappe.conf.media_base_url
+
 class UserManager:
     
+    #mobile number should be unique...to do
+
     @staticmethod
     def create(full_name:str,dob:str,gender:str,category:str,mobile_no:str,bio:str)->Result:
         
@@ -20,6 +25,7 @@ class UserManager:
             user.birth_date = formatted_dob
             user.gender = gender
             user.mobile_no = mobile_no
+            user.bio=bio
             user.email=mobile_no+"@samaaja.com"
             user.flags.no_welcome_mail = True
             user.send_welcome_email = 0
@@ -32,6 +38,11 @@ class UserManager:
             user_category_name = frappe.db.get_value("User Category", {"category_name": category}, "name")
             user_metadata.user_category = user_category_name
             user_metadata.save(ignore_permissions=True)
+
+
+            frappe.local.login_manager = LoginManager()
+            frappe.local.login_manager.user = user.email
+            frappe.local.login_manager.post_login()
             return Result.success(
                 "User created successfully",
                 data={
@@ -87,7 +98,7 @@ class UserManager:
                 ],
                 as_dict=True
             )
-            user["user_image"]=get_url(user["user_image"])
+            user["user_image"]= f"{media_base_url}{user['user_image']}" if user["user_image"] else ""
             if user_metadata:
                 if user_metadata["user_category"]:
                     user_category_name = frappe.db.get_value("User Category", user_metadata["user_category"], "category_name")
@@ -100,14 +111,45 @@ class UserManager:
                 interest_array = user["interest"].split(",")
                 interests = []
                 for interest in interest_array:
-                    icon = frappe.db.get_value("Action Category", interest, "icon")
+                    icon = frappe.db.get_value("Action Category", interest.strip(), "icon")
                     interests.append(
                         {
-                            "action_category": interest,
-                            "icon": get_url(icon) if icon else ""
+                            "action_category": interest.strip(),
+                            "icon": f"{media_base_url}{icon}" if icon else ""
                         }
                     )
                 result["interests"] = interests
+
+            community_count = frappe.db.count(
+                "Community Post",
+                filters={
+                    "user": user_email
+                }
+                )
+            result["posts"] = community_count
+            
+
+            badges = frappe.get_list(
+                "User Badge",
+                filters={
+                    "user": user_email
+                },
+                fields=[
+                    "badge"
+                ]
+            )
+
+            badges_list = []
+            for badge in badges:
+                badges_list.append(
+                    {
+                        "badge": badge.badge,
+                        "badge_name": frappe.db.get_value("Badge", badge.badge, "title"),
+                        "badge_icon": f"{media_base_url}{icon}" if icon else "",
+                        "badge_count":badge.badge_count
+                    }
+                )
+            result["badges"] = badges_list
 
             return Result.success(
                 "User profile fetched successfully",
@@ -185,6 +227,45 @@ class UserManager:
                 "Failed to complete user profile",
                 error_data=str(e)
             )
+    @staticmethod
+    def login_using_OTP(mobile_no: str, otp:str):
+        try:
+            if not otp == '1111':
+                return Result.bad_request(
+                    "Invalid OTP"
+                )
+            
+            user = frappe.get_value(
+                "User",
+                {"mobile_no":mobile_no},
+                [
+                    "name",
+                ]
+            )
+            if not user:
+                return Result.not_found(
+                    "User not found"
+                )
+
+            login_manager = LoginManager()
+            login_manager.login_as(user)
+
+
+            return Result.success(
+                "User logged in successfully",
+                data={
+                    "user": user
+                }
+            )
+        except Exception as e:
+            frappe.log_error(
+                frappe.get_traceback(),
+                "Failed to log in user"
+            )
+            return Result.failure(
+                "Failed to log in user",
+                error_data=str(e)
+            )
 
 def update_user_interest_from_top_categories(doc_name: str):
     """Module-level wrapper for frappe.enqueue dotted-path imports."""
@@ -197,3 +278,5 @@ def update_user_interest_from_top_categories(doc_name: str):
                 as_dict=True
             )
     UserManager.update_user_interest_from_top_categories(user_dict["user"])
+
+
