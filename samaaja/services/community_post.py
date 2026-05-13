@@ -12,6 +12,33 @@ class CommunityPostManager:
         pass
 
     @staticmethod
+    def like(post_id:str, user_id:str) -> Result:
+        try:
+            post = frappe.get_doc("Community Post",post_id)
+            if not post:
+                return Result.bad_request("Community post not found")
+
+            if post.user == user_id:
+                return Result.bad_request("You cannot like your own post")
+
+            if(post.like_count is None):
+                post.like_count = 0
+            post.like_count += 1
+            post.save(ignore_permissions=True)
+            return Result.success("Community post liked successfully")
+
+        except Exception as e:
+            frappe.log_error(
+                frappe.get_traceback(),
+                "Failed to like community post"
+            )
+
+            return Result.failure(
+                "Failed to like community post",
+                error_data=str(e)
+            )
+
+    @staticmethod
     def get(limit=10, offset=0) -> Result:
         try:
             limit = int(limit)
