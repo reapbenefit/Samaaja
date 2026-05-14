@@ -19,13 +19,15 @@ class UserManager:
     def create(full_name:str,dob:str,gender:str,category:str,mobile_no:str,bio:str)->Result:
         
         try:
+            if frappe.db.exists("User", {"mobile_no": mobile_no}):
+                return Result.bad_request("User already exists with this mobile number")
             user = frappe.new_doc("User")
             user.first_name = full_name
             formatted_dob = datetime.strptime(dob, "%Y-%m-%d").date()
             user.birth_date = formatted_dob
             user.gender = gender
-            user.mobile_no = mobile_no
             user.bio=bio
+            user.mobile_no = mobile_no
             user.email=mobile_no+"@samaaja.com"
             user.flags.no_welcome_mail = True
             user.send_welcome_email = 0
@@ -189,6 +191,8 @@ class UserManager:
                 return Result.bad_request(
                     "Invalid mobile number"
                 )
+            if frappe.db.exists("User", {"mobile_no": user_mobile_no}):
+                return Result.bad_request("User with this mobile number already exists")
 
             user_category = frappe.db.get_value("User Category", {"category_name": user_category}, "name")
 
@@ -206,7 +210,7 @@ class UserManager:
                 )
             user = frappe.get_doc("User", user_email)
             user.gender = user_gender
-            user.bio = user_bio
+            user.bio = user_bio 
             user.mobile_no = user_mobile_no
             user.birth_date = user_dob
             user.save(ignore_permissions=True)
