@@ -235,6 +235,7 @@ class UserManager:
                 "Failed to complete user profile",
                 error_data=str(e)
             )
+    
     @staticmethod
     def login_using_OTP(mobile_no: str, otp:str):
         try:
@@ -285,6 +286,35 @@ class UserManager:
                 error_data=str(e)
             )
 
+    @staticmethod
+    def update_user_metadata(user_id:str):
+        try:
+            last_action = ActionManager.get_last_action(user_id)
+            user_metadata = frappe.get_doc("User Metadata", user_id)
+
+            if not last_action:
+                user_metadata.last_action = None
+                user_metadata.last_action_date = None
+                user_metadata.last_action_type = None
+                user_metadata.last_action_category = None
+            else:
+                user_metadata.last_action = last_action.action_id
+                user_metadata.last_action_date = last_action.action_date
+                user_metadata.last_action_type = last_action.action_type
+                user_metadata.last_action_category = last_action.action_category
+            user_metadata.action_count = ActionManager.calculate_total_actions(user_id)
+            user_metadata.hours_invested = ActionManager.calculate_hours_invested(user_id)
+            user_metadata.save(ignore_permissions=True)
+        except Exception as e:
+            frappe.log_error(
+                frappe.get_traceback(),
+                "Failed to update user metadata"
+            )
+            return Result.failure(
+                "Failed to update user metadata",
+                error_data=str(e)
+            )
+
 def update_user_interest_from_top_categories(doc_name: str):
     """Module-level wrapper for frappe.enqueue dotted-path imports."""
     user_dict = frappe.db.get_value(
@@ -298,3 +328,14 @@ def update_user_interest_from_top_categories(doc_name: str):
     UserManager.update_user_interest_from_top_categories(user_dict["user"])
 
 
+def update_user_metadata(doc_name: str):
+    """Module-level wrapper for frappe.enqueue dotted-path imports."""
+    user_dict = frappe.db.get_value(
+                "Action",
+                doc_name,
+                [
+                    "user"
+                ],
+                as_dict=True
+            )
+    UserManager.update_user_metadata(user_dict["user"])

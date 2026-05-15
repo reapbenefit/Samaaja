@@ -12,6 +12,7 @@ from frappe.utils.image import optimize_image
 from io import BytesIO
 from frappe.model.naming import set_new_name
 from typing import Optional
+from samaaja.model.action import Action
 
 logger.set_log_level("DEBUG")
 logger = frappe.logger("samaaja", allow_site=True, file_count=50)
@@ -113,6 +114,43 @@ class ActionManager:
 
         # Step 3: Convert the list to a comma-separated string
         return ", ".join(category_list)
+
+    @staticmethod
+    def get_last_action(
+        user: str,
+    ) -> Action:
+        try:
+            action = frappe.db.sql("""
+                SELECT name
+                FROM `tabAction`
+                WHERE `user` = %s
+                ORDER BY `creation` DESC
+                LIMIT 1
+            """, (user,), as_dict=True)
+
+            if action:
+                action_model = Action(
+                    action_id=action[0].name,
+                    action_category=action[0].category,
+                    action_type=action[0].type,
+                    user_id=action[0].user,
+                    hours_invested=action[0].hours_invested,
+                    description=action[0].description,
+                    media=action[0].media,
+                    created_at=action[0].creation,
+                    updated_at=action[0].modified
+                )
+                return action_model
+
+            return None
+
+        except Exception:
+            frappe.log_error(
+                frappe.get_traceback(),
+                "Failed to get last action"
+            )
+            return None
+
 
     @staticmethod
     def create(

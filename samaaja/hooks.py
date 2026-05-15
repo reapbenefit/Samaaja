@@ -225,9 +225,7 @@ doc_events = {
         "on_trash": "samaaja.doc_events.events.update_profile_hook",
     },
     "Action": {
-        "after_insert": [
-			"samaaja.doc_events.action.after_insert"
-        ]
+        "after_insert": "samaaja.doc_events.action.after_insert"
     },
     "User": {
         "after_insert": "samaaja.doc_events.user.after_insert",
