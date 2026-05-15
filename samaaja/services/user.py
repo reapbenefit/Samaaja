@@ -100,7 +100,11 @@ class UserManager:
                 ],
                 as_dict=True
             )
-            user["user_image"]= f"{media_base_url}{user['user_image']}" if user["user_image"] else ""
+            
+            if user["user_image"] and user["user_image"].startswith("http"):
+                pass
+            else:
+                user["user_image"]= f"{media_base_url}{user['user_image']}" if user["user_image"] else ""
             if user_metadata:
                 if user_metadata["user_category"]:
                     user_category_name = frappe.db.get_value("User Category", user_metadata["user_category"], "category_name")

@@ -145,8 +145,10 @@ def create(doc_name:str):
             "description",
             "attachment_1",
             "user",
-            "category"
+            "category",
+            "type"
         ],
         as_dict=True
     )
-    CommunityPostManager.create(action_doc["title"], action_doc["description"], action_doc["attachment_1"], action_doc["user"], doc_name, action_doc["category"])
+    tag = action_doc["category"] + ", " + action_doc["type"]
+    CommunityPostManager.create(action_doc["title"], action_doc["description"], action_doc["attachment_1"], action_doc["user"], doc_name, tag)

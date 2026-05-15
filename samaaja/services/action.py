@@ -120,8 +120,10 @@ class ActionManager:
     hours_invested: float,
     category: str,
     user: str,
+    action_type: str = None,
     media=None,
-    title: Optional[str] = None
+    title: Optional[str] = None,
+
     ) -> Result:
         try:
             action = frappe.new_doc("Action")
@@ -138,7 +140,12 @@ class ActionManager:
             if action_category:
                 action.category = action_category
             action.user = user
-
+            logger.info(f'action type is {action_type}')            
+            if action_type:
+                action_type_name = frappe.db.get_value("Action Type", {"type": action_type}, "name")
+                logger.info(f'action type name is {action_type_name}')
+                if action_type_name:
+                    action.type = action_type_name
             if media:
                 file_content = media.stream.read()
 

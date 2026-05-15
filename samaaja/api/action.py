@@ -11,13 +11,14 @@ def create():
         hours_invested = frappe.form_dict.get("hours_invested")
         category = frappe.form_dict.get("category")
         media = frappe.request.files.get("attachments")
-
+        action_type = frappe.form_dict.get("type")
         return ActionManager.create(
                                     title=title,
                                     description=description,
                                     hours_invested=hours_invested,
                                     category=category,
                                     user=frappe.session.user,
+                                    action_type=action_type,
                                     media=media
                                 ).to_custom_response()
     except Exception as e:
