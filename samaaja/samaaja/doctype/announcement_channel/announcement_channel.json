@@ -1,0 +1,39 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-05-12 14:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "channel_name",
+  "enabled"
+ ],
+ "fields": [
+  {
+   "fieldname": "channel_name",
+   "fieldtype": "Select",
+   "label": "Channel Name",
+   "options": "Email\nApp Notification\nWhatsApp",
+   "reqd": 1
+  },
+  {
+   "default": "1",
+   "fieldname": "enabled",
+   "fieldtype": "Check",
+   "label": "Enabled"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-05-12 14:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Announcements",
+ "name": "Announcement Channel",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
