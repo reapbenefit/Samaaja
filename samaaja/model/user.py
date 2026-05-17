@@ -2,7 +2,7 @@ from typing import Optional
 from pydantic import BaseModel
 from datetime import datetime   
 
-Class UserProfile(BaseModel):
+class UserProfile(BaseModel):
     user_id: str
     full_name: str
     user_image: Optional[str] = None
