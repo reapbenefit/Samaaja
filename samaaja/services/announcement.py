@@ -4,6 +4,7 @@ from samaaja.utils.result import Result
 
 
 class AnnouncementManager:
+    media_base_url = frappe.conf.media_base_url
 
     @staticmethod
     def get_announcement(name: str) -> dict:
@@ -11,37 +12,44 @@ class AnnouncementManager:
 
     @staticmethod
     def get_active_announcements() -> Result:
-        now = frappe.utils.now_datetime()
+        try:
+            now = frappe.utils.now_datetime()
 
-        names = frappe.get_all("Announcement",
-            filters={"published": 1},
-            pluck="name"
-        )
+            names = frappe.get_all("Announcement",
+                filters={"published": 1},
+                pluck="name"
+            )
 
-        announcements = []
-        for name in names:
-            doc = frappe.get_doc("Announcement", name)
+            announcements = []
+            for name in names:
+                doc = frappe.get_doc("Announcement", name)
 
-            if doc.valid_from and doc.valid_from > now:
-                continue
-            if doc.valid_to and doc.valid_to < now:
-                continue
-            if doc.target_audience == "Registered Users" and frappe.session.user == "Guest":
-                continue
+                if doc.valid_from and doc.valid_from > now:
+                    continue
+                if doc.valid_to and doc.valid_to < now:
+                    continue
+                if doc.target_audience == "Registered Users" and frappe.session.user == "Guest":
+                    continue
 
-            announcements.append({
-                "name": doc.name,
-                "title": doc.title,
-                "message": doc.message,
-                "url_link": doc.url_link,
-                "image": doc.image,
-                "valid_from": doc.valid_from,
-                "valid_to": doc.valid_to,
-                "target_audience": doc.target_audience,
-            })
+                announcements.append({
+                    "name": doc.name,
+                    "title": doc.title,
+                    "message": doc.message,
+                    "url_link": doc.url_link,
+                    "image":  f"{AnnouncementManager.media_base_url}{doc.image}" if doc.image else "",
+                    "valid_from": doc.valid_from,
+                    "valid_to": doc.valid_to,
+                    "target_audience": doc.target_audience,
+                })
 
-        announcements.sort(key=lambda x: x["valid_from"] or "", reverse=True)
-        return Result.success("Announcements fetched successfully", data=announcements)
+            announcements.sort(key=lambda x: x["valid_from"] or "", reverse=True)
+            return Result.success("Announcements fetched successfully", data=announcements)
+        except Exception as e:
+            frappe.log_error(
+                frappe.get_traceback(),
+                "Failed to fetch announcements"
+            )
+            return Result.error("Failed to fetch announcements")
 
     @staticmethod
     def record_interaction(announcement: str, interaction_type: str, contact_id: str = None) -> Result:
