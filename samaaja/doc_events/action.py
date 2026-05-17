@@ -10,17 +10,20 @@ def after_insert(doc, method=None):
     frappe.enqueue(
         "samaaja.services.action.update_action_details_in_user_metadata",
         queue='short',
-        doc_name=doc.name
+        doc_name=doc.name,
+        enqueue_after_commit=True
     )
     frappe.enqueue(
         "samaaja.services.user.update_user_interest_from_top_categories",
         queue='short',
-        doc_name=doc.name
+        doc_name=doc.name,
+        enqueue_after_commit=True
     )
     frappe.enqueue(
         "samaaja.services.community_post.create",
         queue='short',
-        doc_name=doc.name
+        doc_name=doc.name,
+        enqueue_after_commit=True
     )
 
 def on_trash(doc, method=None):

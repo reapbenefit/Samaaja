@@ -29,12 +29,12 @@ def add():
         media = frappe.request.files.get("attachments")
 
         return CommunityPostManager.create(
-                                    title=title,
                                     description=description,
                                     media=media,
                                     user=frappe.session.user,
                                     action_doc=None,
-                                    tag=category
+                                    tag=category,
+                                    title=title
                                 ).to_custom_response()
     except Exception as e:
         frappe.log_error(

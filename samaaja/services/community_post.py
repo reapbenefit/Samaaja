@@ -92,10 +92,11 @@ class CommunityPostManager:
             )
     
     @staticmethod
-    def create(title: str, description: str, media: str, user: str, action_doc:str, tag:str) -> Result:
+    def create(description: str, media: str, user: str, action_doc:str, tag:str, title:str=None) -> Result:
         try:
             post = frappe.new_doc("Community Post")
-            post.title = title
+            if title:
+                post.title = title
             post.description = description
             set_new_name(post)
             if isinstance (media,str):
@@ -141,7 +142,6 @@ def create(doc_name:str):
         "Action",
         doc_name,
         [
-            "title",
             "description",
             "attachment_1",
             "user",
@@ -151,4 +151,4 @@ def create(doc_name:str):
         as_dict=True
     )
     tag = action_doc["category"] + ", " + action_doc["type"]
-    CommunityPostManager.create(action_doc["title"], action_doc["description"], action_doc["attachment_1"], action_doc["user"], doc_name, tag)
+    CommunityPostManager.create(action_doc["description"], action_doc["attachment_1"], action_doc["user"], doc_name, tag)

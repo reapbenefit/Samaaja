@@ -141,17 +141,19 @@ class UserManager:
                     "user": user_email
                 },
                 fields=[
-                    "badge"
+                    "badge",
+                    "badge_count"
                 ]
             )
 
             badges_list = []
             for badge in badges:
+                badge_doc = frappe.get_doc("Badge", badge.badge)
                 badges_list.append(
                     {
                         "badge": badge.badge,
-                        "badge_name": frappe.db.get_value("Badge", badge.badge, "title"),
-                        "badge_icon": f"{media_base_url}{icon}" if icon else "",
+                        "badge_name": badge_doc.title,
+                        "badge_icon": f"{media_base_url}{badge_doc.icon}" if badge_doc.icon else "",
                         "badge_count":badge.badge_count
                     }
                 )
@@ -317,16 +319,10 @@ class UserManager:
 
 def update_user_interest_from_top_categories(doc_name: str):
     """Module-level wrapper for frappe.enqueue dotted-path imports."""
-    user_dict = frappe.db.get_value(
-                "Action",
-                doc_name,
-                [
-                    "user"
-                ],
-                as_dict=True
-            )
-    UserManager.update_user_interest_from_top_categories(user_dict["user"])
+    user = frappe.db.get_value("Action", doc_name, "user")
 
+    if user:
+        UserManager.update_user_interest_from_top_categories(user)
 
 def update_user_metadata(doc_name: str):
     """Module-level wrapper for frappe.enqueue dotted-path imports."""
