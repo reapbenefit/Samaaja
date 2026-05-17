@@ -1,174 +1,174 @@
 {
- "actions": [],
- "allow_rename": 1,
- "creation": "2026-05-09 12:00:00.000000",
- "doctype": "DocType",
- "editable_grid": 1,
- "engine": "InnoDB",
- "field_order": [
-  "title",
-  "message",
-  "url_link",
-  "image",
-  "valid_from",
-  "valid_to",
-  "target_audience",
-  "published",
-  "column_break_8",
-  "publish_on",
-  "is_recurring",
-  "frequency",
-  "repeat_until",
-  "total_repeat_times",
-  "current_repeat_count",
-  "last_sent_on",
-  "section_break_channels",
-  "delivery_channels",
-  "total_views",
-  "total_clicks"
- ],
- "fields": [
-  {
-   "fieldname": "title",
-   "fieldtype": "Data",
-   "label": "Title",
-   "reqd": 1
-  },
-  {
-   "fieldname": "message",
-   "fieldtype": "Text Editor",
-   "label": "Message",
-   "reqd": 1
-  },
-  {
-   "fieldname": "url_link",
-   "fieldtype": "Data",
-   "label": "URL Link",
-   "options": "URL"
-  },
-  {
-   "fieldname": "image",
-   "fieldtype": "Attach Image",
-   "label": "Image"
-  },
-  {
-   "fieldname": "valid_from",
-   "fieldtype": "Datetime",
-   "label": "Valid From",
-   "reqd": 1
-  },
-  {
-   "fieldname": "valid_to",
-   "fieldtype": "Datetime",
-   "label": "Valid To"
-  },
-  {
-   "default": "All",
-   "fieldname": "target_audience",
-   "fieldtype": "Select",
-   "label": "Target Audience",
-   "options": "All\nRegistered Users"
-  },
-  {
-   "default": "0",
-   "fieldname": "published",
-   "fieldtype": "Check",
-   "label": "Announce/Publish?"
-  },
-  {
-   "fieldname": "column_break_8",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "publish_on",
-   "fieldtype": "Datetime",
-   "label": "Publish On (Scheduler)"
-  },
-  {
-   "default": "0",
-   "fieldname": "is_recurring",
-   "fieldtype": "Check",
-   "label": "Is Recurring"
-  },
-  {
-   "depends_on": "eval:doc.is_recurring==1",
-   "fieldname": "frequency",
-   "fieldtype": "Select",
-   "label": "Frequency",
-   "options": "Hourly\nDaily\nWeekly\nMonthly"
-  },
-  {
-   "depends_on": "eval:doc.is_recurring==1",
-   "fieldname": "repeat_until",
-   "fieldtype": "Date",
-   "label": "Repeat Until"
-  },
-  {
-   "depends_on": "eval:doc.is_recurring==1",
-   "description": "Optional: Stop after repeating this many times.",
-   "fieldname": "total_repeat_times",
-   "fieldtype": "Int",
-   "label": "Total Repeat Times"
-  },
-  {
-   "default": "0",
-   "fieldname": "current_repeat_count",
-   "fieldtype": "Int",
-   "label": "Current Repeat Count",
-   "read_only": 1
-  },
-  {
-   "fieldname": "last_sent_on",
-   "fieldtype": "Datetime",
-   "label": "Last Sent On",
-   "read_only": 1
-  },
-  {
-   "fieldname": "section_break_channels",
-   "fieldtype": "Section Break",
-   "label": "Delivery Channels"
-  },
-  {
-   "fieldname": "delivery_channels",
-   "fieldtype": "Table",
-   "label": "Delivery Channels",
-   "options": "Announcement Channel"
-  },
-  {
-   "fieldname": "total_views",
-   "fieldtype": "Int",
-   "label": "Total Views",
-   "read_only": 1
-  },
-  {
-   "fieldname": "total_clicks",
-   "fieldtype": "Int",
-   "label": "Total Clicks",
-   "read_only": 1
-  }
- ],
- "index_web_pages_for_search": 1,
- "links": [],
- "modified": "2026-05-13 10:00:00.000000",
- "modified_by": "Administrator",
- "module": "Announcements",
- "name": "Announcement",
- "owner": "Administrator",
- "permissions": [
-  {
-   "create": 1,
-   "delete": 1,
-   "email": 1,
-   "export": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "System Manager",
-   "share": 1,
-   "write": 1
-  }
- ],
- "sort_field": "modified",
- "sort_order": "DESC",
- "states": []
+    "actions": [],
+    "allow_rename": 1,
+    "creation": "2026-05-09 12:00:00.000000",
+    "doctype": "DocType",
+    "editable_grid": 1,
+    "engine": "InnoDB",
+    "field_order": [
+        "title",
+        "message",
+        "url_link",
+        "image",
+        "valid_from",
+        "valid_to",
+        "target_audience",
+        "published",
+        "column_break_8",
+        "publish_on",
+        "is_recurring",
+        "frequency",
+        "repeat_until",
+        "total_repeat_times",
+        "current_repeat_count",
+        "last_sent_on",
+        "section_break_channels",
+        "delivery_channels",
+        "total_views",
+        "total_clicks"
+    ],
+    "fields": [
+        {
+            "fieldname": "title",
+            "fieldtype": "Data",
+            "label": "Title",
+            "reqd": 1
+        },
+        {
+            "fieldname": "message",
+            "fieldtype": "Text Editor",
+            "label": "Message",
+            "reqd": 1
+        },
+        {
+            "fieldname": "url_link",
+            "fieldtype": "Data",
+            "label": "URL Link",
+            "options": "URL"
+        },
+        {
+            "fieldname": "image",
+            "fieldtype": "Attach Image",
+            "label": "Image"
+        },
+        {
+            "fieldname": "valid_from",
+            "fieldtype": "Datetime",
+            "label": "Valid From",
+            "reqd": 1
+        },
+        {
+            "fieldname": "valid_to",
+            "fieldtype": "Datetime",
+            "label": "Valid To"
+        },
+        {
+            "default": "All",
+            "fieldname": "target_audience",
+            "fieldtype": "Select",
+            "label": "Target Audience",
+            "options": "All\nRegistered Users"
+        },
+        {
+            "default": "0",
+            "fieldname": "published",
+            "fieldtype": "Check",
+            "label": "Announce/Publish?"
+        },
+        {
+            "fieldname": "column_break_8",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "publish_on",
+            "fieldtype": "Datetime",
+            "label": "Publish On (Scheduler)"
+        },
+        {
+            "default": "0",
+            "fieldname": "is_recurring",
+            "fieldtype": "Check",
+            "label": "Is Recurring"
+        },
+        {
+            "depends_on": "eval:doc.is_recurring==1",
+            "fieldname": "frequency",
+            "fieldtype": "Select",
+            "label": "Frequency",
+            "options": "Hourly\nDaily\nWeekly\nMonthly"
+        },
+        {
+            "depends_on": "eval:doc.is_recurring==1",
+            "fieldname": "repeat_until",
+            "fieldtype": "Date",
+            "label": "Repeat Until"
+        },
+        {
+            "depends_on": "eval:doc.is_recurring==1",
+            "description": "Optional: Stop after repeating this many times.",
+            "fieldname": "total_repeat_times",
+            "fieldtype": "Int",
+            "label": "Total Repeat Times"
+        },
+        {
+            "default": "0",
+            "fieldname": "current_repeat_count",
+            "fieldtype": "Int",
+            "label": "Current Repeat Count",
+            "read_only": 1
+        },
+        {
+            "fieldname": "last_sent_on",
+            "fieldtype": "Datetime",
+            "label": "Last Sent On",
+            "read_only": 1
+        },
+        {
+            "fieldname": "section_break_channels",
+            "fieldtype": "Section Break",
+            "label": "Delivery Channels"
+        },
+        {
+            "fieldname": "delivery_channels",
+            "fieldtype": "Table",
+            "label": "Delivery Channels",
+            "options": "Announcement Channel"
+        },
+        {
+            "fieldname": "total_views",
+            "fieldtype": "Int",
+            "label": "Total Views",
+            "read_only": 1
+        },
+        {
+            "fieldname": "total_clicks",
+            "fieldtype": "Int",
+            "label": "Total Clicks",
+            "read_only": 1
+        }
+    ],
+    "index_web_pages_for_search": 1,
+    "links": [],
+    "modified": "2026-05-13 10:00:00.000000",
+    "modified_by": "Administrator",
+    "module": "Samaaja",
+    "name": "Announcement",
+    "owner": "Administrator",
+    "permissions": [
+        {
+            "create": 1,
+            "delete": 1,
+            "email": 1,
+            "export": 1,
+            "print": 1,
+            "read": 1,
+            "report": 1,
+            "role": "System Manager",
+            "share": 1,
+            "write": 1
+        }
+    ],
+    "sort_field": "modified",
+    "sort_order": "DESC",
+    "states": []
 }
