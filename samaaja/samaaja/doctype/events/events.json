@@ -112,19 +112,14 @@
    "options": "Location"
   },
   {
-   "default": "12.9244925",
    "fieldname": "latitude",
    "fieldtype": "Data",
-   "hidden": 1,
    "label": "Latitude"
   },
   {
-   "default": "77.5905634",
    "fieldname": "longitude",
    "fieldtype": "Data",
-   "hidden": 1,
-   "label": "Longitude",
-   "reqd": 1
+   "label": "Longitude"
   },
   {
    "fieldname": "description",
@@ -231,7 +226,7 @@
    "link_fieldname": "event_id"
   }
  ],
- "modified": "2026-04-08 01:49:26.525328",
+ "modified": "2026-05-19 10:44:29.941422",
  "modified_by": "Administrator",
  "module": "Samaaja",
  "name": "Events",
