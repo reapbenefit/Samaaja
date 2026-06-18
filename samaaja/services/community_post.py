@@ -10,7 +10,7 @@ from frappe.model.naming import set_new_name
 class CommunityPostManager:
     def __init__(self):
         pass
-
+    
     @staticmethod
     def like(post_id:str, user_id:str) -> Result:
         try:
@@ -39,6 +39,36 @@ class CommunityPostManager:
             )
 
     @staticmethod
+    def unlike(post_id:str, user_id:str) -> Result:
+        try:
+            post = frappe.get_doc("Community Post", post_id)
+            if not post:
+                return Result.bad_request("Community post not found")
+
+            if post.user == user_id:
+                return Result.bad_request("You cannot unlike your own post")
+
+            # Ensure like_count doesn't go below 0
+            if post.like_count is None or post.like_count <= 0:
+                post.like_count = 0
+            else:
+                post.like_count -= 1
+                
+            post.save(ignore_permissions=True)
+            return Result.success("Community post unliked successfully")
+
+        except Exception as e:
+            frappe.log_error(
+                frappe.get_traceback(),
+                "Failed to unlike community post"
+            )
+
+            return Result.failure(
+                "Failed to unlike community post",
+                error_data=str(e)
+            )
+
+    @staticmethod
     def get(limit=10, offset=0) -> Result:
         try:
             limit = int(limit)
@@ -52,6 +82,7 @@ class CommunityPostManager:
                     `media`,
                     `creation`,
                     `like_count`,
+                    `comment_count`,
                     `user`,
                     `tag`
                 FROM `tabCommunity Post`

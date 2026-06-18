@@ -1,32 +1,56 @@
 # samaaja/api/comment.py
 
 import frappe
+from samaaja.services.community_post_comment import CommunityPostCommentManager
+from samaaja.utils.custom_response import custom_response
+
+
+
+@frappe.whitelist(methods=["POST"])
+def create():
+    try:
+        post_id = frappe.form_dict.get("post_id")
+        comment_text = frappe.form_dict.get("comment_text")
+
+        if not post_id:
+            return custom_response("Post ID is required", status_code=400)
+
+        if not comment_text:
+            return custom_response("Comment text is required", status_code=400)
+
+        return CommunityPostCommentManager.create(
+            post_id=post_id,
+            comment_text=comment_text,
+            user_id=frappe.session.user
+        ).to_custom_response()
+
+    except Exception:
+        frappe.log_error(
+            frappe.get_traceback(),
+            "Failed to create comment"
+        )
+        return custom_response(
+            "Failed to create comment",
+            status_code=500
+        )
 
 
 @frappe.whitelist()
-def create_comment(post_id, comment_text, user_id):
-    """Create a comment."""
-    pass
+def get(post_id, limit=10, offset=0):
+    try:
+        return CommunityPostCommentManager.get(
+            post_id=post_id,
+            limit=limit,
+            offset=offset
+        ).to_custom_response()
 
+    except Exception:
+        frappe.log_error(
+            frappe.get_traceback(),
+            "Failed to get comments"
+        )
 
-@frappe.whitelist()
-def get_comments(post_id):
-    """Get comments for a post."""
-    pass
-
-
-def verify_post_id(post_id):
-    """Verify if the post ID exists."""
-    pass
-
-
-def verify_user_id(user_id):
-    """Verify if the user ID exists."""
-    pass
-
-
-
-
-
-
-
+        return custom_response(
+            "Failed to get comments",
+            status_code=500
+        )

@@ -13,7 +13,8 @@
   "action",
   "tag",
   "post_analytics_section",
-  "like_count"
+  "like_count",
+  "comment_count"
  ],
  "fields": [
   {
@@ -62,13 +63,18 @@
    "fieldname": "tag",
    "fieldtype": "Data",
    "label": "Tag"
+  },
+  {
+   "fieldname": "comment_count",
+   "fieldtype": "Int",
+   "label": "CommentCount"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-05-11 16:12:20.874682",
- "modified_by": "ankit@impactyaan.com",
+ "modified": "2026-06-17 14:37:05.705461",
+ "modified_by": "Administrator",
  "module": "Samaaja",
  "name": "Community Post",
  "owner": "Administrator",
