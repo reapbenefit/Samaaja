@@ -2,7 +2,7 @@ from samaaja.utils.result import Result
 import frappe
 
 
-class CommunityPostCommentManager:
+class CommentManager:
     def __init__(self):
         pass
 
@@ -12,23 +12,16 @@ class CommunityPostCommentManager:
             if not frappe.db.exists("Community Post", post_id):
                 return Result.bad_request("Community post not found")
 
-            comment = frappe.new_doc("Community Post Comment")
+            comment = frappe.new_doc("User Comment")
             comment.post = post_id
             comment.comment_text = comment_text
             comment.user = user_id
             comment.save(ignore_permissions=True)
 
-            # Increment comment count on the post
-            frappe.db.sql(
-                """
-                UPDATE `tabCommunity Post`
-                SET comment_count = COALESCE(comment_count, 0) + 1
-                WHERE name = %s
-                """,
-                (post_id,)
-            )
-
-            frappe.db.commit()
+            # Increment comment count on the post via ORM
+            post = frappe.get_doc("Community Post", post_id)
+            post.comment_count = (post.comment_count or 0) + 1
+            post.save(ignore_permissions=True)
 
             return Result.success(
                 "Comment created successfully",
@@ -60,14 +53,14 @@ class CommunityPostCommentManager:
                 SELECT
                     c.name,
                     c.comment_text,
-                    c.user,
+                    c.user_id,
                     c.creation,
                     u.full_name,
                     u.user_image
-                FROM `tabCommunity Post Comment` c
+                FROM `tabUser Comment` c
                 LEFT JOIN `tabUser` u
-                    ON c.user = u.name
-                WHERE c.post = %s
+                    ON c.user_id = u.name
+                WHERE c.post_id = %s
                 ORDER BY c.creation DESC
                 LIMIT %s OFFSET %s
                 """,

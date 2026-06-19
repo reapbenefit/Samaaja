@@ -1,7 +1,7 @@
 # samaaja/api/comment.py
 
 import frappe
-from samaaja.services.community_post_comment import CommunityPostCommentManager
+from samaaja.services.comment import CommentManager
 from samaaja.utils.custom_response import custom_response
 
 
@@ -18,7 +18,7 @@ def create():
         if not comment_text:
             return custom_response("Comment text is required", status_code=400)
 
-        return CommunityPostCommentManager.create(
+        return CommentManager.create(
             post_id=post_id,
             comment_text=comment_text,
             user_id=frappe.session.user
@@ -38,7 +38,7 @@ def create():
 @frappe.whitelist()
 def get(post_id, limit=10, offset=0):
     try:
-        return CommunityPostCommentManager.get(
+        return CommentManager.get(
             post_id=post_id,
             limit=limit,
             offset=offset

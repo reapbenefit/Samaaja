@@ -1,43 +1,37 @@
 {
  "actions": [],
  "allow_rename": 1,
- "creation": "2026-06-09 15:56:20.252836",
+ "creation": "2026-06-19 12:34:12.909165",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "postid",
-  "userid",
-  "comment"
+  "post_id",
+  "comment_text",
+  "user_id"
  ],
  "fields": [
   {
-   "fieldname": "postid",
+   "fieldname": "post_id",
    "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "Post id",
-   "options": "Community Post",
-   "reqd": 1
+   "label": "Post Id",
+   "options": "Community Post"
   },
   {
-   "fieldname": "userid",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "user Id",
-   "options": "User",
-   "reqd": 1
+   "fieldname": "comment_text",
+   "fieldtype": "Long Text",
+   "label": "Comment"
   },
   {
-   "fieldname": "comment",
-   "fieldtype": "Text",
-   "in_list_view": 1,
-   "label": "comment",
-   "reqd": 1
+   "fieldname": "user_id",
+   "fieldtype": "Link",
+   "label": "User Id",
+   "options": "User"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-06-10 00:43:21.084134",
+ "modified": "2026-06-19 12:41:41.170747",
  "modified_by": "Administrator",
  "module": "Samaaja",
  "name": "User Comment",
