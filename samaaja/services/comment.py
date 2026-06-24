@@ -13,9 +13,9 @@ class CommentManager:
                 return Result.bad_request("Community post not found")
 
             comment = frappe.new_doc("User Comment")
-            comment.post = post_id
+            comment.post_id = post_id
             comment.comment_text = comment_text
-            comment.user = user_id
+            comment.user_id = user_id
             comment.save(ignore_permissions=True)
 
             # Increment comment count on the post via ORM
