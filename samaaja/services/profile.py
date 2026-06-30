@@ -115,17 +115,18 @@ class ProfileManager:
                 return urls
 
             action_list = [
-                Action(
-                    action_id=action.name,
-                    action_category=action.category,
-                    action_type=action.type,
-                    user_id=action.user,
-                    hours_invested=action.hours_invested,
-                    description=action.description,
-                    created_at=action.creation,
-                    updated_at=action.modified,
-                )
-                for action in actions
+               {
+        "action_id": action.name,
+        "action_category": action.category,
+        "action_type": action.type,
+        "user_id": action.user,
+        "hours_invested": action.hours_invested,
+        "description": action.description,
+        "media": build_media_urls(action),
+        "created_at": action.creation,
+        "updated_at": action.modified,
+    }
+    for action in actions
             ]
 
             return Result.success(
