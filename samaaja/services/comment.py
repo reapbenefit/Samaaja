@@ -9,7 +9,7 @@ class CommentManager:
     @staticmethod
     def create(post_id: str, comment_text: str, user_id: str) -> Result:
         try:
-            if not frappe.db.exists("Community Post", post_id):
+            if not frappe.db.exists("Community Post", post_id): 
                 return Result.bad_request("Community post not found")
 
             comment = frappe.new_doc("User Comment")
@@ -20,7 +20,10 @@ class CommentManager:
 
             # Increment comment count on the post via ORM
             post = frappe.get_doc("Community Post", post_id)
-            post.comment_count = (post.comment_count or 0) + 1
+            post.comment_count = frappe.db.count(
+    "User Comment",
+    {"post_id": post_id}
+)
             post.save(ignore_permissions=True)
 
             return Result.success(
