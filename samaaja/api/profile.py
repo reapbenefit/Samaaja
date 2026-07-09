@@ -1,12 +1,13 @@
 import frappe
-from samaaja.services.profile import ProfileManager
+from samaaja.services.community_post import CommunityPostManager
+from samaaja.services.action import ActionManager
 from samaaja.utils.custom_response import custom_response
 
 
 @frappe.whitelist(allow_guest=True)
 def get_posts(user, limit=10, offset=0):
     try:
-        return ProfileManager.get_posts(
+        return CommunityPostManager.get_posts(
             user=user,
             limit=limit,
             offset=offset
@@ -26,7 +27,7 @@ def get_posts(user, limit=10, offset=0):
 @frappe.whitelist(allow_guest=True)
 def get_actions(user, limit=10, offset=0):
     try:
-        return ProfileManager.get_actions(
+        return ActionManager.get_actions(
             user=user,
             limit=limit,
             offset=offset

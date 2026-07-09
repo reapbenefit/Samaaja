@@ -49,6 +49,86 @@ class ActionManager:
             )
     
     @staticmethod
+    def get_actions(
+        user: str,
+        limit: int = 10,
+        offset: int = 0,
+    ) -> Result:
+        try:
+            limit = int(limit)
+            offset = int(offset)
+
+            actions = frappe.db.sql(
+                """
+                SELECT
+                    name,
+                    category,
+                    type,
+                    user,
+                    hours_invested,
+                    description,
+                    attachment_1,
+                    attachment_2,
+                    creation,
+                    modified
+                FROM `tabAction`
+                WHERE user = %s
+                ORDER BY creation DESC
+                LIMIT %s OFFSET %s
+                """,
+                (user, limit, offset),
+                as_dict=True,
+            )
+
+            media_base_url = frappe.conf.get("media_base_url", "")
+
+            def build_media_urls(action):
+                urls = []
+                for field in ("attachment_1", "attachment_2"):
+                    val = action.get(field)
+                    if val:
+                        urls.append(f"{media_base_url}{val}")
+                return urls
+
+            action_list = [
+               {
+        "action_id": action.name,
+        "action_category": action.category,
+        "action_type": action.type,
+        "user_id": action.user,
+        "hours_invested": action.hours_invested,
+        "description": action.description,
+        "media": build_media_urls(action),
+        "created_at": action.creation,
+        "updated_at": action.modified,
+    }
+    for action in actions
+            ]
+
+            return Result.success(
+                "User actions fetched successfully",
+                data={
+                    "actions": action_list,
+                    "limit": limit,
+                    "offset": offset,
+                    "has_more": len(action_list) == limit,
+                },
+            )
+
+        except Exception as e:
+            frappe.log_error(
+                frappe.get_traceback(),
+                "Failed to get user actions",
+            )
+
+            return Result.failure(
+                "Failed to get user actions",
+                error_data=str(e),
+            )
+
+
+
+    @staticmethod
     def calculate_total_actions(user_name: str) -> int:
         try:
             count = frappe.db.sql("""
