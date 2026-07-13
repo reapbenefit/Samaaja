@@ -49,7 +49,7 @@ class ActionManager:
             )
     
     @staticmethod
-    def get_actions(
+    def get_list(
         user: str,
         limit: int = 10,
         offset: int = 0,
@@ -92,17 +92,17 @@ class ActionManager:
 
             action_list = [
                {
-        "action_id": action.name,
-        "action_category": action.category,
-        "action_type": action.type,
-        "user_id": action.user,
-        "hours_invested": action.hours_invested,
-        "description": action.description,
-        "media": build_media_urls(action),
-        "created_at": action.creation,
-        "updated_at": action.modified,
-    }
-    for action in actions
+                    "action_id": action.name,
+                    "action_category": action.category,
+                    "action_type": action.type,
+                    "user_id": action.user,
+                    "hours_invested": action.hours_invested,
+                    "description": action.description,
+                    "media": build_media_urls(action),
+                    "created_at": action.creation,
+                    "updated_at": action.modified,
+                }
+            for action in actions
             ]
 
             return Result.success(
@@ -114,7 +114,6 @@ class ActionManager:
                     "has_more": len(action_list) == limit,
                 },
             )
-
         except Exception as e:
             frappe.log_error(
                 frappe.get_traceback(),

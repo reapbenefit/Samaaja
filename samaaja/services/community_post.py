@@ -39,7 +39,7 @@ class CommunityPostManager:
             )
         
     @staticmethod
-    def get_posts(user, limit=10, offset=0) -> Result:
+    def get_list(user, limit=10, offset=0) -> Result:
         try:
             limit = int(limit)
             offset = int(offset)
