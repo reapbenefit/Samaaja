@@ -37,7 +37,73 @@ class CommunityPostManager:
                 "Failed to like community post",
                 error_data=str(e)
             )
+        
+    @staticmethod
+    def get_list(user, limit=10, offset=0) -> Result:
+        try:
+            limit = int(limit)
+            offset = int(offset)
 
+            # Check if user exists
+            if not frappe.db.exists("User", user):
+                return Result.failure(
+                    "No user found",
+                    error_data=f"User '{user}' does not exist.",
+                )
+
+            posts = frappe.db.sql(
+                """
+                SELECT
+                    name,
+                    title,
+                    description,
+                    media,
+                    creation,
+                    like_count,
+                    user,
+                    tag
+                FROM `tabCommunity Post`
+                WHERE user = %s
+                ORDER BY creation DESC
+                LIMIT %s OFFSET %s
+                """,
+                (user, limit, offset),
+                as_dict=True,
+            )
+
+            media_base_url = frappe.conf.get("media_base_url", "")
+
+            user_profile = UserManager.get_profile(user)
+            profile_data = user_profile.data if user_profile.success else {}
+
+            for post in posts:
+                post["id"] = post["name"]
+                post["user_profile"] = profile_data
+
+                if post.get("media"):
+                    post["media"] = f"{media_base_url}{post['media']}"
+
+            return Result.success(
+                "User community posts fetched successfully",
+                data={
+                    "posts": posts,
+                    "limit": limit,
+                    "offset": offset,
+                    "has_more": len(posts) == limit,
+                },
+            )
+
+        except Exception as e:
+            frappe.log_error(
+                frappe.get_traceback(),
+                "Failed to fetch user community posts",
+            )
+
+            return Result.failure(
+                "Failed to fetch user community posts",
+                error_data=str(e),
+            )
+        
     @staticmethod
     def get(limit=10, offset=0) -> Result:
         try:
