@@ -8,6 +8,7 @@ def like():
         post_id = frappe.form_dict.get("post_id")
         if not post_id:
             return custom_response("Post ID is required", status_code=400)
+            
         return CommunityPostManager.like(
                                     post_id=post_id,
                                     user_id=frappe.session.user
@@ -18,6 +19,27 @@ def like():
             "Failed to like community post"
         )
         return custom_response("Failed to like community post", status_code=500)
+
+# ---------------------------------------------------------
+# NEW UNLIKE FUNCTION
+# ---------------------------------------------------------
+@frappe.whitelist(methods=["POST"])
+def unlike():
+    try:
+        post_id = frappe.form_dict.get("post_id")
+        if not post_id:
+            return custom_response("Post ID is required", status_code=400)
+            
+        return CommunityPostManager.unlike(
+                                    post_id=post_id,
+                                    user_id=frappe.session.user
+                                ).to_custom_response()
+    except Exception as e:
+        frappe.log_error(
+            frappe.get_traceback(),
+            "Failed to unlike community post"
+        )
+        return custom_response("Failed to unlike community post", status_code=500)
 
 
 @frappe.whitelist()
