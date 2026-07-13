@@ -38,7 +38,7 @@ def create():
 @frappe.whitelist()
 def get(post_id, limit=10, offset=0):
     try:
-        return CommentManager.get(
+        return CommentManager.get_list(
             post_id=post_id,
             limit=limit,
             offset=offset

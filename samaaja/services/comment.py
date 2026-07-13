@@ -43,7 +43,7 @@ class CommentManager:
             )
 
     @staticmethod
-    def get(post_id: str, limit=10, offset=0) -> Result:
+    def get_list(post_id: str, limit=10, offset=0) -> Result:
         try:
             if not frappe.db.exists("Community Post", post_id):
                 return Result.bad_request("Community post not found")
