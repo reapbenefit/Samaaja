@@ -242,4 +242,5 @@ doc_events = {
     }
 }
 
-fixtures = ["Client Script"]on_session_creation = "samaaja.utils.cookie_patch.apply_patch"
+fixtures = ["Client Script"]
+on_session_creation = "samaaja.utils.cookie_patch.apply_patch"
