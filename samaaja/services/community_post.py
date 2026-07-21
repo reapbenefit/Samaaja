@@ -60,6 +60,7 @@ class CommunityPostManager:
                     media,
                     creation,
                     like_count,
+                    comment_count,
                     user,
                     tag
                 FROM `tabCommunity Post`
