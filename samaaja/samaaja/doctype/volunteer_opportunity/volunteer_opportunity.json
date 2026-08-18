@@ -1,0 +1,97 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-08-18 07:14:59.022148",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "details_section",
+  "title",
+  "description",
+  "column_break_crjw",
+  "category",
+  "type",
+  "start_date",
+  "end_date"
+ ],
+ "fields": [
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Title",
+   "reqd": 1
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "Description"
+  },
+  {
+   "fieldname": "column_break_crjw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "category",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Category",
+   "options": "Education & Learning\nHealth & Wellbeing\nChild & Youth Development\nWomen & Gender Equality\nLivelihoods & Employment\nEnvironment & Climate",
+   "reqd": 1
+  },
+  {
+   "fieldname": "type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Type",
+   "options": "One-time\nOngoing",
+   "reqd": 1
+  },
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Starte date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "label": "End date"
+  },
+  {
+   "fieldname": "details_section",
+   "fieldtype": "Section Break",
+   "label": "Details"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-08-18 08:41:16.386418",
+ "modified_by": "Administrator",
+ "module": "Samaaja",
+ "name": "Volunteer Opportunity",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "show_title_field_in_link": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "title"
+}

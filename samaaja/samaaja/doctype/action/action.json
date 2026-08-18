@@ -15,7 +15,8 @@
   "source",
   "attachment_1",
   "attachment_2",
-  "hours_invested"
+  "hours_invested",
+  "action_for_a_volunteering_opportunity_"
  ],
  "fields": [
   {
@@ -26,8 +27,7 @@
    "fieldname": "title",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Title",
-   "reqd": 1
+   "label": "Title"
   },
   {
    "fieldname": "type",
@@ -80,12 +80,18 @@
    "fieldname": "hours_invested",
    "fieldtype": "Float",
    "label": "Hours Invested"
+  },
+  {
+   "default": "0",
+   "fieldname": "action_for_a_volunteering_opportunity_",
+   "fieldtype": "Check",
+   "label": "Action for a volunteering opportunity ?"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-05-11 07:16:47.772426",
+ "modified": "2026-08-18 08:56:26.477656",
  "modified_by": "Administrator",
  "module": "Samaaja",
  "name": "Action",
