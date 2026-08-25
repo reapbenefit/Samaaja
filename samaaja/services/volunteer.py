@@ -1,82 +1,147 @@
+import json
+
+import frappe
+from frappe.query_builder import DocType
+
+from samaaja.utils.result import Result
+
+
 class VolunteerManager:
 
     @staticmethod
     def get_list(filters=None, limit=10, offset=0):
-        # Pseudocode:
-        # 1. Build filters for the Volunteer Opportunity DocType.
-        #    - Only fetch opportunities with Status = "Active".
-        #
-        # 2. Accept filters as a JSON object containing:
-        #    {
-        #        "categories": ["Education & Learning", "Environment & Climate"],
-        #        "locations": ["Bengaluru", "Mysuru"],
-        #        "skills": ["Teaching & Mentoring", "Graphic Design"]
-        #    }
-        #
-        # 3. Apply filter behaviour:
-        #    - Multiple categories use OR.
-        #      Example: Education OR Environment.
-        #    - Multiple locations use OR.
-        #      Example: Bengaluru OR Mysuru.
-        #    - Multiple skills use OR.
-        #      Example: Teaching OR Graphic Design.
-        #    - Different filter types use AND.
-        #      Example: Bengaluru AND Teaching.
-        #
-        # 4. Query the Volunteer Opportunity DocType using
-        #    the appropriate Frappe database/query method.
-        #
-        # 5. Fetch the fields required for the opportunity cards:
-        #    - name (system-generated document ID)
-        #    - title
-        #    - category
-        #    - description
-        #    - location
-        #    - skills_needed
-        #
-        # 6. Resolve linked Category and Location information
-        #    where required for the API response.
-        #
-        # 7. Handle the Skills Needed MultiSelect Table and return
-        #    the selected skills.
-        #
-        # 8. Apply pagination using limit and offset.
-        #
-        # 9. Convert the records into the standard Result format.
-        #
-        # 10. Return the Result containing the matching opportunities.
+        filters = (
+            json.loads(filters)
+            if isinstance(filters, str)
+            else (filters or {})
+        )
 
-        pass
+        limit = int(limit)
+        offset = int(offset)
+
+        VolunteerOpportunity = DocType("Volunteer Opportunity")
+        SkillChildTable = DocType("Skill Child Table")
+        SamaajaLocation = DocType("Samaaja Location")
+
+        query = (
+            frappe.qb.from_(VolunteerOpportunity)
+            .select(
+                VolunteerOpportunity.name,
+                VolunteerOpportunity.title,
+                VolunteerOpportunity.description,
+                VolunteerOpportunity.category,
+                VolunteerOpportunity.location,
+                VolunteerOpportunity.type,
+                VolunteerOpportunity.start_date,
+                VolunteerOpportunity.end_date,
+                VolunteerOpportunity.volunteer_format,
+                VolunteerOpportunity.expected_time_commitment,
+                VolunteerOpportunity.compensation_type,
+                VolunteerOpportunity.status,
+            )
+            .where(VolunteerOpportunity.status == "Active")
+        )
+
+        categories = filters.get("categories") or []
+        locations = filters.get("locations") or []
+        skills = filters.get("skills") or []
+
+        # Multiple categories use OR.
+        # Different filter types use AND.
+        if categories:
+            query = query.where(
+                VolunteerOpportunity.category.isin(categories)
+            )
+
+        # Match the requested city names against
+        # the City field of Samaaja Location.
+        if locations:
+            query = (
+                query
+                .join(SamaajaLocation)
+                .on(
+                    SamaajaLocation.name == VolunteerOpportunity.location
+                )
+                .where(
+                    SamaajaLocation.city.isin(locations)
+                )
+            )
+
+        # Multiple skills use OR.
+        # An opportunity matches if it needs any selected skill.
+        if skills:
+            query = (
+                query
+                .join(SkillChildTable)
+                .on(
+                    SkillChildTable.parent == VolunteerOpportunity.name
+                )
+                .where(
+                    SkillChildTable.skill.isin(skills)
+                )
+            )
+
+        query = (
+            query
+            .distinct()
+            .orderby(
+                VolunteerOpportunity.creation,
+                order=frappe.qb.desc
+            )
+            .limit(limit)
+            .offset(offset)
+        )
+
+        opportunities = query.run(as_dict=True)
+
+        for opportunity in opportunities:
+            opportunity["skills_needed"] = frappe.get_all(
+                "Skill Child Table",
+                filters={
+                    "parent": opportunity["name"],
+                    "parenttype": "Volunteer Opportunity",
+                },
+                fields=["skill"],
+                pluck="skill",
+            )
+
+        return Result.success(opportunities)
 
     @staticmethod
     def get_by_id(volunteer_id):
-        # Pseudocode:
-        # 1. Find the Volunteer Opportunity using its
-        #    system-generated document ID.
-        #
-        # 2. Fetch the fields required for the opportunity detail page:
-        #    - name (system-generated document ID)
-        #    - title
-        #    - category
-        #    - location
-        #    - description
-        #    - expected_time_commitment
-        #    - start_date
-        #    - end_date
-        #    - volunteer_format
-        #    - compensation_type
-        #    - skills_needed
-        #
-        # 3. Resolve linked Category and Location information.
-        #
-        # 4. Handle the Skills Needed MultiSelect Table and return
-        #    the selected skills.
-        #
-        # 5. If the opportunity does not exist, return an appropriate
-        #    not-found Result/error response.
-        #
-        # 6. Convert the opportunity into the standard Result format.
-        #
-        # 7. Return the Result containing the opportunity details.
+        opportunity = frappe.db.get_value(
+            "Volunteer Opportunity",
+            volunteer_id,
+            [
+                "name",
+                "title",
+                "description",
+                "category",
+                "location",
+                "type",
+                "start_date",
+                "end_date",
+                "volunteer_format",
+                "expected_time_commitment",
+                "compensation_type",
+                "status",
+            ],
+            as_dict=True,
+        )
 
-        pass
+        if not opportunity:
+            return Result.not_found(
+                "Volunteer opportunity not found"
+            )
+
+        opportunity["skills_needed"] = frappe.get_all(
+            "Skill Child Table",
+            filters={
+                "parent": volunteer_id,
+                "parenttype": "Volunteer Opportunity",
+            },
+            fields=["skill"],
+            pluck="skill",
+        )
+
+        return Result.success(opportunity)

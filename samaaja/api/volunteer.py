@@ -1,15 +1,16 @@
 import json
+
 import frappe
 
 from samaaja.services.volunteer import VolunteerManager
 from samaaja.utils.custom_response import custom_response
- from samaaja.utils.result import Result
 
 
 @frappe.whitelist()
 def get_list(filters=None, limit=10, offset=0):
     try:
-        filters = json.loads(filters) if filters else {}
+        if isinstance(filters, str):
+            filters = json.loads(filters)
 
         return VolunteerManager.get_list(
             filters=filters,
@@ -22,6 +23,7 @@ def get_list(filters=None, limit=10, offset=0):
             frappe.get_traceback(),
             "Failed to fetch volunteer opportunities"
         )
+
         return custom_response(
             message="Failed to fetch volunteer opportunities",
             status_code=500
@@ -40,6 +42,7 @@ def get_by_id(volunteer_id):
             frappe.get_traceback(),
             "Failed to fetch volunteer opportunity"
         )
+
         return custom_response(
             message="Failed to fetch volunteer opportunity",
             status_code=500
