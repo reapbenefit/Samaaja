@@ -1,24 +1,32 @@
 class VolunteerManager:
 
     @staticmethod
-    def get_list(
-        limit=10,
-        offset=0,
-        location=None,
-        category=None,
-        skills_needed=None
-    ):
+    def get_list(filters=None, limit=10, offset=0):
         # Pseudocode:
         # 1. Build filters for the Volunteer Opportunity DocType.
         #    - Only fetch opportunities with Status = "Active".
-        #    - Apply Location filter if provided.
-        #    - Apply Category filter if provided.
-        #    - Apply Skills Needed filter if provided.
         #
-        # 2. Query the Volunteer Opportunity DocType using
+        # 2. Accept filters as a JSON object containing:
+        #    {
+        #        "categories": ["Education & Learning", "Environment & Climate"],
+        #        "locations": ["Bengaluru", "Mysuru"],
+        #        "skills": ["Teaching & Mentoring", "Graphic Design"]
+        #    }
+        #
+        # 3. Apply filter behaviour:
+        #    - Multiple categories use OR.
+        #      Example: Education OR Environment.
+        #    - Multiple locations use OR.
+        #      Example: Bengaluru OR Mysuru.
+        #    - Multiple skills use OR.
+        #      Example: Teaching OR Graphic Design.
+        #    - Different filter types use AND.
+        #      Example: Bengaluru AND Teaching.
+        #
+        # 4. Query the Volunteer Opportunity DocType using
         #    the appropriate Frappe database/query method.
         #
-        # 3. Fetch the fields required for the opportunity cards:
+        # 5. Fetch the fields required for the opportunity cards:
         #    - name (system-generated document ID)
         #    - title
         #    - category
@@ -26,17 +34,17 @@ class VolunteerManager:
         #    - location
         #    - skills_needed
         #
-        # 4. Resolve linked Category and Location information
+        # 6. Resolve linked Category and Location information
         #    where required for the API response.
         #
-        # 5. Handle the Skills Needed MultiSelect Table and return
+        # 7. Handle the Skills Needed MultiSelect Table and return
         #    the selected skills.
         #
-        # 6. Apply pagination using limit and offset.
+        # 8. Apply pagination using limit and offset.
         #
-        # 7. Convert the records into the standard Result format.
+        # 9. Convert the records into the standard Result format.
         #
-        # 8. Return the Result containing the matching opportunities.
+        # 10. Return the Result containing the matching opportunities.
 
         pass
 
@@ -70,4 +78,5 @@ class VolunteerManager:
         # 6. Convert the opportunity into the standard Result format.
         #
         # 7. Return the Result containing the opportunity details.
+
         pass

@@ -1,25 +1,20 @@
+import json
 import frappe
 
 from samaaja.services.volunteer import VolunteerManager
 from samaaja.utils.custom_response import custom_response
-from samaaja.utils.result import Result
+ from samaaja.utils.result import Result
 
 
 @frappe.whitelist()
-def get_list(
-    limit=10,
-    offset=0,
-    location=None,
-    category=None,
-    skills_needed=None
-):
+def get_list(filters=None, limit=10, offset=0):
     try:
+        filters = json.loads(filters) if filters else {}
+
         return VolunteerManager.get_list(
+            filters=filters,
             limit=limit,
-            offset=offset,
-            location=location,
-            category=category,
-            skills_needed=skills_needed
+            offset=offset
         ).to_custom_response()
 
     except Exception:
