@@ -9,7 +9,11 @@ from samaaja.utils.result import Result
 class VolunteerManager:
 
     @staticmethod
-    def get_list(filters=None, limit=10, offset=0):
+    def get_list(
+        filters=None,
+        limit: int = 10,
+        offset: int = 0,
+    ) -> Result:
         filters = (
             json.loads(filters)
             if isinstance(filters, str)
@@ -25,12 +29,16 @@ class VolunteerManager:
 
         query = (
             frappe.qb.from_(VolunteerOpportunity)
+            .left_join(SamaajaLocation)
+            .on(
+                SamaajaLocation.name == VolunteerOpportunity.location
+            )
             .select(
                 VolunteerOpportunity.name,
                 VolunteerOpportunity.title,
                 VolunteerOpportunity.description,
                 VolunteerOpportunity.category,
-                VolunteerOpportunity.location,
+                SamaajaLocation.city.as_("location"),
                 VolunteerOpportunity.type,
                 VolunteerOpportunity.start_date,
                 VolunteerOpportunity.end_date,
@@ -53,18 +61,11 @@ class VolunteerManager:
                 VolunteerOpportunity.category.isin(categories)
             )
 
-        # Match the requested city names against
+        # Match requested city names against
         # the City field of Samaaja Location.
         if locations:
-            query = (
-                query
-                .join(SamaajaLocation)
-                .on(
-                    SamaajaLocation.name == VolunteerOpportunity.location
-                )
-                .where(
-                    SamaajaLocation.city.isin(locations)
-                )
+            query = query.where(
+                SamaajaLocation.city.isin(locations)
             )
 
         # Multiple skills use OR.
@@ -94,24 +95,24 @@ class VolunteerManager:
 
         opportunities = query.run(as_dict=True)
 
-        for opportunity in opportunities:
-            opportunity["skills_needed"] = frappe.get_all(
-                "Skill Child Table",
-                filters={
-                    "parent": opportunity["name"],
-                    "parenttype": "Volunteer Opportunity",
-                },
-                fields=["skill"],
-                pluck="skill",
-            )
-
-        return Result.success(opportunities)
+        return Result.success(
+            "Volunteer opportunities fetched successfully",
+            data={
+                "opportunities": opportunities,
+                "limit": limit,
+                "offset": offset,
+                "has_more": len(opportunities) == limit,
+            },
+        )
 
     @staticmethod
-    def get_by_id(volunteer_id):
+    def get_by_id(volunteer_id: str) -> Result:
         opportunity = frappe.db.get_value(
             "Volunteer Opportunity",
-            volunteer_id,
+            {
+                "name": volunteer_id,
+                "status": "Active",
+            },
             [
                 "name",
                 "title",
@@ -144,4 +145,9 @@ class VolunteerManager:
             pluck="skill",
         )
 
-        return Result.success(opportunity)
+        return Result.success(
+            "Volunteer opportunity fetched successfully",
+            data={
+                "opportunity": opportunity,
+            },
+        )
