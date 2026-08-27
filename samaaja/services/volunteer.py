@@ -55,22 +55,16 @@ class VolunteerManager:
             locations = filters.get("locations") or []
             skills = filters.get("skills") or []
 
-            # Multiple categories use OR.
-            # Different filter types use AND.
             if categories:
                 query = query.where(
                     VolunteerOpportunity.category.isin(categories)
                 )
 
-            # Match requested city names against
-            # the City field of Samaaja Location.
             if locations:
                 query = query.where(
                     SamaajaLocation.city.isin(locations)
                 )
 
-            # Multiple skills use OR.
-            # An opportunity matches if it needs any selected skill.
             if skills:
                 query = (
                     query
@@ -196,15 +190,17 @@ class VolunteerManager:
         privacy_consent=False,
     ) -> Result:
         try:
-            # Validate that the user is authenticated.
             if user == "Guest":
                 return Result.failure(
                     "Authentication required",
                     error_data="Guest users cannot submit volunteer applications.",
                 )
 
-            # Validate that the Volunteer Opportunity exists
-            # and has status = "Active".
+            if not volunteer_opportunity:
+                return Result.bad_request(
+                    "Volunteer opportunity is required"
+                )
+
             if not frappe.db.exists(
                 "Volunteer Opportunity",
                 {
@@ -216,18 +212,11 @@ class VolunteerManager:
                     "Volunteer opportunity not found"
                 )
 
-            # Validate required application fields.
-            if not volunteer_opportunity:
-                return Result.bad_request(
-                    "Volunteer opportunity is required"
-                )
-
             if not privacy_consent:
                 return Result.bad_request(
                     "Privacy consent is required"
                 )
 
-            # Validate Preferred Available Days if provided.
             allowed_available_days = [
                 "Daily",
                 "Few times a week",
@@ -243,24 +232,19 @@ class VolunteerManager:
                     "Invalid preferred available days"
                 )
 
-            # Create a new Volunteer Application document.
             application = frappe.new_doc("Volunteer Application")
 
-            # Set the User field to the currently logged-in user.
             application.user = user
-
-            # Set the Volunteer Opportunity field.
             application.volunteer_opportunity = volunteer_opportunity
-
-            # Set the application fields.
             application.age = age
-            application.preferred_available_days = preferred_available_days
+            application.preferred_available_days = (
+                preferred_available_days
+            )
             application.why_do_you_want_to_volunteer = (
                 why_do_you_want_to_volunteer
             )
             application.privacy_consent = privacy_consent
 
-            # Insert the Volunteer Application document.
             application.insert(ignore_permissions=True)
 
             return Result.success(

@@ -76,10 +76,8 @@ def apply(
                 status_code=401
             )
 
-        user = frappe.session.user
-
         return VolunteerManager.apply(
-            user=user,
+            user=frappe.session.user,
             volunteer_opportunity=volunteer_opportunity,
             age=age,
             preferred_available_days=preferred_available_days,
