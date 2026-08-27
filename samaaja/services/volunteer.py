@@ -14,153 +14,177 @@ class VolunteerManager:
         limit: int = 10,
         offset: int = 0,
     ) -> Result:
-        filters = (
-            json.loads(filters)
-            if isinstance(filters, str)
-            else (filters or {})
-        )
-
-        limit = int(limit)
-        offset = int(offset)
-
-        VolunteerOpportunity = DocType("Volunteer Opportunity")
-        SkillChildTable = DocType("Skill Child Table")
-        SamaajaLocation = DocType("Samaaja Location")
-
-        query = (
-            frappe.qb.from_(VolunteerOpportunity)
-            .left_join(SamaajaLocation)
-            .on(
-                SamaajaLocation.name == VolunteerOpportunity.location
-            )
-            .select(
-                VolunteerOpportunity.name,
-                VolunteerOpportunity.title,
-                VolunteerOpportunity.description,
-                VolunteerOpportunity.category,
-                SamaajaLocation.city.as_("location"),
-                VolunteerOpportunity.type,
-                VolunteerOpportunity.start_date,
-                VolunteerOpportunity.end_date,
-                VolunteerOpportunity.volunteer_format,
-                VolunteerOpportunity.expected_time_commitment,
-                VolunteerOpportunity.compensation_type,
-                VolunteerOpportunity.status,
-            )
-            .where(VolunteerOpportunity.status == "Active")
-        )
-
-        categories = filters.get("categories") or []
-        locations = filters.get("locations") or []
-        skills = filters.get("skills") or []
-
-        # Multiple categories use OR.
-        # Different filter types use AND.
-        if categories:
-            query = query.where(
-                VolunteerOpportunity.category.isin(categories)
+        try:
+            filters = (
+                json.loads(filters)
+                if isinstance(filters, str)
+                else (filters or {})
             )
 
-        # Match requested city names against
-        # the City field of Samaaja Location.
-        if locations:
-            query = query.where(
-                SamaajaLocation.city.isin(locations)
+            limit = int(limit)
+            offset = int(offset)
+
+            VolunteerOpportunity = DocType("Volunteer Opportunity")
+            SkillChildTable = DocType("Skill Child Table")
+            SamaajaLocation = DocType("Samaaja Location")
+
+            query = (
+                frappe.qb.from_(VolunteerOpportunity)
+                .left_join(SamaajaLocation)
+                .on(
+                    SamaajaLocation.name == VolunteerOpportunity.location
+                )
+                .select(
+                    VolunteerOpportunity.name,
+                    VolunteerOpportunity.title,
+                    VolunteerOpportunity.description,
+                    VolunteerOpportunity.category,
+                    SamaajaLocation.city.as_("location"),
+                    VolunteerOpportunity.type,
+                    VolunteerOpportunity.start_date,
+                    VolunteerOpportunity.end_date,
+                    VolunteerOpportunity.volunteer_format,
+                    VolunteerOpportunity.expected_time_commitment,
+                    VolunteerOpportunity.compensation_type,
+                    VolunteerOpportunity.status,
+                )
+                .where(VolunteerOpportunity.status == "Active")
             )
 
-        # Multiple skills use OR.
-        # An opportunity matches if it needs any selected skill.
-        if skills:
+            categories = filters.get("categories") or []
+            locations = filters.get("locations") or []
+            skills = filters.get("skills") or []
+
+            # Multiple categories use OR.
+            # Different filter types use AND.
+            if categories:
+                query = query.where(
+                    VolunteerOpportunity.category.isin(categories)
+                )
+
+            # Match requested city names against
+            # the City field of Samaaja Location.
+            if locations:
+                query = query.where(
+                    SamaajaLocation.city.isin(locations)
+                )
+
+            # Multiple skills use OR.
+            # An opportunity matches if it needs any selected skill.
+            if skills:
+                query = (
+                    query
+                    .join(SkillChildTable)
+                    .on(
+                        SkillChildTable.parent == VolunteerOpportunity.name
+                    )
+                    .where(
+                        SkillChildTable.skill.isin(skills)
+                    )
+                )
+
             query = (
                 query
-                .join(SkillChildTable)
-                .on(
-                    SkillChildTable.parent == VolunteerOpportunity.name
+                .distinct()
+                .orderby(
+                    VolunteerOpportunity.creation,
+                    order=frappe.qb.desc
                 )
-                .where(
-                    SkillChildTable.skill.isin(skills)
-                )
+                .limit(limit)
+                .offset(offset)
             )
 
-        query = (
-            query
-            .distinct()
-            .orderby(
-                VolunteerOpportunity.creation,
-                order=frappe.qb.desc
+            opportunities = query.run(as_dict=True)
+
+            return Result.success(
+                "Volunteer opportunities fetched successfully",
+                data={
+                    "opportunities": opportunities,
+                    "limit": limit,
+                    "offset": offset,
+                    "has_more": len(opportunities) == limit,
+                },
             )
-            .limit(limit)
-            .offset(offset)
-        )
 
-        opportunities = query.run(as_dict=True)
+        except Exception as e:
+            frappe.log_error(
+                frappe.get_traceback(),
+                "Failed to fetch volunteer opportunities"
+            )
 
-        return Result.success(
-            "Volunteer opportunities fetched successfully",
-            data={
-                "opportunities": opportunities,
-                "limit": limit,
-                "offset": offset,
-                "has_more": len(opportunities) == limit,
-            },
-        )
+            return Result.failure(
+                "Failed to fetch volunteer opportunities",
+                error_data=str(e),
+            )
 
     @staticmethod
-    def get_by_id(volunteer_id: str) -> Result:
-        VolunteerOpportunity = DocType("Volunteer Opportunity")
-        SamaajaLocation = DocType("Samaaja Location")
+    def get(volunteer_id: str) -> Result:
+        try:
+            VolunteerOpportunity = DocType("Volunteer Opportunity")
+            SamaajaLocation = DocType("Samaaja Location")
 
-        opportunity = (
-            frappe.qb.from_(VolunteerOpportunity)
-            .left_join(SamaajaLocation)
-            .on(
-                SamaajaLocation.name == VolunteerOpportunity.location
-            )
-            .select(
-                VolunteerOpportunity.name,
-                VolunteerOpportunity.title,
-                VolunteerOpportunity.description,
-                VolunteerOpportunity.category,
-                SamaajaLocation.city.as_("location"),
-                VolunteerOpportunity.type,
-                VolunteerOpportunity.start_date,
-                VolunteerOpportunity.end_date,
-                VolunteerOpportunity.volunteer_format,
-                VolunteerOpportunity.expected_time_commitment,
-                VolunteerOpportunity.compensation_type,
-                VolunteerOpportunity.status,
-            )
-            .where(
-                (VolunteerOpportunity.name == volunteer_id)
-                & (VolunteerOpportunity.status == "Active")
-            )
-        )
-
-        opportunity = opportunity.run(as_dict=True)
-
-        if not opportunity:
-            return Result.not_found(
-                "Volunteer opportunity not found"
+            opportunity = (
+                frappe.qb.from_(VolunteerOpportunity)
+                .left_join(SamaajaLocation)
+                .on(
+                    SamaajaLocation.name == VolunteerOpportunity.location
+                )
+                .select(
+                    VolunteerOpportunity.name,
+                    VolunteerOpportunity.title,
+                    VolunteerOpportunity.description,
+                    VolunteerOpportunity.category,
+                    SamaajaLocation.city.as_("location"),
+                    VolunteerOpportunity.type,
+                    VolunteerOpportunity.start_date,
+                    VolunteerOpportunity.end_date,
+                    VolunteerOpportunity.volunteer_format,
+                    VolunteerOpportunity.expected_time_commitment,
+                    VolunteerOpportunity.compensation_type,
+                    VolunteerOpportunity.status,
+                )
+                .where(
+                    (VolunteerOpportunity.name == volunteer_id)
+                    & (VolunteerOpportunity.status == "Active")
+                )
             )
 
-        opportunity = opportunity[0]
+            opportunity = opportunity.run(as_dict=True)
 
-        opportunity["skills_needed"] = frappe.get_all(
-            "Skill Child Table",
-            filters={
-                "parent": volunteer_id,
-                "parenttype": "Volunteer Opportunity",
-            },
-            fields=["skill"],
-            pluck="skill",
-        )
+            if not opportunity:
+                return Result.not_found(
+                    "Volunteer opportunity not found"
+                )
 
-        return Result.success(
-            "Volunteer opportunity fetched successfully",
-            data={
-                "opportunity": opportunity,
-            },
-        )
+            opportunity = opportunity[0]
+
+            opportunity["skills_needed"] = frappe.get_all(
+                "Skill Child Table",
+                filters={
+                    "parent": volunteer_id,
+                    "parenttype": "Volunteer Opportunity",
+                },
+                fields=["skill"],
+                pluck="skill",
+            )
+
+            return Result.success(
+                "Volunteer opportunity fetched successfully",
+                data={
+                    "opportunity": opportunity,
+                },
+            )
+
+        except Exception as e:
+            frappe.log_error(
+                frappe.get_traceback(),
+                "Failed to fetch volunteer opportunity"
+            )
+
+            return Result.failure(
+                "Failed to fetch volunteer opportunity",
+                error_data=str(e),
+            )
 
     @staticmethod
     def apply(
@@ -171,49 +195,88 @@ class VolunteerManager:
         why_do_you_want_to_volunteer=None,
         privacy_consent=False,
     ) -> Result:
+        try:
+            # Validate that the user is authenticated.
+            if user == "Guest":
+                return Result.failure(
+                    "Authentication required",
+                    error_data="Guest users cannot submit volunteer applications.",
+                )
 
-        # Pseudocode:
+            # Validate that the Volunteer Opportunity exists
+            # and has status = "Active".
+            if not frappe.db.exists(
+                "Volunteer Opportunity",
+                {
+                    "name": volunteer_opportunity,
+                    "status": "Active",
+                },
+            ):
+                return Result.not_found(
+                    "Volunteer opportunity not found"
+                )
 
-        # 1. Validate that the user is authenticated.
-        #    - Do not allow Guest users to submit an application.
+            # Validate required application fields.
+            if not volunteer_opportunity:
+                return Result.bad_request(
+                    "Volunteer opportunity is required"
+                )
 
-        # 2. Check that the Volunteer Opportunity exists
-        #    and has status = "Active".
-        #
-        #    - Do not allow applications for inactive/closed
-        #      opportunities.
+            if not privacy_consent:
+                return Result.bad_request(
+                    "Privacy consent is required"
+                )
 
-        # 3. Validate the required application fields:
-        #    - volunteer_opportunity
-        #    - privacy_consent
+            # Validate Preferred Available Days if provided.
+            allowed_available_days = [
+                "Daily",
+                "Few times a week",
+                "Only on Weekends",
+                "Flexible",
+            ]
 
-        # 4. Validate Preferred Available Days if provided.
-        #    Allowed values:
-        #    - Daily
-        #    - Few times a week
-        #    - Only on Weekends
-        #    - Flexible
+            if (
+                preferred_available_days
+                and preferred_available_days not in allowed_available_days
+            ):
+                return Result.bad_request(
+                    "Invalid preferred available days"
+                )
 
-        # 5. Validate Privacy & Consent.
-        #    - The user must provide consent before submitting
-        #      the application.
+            # Create a new Volunteer Application document.
+            application = frappe.new_doc("Volunteer Application")
 
-        # 6. Create a new Volunteer Application document.
+            # Set the User field to the currently logged-in user.
+            application.user = user
 
-        # 7. Set the User field to the provided user.
+            # Set the Volunteer Opportunity field.
+            application.volunteer_opportunity = volunteer_opportunity
 
-        # 8. Set the Volunteer Opportunity field to the selected
-        #    volunteer opportunity.
+            # Set the application fields.
+            application.age = age
+            application.preferred_available_days = preferred_available_days
+            application.why_do_you_want_to_volunteer = (
+                why_do_you_want_to_volunteer
+            )
+            application.privacy_consent = privacy_consent
 
-        # 9. Set the application fields:
-        #    - Age
-        #    - Preferred Available Days
-        #    - Why do you want to volunteer?
-        #    - Privacy & Consent
+            # Insert the Volunteer Application document.
+            application.insert(ignore_permissions=True)
 
-        # 10. Insert the Volunteer Application document.
+            return Result.success(
+                "Volunteer application submitted successfully",
+                data={
+                    "application": application,
+                },
+            )
 
-        # 11. Return the created application using the standard
-        #     Result pattern.
+        except Exception as e:
+            frappe.log_error(
+                frappe.get_traceback(),
+                "Failed to submit volunteer application"
+            )
 
-        # 12. Return an appropriate success message.
+            return Result.failure(
+                "Failed to submit volunteer application",
+                error_data=str(e),
+            )

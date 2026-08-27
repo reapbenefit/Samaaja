@@ -6,9 +6,15 @@ from samaaja.services.volunteer import VolunteerManager
 from samaaja.utils.custom_response import custom_response
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["GET"])
 def get_list(filters=None, limit=10, offset=0):
     try:
+        if frappe.session.user == "Guest":
+            return custom_response(
+                message="Authentication required",
+                status_code=401
+            )
+
         if isinstance(filters, str):
             filters = json.loads(filters)
 
@@ -30,10 +36,16 @@ def get_list(filters=None, limit=10, offset=0):
         )
 
 
-@frappe.whitelist()
-def get_by_id(volunteer_id):
+@frappe.whitelist(methods=["GET"])
+def get(volunteer_id):
     try:
-        return VolunteerManager.get_by_id(
+        if frappe.session.user == "Guest":
+            return custom_response(
+                message="Authentication required",
+                status_code=401
+            )
+
+        return VolunteerManager.get(
             volunteer_id
         ).to_custom_response()
 
@@ -58,23 +70,22 @@ def apply(
     privacy_consent=False,
 ):
     try:
+        if frappe.session.user == "Guest":
+            return custom_response(
+                message="Authentication required",
+                status_code=401
+            )
+
         user = frappe.session.user
 
-        # Pseudocode:
-        # 1. Get the currently logged-in user using frappe.session.user.
-        #
-        # 2. Call VolunteerManager.apply() with:
-        #    - logged-in user
-        #    - volunteer opportunity
-        #    - age
-        #    - preferred available days
-        #    - reason for volunteering
-        #    - privacy consent
-        #
-        # 3. Convert the returned Result into the standard
-        #    custom API response.
-
-        pass
+        return VolunteerManager.apply(
+            user=user,
+            volunteer_opportunity=volunteer_opportunity,
+            age=age,
+            preferred_available_days=preferred_available_days,
+            why_do_you_want_to_volunteer=why_do_you_want_to_volunteer,
+            privacy_consent=privacy_consent,
+        ).to_custom_response()
 
     except Exception:
         frappe.log_error(
