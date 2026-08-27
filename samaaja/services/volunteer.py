@@ -184,7 +184,6 @@ class VolunteerManager:
         #      opportunities.
 
         # 3. Validate the required application fields:
-        #    - user
         #    - volunteer_opportunity
         #    - privacy_consent
 
@@ -202,7 +201,6 @@ class VolunteerManager:
         # 6. Create a new Volunteer Application document.
 
         # 7. Set the User field to the provided user.
-        #    - Full Name, Email, Phone Number and Gender will be autofetched from the User.
 
         # 8. Set the Volunteer Opportunity field to the selected
         #    volunteer opportunity.

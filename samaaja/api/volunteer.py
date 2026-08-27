@@ -48,9 +48,9 @@ def get_by_id(volunteer_id):
             status_code=500
         )
 
-@frappe.whitelist()
+
+@frappe.whitelist(methods=["POST"])
 def apply(
-    user,
     volunteer_opportunity,
     age=None,
     preferred_available_days=None,
@@ -58,17 +58,20 @@ def apply(
     privacy_consent=False,
 ):
     try:
+        user = frappe.session.user
 
         # Pseudocode:
-        # 1. Call VolunteerManager.apply() with:
-        #    - user
+        # 1. Get the currently logged-in user using frappe.session.user.
+        #
+        # 2. Call VolunteerManager.apply() with:
+        #    - logged-in user
         #    - volunteer opportunity
         #    - age
         #    - preferred available days
         #    - reason for volunteering
         #    - privacy consent
         #
-        # 2. Convert the returned Result into the standard
+        # 3. Convert the returned Result into the standard
         #    custom API response.
 
         pass
