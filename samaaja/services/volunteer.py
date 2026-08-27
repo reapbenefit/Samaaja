@@ -107,33 +107,43 @@ class VolunteerManager:
 
     @staticmethod
     def get_by_id(volunteer_id: str) -> Result:
-        opportunity = frappe.db.get_value(
-            "Volunteer Opportunity",
-            {
-                "name": volunteer_id,
-                "status": "Active",
-            },
-            [
-                "name",
-                "title",
-                "description",
-                "category",
-                "location",
-                "type",
-                "start_date",
-                "end_date",
-                "volunteer_format",
-                "expected_time_commitment",
-                "compensation_type",
-                "status",
-            ],
-            as_dict=True,
+        VolunteerOpportunity = DocType("Volunteer Opportunity")
+        SamaajaLocation = DocType("Samaaja Location")
+
+        opportunity = (
+            frappe.qb.from_(VolunteerOpportunity)
+            .left_join(SamaajaLocation)
+            .on(
+                SamaajaLocation.name == VolunteerOpportunity.location
+            )
+            .select(
+                VolunteerOpportunity.name,
+                VolunteerOpportunity.title,
+                VolunteerOpportunity.description,
+                VolunteerOpportunity.category,
+                SamaajaLocation.city.as_("location"),
+                VolunteerOpportunity.type,
+                VolunteerOpportunity.start_date,
+                VolunteerOpportunity.end_date,
+                VolunteerOpportunity.volunteer_format,
+                VolunteerOpportunity.expected_time_commitment,
+                VolunteerOpportunity.compensation_type,
+                VolunteerOpportunity.status,
+            )
+            .where(
+                (VolunteerOpportunity.name == volunteer_id)
+                & (VolunteerOpportunity.status == "Active")
+            )
         )
+
+        opportunity = opportunity.run(as_dict=True)
 
         if not opportunity:
             return Result.not_found(
                 "Volunteer opportunity not found"
             )
+
+        opportunity = opportunity[0]
 
         opportunity["skills_needed"] = frappe.get_all(
             "Skill Child Table",
@@ -151,3 +161,72 @@ class VolunteerManager:
                 "opportunity": opportunity,
             },
         )
+
+    @staticmethod
+    def apply(
+        user,
+        volunteer_opportunity,
+        full_name,
+        email,
+        phone_number,
+        age=None,
+        gender=None,
+        preferred_available_days=None,
+        why_do_you_want_to_volunteer=None,
+        privacy_consent=False,
+    ) -> Result:
+
+        # Pseudocode:
+
+        # 1. Validate that the user is authenticated.
+        #    - Do not allow Guest users to submit an application.
+
+        # 2. Check that the Volunteer Opportunity exists
+        #    and has status = "Active".
+        #
+        #    - Do not allow applications for inactive/closed
+        #      opportunities.
+
+        # 3. Validate the required application fields:
+        #    - volunteer_opportunity
+        #    - full_name
+        #    - email
+        #    - phone_number
+        #    - privacy_consent
+
+        # 4. Validate Preferred Available Days if provided.
+        #    Allowed values:
+        #    - Daily
+        #    - Few times a week
+        #    - Only on Weekends
+        #    - Flexible
+
+        # 5. Validate Privacy & Consent.
+        #    - The user must provide consent before submitting
+        #      the application.
+
+        # 6. Create a new Volunteer Application document.
+
+        # 7. Set the User field to the currently logged-in user.
+
+        # 8. Set the Volunteer Opportunity field to the selected
+        #    volunteer opportunity.
+
+        # 9. Set the applicant profile fields:
+        #    - Full Name
+        #    - Email
+        #    - Phone Number
+        #    - Age
+        #    - Gender
+
+        # 10. Set the application fields:
+        #     - Preferred Available Days
+        #     - Why do you want to volunteer?
+        #     - Privacy & Consent
+
+        # 11. Insert the Volunteer Application document.
+
+        # 12. Return the created application using the standard
+        #     Result pattern.
+
+        # 13. Return an appropriate success message.
