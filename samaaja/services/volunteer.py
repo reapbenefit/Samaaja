@@ -166,11 +166,7 @@ class VolunteerManager:
     def apply(
         user,
         volunteer_opportunity,
-        full_name,
-        email,
-        phone_number,
         age=None,
-        gender=None,
         preferred_available_days=None,
         why_do_you_want_to_volunteer=None,
         privacy_consent=False,
@@ -188,10 +184,8 @@ class VolunteerManager:
         #      opportunities.
 
         # 3. Validate the required application fields:
+        #    - user
         #    - volunteer_opportunity
-        #    - full_name
-        #    - email
-        #    - phone_number
         #    - privacy_consent
 
         # 4. Validate Preferred Available Days if provided.
@@ -207,26 +201,21 @@ class VolunteerManager:
 
         # 6. Create a new Volunteer Application document.
 
-        # 7. Set the User field to the currently logged-in user.
+        # 7. Set the User field to the provided user.
+        #    - Full Name, Email, Phone Number and Gender will be autofetched from the User.
 
         # 8. Set the Volunteer Opportunity field to the selected
         #    volunteer opportunity.
 
-        # 9. Set the applicant profile fields:
-        #    - Full Name
-        #    - Email
-        #    - Phone Number
+        # 9. Set the application fields:
         #    - Age
-        #    - Gender
+        #    - Preferred Available Days
+        #    - Why do you want to volunteer?
+        #    - Privacy & Consent
 
-        # 10. Set the application fields:
-        #     - Preferred Available Days
-        #     - Why do you want to volunteer?
-        #     - Privacy & Consent
+        # 10. Insert the Volunteer Application document.
 
-        # 11. Insert the Volunteer Application document.
-
-        # 12. Return the created application using the standard
+        # 11. Return the created application using the standard
         #     Result pattern.
 
-        # 13. Return an appropriate success message.
+        # 12. Return an appropriate success message.
