@@ -190,12 +190,6 @@ class VolunteerManager:
         privacy_consent=False,
     ) -> Result:
         try:
-            if user == "Guest":
-                return Result.failure(
-                    "Authentication required",
-                    error_data="Guest users cannot submit volunteer applications.",
-                )
-
             if not volunteer_opportunity:
                 return Result.bad_request(
                     "Volunteer opportunity is required"
@@ -211,6 +205,22 @@ class VolunteerManager:
                 return Result.not_found(
                     "Volunteer opportunity not found"
                 )
+
+            # Prevent duplicate applications from the same user
+            # for the same volunteer opportunity.
+            if frappe.db.exists(
+                "Volunteer Application",
+                {
+                    "user": user,
+                    "volunteer_opportunity": volunteer_opportunity,
+                },
+            ):
+                return Result.bad_request(
+                    "You have already applied for this volunteer opportunity"
+                )
+
+            # Normalize privacy consent before validation.
+            privacy_consent = frappe.utils.cint(privacy_consent)
 
             if not privacy_consent:
                 return Result.bad_request(
@@ -249,9 +259,7 @@ class VolunteerManager:
 
             return Result.success(
                 "Volunteer application submitted successfully",
-                data={
-                    "application": application,
-                },
+                data=application,
             )
 
         except Exception as e:
