@@ -1,19 +1,30 @@
-@frappe.whitelist(methods=["GET"])
-def get_list(doctype, lang):
+import frappe
 
-    # Pseudocode:
-    # 1. Check whether the current user is authenticated.
-    #
-    # 2. If the current user is "Guest",
-    #    return an authentication required response with status code 401.
-    #
-    # 3. Call DropdownManager.get_list() with:
-    #    - Doctype
-    #    - Language
-    #
-    # 4. Convert the returned Result into the standard custom response
-    #    expected by the API.
-    #
-    # 5. If an unexpected exception occurs:
-    #    - Log the error.
-    #    - Return a failure response with status code 500.
+from samaaja.services.dropdown import DropdownManager
+from samaaja.utils.custom_response import custom_response
+
+
+@frappe.whitelist(methods=["GET"])
+def get_list(doctype, lang="en"):
+    try:
+        if frappe.session.user == "Guest":
+            return custom_response(
+                message="Authentication required",
+                status_code=401
+            )
+
+        return DropdownManager.get_list(
+            doctype=doctype,
+            lang=lang
+        ).to_custom_response()
+
+    except Exception:
+        frappe.log_error(
+            frappe.get_traceback(),
+            "Failed to fetch dropdown options"
+        )
+
+        return custom_response(
+            message="Failed to fetch dropdown options",
+            status_code=500
+        )
