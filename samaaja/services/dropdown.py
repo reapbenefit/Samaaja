@@ -3,26 +3,26 @@ import frappe
 from samaaja.utils.result import Result
 
 
-OPTIONS = {
+DROPDOWN_CONFIG = {
     "Gender": {
         "doctype": "Gender",
         "field": "gender",
-        "defaults": {},
+        "filters": {},
     },
     "User Category": {
         "doctype": "User Category",
         "field": "category_name",
-        "defaults": {"is_active": 1},
+        "filters": {"is_active": 1},
     },
     "Action Type": {
         "doctype": "Action Type",
         "field": "type",
-        "defaults": {},
+        "filters": {},
     },
     "Action Category": {
         "doctype": "Action Category",
-        "field": "category_name",
-        "defaults": {},
+        "field": "category",
+        "filters": {},
     },
 }
 
@@ -40,27 +40,25 @@ class DropdownManager:
                     "Doctype is required"
                 )
 
-            if doctype not in OPTIONS:
+            if doctype not in DROPDOWN_CONFIG:
                 return Result.not_found(
                     "Dropdown options not found for the requested doctype"
                 )
 
-            config = OPTIONS[doctype]
+            config = DROPDOWN_CONFIG[doctype]
 
             values = frappe.get_all(
                 config["doctype"],
-                filters=config["defaults"],
+                filters=config["filters"],
                 fields=[config["field"]],
                 pluck=config["field"],
             )
 
-            data = {
-                doctype: [
-                    frappe._(value, lang=lang)
-                    for value in values
-                    if value
-                ]
-            }
+            data = [
+                frappe._(value, lang=lang)
+                for value in values
+                if value
+            ]
 
             return Result.success(
                 "Dropdown options fetched successfully",
