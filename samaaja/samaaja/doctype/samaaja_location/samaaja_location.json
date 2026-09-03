@@ -1,37 +1,45 @@
 {
  "actions": [],
  "allow_rename": 1,
- "creation": "2026-08-18 08:30:24.497874",
+ "creation": "2026-08-20 14:02:34.710133",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "user",
-  "volunteer_opportunity"
+  "country",
+  "state",
+  "city"
  ],
  "fields": [
   {
-   "fieldname": "user",
-   "fieldtype": "Link",
+   "fieldname": "country",
+   "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "User",
-   "options": "User",
+   "label": "Country",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "state",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "State",
    "reqd": 1
   },
   {
-   "fieldname": "volunteer_opportunity",
-   "fieldtype": "Link",
-   "label": "Volunteer Opportunity",
-   "options": "Volunteer Opportunity",
+   "fieldname": "city",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "City",
    "reqd": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-08-18 08:31:57.023010",
+ "modified": "2026-08-20 15:00:05.844141",
  "modified_by": "Administrator",
  "module": "Samaaja",
- "name": "Volunteer Interest",
+ "name": "Samaaja Location",
  "owner": "Administrator",
  "permissions": [
   {
@@ -49,7 +57,9 @@
  ],
  "row_format": "Dynamic",
  "rows_threshold_for_grid_search": 20,
+ "show_title_field_in_link": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "title_field": "city"
 }
