@@ -34,6 +34,10 @@ class VolunteerManager:
                 .on(
                     SamaajaLocation.name == VolunteerOpportunity.location
                 )
+                .left_join(SkillChildTable)
+                .on(
+                    SkillChildTable.parent == VolunteerOpportunity.name
+                )
                 .select(
                     VolunteerOpportunity.name,
                     VolunteerOpportunity.title,
@@ -47,6 +51,7 @@ class VolunteerManager:
                     VolunteerOpportunity.expected_time_commitment,
                     VolunteerOpportunity.compensation_type,
                     VolunteerOpportunity.status,
+                    SkillChildTable.skill,
                 )
                 .where(VolunteerOpportunity.status == "Active")
             )
