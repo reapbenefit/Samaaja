@@ -15,8 +15,7 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Country",
-   "reqd": 1,
-   "unique": 1
+   "reqd": 1
   },
   {
    "fieldname": "state",
@@ -36,7 +35,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-08-20 15:00:05.844141",
+ "modified": "2026-09-07 15:44:38.408121",
  "modified_by": "Administrator",
  "module": "Samaaja",
  "name": "Samaaja Location",
