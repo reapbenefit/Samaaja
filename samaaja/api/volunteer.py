@@ -60,6 +60,31 @@ def get(volunteer_id):
             status_code=500
         )
 
+@frappe.whitelist(methods=["GET"])
+def check_application(volunteer_opportunity):
+    try:
+        if frappe.session.user == "Guest":
+            return custom_response(
+                message="Authentication required",
+                status_code=401
+            )
+
+        return VolunteerManager.check_application(
+            user=frappe.session.user,
+            volunteer_opportunity=volunteer_opportunity,
+        ).to_custom_response()
+
+    except Exception:
+        frappe.log_error(
+            frappe.get_traceback(),
+            "Failed to check volunteer application"
+        )
+
+        return custom_response(
+            message="Failed to check volunteer application",
+            status_code=500
+        )
+
 
 @frappe.whitelist(methods=["POST"])
 def apply(

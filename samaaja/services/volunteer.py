@@ -186,6 +186,51 @@ class VolunteerManager:
             )
 
     @staticmethod
+    def check_application(user, volunteer_opportunity) -> Result:
+        try:
+            if not volunteer_opportunity:
+                return Result.bad_request(
+                    "Volunteer opportunity is required"
+                )
+
+            if not frappe.db.exists(
+                "Volunteer Opportunity",
+                {
+                    "name": volunteer_opportunity,
+                    "status": "Active",
+                },
+            ):
+                return Result.not_found(
+                    "Volunteer opportunity not found"
+                )
+
+            already_applied = frappe.db.exists(
+                "Volunteer Application",
+                {
+                    "user": user,
+                    "volunteer_opportunity": volunteer_opportunity,
+                },
+            )
+
+            return Result.success(
+                "Application status fetched successfully",
+                data={
+                    "already_applied": bool(already_applied),
+                },
+            )
+
+        except Exception as e:
+            frappe.log_error(
+                frappe.get_traceback(),
+                "Failed to check volunteer application"
+            )
+
+            return Result.failure(
+                "Failed to check volunteer application",
+                error_data=str(e),
+            )
+
+    @staticmethod
     def apply(
         user,
         volunteer_opportunity,
