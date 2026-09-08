@@ -24,26 +24,104 @@ DROPDOWN_CONFIG = {
         "field": "category",
         "filters": {},
     },
-    "Location": {
-        "doctype": "Samaaja Location",
-        "field": "city",
-        "filters": {},
-    },
+}
+VOLUNTEER_FILTER_CONFIG = {
     "Category": {
-        "doctype": "Action Category",
-        "field": "category",
-        "filters": {},
+        "handler": "_get_active_categories",
+    },
+    "Location": {
+        "handler": "_get_active_locations",
     },
     "Skill": {
-        "doctype": "Skills",
-        "field": "skill_name",
-        "filters": {},
+        "handler": "_get_active_skills",
     },
 }
 
 
 class DropdownManager:
+    @staticmethod
+    def _get_active_categories():
+        values = frappe.get_all(
+            "Volunteer Opportunity",
+            filters={"status": "Active"},
+            fields=["category"],
+            pluck="category",
+        )
 
+        return list(dict.fromkeys(
+            value for value in values if value
+     ))
+
+    @staticmethod
+    def _get_active_locations():
+        locations = frappe.get_all(
+            "Volunteer Opportunity",
+            filters={"status": "Active"},
+            fields=["location"],
+            pluck="location",
+        )
+
+        locations = [
+            location for location in locations
+            if location
+        ]
+
+        if not locations:
+            return []
+
+        values = frappe.get_all(
+            "Samaaja Location",
+            filters={
+                "name": ["in", locations],
+            },
+            fields=["city"],
+            pluck="city",
+        )
+
+        return list(dict.fromkeys(
+           value for value in values if value
+        ))
+
+    @staticmethod
+    def _get_active_skills():
+        opportunities = frappe.get_all(
+            "Volunteer Opportunity",
+             filters={"status": "Active"},
+             fields=["name"],
+             pluck="name",
+        )
+
+        if not opportunities:
+            return []
+
+        values = frappe.get_all(
+            "Skill Child Table",
+            filters={
+                "parent": ["in", opportunities],
+                "parenttype": "Volunteer Opportunity",
+           },
+           fields=["skill"],
+           pluck="skill",
+        )
+
+        return list(dict.fromkeys(
+           value for value in values if value
+       ))
+
+    @staticmethod
+    def _get_direct_options(config, lang="en"):
+        values = frappe.get_all(
+            config["doctype"],
+            filters=config["filters"],
+            fields=[config["field"]],
+            pluck=config["field"],
+        )
+
+        return [
+            frappe._(value, lang=lang)
+            for value in values
+            if value
+       ]
     @staticmethod
     def get_list(
         doctype: str,
@@ -55,122 +133,32 @@ class DropdownManager:
                     "Doctype is required"
                 )
 
-            if doctype not in DROPDOWN_CONFIG:
+            if (
+                doctype not in VOLUNTEER_FILTER_CONFIG
+                and doctype not in DROPDOWN_CONFIG
+            ):
                 return Result.not_found(
                     "Dropdown options not found for the requested doctype"
                 )
 
-            # Return only categories used in active volunteer opportunities.
-            if doctype == "Category":
-                values = frappe.get_all(
-                    "Volunteer Opportunity",
-                    filters={"status": "Active"},
-                    fields=["category"],
-                    pluck="category",
-                )
-
-                data = list(dict.fromkeys(
-                    value for value in values if value
-                ))
+            if doctype in VOLUNTEER_FILTER_CONFIG:
+                handler_name = VOLUNTEER_FILTER_CONFIG[doctype]["handler"]
+                values = getattr(DropdownManager, handler_name)()
 
                 return Result.success(
                     "Dropdown options fetched successfully",
-                    data=data,
+                    data=values,
                 )
 
-            # Volunteer Opportunity stores a link to Samaaja Location.
-            # Return only cities from locations used in active opportunities.
-            if doctype == "Location":
-                locations = frappe.get_all(
-                    "Volunteer Opportunity",
-                    filters={"status": "Active"},
-                    fields=["location"],
-                    pluck="location",
-                )
-
-                locations = [
-                    location for location in locations
-                    if location
-                ]
-
-                if not locations:
-                    return Result.success(
-                        "Dropdown options fetched successfully",
-                        data=[],
-                    )
-
-                values = frappe.get_all(
-                    "Samaaja Location",
-                    filters={
-                        "name": ["in", locations],
-                    },
-                    fields=["city"],
-                    pluck="city",
-                )
-
-                data = list(dict.fromkeys(
-                    value for value in values if value
-                ))
-
-                return Result.success(
-                    "Dropdown options fetched successfully",
-                    data=data,
-                )
-
-            # Skills are stored in Skill Child Table.
-            # Return only skills used in active volunteer opportunities.
-            if doctype == "Skill":
-                opportunities = frappe.get_all(
-                    "Volunteer Opportunity",
-                    filters={"status": "Active"},
-                    fields=["name"],
-                    pluck="name",
-                )
-
-                if not opportunities:
-                    return Result.success(
-                        "Dropdown options fetched successfully",
-                        data=[],
-                    )
-
-                values = frappe.get_all(
-                    "Skill Child Table",
-                    filters={
-                        "parent": ["in", opportunities],
-                        "parenttype": "Volunteer Opportunity",
-                    },
-                    fields=["skill"],
-                    pluck="skill",
-                )
-
-                data = list(dict.fromkeys(
-                    value for value in values if value
-                ))
-
-                return Result.success(
-                    "Dropdown options fetched successfully",
-                    data=data,
-                )
-
-            config = DROPDOWN_CONFIG[doctype]
-
-            values = frappe.get_all(
-                config["doctype"],
-                filters=config["filters"],
-                fields=[config["field"]],
-                pluck=config["field"],
+            values = DropdownManager._get_direct_options(
+                DROPDOWN_CONFIG[doctype],
+                lang=lang,
             )
-
-            data = [
-                frappe._(value, lang=lang)
-                for value in values
-                if value
-            ]
 
             return Result.success(
                 "Dropdown options fetched successfully",
-                data=data,
-            )
+                data=values,
+            ) 
 
         except Exception as e:
             frappe.log_error(
