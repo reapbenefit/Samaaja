@@ -25,7 +25,6 @@ class VolunteerManager:
             offset = int(offset)
 
             VolunteerOpportunity = DocType("Volunteer Opportunity")
-            SkillChildTable = DocType("Skill Child Table")
             SamaajaLocation = DocType("Samaaja Location")
 
             query = (
@@ -33,10 +32,6 @@ class VolunteerManager:
                 .left_join(SamaajaLocation)
                 .on(
                     SamaajaLocation.name == VolunteerOpportunity.location
-                )
-                .left_join(SkillChildTable)
-                .on(
-                    SkillChildTable.parent == VolunteerOpportunity.name
                 )
                 .select(
                     VolunteerOpportunity.name,
@@ -51,7 +46,6 @@ class VolunteerManager:
                     VolunteerOpportunity.expected_time_commitment,
                     VolunteerOpportunity.compensation_type,
                     VolunteerOpportunity.status,
-                    SkillChildTable.skill,
                 )
                 .where(VolunteerOpportunity.status == "Active")
             )
@@ -71,6 +65,8 @@ class VolunteerManager:
                 )
 
             if skills:
+                SkillChildTable = DocType("Skill Child Table")
+
                 query = (
                     query
                     .join(SkillChildTable)
@@ -94,6 +90,34 @@ class VolunteerManager:
             )
 
             opportunities = query.run(as_dict=True)
+
+            opportunity_names = [opportunity["name"] for opportunity in opportunities]
+
+            if opportunity_names:
+                skill_rows = frappe.get_all(
+                    "Skill Child Table",
+                    filters={
+                        "parent": ["in", opportunity_names],
+                        "parenttype": "Volunteer Opportunity",
+                    },
+                    fields=["parent", "skill"],
+                )
+            else:
+                skill_rows = []
+
+            skills_by_opportunity = {}
+
+            for row in skill_rows:
+                skills_by_opportunity.setdefault(
+                    row["parent"],
+                    []
+                ).append(row["skill"])
+
+            for opportunity in opportunities:
+                opportunity["skills_needed"] = skills_by_opportunity.get(
+                    opportunity["name"],
+                    []
+                )
 
             return Result.success(
                 "Volunteer opportunities fetched successfully",
