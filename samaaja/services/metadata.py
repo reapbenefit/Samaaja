@@ -38,7 +38,57 @@ VOLUNTEER_FILTER_CONFIG = {
 }
 
 
-class DropdownManager:
+class MetadataManager:
+
+    @staticmethod
+    def get_list(
+        doctype: str,
+        lang: str = "en",
+    ) -> Result:
+        try:
+            if not doctype:
+                return Result.bad_request(
+                    "Doctype is required"
+                )
+
+            if (
+                doctype not in VOLUNTEER_FILTER_CONFIG
+                and doctype not in DROPDOWN_CONFIG
+            ):
+                return Result.not_found(
+                    "Dropdown options not found for the requested doctype"
+                )
+
+            if doctype in VOLUNTEER_FILTER_CONFIG:
+                handler_name = VOLUNTEER_FILTER_CONFIG[doctype]["handler"]
+                values = getattr(MetadataManager, handler_name)()
+
+                return Result.success(
+                    "Dropdown options fetched successfully",
+                    data=values,
+                )
+
+            values = MetadataManager._get_direct_options(
+                DROPDOWN_CONFIG[doctype],
+                lang=lang,
+            )
+
+            return Result.success(
+                "Dropdown options fetched successfully",
+                data=values,
+            )
+
+        except Exception as e:
+            frappe.log_error(
+                frappe.get_traceback(),
+                "Failed to fetch dropdown options"
+            )
+
+            return Result.failure(
+                "Failed to fetch dropdown options",
+                error_data=str(e),
+            )
+
     @staticmethod
     def _get_active_categories():
         values = frappe.get_all(
@@ -46,11 +96,12 @@ class DropdownManager:
             filters={"status": "Active"},
             fields=["category"],
             pluck="category",
+            order_by="category asc",
         )
 
         return list(dict.fromkeys(
             value for value in values if value
-     ))
+        ))
 
     @staticmethod
     def _get_active_locations():
@@ -76,19 +127,20 @@ class DropdownManager:
             },
             fields=["city"],
             pluck="city",
+            order_by="city asc",
         )
 
         return list(dict.fromkeys(
-           value for value in values if value
+            value for value in values if value
         ))
 
     @staticmethod
     def _get_active_skills():
         opportunities = frappe.get_all(
             "Volunteer Opportunity",
-             filters={"status": "Active"},
-             fields=["name"],
-             pluck="name",
+            filters={"status": "Active"},
+            fields=["name"],
+            pluck="name",
         )
 
         if not opportunities:
@@ -99,14 +151,15 @@ class DropdownManager:
             filters={
                 "parent": ["in", opportunities],
                 "parenttype": "Volunteer Opportunity",
-           },
-           fields=["skill"],
-           pluck="skill",
+            },
+            fields=["skill"],
+            pluck="skill",
+            order_by="skill asc",
         )
 
         return list(dict.fromkeys(
-           value for value in values if value
-       ))
+            value for value in values if value
+        ))
 
     @staticmethod
     def _get_direct_options(config, lang="en"):
@@ -121,52 +174,4 @@ class DropdownManager:
             frappe._(value, lang=lang)
             for value in values
             if value
-       ]
-    @staticmethod
-    def get_list(
-        doctype: str,
-        lang: str = "en",
-    ) -> Result:
-        try:
-            if not doctype:
-                return Result.bad_request(
-                    "Doctype is required"
-                )
-
-            if (
-                doctype not in VOLUNTEER_FILTER_CONFIG
-                and doctype not in DROPDOWN_CONFIG
-            ):
-                return Result.not_found(
-                    "Dropdown options not found for the requested doctype"
-                )
-
-            if doctype in VOLUNTEER_FILTER_CONFIG:
-                handler_name = VOLUNTEER_FILTER_CONFIG[doctype]["handler"]
-                values = getattr(DropdownManager, handler_name)()
-
-                return Result.success(
-                    "Dropdown options fetched successfully",
-                    data=values,
-                )
-
-            values = DropdownManager._get_direct_options(
-                DROPDOWN_CONFIG[doctype],
-                lang=lang,
-            )
-
-            return Result.success(
-                "Dropdown options fetched successfully",
-                data=values,
-            ) 
-
-        except Exception as e:
-            frappe.log_error(
-                frappe.get_traceback(),
-                "Failed to fetch dropdown options"
-            )
-
-            return Result.failure(
-                "Failed to fetch dropdown options",
-                error_data=str(e),
-            )
+        ]

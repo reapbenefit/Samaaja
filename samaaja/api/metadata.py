@@ -1,6 +1,6 @@
 import frappe
 
-from samaaja.services.metadata import DropdownManager
+from samaaja.services.metadata import MetadataManager
 from samaaja.utils.custom_response import custom_response
 
 
@@ -13,7 +13,7 @@ def get_list(doctype, lang="en"):
                 status_code=401
             )
 
-        return DropdownManager.get_list(
+        return MetadataManager.get_list(
             doctype=doctype,
             lang=lang
         ).to_custom_response()
