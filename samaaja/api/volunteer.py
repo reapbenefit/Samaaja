@@ -94,6 +94,7 @@ def apply(
     preferred_available_days=None,
     why_do_you_want_to_volunteer=None,
     privacy_consent=False,
+    gender=None,
 ):
     try:
         if frappe.session.user == "Guest":
