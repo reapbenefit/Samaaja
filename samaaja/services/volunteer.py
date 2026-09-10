@@ -259,6 +259,7 @@ class VolunteerManager:
         user,
         volunteer_opportunity,
         age=None,
+        gender=None,
         preferred_available_days=None,
         why_do_you_want_to_volunteer=None,
         privacy_consent=False,
@@ -321,6 +322,7 @@ class VolunteerManager:
             application.user = user
             application.volunteer_opportunity = volunteer_opportunity
             application.age = age
+            application.gender = gender
             application.preferred_available_days = (
                 preferred_available_days
             )
