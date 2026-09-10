@@ -93,6 +93,7 @@ def apply(
     preferred_available_days=None,
     why_do_you_want_to_volunteer=None,
     privacy_consent=False,
+    gender=None,
 ):
     try:
         if frappe.session.user == "Guest":
@@ -105,6 +106,7 @@ def apply(
             user=frappe.session.user,
             volunteer_opportunity=volunteer_opportunity,
             age=age,
+            gender=gender,
             preferred_available_days=preferred_available_days,
             why_do_you_want_to_volunteer=why_do_you_want_to_volunteer,
             privacy_consent=privacy_consent,

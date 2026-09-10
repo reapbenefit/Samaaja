@@ -65,9 +65,11 @@
   },
   {
    "fetch_from": "user.gender",
+   "fetch_if_empty": 1,
    "fieldname": "gender",
-   "fieldtype": "Data",
+   "fieldtype": "Select",
    "label": "Gender",
+   "options": "\nFemale\nMale\nOther",
    "read_only": 1
   },
   {
@@ -92,7 +94,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-08-27 12:07:47.017201",
+ "modified": "2026-09-10 18:28:33.571346",
  "modified_by": "Administrator",
  "module": "Samaaja",
  "name": "Volunteer Application",
