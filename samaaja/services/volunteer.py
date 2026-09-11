@@ -262,8 +262,7 @@ class VolunteerManager:
         gender=None,
         preferred_available_days=None,
         why_do_you_want_to_volunteer=None,
-        privacy_consent=False,
-        gender=None,
+        privacy_consent=False
     ) -> Result:
         try:
             if not volunteer_opportunity:
