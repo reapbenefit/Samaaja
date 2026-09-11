@@ -5,5 +5,5 @@
 from frappe.tests.utils import FrappeTestCase
 
 
-class TestVolunteerInterest(FrappeTestCase):
+class TestSamaajaLocation(FrappeTestCase):
 	pass
