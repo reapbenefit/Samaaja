@@ -7,6 +7,18 @@ app_description = "Samaaja is an open source software solution for rapidly build
 app_email = "abhinav.raut@zerodha.com"
 app_license = "MIT"
 
+required_apps = ["eps"]
+
+add_to_apps_screen = [
+	{
+		"name": "samaaja",
+		"title": "Samaaja",
+		"route": "/desk/samaaja",
+		"logo": "/assets/frappe/images/frappe-framework-logo.svg",
+		"has_permission": "samaaja.api.check_app_permission",
+	}
+]
+
 # Includes in <head>
 # ------------------
 

@@ -1,0 +1,85 @@
+{
+ "charts": [],
+ "content": "[{\"id\":\"samaaja_hdr\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Samaaja</span>\",\"col\":12}},{\"id\":\"sc_events\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Events\",\"col\":3}},{\"id\":\"sc_location\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Location\",\"col\":3}},{\"id\":\"sc_badge\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Badge\",\"col\":3}},{\"id\":\"sc_user_meta\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"User Metadata\",\"col\":3}},{\"id\":\"sc_user_badge\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"User badge\",\"col\":3}},{\"id\":\"sc_microskill\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Microskill\",\"col\":3}},{\"id\":\"sc_cities\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Samaaja Cities\",\"col\":3}},{\"id\":\"sc_settings\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Samaaja Settings\",\"col\":3}}]",
+ "creation": "2026-08-26 06:00:00.000000",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "organization",
+ "idx": 0,
+ "is_hidden": 0,
+ "label": "Samaaja",
+ "links": [],
+ "modified": "2026-08-26 06:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Samaaja",
+ "name": "Samaaja",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 1.0,
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Events",
+   "link_to": "Events",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Location",
+   "link_to": "Location",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Badge",
+   "link_to": "Badge",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "User Metadata",
+   "link_to": "User Metadata",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "User badge",
+   "link_to": "User badge",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Microskill",
+   "link_to": "Microskill",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Samaaja Cities",
+   "link_to": "Samaaja Cities",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Samaaja Settings",
+   "link_to": "Samaaja Settings",
+   "type": "DocType"
+  }
+ ],
+ "title": "Samaaja"
+}
