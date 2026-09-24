@@ -8,11 +8,18 @@
   "details_section",
   "title",
   "description",
+  "skills_needed",
+  "location",
   "column_break_crjw",
   "category",
   "type",
   "start_date",
-  "end_date"
+  "end_date",
+  "column_break_vzjf",
+  "volunteer_format",
+  "expected_time_commitment",
+  "compensation_type",
+  "status"
  ],
  "fields": [
   {
@@ -20,12 +27,14 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Title",
+   "length": 120,
    "reqd": 1
   },
   {
    "fieldname": "description",
    "fieldtype": "Small Text",
-   "label": "Description"
+   "label": "Description",
+   "reqd": 1
   },
   {
    "fieldname": "column_break_crjw",
@@ -33,10 +42,10 @@
   },
   {
    "fieldname": "category",
-   "fieldtype": "Select",
+   "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Category",
-   "options": "Education & Learning\nHealth & Wellbeing\nChild & Youth Development\nWomen & Gender Equality\nLivelihoods & Employment\nEnvironment & Climate",
+   "options": "Action Category",
    "reqd": 1
   },
   {
@@ -51,7 +60,7 @@
    "fieldname": "start_date",
    "fieldtype": "Date",
    "in_list_view": 1,
-   "label": "Starte date",
+   "label": "Start date",
    "reqd": 1
   },
   {
@@ -63,12 +72,58 @@
    "fieldname": "details_section",
    "fieldtype": "Section Break",
    "label": "Details"
+  },
+  {
+   "fieldname": "volunteer_format",
+   "fieldtype": "Select",
+   "label": "Volunteer Format",
+   "options": "Remote\nOn-ground\nHybrid",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_vzjf",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "skills_needed",
+   "fieldtype": "Table MultiSelect",
+   "label": "Skills Needed",
+   "options": "Skill Child Table",
+   "reqd": 1
+  },
+  {
+   "fieldname": "location",
+   "fieldtype": "Link",
+   "label": "Location (Country / State / City)",
+   "options": "Samaaja Location",
+   "reqd": 1
+  },
+  {
+   "fieldname": "expected_time_commitment",
+   "fieldtype": "Small Text",
+   "label": "Expected time commitment",
+   "reqd": 1
+  },
+  {
+   "fieldname": "compensation_type",
+   "fieldtype": "Select",
+   "label": "Compensation Type",
+   "options": "Pro Bono\nStipend",
+   "reqd": 1
+  },
+  {
+   "default": "Active",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Active\nInactive",
+   "reqd": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-08-18 08:41:16.386418",
+ "modified": "2026-08-20 16:33:16.010470",
  "modified_by": "Administrator",
  "module": "Samaaja",
  "name": "Volunteer Opportunity",

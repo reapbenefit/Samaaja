@@ -5,5 +5,5 @@
 from frappe.model.document import Document
 
 
-class VolunteerInterest(Document):
+class SamaajaLocation(Document):
 	pass

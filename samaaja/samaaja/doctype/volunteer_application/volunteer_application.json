@@ -1,0 +1,121 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-08-18 08:30:24.497874",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "user",
+  "volunteer_opportunity",
+  "full_name",
+  "email",
+  "phone_number",
+  "age",
+  "gender",
+  "column_break_drxj",
+  "preferred_available_days",
+  "why_do_you_want_to_volunteer",
+  "privacy_consent"
+ ],
+ "fields": [
+  {
+   "fieldname": "user",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "User",
+   "options": "User",
+   "reqd": 1
+  },
+  {
+   "fieldname": "volunteer_opportunity",
+   "fieldtype": "Link",
+   "label": "Volunteer Opportunity",
+   "options": "Volunteer Opportunity",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "user.full_name",
+   "fieldname": "full_name",
+   "fieldtype": "Data",
+   "label": "Full Name",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "user.email",
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "user.mobile_no",
+   "fieldname": "phone_number",
+   "fieldtype": "Data",
+   "label": "Phone Number",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_drxj",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "age",
+   "fieldtype": "Int",
+   "label": "Age"
+  },
+  {
+   "fetch_from": "user.gender",
+   "fetch_if_empty": 1,
+   "fieldname": "gender",
+   "fieldtype": "Select",
+   "label": "Gender",
+   "options": "\nFemale\nMale\nOther",
+   "read_only": 1
+  },
+  {
+   "fieldname": "preferred_available_days",
+   "fieldtype": "Select",
+   "label": "Preferred Available Days",
+   "options": "Daily\nFew times a week\nOnly on Weekends\nFlexible"
+  },
+  {
+   "fieldname": "why_do_you_want_to_volunteer",
+   "fieldtype": "Long Text",
+   "label": "Why do you want to volunteer?"
+  },
+  {
+   "default": "0",
+   "description": "I consent to the NPO contacting me regarding this volunteer application and further action.",
+   "fieldname": "privacy_consent",
+   "fieldtype": "Check",
+   "label": "Privacy & Consent"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-09-10 18:28:33.571346",
+ "modified_by": "Administrator",
+ "module": "Samaaja",
+ "name": "Volunteer Application",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
